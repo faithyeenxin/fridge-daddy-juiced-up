@@ -1,0 +1,26 @@
+{
+  "name": "02_fridge_daddy_upgraded",
+  "version": "1.0.0",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^18.8.5",
+    "turbo": "^1.5.5"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "start": "cd apps/server && npm run start",
+    "generate": "cd apps/server && npx prisma generate",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "dev": "turbo run dev"
+  },
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=16"
+  }
+}

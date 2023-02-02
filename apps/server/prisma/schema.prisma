@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String   @id @default(uuid())
+  password   String
+  name       String
+  image      String?  @default("https://res.cloudinary.com/dj6tlm5xx/image/upload/v1665411728/samples/people/new_user_fnx00w.jpg")
+  email      String   @unique
+  dateJoined DateTime? @default(now())
+  Items Item[]
+  Categories Category[]
+}
+
+model Item{
+  id String @id @default(uuid())
+  user User @relation(fields: [userId], references: [id])
+  userId          String
+  categoryId String
+  category Category @relation(fields: [categoryId], references: [id])
+  name       String
+  purchaseDate DateTime
+  expiryDate DateTime
+  storedIn String
+  quantity String
+  trashed Boolean
+}
+
+model Category{
+  id String @id @default(uuid())
+  user User @relation(fields: [userId], references: [id])
+  userId          String
+  Items Item[]
+  name String
+  dateCreated DateTime @default(now())
+  pantryDays Float
+  fridgeDays Float
+  freezerDays Float
+}
+
+model Files{
+  id String @id @default(uuid())
+  urls String[]
+}
