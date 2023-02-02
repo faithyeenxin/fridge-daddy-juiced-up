@@ -4,3 +4,5 @@ let ans2 = "FREEZER-62".replace(/[^a-zA-Z]+/g, "");
 
 console.log(ans1);
 console.log(ans2);
+
+console.log("testing")
