@@ -10,15 +10,17 @@ module.exports = {
     },
     extend: {
       colors: {
+        bgColor: "#FEE9E7",
         sand: "#FFF6F1",
         beige: "#FFD6C0",
         mutedPink: "#FEC5B9",
+        extraMutedPink: "#FED8CF",
         offWhite: "#FFF6F1",
         orange: "#FF5C39",
+        orangeLight: "#FF5C39",
         // bgBeige: "#F9DCC4",
         // bgPeach: "#FFD4B7",
         // bgSand: "#FEC89A",
-        // bgPink: "#fee9e7",
         // bgBabyPink: "#FBD1DB",
         // fontOrangeLight: "#FF8866",
         // fontGreen: "#228B22",

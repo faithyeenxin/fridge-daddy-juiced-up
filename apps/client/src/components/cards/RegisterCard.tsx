@@ -129,7 +129,7 @@ export const RegisterCard = () => {
     <div className="bg-grey-lighter flex flex-col">
       <div className="container max-w-md mx-auto flex-1 flex flex-col items-center justify-center ">
         <div className="bg-white px-6 py-8 rounded-lg shadow-md text-black w-full ">
-          <h1 className="mb-8 text-3xl text-center font-bold text-fontOrange">
+          <h1 className="mb-8 text-3xl text-center font-bold text-orange">
             Register
           </h1>
           <form onSubmit={formik.handleSubmit}>
@@ -145,7 +145,7 @@ export const RegisterCard = () => {
               autoComplete="off"
             />
             {formik.touched.name && formik.errors.name ? (
-              <div className="px-2 text-fontOrange italic text-sm">
+              <div className="px-2 text-orange italic text-sm">
                 {formik.errors.name}
               </div>
             ) : null}
@@ -161,7 +161,7 @@ export const RegisterCard = () => {
               autoComplete="off"
             />
             {formik.touched.email && formik.errors.email ? (
-              <div className="px-2 text-fontOrange italic text-sm">
+              <div className="px-2 text-orange italic text-sm">
                 {formik.errors.email}
               </div>
             ) : null}
@@ -177,14 +177,14 @@ export const RegisterCard = () => {
               value={formik.values.password}
             />
             {formik.touched.password && formik.errors.password ? (
-              <div className="px-2 text-fontOrange italic text-sm">
+              <div className="px-2 text-orange italic text-sm">
                 {formik.errors.password}
               </div>
             ) : null}
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="w-64 bg-fontOrange text-center py-3 text-white my-1 rounded-full hover:bg-fontOrangeLight mt-2"
+                className="w-64 bg-orange text-center py-3 text-white my-1 rounded-full hover:bg-orangeLight mt-2"
               >
                 Create Account
               </button>
@@ -196,7 +196,7 @@ export const RegisterCard = () => {
           <div className="text-center text-sm text-grey-dark mt-2">
             Having issues registering? {""}
             <a
-              className="no-underline border-b border-grey-dark text-grey-dark hover:text-fontOrangeLight"
+              className="no-underline border-b border-grey-dark text-grey-dark hover:text-orangeLight"
               href="mailto:faith.ye@hotmail.com?subject=Hi there! I am having issues regarding FridgeDaddy..."
             >
               Contact our developers here!

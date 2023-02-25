@@ -45,7 +45,7 @@ const CardItemDisplay = (item: any) => {
 
           {/* NAME */}
           <div className="flex w-full md:mx-0 md:w-auto gap-2 justify-center">
-            <h5 className="flex mb-1 pl-3 text-sm md:text-md font-bold tracking-tight text-fontOrange items-center">
+            <h5 className="flex mb-1 pl-3 text-sm md:text-md font-bold tracking-tight text-orange items-center">
               {item.item.name}{" "}
             </h5>
 

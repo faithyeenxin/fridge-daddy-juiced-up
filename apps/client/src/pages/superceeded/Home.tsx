@@ -39,15 +39,15 @@ export default function Home() {
     <div className="flex justify-center sm:mx-2 md:mx-10">
       <div className="w-full px-2 py-5 sm:px-0 mx-8">
         <Tab.Group>
-          <Tab.List className="flex space-x-1 rounded-full bg-bgPink p-1 border-2 border-fontOrange">
+          <Tab.List className="flex space-x-1 rounded-full bg-bgColor p-1 border-2 border-orange">
             {Object.keys(allItems)?.map((itemName, idx) => {
               return (
                 <Tab
                   key={idx}
                   className={({ selected }) =>
                     classNames(
-                      "w-screen rounded-3xl py-2.5 text-sm font-medium leading-5 text-fontOrange",
-                      "ring-white ring-opacity-60 ring-offset-2 ring-offset-fontOrange focus:outline-none focus:ring-2",
+                      "w-screen rounded-3xl py-2.5 text-sm font-medium leading-5 text-orange",
+                      "ring-white ring-opacity-60 ring-offset-2 ring-offset-orange focus:outline-none focus:ring-2",
                       selected
                         ? "bg-white shadow"
                         : "text-white hover:bg-white/[0.12] hover:text-white"

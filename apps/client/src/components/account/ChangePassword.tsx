@@ -2,7 +2,7 @@ import React from "react";
 import password from "../../assets/img/password.png";
 const ChangePassword = () => {
   return (
-    <div className="flex flex-wrap-reverse bg-bgPink w-4/5 md:w-2/3 m-auto justify-center md:justify-between rounded-2xl py-5 md:p-10 mb-10">
+    <div className="flex flex-wrap-reverse bg-bgColor w-4/5 md:w-2/3 m-auto justify-center md:justify-between rounded-2xl py-5 md:p-10 mb-10">
       <div className="flex flex-wrap-reverse md:flex-nowrap w-full justify-center">
         <div className="flex justify-center items-center w-2/3">
           {/* <input type="file" /> */}

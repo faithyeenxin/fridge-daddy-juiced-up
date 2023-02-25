@@ -45,14 +45,14 @@ const LoggedInNavBar = () => {
   };
 
   return (
-    // <nav className="bg-bgPink py-2.5 pr-5 md:pr-10 sticky w-full z-20 top-0 left-0 p-7">
-    <nav className="bg-bgPink py-2.5 md:py-4 sticky w-full z-20 top-0 left-0 p-7">
+    // <nav className="bg-bgColor py-2.5 pr-5 md:pr-10 sticky w-full z-20 top-0 left-0 p-7">
+    <nav className="bg-bgColor py-2.5 md:py-4 sticky w-full z-20 top-0 left-0 p-7">
       {/*Flex container */}
       <div className="flex items-center justify-between sm:mx-5 md:mx-0">
         {/* Logo*/}
         <div className="flex">
           <div
-            className="text-3xl font-bold tracking-wider text-fontOrange"
+            className="text-3xl font-bold tracking-wider text-orange"
             onClick={() => {
               navigate("/home");
               setNavStatus("");
@@ -135,7 +135,7 @@ const LoggedInNavBar = () => {
           className={`${hamburgMenuStatus} absolute flex flex-col items-center self-end mx-10 py-8 mt-8 space-y-6 font-bold bg-white sm:self-center left-2 right-2 drop-shadow-md bg-opacity-80 rounded-2xl`}
         >
           <div
-            className="hover:text-fontOrange pt-2 md:text-2xl tracking-wider"
+            className="hover:text-orange pt-2 md:text-2xl tracking-wider"
             onClick={() => {
               navigate(`/add-item`);
               setNavStatus("");
@@ -145,7 +145,7 @@ const LoggedInNavBar = () => {
             Add Item
           </div>
           <div
-            className="hover:text-fontOrange pt-2 md:text-2xl tracking-wider"
+            className="hover:text-orange pt-2 md:text-2xl tracking-wider"
             onClick={() => {
               navigate(`/add-category`);
               setNavStatus("");
@@ -155,7 +155,7 @@ const LoggedInNavBar = () => {
             Category
           </div>
           <div
-            className="hover:text-fontOrange pt-2 md:text-2xl tracking-wider"
+            className="hover:text-orange pt-2 md:text-2xl tracking-wider"
             onClick={() => {
               navigate(`/recipes`);
               setNavStatus("");
@@ -165,7 +165,7 @@ const LoggedInNavBar = () => {
             Recipes
           </div>
           <div
-            className="hover:text-fontOrange pt-2 md:text-2xl tracking-wider"
+            className="hover:text-orange pt-2 md:text-2xl tracking-wider"
             onClick={() => {
               navigate(`/account`);
               setNavStatus("");
@@ -175,7 +175,7 @@ const LoggedInNavBar = () => {
             Account
           </div>
           <div
-            className="md:block p-2 px-6 pt-2 text-white bg-fontOrange rounded-full baseline hover:bg-fontOrangeLight md:text-2xl"
+            className="md:block p-2 px-6 pt-2 text-white bg-orange rounded-full baseline hover:bg-orangeLight md:text-2xl"
             onClick={() => {
               sessionStorage.removeItem("fridgeDaddyToken");
               navigate(`/`);

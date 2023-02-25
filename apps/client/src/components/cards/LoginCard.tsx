@@ -107,7 +107,7 @@ const LoginCard = () => {
       <div className="bg-grey-lighter flex flex-col">
         <div className="container max-w-md mx-auto flex-1 flex flex-col items-center justify-center">
           <div className="bg-white px-6 py-8 rounded-lg shadow-md text-black w-full">
-            <h1 className="mb-8 text-3xl text-center font-bold text-fontOrange">
+            <h1 className="mb-8 text-3xl text-center font-bold text-orange">
               Sign In to FridgeDaddy!
             </h1>
             <form onSubmit={formik.handleSubmit}>
@@ -123,7 +123,7 @@ const LoginCard = () => {
                 autoComplete="off"
               />
               {formik.touched.email && formik.errors.email ? (
-                <div className="px-2 text-fontOrange italic text-sm">
+                <div className="px-2 text-orange italic text-sm">
                   {formik.errors.email}
                 </div>
               ) : null}
@@ -139,14 +139,14 @@ const LoginCard = () => {
                 value={formik.values.password}
               />
               {formik.touched.password && formik.errors.password ? (
-                <div className="px-2 text-fontOrange italic text-sm">
+                <div className="px-2 text-orange italic text-sm">
                   {formik.errors.password}
                 </div>
               ) : null}
               <div className="flex justify-center">
                 <button
                   type="submit"
-                  className="w-64 bg-fontOrange text-center py-3 mt-4 text-white my-1 rounded-full hover:bg-fontOrangeLight"
+                  className="w-64 bg-orange text-center py-3 mt-4 text-white my-1 rounded-full hover:bg-orangeLight"
                 >
                   Let's Go!
                 </button>
@@ -155,10 +155,10 @@ const LoginCard = () => {
 
             <div className="flex justify-center" id="logInDiv"></div>
 
-            <div className="text-center text-sm text-fontOrangeLight mt-2 animate-pulse">
+            <div className="text-center text-sm text-orangeLight mt-2 animate-pulse">
               Try us out using our {""}
               <a
-                className="no-underline border-b border-grey-dark text-fontOrangeLight hover:text-green-500"
+                className="no-underline border-b border-grey-dark text-orangeLight hover:text-green-500"
                 onClick={() =>
                   setUseTestUser({
                     email: "testUser@hotmail.com",
@@ -179,7 +179,7 @@ const LoginCard = () => {
             <div className="text-center text-sm text-grey-dark">
               Having issues logging in? {""}
               <a
-                className="no-underline border-b border-grey-dark text-grey-dark hover:text-fontOrangeLight"
+                className="no-underline border-b border-grey-dark text-grey-dark hover:text-orangeLight"
                 href="mailto:faith.ye@hotmail.com?subject=Hi there! I am having issues regarding FridgeDaddy..."
               >
                 Contact our developers here!
@@ -252,7 +252,7 @@ const LoginCard = () => {
                   <div className="mt-4">
                     <button
                       type="button"
-                      className="mr-2 inline-flex justify-center rounded-md border border-transparent bg-fontOrange px-4 py-2 text-sm font-medium text-white hover:bg-fontOrangeLight focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="mr-2 inline-flex justify-center rounded-md border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-orangeLight focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={closeModal}
                     >
                       Try Again!

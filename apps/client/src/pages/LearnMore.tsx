@@ -15,9 +15,9 @@ const LearnMore = () => {
     setFocusedGif(item);
   };
   return (
-    <section id="features" className="bg-bgPink h-full lg:h-screen">
+    <section id="features" className="bg-bgColor h-full lg:h-screen">
       <h1
-        className="text-center text-fontOrange text-3xl font-bold md:text-4xl pt-10"
+        className="text-center text-orange text-3xl font-bold md:text-4xl pt-10"
         onMouseOver={() => changeGif(hoverme)}
       >
         How FridgeDaddy Works
@@ -36,7 +36,7 @@ const LearnMore = () => {
           >
             <img src={pan} className="lg:w-1/4 w-1/3" />
             <div className="py-5 space-y-3">
-              <h1 className="text-xl md:text-3xl font-bold text-fontOrange ">
+              <h1 className="text-xl md:text-3xl font-bold text-orange ">
                 add groceries
               </h1>
               <h1 className="font-mono">
@@ -52,7 +52,7 @@ const LearnMore = () => {
             {/* lg:w-1/3 md:w-1/2 sm:w-1/3 w-20 */}
             <img src={recipe} className="lg:w-1/4 w-1/3" />
             <div className="py-5 space-y-3">
-              <h1 className="text-xl  md:text-3xl font-bold text-fontOrange ">
+              <h1 className="text-xl  md:text-3xl font-bold text-orange ">
                 get inspired
               </h1>
               <h1 className="font-mono">
@@ -66,7 +66,7 @@ const LearnMore = () => {
           >
             <img src={contribute} className="lg:w-1/4 w-1/3" />
             <div className="py-5 space-y-3">
-              <h1 className="text-xl md:text-3xl font-bold text-fontOrange">
+              <h1 className="text-xl md:text-3xl font-bold text-orange">
                 contribute
               </h1>
               <h1 className="font-mono">
@@ -76,13 +76,13 @@ const LearnMore = () => {
           </div>
           {/* <div className="flex flex-col space-y-3 md:space-y-0 md:space-x-3 md:flex-row">
             <img src={takeout} className="w-1/3" />
-            <h1 className="text-3xl font-bold py-10 text-fontOrange ">
+            <h1 className="text-3xl font-bold py-10 text-orange ">
             GET INSPIRED
             </h1>
             </div>
             <div className="flex flex-col space-y-3 md:space-y-0 md:space-x-3 md:flex-row">
             <img src={contribute} className="w-1/3" />
-            <h1 className="text-3xl font-bold py-10 text-fontOrange s">
+            <h1 className="text-3xl font-bold py-10 text-orange s">
             CONTRIBUTE
             </h1>
           </div> */}

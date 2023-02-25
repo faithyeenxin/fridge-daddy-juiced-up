@@ -45,14 +45,14 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="bg-bgPink py-2.5 md:py-4 sticky w-full z-20 top-0 left-0 p-7">
+    <nav className="bg-bgColor py-2.5 md:py-4 sticky w-full z-20 top-0 left-0 p-7">
       {/*Flex container */}
       <div className="flex items-center justify-between sm:mx-5 md:mx-0">
         {/* Logo*/}
         <div className="flex">
           {/* <img src={hammieBurg} alt="fridge daddy icon" /> */}
           <a
-            className="text-3xl font-bold tracking-wider text-fontOrange"
+            className="text-3xl font-bold tracking-wider text-orange"
             onClick={() => {
               navigate("/");
             }}
@@ -63,13 +63,13 @@ const NavBar = () => {
         {/* Menu Items */}
         <div className="hidden md:flex space-x-6  md:text-l lg:text-xl tracking-wide items-center">
           {/* <a
-              className="hover:text-fontOrange pt-2"
+              className="hover:text-orange pt-2"
               onClick={() => navigate("/learn-more")}
             >
               Learn More
             </a> */}
           <div
-            className="hover:text-fontOrange"
+            className="hover:text-orange"
             onClick={() => {
               navigate("/creators");
             }}
@@ -77,7 +77,7 @@ const NavBar = () => {
             the Creator
           </div>
           <div
-            className="hover:text-fontOrange"
+            className="hover:text-orange"
             onClick={() => {
               navigate("/login");
             }}
@@ -85,7 +85,7 @@ const NavBar = () => {
             Sign In
           </div>
           <div
-            className="hidden md:block p-1 px-6 text-white bg-fontOrange rounded-full baseline hover:bg-fontOrangeLight text-md "
+            className="hidden md:block p-1 px-6 text-white bg-orange rounded-full baseline hover:bg-orangeLight text-md "
             onClick={() => {
               navigate("/register");
             }}
@@ -113,13 +113,13 @@ const NavBar = () => {
           className={`${hamburgMenuStatus} absolute flex flex-col items-center self-end  mx-10 py-8 mt-1 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-5 right-5 drop-shadow-md bg-opacity-80 rounded-2xl`}
         >
           {/* <a
-              className="hover:text-fontOrange pt-2 tracking-widest"
+              className="hover:text-orange pt-2 tracking-widest"
               href="/learn-more"
             >
               Learn More
             </a> */}
           <a
-            className="hover:text-fontOrange tracking-widest"
+            className="hover:text-orange tracking-widest"
             onClick={() => {
               navigate("/creators");
               setNavStatus("");
@@ -129,7 +129,7 @@ const NavBar = () => {
             the Creators
           </a>
           <a
-            className="hover:text-fontOrange tracking-widest"
+            className="hover:text-orange tracking-widest"
             onClick={() => {
               navigate("/login");
               setNavStatus("");
@@ -139,7 +139,7 @@ const NavBar = () => {
             Sign In
           </a>
           <a
-            className="md:block p-2 px-6 text-white bg-fontOrange rounded-full baseline hover:bg-fontOrangeLight text-md"
+            className="md:block p-2 px-6 text-white bg-orange rounded-full baseline hover:bg-orangeLight text-md"
             onClick={() => {
               navigate("/register");
               setNavStatus("");

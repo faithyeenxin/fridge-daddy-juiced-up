@@ -27,7 +27,7 @@ const Account = () => {
   return (
     <div>
       <div className="flex mt-6 md:mt-10 mx-auto">
-        <div className="w-4/5 md:w-2/3 mx-auto p-10 bg-bgPink rounded-2xl">
+        <div className="w-4/5 md:w-2/3 mx-auto p-10 bg-bgColor rounded-2xl">
           <div className="flex justify-center items-center gap-3 md:gap-10 ">
             {/* <div className="flex md:w-1/3 justify-center"> */}
             <img
@@ -118,16 +118,14 @@ const Account = () => {
         </div>
       </div>
       <div
-        className={`flex justify-center mx-auto mt-5 md:mt-10 ${
-          showChangeProfilePicComponent ? "" : "hidden"
-        }`}
+        className={`flex justify-center mx-auto mt-5 md:mt-10 ${showChangeProfilePicComponent ? "" : "hidden"
+          }`}
       >
         <ChangeProfilePicture />
       </div>
       <div
-        className={`flex justify-center mx-auto mt-5 md:mt-10 ${
-          showChangePasswordComponent ? "" : "hidden"
-        }`}
+        className={`flex justify-center mx-auto mt-5 md:mt-10 ${showChangePasswordComponent ? "" : "hidden"
+          }`}
       >
         <ChangePassword />
       </div>
