@@ -6,7 +6,7 @@ import { IItem } from "../../interface";
 
 import trash from "../../assets/img/trash.png";
 import untrash from "../../assets/img/untrash.png";
-const CardItem = (item: any) => {
+const CardItemDisplay = (item: any) => {
   let days = differenceInDays(new Date(item.item.expiryDate), new Date());
   const dispatch = useAppDispatch();
   let avatarColor = {
@@ -17,28 +17,26 @@ const CardItem = (item: any) => {
   };
 
   return (
-    <div className="w-80 h-12 md:w-60 md:h-40 flex flex-col items-center justify-center rounded-lg shadow-md md:flex-row md:max-w-md hover:bg-gray-100 bg-white">
+    <div className="w-80 h-12 md:w-60 md:h-40  flex flex-col items-center justify-center rounded-lg shadow-md md:flex-row md:max-w-md hover:bg-gray-100 bg-white">
       <div className="flex flex-col px-2 md:px-2 w-full items-center">
-        <div className="flex justify-between w-full">
+        <div className="flex w-full">
           {/* AVATAR */}
           <div className="flex items-center">
             <div
-              className={`inline-flex overflow-hidden relative justify-center items-center w-8 h-8 md:w-11 md:h-11 ${
-                days < 0
-                  ? avatarColor.red.bg
-                  : days < 7
+              className={`inline-flex overflow-hidden relative justify-center items-center w-8 h-8 md:w-11 md:h-11 ${days < 0
+                ? avatarColor.red.bg
+                : days < 7
                   ? "bg-avatarOrangeBg"
                   : avatarColor.green.bg
-              } rounded-full mx-1`}
+                } rounded-full mx-1`}
             >
               <span
-                className={`text-sm md:text-xl ${
-                  days < 0
-                    ? avatarColor.red.text
-                    : days < 7
+                className={`text-sm md:text-xl ${days < 0
+                  ? avatarColor.red.text
+                  : days < 7
                     ? "text-avatarOrangeFont"
                     : avatarColor.green.text
-                } font-bold`}
+                  } font-bold`}
               >
                 {days}
               </span>
@@ -46,8 +44,8 @@ const CardItem = (item: any) => {
           </div>
 
           {/* NAME */}
-          <div className="flex w-full md:mx-0 md:w-auto gap-2">
-            <h5 className="flex mb-1 text-sm md:text-md font-bold tracking-tight text-fontOrange items-center">
+          <div className="flex w-full md:mx-0 md:w-auto gap-2 justify-center">
+            <h5 className="flex mb-1 pl-3 text-sm md:text-md font-bold tracking-tight text-fontOrange items-center">
               {item.item.name}{" "}
             </h5>
 
@@ -60,7 +58,7 @@ const CardItem = (item: any) => {
           </div>
 
           {/* TRASH ICON */}
-          {item.item.trashed ? (
+          {/* {item.item.trashed ? (
             <div
               className="flex items-center"
               onClick={() => {
@@ -106,11 +104,11 @@ const CardItem = (item: any) => {
                 />
               </svg>
             </div>
-          )}
+          )} */}
         </div>
 
         {/* DESCRIPTION */}
-        <div className="w-full justify-center items-center">
+        <div className="flex w-full justify-center items-center">
           <p className="mb-1 text-sm font-normal text-gray-700 dark:text-gray-400 hidden md:block">
             Purchased: {""}
             {format(new Date(item.item.purchaseDate), "d MMM yy")} <br />
@@ -126,4 +124,4 @@ const CardItem = (item: any) => {
   );
 };
 
-export default CardItem;
+export default CardItemDisplay;

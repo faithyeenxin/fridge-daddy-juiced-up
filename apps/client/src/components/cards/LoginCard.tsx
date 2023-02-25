@@ -17,7 +17,6 @@ import { resetCategories } from "../../app/slices/categoriesSlice";
 const LoginCard = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [emailExist, setEmailExist] = useState(false);
   let [isOpen, setIsOpen] = useState(false);
   const [useTestUser, setUseTestUser] = useState({
     email: "",

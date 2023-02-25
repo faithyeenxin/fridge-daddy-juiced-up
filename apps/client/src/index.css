@@ -72,6 +72,9 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+body {
+  background-color: #FEE9E7;
+}
 
 /* Hamburger Menu */
 .hamburger {

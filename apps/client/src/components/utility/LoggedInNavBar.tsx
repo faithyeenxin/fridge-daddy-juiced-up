@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import {} from "../../app/slices/itemsSlice";
+import { } from "../../app/slices/itemsSlice";
 import { useAppDispatch, useAppSelector } from "../../app/store";
 
 const LoggedInNavBar = () => {
@@ -45,28 +45,26 @@ const LoggedInNavBar = () => {
   };
 
   return (
-    <>
-      {/* NavBar */}
-      {/* <nav className="sticky top-0 z-50 container mx-auto font-lora p-6 "> */}
-      <nav className="bg-bgPink py-2.5 pr-5 md:pr-10 sticky w-full z-20 top-0 left-0 p-4">
-        {/*Flex container */}
-        <div className="flex items-center justify-between">
-          {/* Logo*/}
-          <div className="flex">
-            <div
-              className="text-xl md:text-3xl font-bold tracking-wider text-fontOrange m-3"
-              onClick={() => {
-                navigate("/home");
-                setNavStatus("");
-                setHamburgMenuStatus("hidden");
-              }}
-            >
-              FridgeDaddy
-            </div>
+    // <nav className="bg-bgPink py-2.5 pr-5 md:pr-10 sticky w-full z-20 top-0 left-0 p-7">
+    <nav className="bg-bgPink py-2.5 md:py-4 sticky w-full z-20 top-0 left-0 p-7">
+      {/*Flex container */}
+      <div className="flex items-center justify-between sm:mx-5 md:mx-0">
+        {/* Logo*/}
+        <div className="flex">
+          <div
+            className="text-3xl font-bold tracking-wider text-fontOrange"
+            onClick={() => {
+              navigate("/home");
+              setNavStatus("");
+              setHamburgMenuStatus("hidden");
+            }}
+          >
+            FridgeDaddy
           </div>
-          {/* Menu Items */}
-          <div className="flex space-x-5 md:text-l lg:text-xl tracking-wide items-center align-center justify-between">
-            {/* <div className=" text-fontGreen">
+        </div>
+        {/* Menu Items */}
+        <div className="flex space-x-5 md:text-l lg:text-xl tracking-wide items-center align-center justify-between">
+          {/* <div className=" text-fontGreen">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -118,80 +116,79 @@ const LoggedInNavBar = () => {
               <div className="md:inline text-sm">{trashed.length}</div>
             </div> */}
 
-            {/* Hambuger Icon */}
-            <button
-              id="menu-btn"
-              className={`${navStatus} block hamburger focus:outline-none`}
-              onClick={navBarClicked}
-            >
-              <span className="hamburger-top "></span>
-              <span className="hamburger-middle"></span>
-              <span className="hamburger-bottom"></span>
-            </button>
-          </div>
-        </div>
-        {/* Mobile Menu */}
-        <div ref={ref}>
-          <div
-            id="menu"
-            className={`${hamburgMenuStatus} absolute flex flex-col items-center self-end mx-10 py-8 mt-8 space-y-6 font-bold bg-white sm:self-center left-2 right-2 drop-shadow-md bg-opacity-80 rounded-2xl`}
+          {/* Hambuger Icon */}
+          <button
+            id="menu-btn"
+            className={`${navStatus} block hamburger focus:outline-none`}
+            onClick={navBarClicked}
           >
-            <div
-              className="hover:text-fontOrange pt-2 md:text-2xl tracking-wider"
-              onClick={() => {
-                navigate(`/add-item`);
-                setNavStatus("");
-                setHamburgMenuStatus("hidden");
-              }}
-            >
-              Add Item
-            </div>
-            <div
-              className="hover:text-fontOrange pt-2 md:text-2xl tracking-wider"
-              onClick={() => {
-                navigate(`/add-category`);
-                setNavStatus("");
-                setHamburgMenuStatus("hidden");
-              }}
-            >
-              Category
-            </div>
-            <div
-              className="hover:text-fontOrange pt-2 md:text-2xl tracking-wider"
-              onClick={() => {
-                navigate(`/recipes`);
-                setNavStatus("");
-                setHamburgMenuStatus("hidden");
-              }}
-            >
-              Recipes
-            </div>
-            <div
-              className="hover:text-fontOrange pt-2 md:text-2xl tracking-wider"
-              onClick={() => {
-                navigate(`/account`);
-                setNavStatus("");
-                setHamburgMenuStatus("hidden");
-              }}
-            >
-              Account
-            </div>
-            <div
-              className="md:block p-2 px-6 pt-2 text-white bg-fontOrange rounded-full baseline hover:bg-fontOrangeLight md:text-2xl"
-              onClick={() => {
-                sessionStorage.removeItem("fridgeDaddyToken");
-                navigate(`/`);
-                setNavStatus("");
-                setHamburgMenuStatus("hidden");
-              }}
-            >
-              Log Out
-            </div>
+            <span className="hamburger-top "></span>
+            <span className="hamburger-middle"></span>
+            <span className="hamburger-bottom"></span>
+          </button>
+        </div>
+      </div>
+      {/* Mobile Menu */}
+      <div ref={ref}>
+        <div
+          id="menu"
+          className={`${hamburgMenuStatus} absolute flex flex-col items-center self-end mx-10 py-8 mt-8 space-y-6 font-bold bg-white sm:self-center left-2 right-2 drop-shadow-md bg-opacity-80 rounded-2xl`}
+        >
+          <div
+            className="hover:text-fontOrange pt-2 md:text-2xl tracking-wider"
+            onClick={() => {
+              navigate(`/add-item`);
+              setNavStatus("");
+              setHamburgMenuStatus("hidden");
+            }}
+          >
+            Add Item
+          </div>
+          <div
+            className="hover:text-fontOrange pt-2 md:text-2xl tracking-wider"
+            onClick={() => {
+              navigate(`/add-category`);
+              setNavStatus("");
+              setHamburgMenuStatus("hidden");
+            }}
+          >
+            Category
+          </div>
+          <div
+            className="hover:text-fontOrange pt-2 md:text-2xl tracking-wider"
+            onClick={() => {
+              navigate(`/recipes`);
+              setNavStatus("");
+              setHamburgMenuStatus("hidden");
+            }}
+          >
+            Recipes
+          </div>
+          <div
+            className="hover:text-fontOrange pt-2 md:text-2xl tracking-wider"
+            onClick={() => {
+              navigate(`/account`);
+              setNavStatus("");
+              setHamburgMenuStatus("hidden");
+            }}
+          >
+            Account
+          </div>
+          <div
+            className="md:block p-2 px-6 pt-2 text-white bg-fontOrange rounded-full baseline hover:bg-fontOrangeLight md:text-2xl"
+            onClick={() => {
+              sessionStorage.removeItem("fridgeDaddyToken");
+              navigate(`/`);
+              setNavStatus("");
+              setHamburgMenuStatus("hidden");
+            }}
+          >
+            Log Out
           </div>
         </div>
-      </nav>
-      <Outlet />
-    </>
+      </div>
+    </nav>
+
   );
 };
 

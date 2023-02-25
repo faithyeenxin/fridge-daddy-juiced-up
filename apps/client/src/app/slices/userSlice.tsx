@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-
 import { IGoogleUser, IUser } from "../../interface";
 import { RootState } from "../store";
 

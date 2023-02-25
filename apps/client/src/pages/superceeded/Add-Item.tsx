@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { showCategories } from "../app/slices/categoriesSlice";
-import { createItem, showUserItems } from "../app/slices/itemsSlice";
-import { getUserId } from "../app/slices/userSlice";
-import { useAppDispatch, useAppSelector } from "../app/store";
-import CardItem from "../components/cards/CardItem";
+import { showCategories } from "../../app/slices/categoriesSlice";
+import { createItem, showUserItems } from "../../app/slices/itemsSlice";
+import { getUserId } from "../../app/slices/userSlice";
+import { useAppDispatch, useAppSelector } from "../../app/store";
+import CardItem from "./CardItem";
 import format from "date-fns/format";
 import differenceInDays from "date-fns/differenceInDays";
 import { addDays } from "date-fns";
 import parseISO from "date-fns/parseISO";
-import CardItemDisplay from "../components/cards/CardItemDisplay";
+import CardItemDisplay from "./CardItemDisplay";
 
 const AddItem = () => {
   const token: any = useAppSelector(getUserId);

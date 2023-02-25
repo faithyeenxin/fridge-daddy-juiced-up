@@ -71,6 +71,9 @@ router.get("/", async (req, res) => {
     include: {
       category: true,
     },
+    orderBy: {
+      expiryDate: 'asc',
+    },
   });
   res.status(200).send(allItems);
 });

@@ -25,11 +25,6 @@ const Aws_Test = () => {
   return (
     <>
       <div>AWS TEST PAGE</div>
-      <div>Eg of uploaded image below:</div>
-      <img src="https://idealify-upload.s3.ap-northeast-1.amazonaws.com/uploadedFiles-1673496509056" />
-      <div>Eg of an uploaded pdf file below:</div>
-      <img src="https://fridgedaddy-upload.s3.ap-northeast-1.amazonaws.com/uploadedFiles-1673497451844" />
-
       <form onSubmit={handleSubmit}>
         <input
           name="multipleFiles"

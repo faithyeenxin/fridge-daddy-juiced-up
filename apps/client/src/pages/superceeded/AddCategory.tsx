@@ -3,9 +3,9 @@ import {
   createCategory,
   fetchAllCategories,
   showCategories,
-} from "../app/slices/categoriesSlice";
-import { getUserId } from "../app/slices/userSlice";
-import { useAppDispatch, useAppSelector } from "../app/store";
+} from "../../app/slices/categoriesSlice";
+import { getUserId } from "../../app/slices/userSlice";
+import { useAppDispatch, useAppSelector } from "../../app/store";
 const AddCategory = () => {
   const token: any = useAppSelector(getUserId);
   const dispatch = useAppDispatch();
