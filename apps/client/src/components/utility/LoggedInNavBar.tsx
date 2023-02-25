@@ -118,6 +118,7 @@ const LoggedInNavBar = () => {
 
           {/* Hambuger Icon */}
           <button
+            ref={ref}
             id="menu-btn"
             className={`${navStatus} block hamburger focus:outline-none`}
             onClick={navBarClicked}
@@ -129,12 +130,12 @@ const LoggedInNavBar = () => {
         </div>
       </div>
       {/* Mobile Menu */}
-      <div ref={ref}>
+      <div ref={ref} >
         <div
           id="menu"
-          className={`${hamburgMenuStatus} absolute flex flex-col items-center self-end mx-10 py-8 mt-8 space-y-6 font-bold bg-white sm:self-center left-2 right-2 drop-shadow-md bg-opacity-80 rounded-2xl`}
+          className={`${hamburgMenuStatus} absolute flex flex-col items-center self-end mx-[10%] py-8 mt-8 space-y-6 font-bold bg-white sm:self-center left-2 right-2 drop-shadow-md bg-opacity-80 rounded-2xl`}
         >
-          <div
+          {/* <div
             className="hover:text-orange pt-2 md:text-2xl tracking-wider"
             onClick={() => {
               navigate(`/add-item`);
@@ -143,8 +144,8 @@ const LoggedInNavBar = () => {
             }}
           >
             Add Item
-          </div>
-          <div
+          </div> */}
+          {/* <div
             className="hover:text-orange pt-2 md:text-2xl tracking-wider"
             onClick={() => {
               navigate(`/add-category`);
@@ -153,7 +154,7 @@ const LoggedInNavBar = () => {
             }}
           >
             Category
-          </div>
+          </div> */}
           <div
             className="hover:text-orange pt-2 md:text-2xl tracking-wider"
             onClick={() => {

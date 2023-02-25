@@ -33,7 +33,7 @@ export default function Home() {
     <div>
       <LandingHero />
       <div className="flex gap-5">
-        <div className="flex w-3/12 flex-col gap-5">
+        <div className="flex w-3/12 flex-col gap-6">
           <AddItemCard />
           <AddCategoryCard />
         </div>
