@@ -1,8 +1,10 @@
 export interface IItem {
   id?: string;
+  userId: string;
   name: string;
   purchaseDate: Date | string;
   expiryDate: Date | string;
+  categoryId: string;
   storedIn: string;
   quantity: string;
   trashed: Boolean;
@@ -10,6 +12,7 @@ export interface IItem {
 
 export interface ICategory {
   id?: string;
+  userId: string;
   name: string;
   dateCreated: Date | string;
   pantryDays: number;

@@ -1,5 +1,5 @@
 import React from 'react'
-import DropdownButton from '../components/button/DropdownButton'
+import DropdownButton from '../components/button/DropdownSelect'
 
 import Home from './Home'
 

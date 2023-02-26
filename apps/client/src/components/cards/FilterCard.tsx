@@ -6,7 +6,7 @@ import {
     updateFilteredItems,
 } from "../../app/slices/itemsSlice";
 import { useAppDispatch, useAppSelector } from "../../app/store";
-import { isAfter } from "date-fns";
+import { isAfter, isWithinInterval } from "date-fns";
 import { IItem } from "../../interface";
 
 interface ICheckboxStatus {
@@ -54,20 +54,14 @@ const FilterCard = () => {
     const filterData = (data: ICheckboxStatus) => {
         if (data.evergreen) {
             allUserItems.forEach((item) => {
-                if (
-                    isAfter(new Date(item.expiryDate), new Date()) &&
-                    item.trashed === false
-                ) {
+                if (isAfter(new Date(item.expiryDate), new Date())) {
                     filteredData.push(item);
                 }
             });
         }
         if (data.rotten) {
             allUserItems.forEach((item) => {
-                if (
-                    isAfter(new Date(), new Date(item.expiryDate)) &&
-                    item.trashed === false
-                ) {
+                if (isAfter(new Date(), new Date(item.expiryDate))) {
                     filteredData.push(item);
                 }
             });
@@ -79,6 +73,7 @@ const FilterCard = () => {
                 }
             });
         }
+
         if (!data.evergreen && !data.rotten && !data.trashed) {
             filteredData = allUserItems;
         }
@@ -101,9 +96,19 @@ const FilterCard = () => {
         if (data.today) {
             result = result.filter((item) => today === new Date(item.expiryDate));
         } else if (data.in3Days) {
-            result = result.filter((item) => in3Days === new Date(item.expiryDate));
+            result = result.filter((item) =>
+                isWithinInterval(new Date(item.expiryDate), {
+                    start: today,
+                    end: in3Days,
+                })
+            );
         } else if (data.inAWeek) {
-            result = result.filter((item) => inAWeek === new Date(item.expiryDate));
+            result = result.filter((item) =>
+                isWithinInterval(new Date(item.expiryDate), {
+                    start: today,
+                    end: inAWeek,
+                })
+            );
         }
         // console.log(result);
         // console.log(`result array length ${result.length}`);
@@ -114,7 +119,7 @@ const FilterCard = () => {
         // console.log("data is being updated");
         setCheckboxStatus(data);
         clearTimeout(timeoutId);
-        dispatch(setFilterToLoading())
+        dispatch(setFilterToLoading());
         const newTimeoutId = setTimeout(() => {
             filterData(data);
         }, 1000);
@@ -320,7 +325,7 @@ const FilterCard = () => {
                     <div
                         className="flex w-2/3 bg-orange font-lora font-bolder text-white justify-center rounded-3xl p-1 hover:bg-gradient-to-r from-orange to-pink"
                         onClick={() => {
-                            dispatch(updateFilteredItems(allUserItems))
+                            dispatch(updateFilteredItems(allUserItems));
                             setCheckboxStatus({
                                 evergreen: false,
                                 rotten: false,

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { showCategories } from "../../app/slices/categoriesSlice";
 import { useAppDispatch, useAppSelector } from "../../app/store";
-import DropdownButton from "../button/DropdownButton";
+import DropdownButton from "../button/DropdownSelect";
 import { capitalizeWords } from "../utility/functions/capitalizeWord";
 
 const AddCategoryCard = () => {

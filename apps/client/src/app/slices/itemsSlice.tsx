@@ -13,6 +13,7 @@ interface ItemsState {
   // trashed: IItem[];
   filteredUserItems: IItem[];
   userItemsLoading: boolean;
+  addItemLoading: boolean;
   status: string;
   error: any;
 }
@@ -33,6 +34,8 @@ const initialState: ItemsState = {
   ],
   // Item in focus (usually used when creation, updating or deleting of item)
   item: {
+    userId: "",
+    categoryId: "",
     id: "",
     name: "",
     purchaseDate: "2022-02-18T16:00:00.000Z",
@@ -78,6 +81,7 @@ const initialState: ItemsState = {
   // ],
   filteredUserItems: [],
   userItemsLoading: false,
+  addItemLoading: false,
   status: "idle",
   error: null,
 };
@@ -223,6 +227,8 @@ export const itemsSlice = createSlice({
       .addCase(createItem.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.userItems.unshift(action.payload);
+        state.filteredUserItems.unshift(action.payload);
+
         // if (
         //   isAfter(new Date(action.payload.expiryDate), new Date()) &&
         //   action.payload.trashed === false
@@ -264,8 +270,10 @@ export const itemsSlice = createSlice({
         state.status = "succeeded";
         console.log(action.payload);
         state.item = {
+          userId: "",
           id: "",
           name: "",
+          categoryId: "",
           purchaseDate: "",
           expiryDate: "",
           storedIn: "",
@@ -276,8 +284,10 @@ export const itemsSlice = createSlice({
         state.userItems = state.userItems.map((item) => {
           if (item.id === action.payload.id) {
             let newItem = {
+              userId: item.userId,
               id: item.id,
               name: item.name,
+              categoryId: item.categoryId,
               purchaseDate: item.purchaseDate,
               expiryDate: item.expiryDate,
               storedIn: item.storedIn,
@@ -315,8 +325,10 @@ export const itemsSlice = createSlice({
         state.userItems = state.userItems.map((item) => {
           if (item.id === action.payload.id) {
             let newItem = {
+              userId: item.userId,
               id: item.id,
               name: item.name,
+              categoryId: item.categoryId,
               purchaseDate: item.purchaseDate,
               expiryDate: item.expiryDate,
               storedIn: item.storedIn,
@@ -361,6 +373,8 @@ export const showFilteredItems = (state: RootState) =>
   state.items.filteredUserItems;
 export const showUserItemsLoadingState = (state: RootState) =>
   state.items.userItemsLoading;
+export const showAddItemLoadingState = (state: RootState) =>
+  state.items.addItemLoading;
 export const getItemAdded = (state: RootState) => state.items.item;
 export default itemsSlice.reducer;
 // export const getEvergreenItems = (state: RootState) => state.items.evergreen;
