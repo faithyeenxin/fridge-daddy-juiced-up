@@ -19,6 +19,7 @@ interface IDropdownProps {
   setDaysInFocus: any;
   newItem: any;
   setNewItem: any;
+  resetState: any;
 }
 
 const DropdownSelect = ({
@@ -30,6 +31,7 @@ const DropdownSelect = ({
   setDaysInFocus,
   newItem,
   setNewItem,
+  resetState,
 }: IDropdownProps) => {
   const divRef: any = useRef(null);
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -47,6 +49,10 @@ const DropdownSelect = ({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    setSelectedValue(undefined);
+  }, [resetState]);
 
   const handleSelectedValue = (dropdownName: string, item: any) => {
     console.log(item);

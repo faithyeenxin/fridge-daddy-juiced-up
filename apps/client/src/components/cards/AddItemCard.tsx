@@ -26,9 +26,9 @@ const AddItemCard = () => {
   const todayStr = format(today, "yyyy-MM-dd");
   const token: any = useAppSelector(getUserId);
   const addItemLoading = useAppSelector(showAddItemLoadingState);
-
   const dispatch = useAppDispatch();
   const categories = useAppSelector(showCategories);
+  const [resetState, setResetState] = useState(false);
   const [shelfLife, setShelfLife] = useState([
     { id: 1, name: "Pantry", days: 0 },
     { id: 2, name: "Fridge", days: 0 },
@@ -39,6 +39,7 @@ const AddItemCard = () => {
   const [purchaseDate, setPurchaseDate] = useState(todayStr);
   const [expiryDate, setExpiryDate] = useState(todayStr);
   const [daysInFocus, setDaysInFocus] = useState(0);
+  const [resetData, setResetData] = useState(false);
   const [newItem, setNewItem] = useState<IItem>({
     userId: token.id,
     name: "",
@@ -51,6 +52,17 @@ const AddItemCard = () => {
   });
 
   const handleSubmit = (e: any) => {
+    setNewItem({
+      userId: "",
+      name: "",
+      purchaseDate: new Date(),
+      expiryDate: new Date(),
+      categoryId: "",
+      storedIn: "",
+      quantity: "",
+      trashed: false,
+    });
+    setResetState(!resetState);
     let data = {
       ...newItem,
       userId: token.id,
@@ -91,6 +103,7 @@ const AddItemCard = () => {
           placeholder="Name"
           spellCheck={true}
           maxLength={23}
+          value={newItem.name}
           autoComplete="off"
           className="w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none"
           onChange={(e) => {
@@ -105,6 +118,7 @@ const AddItemCard = () => {
           maxLength={9}
           placeholder="Quantity"
           autoComplete="off"
+          value={newItem.quantity}
           className="w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none"
           onChange={(e) => {
             setNewItem({ ...newItem, quantity: e.target.value });
@@ -124,6 +138,7 @@ const AddItemCard = () => {
           purchaseDate={purchaseDate}
           setExpiryDate={setExpiryDate}
           setDaysInFocus={setDaysInFocus}
+          resetState={resetState}
         />
         <DropdownSelect
           name="Compartment"
@@ -134,6 +149,7 @@ const AddItemCard = () => {
           purchaseDate={purchaseDate}
           setExpiryDate={setExpiryDate}
           setDaysInFocus={setDaysInFocus}
+          resetState={resetState}
         />
 
         <div className="flex gap-2 justify-around w-full">
