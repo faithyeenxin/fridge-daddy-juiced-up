@@ -1,7 +1,7 @@
 import React from "react";
-import { FeaturesSection } from "../components/home/FeaturesSection";
-import HeroSection from "../components/home/HeroSection";
-import { RegisterSection } from "../components/home/RegisterSection";
+import { FeaturesSection } from "../components/landing/FeaturesSection";
+import HeroSection from "../components/landing/HeroSection";
+import { RegisterSection } from "../components/landing/RegisterSection";
 
 export const Landing = () => {
   return (

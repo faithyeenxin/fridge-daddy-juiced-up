@@ -186,7 +186,7 @@ const LoggedInNavBar = () => {
             Account
           </div>
           <div
-            className="md:block p-2 px-6 pt-2 text-white bg-orange rounded-full baseline hover:bg-orangeLight md:text-2xl"
+            className="md:block p-2 px-6 pt-2 text-white bg-orange rounded-full baseline hover:bg-gradient-to-r from-orange to-pink md:text-2xl"
             onClick={() => {
               sessionStorage.removeItem("fridgeDaddyToken");
               navigate(`/`);

@@ -184,7 +184,7 @@ export const RegisterCard = () => {
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="w-64 bg-orange text-center py-3 text-white my-1 rounded-full hover:bg-orangeLight mt-2"
+                className="w-64 bg-orange text-center py-3 text-white my-1 rounded-full hover:bg-gradient-to-r from-orange to-pink mt-2"
               >
                 Create Account
               </button>

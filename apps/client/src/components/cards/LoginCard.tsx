@@ -146,7 +146,7 @@ const LoginCard = () => {
               <div className="flex justify-center">
                 <button
                   type="submit"
-                  className="w-64 bg-orange text-center py-3 mt-4 text-white my-1 rounded-full hover:bg-orangeLight"
+                  className="w-64 bg-orange text-center py-3 mt-4 text-white my-1 rounded-full hover:bg-gradient-to-r from-orange to-pink"
                 >
                   Let's Go!
                 </button>
@@ -252,7 +252,7 @@ const LoginCard = () => {
                   <div className="mt-4">
                     <button
                       type="button"
-                      className="mr-2 inline-flex justify-center rounded-md border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-orangeLight focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="mr-2 inline-flex justify-center rounded-md border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={closeModal}
                     >
                       Try Again!

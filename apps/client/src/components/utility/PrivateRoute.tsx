@@ -31,7 +31,7 @@ const PrivateRoute = ({ outlet }: IPrivateRouteProps) => {
       return <Navigate to="/login-redirect" />;
     } else {
       // fetchAllData(payload);
-      console.log("all data fetched");
+      // console.log("all data fetched");
       useEffect(() => {
         dispatch(setToken(payload));
         dispatch(setUser(payload));

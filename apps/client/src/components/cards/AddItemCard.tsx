@@ -73,7 +73,7 @@ const AddItemCard = () => {
                         placeholder="Expiration"
                         type="date"
                     />
-                    <img src="images/cards/add.svg" className="bg-orange rounded-3xl" />
+                    <img src="images/cards/add.svg" className="bg-orange rounded-3xl hover:bg-gradient-to-r from-orange to-pink" />
                 </div>
             </div>
         </div>

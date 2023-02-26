@@ -12,6 +12,7 @@ interface ItemsState {
   // rotten: IItem[];
   // trashed: IItem[];
   filteredUserItems: IItem[];
+  userItemsLoading: boolean;
   status: string;
   error: any;
 }
@@ -76,6 +77,7 @@ const initialState: ItemsState = {
   //   },
   // ],
   filteredUserItems: [],
+  userItemsLoading: false,
   status: "idle",
   error: null,
 };
@@ -159,14 +161,15 @@ export const itemsSlice = createSlice({
   initialState,
   reducers: {
     resetItems(state) {
-      console.log("items reset");
       Object.assign(state, initialState);
     },
+    setFilterToLoading(state) {
+      state.userItemsLoading = true;
+    },
     updateFilteredItems(state, action: PayloadAction<IItem[]>) {
-      console.log("items filtered in slice");
-      console.log(action.payload)
-      Object.assign(state.filteredUserItems, action.payload);
-    }
+      state.filteredUserItems = action.payload;
+      state.userItemsLoading = false;
+    },
   },
   extraReducers: (builder) => {
     // fetch all items in database
@@ -186,9 +189,11 @@ export const itemsSlice = createSlice({
     builder
       .addCase(getItemsByUserId.pending, (state) => {
         state.status = "loading";
+        state.userItemsLoading = true;
       })
       .addCase(getItemsByUserId.fulfilled, (state, action) => {
         state.status = "succeeded";
+        state.userItemsLoading = false;
         state.userItems = action.payload;
         state.filteredUserItems = action.payload;
         // state.evergreen = action.payload.filter(
@@ -207,6 +212,7 @@ export const itemsSlice = createSlice({
       })
       .addCase(getItemsByUserId.rejected, (state, action) => {
         state.status = "failed";
+        state.userItemsLoading = true;
         state.error = action.error.message;
       });
     // create Item
@@ -347,9 +353,14 @@ export const itemsSlice = createSlice({
   },
 });
 
-export const { resetItems, updateFilteredItems } = itemsSlice.actions;
+export const { resetItems, updateFilteredItems, setFilterToLoading } =
+  itemsSlice.actions;
 export const showItems = (state: RootState) => state.items.items;
 export const showUserItems = (state: RootState) => state.items.userItems;
+export const showFilteredItems = (state: RootState) =>
+  state.items.filteredUserItems;
+export const showUserItemsLoadingState = (state: RootState) =>
+  state.items.userItemsLoading;
 export const getItemAdded = (state: RootState) => state.items.item;
 export default itemsSlice.reducer;
 // export const getEvergreenItems = (state: RootState) => state.items.evergreen;

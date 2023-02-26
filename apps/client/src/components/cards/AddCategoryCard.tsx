@@ -34,7 +34,7 @@ const AddCategoryCard = () => {
                         className="w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none"
                     />
                 </div>
-                <div className="flex justify-center w-full bg-orange rounded-3xl items-center">
+                <div className="flex justify-center w-full bg-orange rounded-3xl items-center hover:bg-gradient-to-r from-orange to-pink">
                     <img src="images/cards/add.svg" />
                 </div>
             </div>

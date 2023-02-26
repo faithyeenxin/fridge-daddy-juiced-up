@@ -12,7 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import { all } from "axios";
 import { taskCancelled } from "@reduxjs/toolkit/dist/listenerMiddleware/exceptions";
-import LandingHero from "../components/LandingHero";
+import LandingHero from "../components/HomeHero";
 import AddItemCard from "../components/cards/AddItemCard";
 import AddCategoryCard from "../components/cards/AddCategoryCard";
 import SearchBar from "../components/SearchBar";

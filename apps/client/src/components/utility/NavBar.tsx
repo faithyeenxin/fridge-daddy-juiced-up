@@ -85,7 +85,7 @@ const NavBar = () => {
             Sign In
           </div>
           <div
-            className="hidden md:block p-1 px-6 text-white bg-orange rounded-full baseline hover:bg-orangeLight text-md "
+            className="hidden md:block p-1 px-6 text-white bg-orange rounded-full baseline hover:bg-gradient-to-r from-orange to-pink text-md "
             onClick={() => {
               navigate("/register");
             }}
@@ -139,7 +139,7 @@ const NavBar = () => {
             Sign In
           </a>
           <a
-            className="md:block p-2 px-6 text-white bg-orange rounded-full baseline hover:bg-orangeLight text-md"
+            className="md:block p-2 px-6 text-white bg-orange rounded-full baseline hover:bg-gradient-to-r from-orange to-pink text-md"
             onClick={() => {
               navigate("/register");
               setNavStatus("");

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { showUserItems, updateFilteredItems } from "../../app/slices/itemsSlice";
+import {
+    setFilterToLoading,
+    showUserItems,
+    updateFilteredItems,
+} from "../../app/slices/itemsSlice";
 import { useAppDispatch, useAppSelector } from "../../app/store";
-import differenceInDays from "date-fns/differenceInDays";
 import { isAfter } from "date-fns";
-import { filter } from "lodash";
 import { IItem } from "../../interface";
 
 interface ICheckboxStatus {
@@ -19,20 +21,19 @@ interface ICheckboxStatus {
 }
 
 const FilterCard = () => {
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
     const allUserItems = useAppSelector(showUserItems);
-    console.log(allUserItems)
-    console.log(`all items array length ${allUserItems.length}`);
+    // console.log(allUserItems);
+    // console.log(`all items array length ${allUserItems.length}`);
     let filteredData: IItem[] = [];
     let result: IItem[] = [];
 
     // DATES
-    let today = new Date()
-    let in3Days = new Date()
-    in3Days.setDate(today.getDate() + 3)
-    let inAWeek = new Date()
-    inAWeek.setDate(today.getDate() + 7)
-
+    let today = new Date();
+    let in3Days = new Date();
+    in3Days.setDate(today.getDate() + 3);
+    let inAWeek = new Date();
+    inAWeek.setDate(today.getDate() + 7);
 
     const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>();
 
@@ -71,48 +72,50 @@ const FilterCard = () => {
         }
         if (data.trashed) {
             allUserItems.forEach((item) => {
-                if (
-                    item.trashed === true
-                ) {
+                if (item.trashed === true) {
                     filteredData.push(item);
                 }
             });
         }
         if (!data.evergreen && !data.rotten && !data.trashed) {
-            filteredData = allUserItems
+            filteredData = allUserItems;
         }
         if (data.pantry) {
-            let newData = filteredData.filter((item) => item.storedIn === 'Pantry')
-            result = newData
+            let newData = filteredData.filter((item) => item.storedIn === "Pantry");
+            result = [...result, ...newData];
         }
         if (data.fridge) {
-            let newData = filteredData.filter((item) => item.storedIn === 'Fridge')
-            result = newData
+            let newData = filteredData.filter((item) => item.storedIn === "Fridge");
+            // console.log(newData)
+            result = [...result, ...newData];
         }
         if (data.freezer) {
-            let newData = filteredData.filter((item) => item.storedIn === 'Freezer')
-            result = newData
+            let newData = filteredData.filter((item) => item.storedIn === "Freezer");
+            result = [...result, ...newData];
         }
         if (!data.pantry && !data.fridge && !data.freezer) {
-            result = filteredData
+            result = filteredData;
         }
         if (data.today) {
-            result = result.filter((item) => today === new Date(item.expiryDate))
+            result = result.filter((item) => today === new Date(item.expiryDate));
         } else if (data.in3Days) {
-            result = result.filter((item) => in3Days === new Date(item.expiryDate))
+            result = result.filter((item) => in3Days === new Date(item.expiryDate));
         } else if (data.inAWeek) {
-            result = result.filter((item) => inAWeek === new Date(item.expiryDate))
+            result = result.filter((item) => inAWeek === new Date(item.expiryDate));
         }
-        console.log(result)
-        console.log(`result array length ${result.length}`);
-        dispatch(updateFilteredItems(result))
+        // console.log(result);
+        // console.log(`result array length ${result.length}`);
+        dispatch(updateFilteredItems(result));
     };
 
     const updateCheckboxStatus = (data: ICheckboxStatus) => {
-        console.log("data is being updated");
+        // console.log("data is being updated");
         setCheckboxStatus(data);
         clearTimeout(timeoutId);
-        const newTimeoutId = setTimeout(() => filterData(data), 3000);
+        dispatch(setFilterToLoading())
+        const newTimeoutId = setTimeout(() => {
+            filterData(data);
+        }, 2000);
         setTimeoutId(newTimeoutId);
     };
 
@@ -313,8 +316,9 @@ const FilterCard = () => {
                 </div>
                 <div className="flex justify-center">
                     <div
-                        className="flex w-2/3 bg-orange font-lora font-bolder text-white justify-center rounded-3xl p-1"
+                        className="flex w-2/3 bg-orange font-lora font-bolder text-white justify-center rounded-3xl p-1 hover:bg-gradient-to-r from-orange to-pink"
                         onClick={() => {
+                            dispatch(updateFilteredItems(allUserItems))
                             setCheckboxStatus({
                                 evergreen: false,
                                 rotten: false,

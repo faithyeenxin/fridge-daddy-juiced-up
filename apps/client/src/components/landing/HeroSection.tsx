@@ -7,7 +7,7 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="bg-bgColor border-b-4 border-orange lg:px-20"
+      className="bg-bgColor lg:px-20"
     >
       <div className="container flex flex-col-reverse md:flex-row items-center mx-auto md:space-y-0">
         {/* Left Item */}
@@ -27,7 +27,7 @@ const HeroSection = () => {
           <div className="flex justify-center md:justify-start">
             <a
               href="/register"
-              className=" p-2 px-6 pt-2 text-white bg-orange rounded-full baseline hover:bg-orangeLight text-md "
+              className=" p-2 px-6 pt-2 text-white bg-orange rounded-full baseline hover:bg-gradient-to-r from-orange to-pink text-md "
             >
               Get Started
             </a>

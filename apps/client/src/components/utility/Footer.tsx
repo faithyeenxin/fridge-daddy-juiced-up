@@ -28,8 +28,8 @@ const Footer = () => {
             <div className="flex justify-center gap-x-4">
                 {SOCIAL_LINKS.map((item, idx) => <div key={idx}><a href={item.url}><img src={item.icon} /></a></div>)}
             </div>
-            <div className="flex justify-center pb-1 text-orange text-sm">
-                This website is brought to you by Faith, a Singapore-based full stack web developer. Feel free to connect with her!
+            <div className="flex justify-center py-1 text-orange text-sm">
+                Brought to you by Faith Ye
             </div>
         </div>
     )
