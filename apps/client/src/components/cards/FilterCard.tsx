@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
     setFilterToLoading,
+    showFilteredItems,
     showUserItems,
     updateFilteredItems,
 } from "../../app/slices/itemsSlice";
@@ -23,6 +24,7 @@ interface ICheckboxStatus {
 const FilterCard = () => {
     const dispatch = useAppDispatch();
     const allUserItems = useAppSelector(showUserItems);
+    const filteredUserItems = useAppSelector(showFilteredItems);
     // console.log(allUserItems);
     // console.log(`all items array length ${allUserItems.length}`);
     let filteredData: IItem[] = [];
@@ -115,12 +117,12 @@ const FilterCard = () => {
         dispatch(setFilterToLoading())
         const newTimeoutId = setTimeout(() => {
             filterData(data);
-        }, 2000);
+        }, 1000);
         setTimeoutId(newTimeoutId);
     };
 
     return (
-        <div className="w-full h-full flex bg-offWhite rounded-lg">
+        <div className="w-full h-[665px] flex bg-offWhite rounded-lg">
             <div className="flex flex-col m-5 justify-between w-full">
                 <div className="flex items-center justify-center text-3xl font-lora text-orange">
                     Filters

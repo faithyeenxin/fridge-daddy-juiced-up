@@ -189,11 +189,11 @@ export const itemsSlice = createSlice({
     builder
       .addCase(getItemsByUserId.pending, (state) => {
         state.status = "loading";
-        state.userItemsLoading = true;
+        // state.userItemsLoading = true;
       })
       .addCase(getItemsByUserId.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.userItemsLoading = false;
+        // state.userItemsLoading = false;
         state.userItems = action.payload;
         state.filteredUserItems = action.payload;
         // state.evergreen = action.payload.filter(

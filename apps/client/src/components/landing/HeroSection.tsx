@@ -1,7 +1,3 @@
-import React from "react";
-import hotdogPic from "../../assets/img/hotdog.png";
-import breakfastPic from "../../assets/img/breakfast.png";
-import DonutSVG from "./SVG/DonutSVG";
 import hero from "../../assets/img/happy-food.png";
 const HeroSection = () => {
   return (

@@ -1,17 +1,7 @@
-import { Tab } from "@headlessui/react";
-import CardItem from "./superceeded/CardItem";
-import { useAppDispatch, useAppSelector } from "../app/store";
-import isAfter from "date-fns/isAfter";
 
-import {
-  // getEvergreenItems,
-  // getRottenItems,
-  // getTrashedItems,
-  showUserItems,
-} from "../app/slices/itemsSlice";
-import { useEffect, useState } from "react";
-import { all } from "axios";
-import { taskCancelled } from "@reduxjs/toolkit/dist/listenerMiddleware/exceptions";
+import { gsap } from "gsap";
+
+import { useEffect, useRef } from "react";
 import LandingHero from "../components/HomeHero";
 import AddItemCard from "../components/cards/AddItemCard";
 import AddCategoryCard from "../components/cards/AddCategoryCard";
@@ -19,30 +9,54 @@ import SearchBar from "../components/SearchBar";
 import ItemsTable from "../components/ItemsTable";
 import FilterCard from "../components/cards/FilterCard";
 
-function classNames(...classes: any) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function Home() {
-  let userItems = useAppSelector(showUserItems);
-  // let evergreen = useAppSelector(getEvergreenItems);
-  // let rotten = useAppSelector(getRottenItems);
-  // let trashed = useAppSelector(getTrashedItems);
+  let itemLeftRef = useRef(null)
+  let itemRightRef = useRef(null)
+  let itemCenterRef = useRef(null)
+
+  useEffect(() => {
+    const itemLeft = itemLeftRef.current;
+    const itemRight = itemRightRef.current;
+    const itemCenter = itemCenterRef.current;
+
+    gsap.from(itemLeft, {
+      duration: 0.5,
+      x: -100,
+      opacity: 0
+    })
+    gsap.from(itemRight, {
+      duration: 0.5,
+      x: 100,
+      opacity: 0
+    })
+    gsap.from(itemCenter, {
+      duration: 1,
+      opacity: 0
+    })
+
+  }, [])
 
   return (
-    <div>
+    <div className="w-full h-[1000px]">
       <LandingHero />
       <div className="flex gap-5">
-        <div className="flex w-3/12 flex-col gap-6">
-          <AddItemCard />
-          <AddCategoryCard />
+        <div className="relative w-3/12 opacity-1">
+          <div ref={itemLeftRef} className="flex flex-col gap-6">
+            <AddItemCard />
+            <AddCategoryCard />
+          </div>
         </div>
-        <div className="flex flex-col w-7/12 gap-5">
-          <SearchBar />
-          <ItemsTable />
+        <div className="relative w-7/12 opacity-1">
+          <div ref={itemCenterRef} className="absolute w-full flex flex-col gap-5">
+            <SearchBar />
+            <ItemsTable />
+          </div>
         </div>
-        <div className="w-2/12">
-          <FilterCard />
+
+        <div className="relative w-2/12 opacity-1">
+          <div ref={itemRightRef} className="absolute w-full flex">
+            <FilterCard />
+          </div>
         </div>
       </div>
     </div>
