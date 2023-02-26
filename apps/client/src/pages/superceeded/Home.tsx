@@ -16,6 +16,7 @@ import { taskCancelled } from "@reduxjs/toolkit/dist/listenerMiddleware/exceptio
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Home() {
   // let userItems = useAppSelector(showUserItems);
@@ -35,8 +36,20 @@ export default function Home() {
     Trashed: trashed,
   };
 
+  toast("Your item has been successfully added!", {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  });
   return (
     <div className="flex justify-center sm:mx-2 md:mx-10">
+      {/* Same as */}
+      <ToastContainer />
       <div className="w-full px-2 py-5 sm:px-0 mx-8">
         <Tab.Group>
           <Tab.List className="flex space-x-1 rounded-full bg-bgColor p-1 border-2 border-orange">
@@ -57,12 +70,13 @@ export default function Home() {
                   <div className="space-x-2 p-1">
                     <span>{itemName}</span>
                     <span
-                      className={`text-xs font-semibold px-2 py-0.5 rounded-full ${itemName === "Evergreen"
-                        ? badgeColor.green
-                        : itemName === "Rotten"
+                      className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
+                        itemName === "Evergreen"
+                          ? badgeColor.green
+                          : itemName === "Rotten"
                           ? badgeColor.red
                           : badgeColor.gray
-                        }`}
+                      }`}
                     >
                       {/* Tab Bar bagde icon telling how many in each category */}
                       {allItems[itemName].length}

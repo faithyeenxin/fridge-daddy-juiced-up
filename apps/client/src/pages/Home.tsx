@@ -1,4 +1,3 @@
-
 import { gsap } from "gsap";
 
 import { useEffect, useRef } from "react";
@@ -8,11 +7,13 @@ import AddCategoryCard from "../components/cards/AddCategoryCard";
 import SearchBar from "../components/SearchBar";
 import ItemsTable from "../components/ItemsTable";
 import FilterCard from "../components/cards/FilterCard";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
-  let itemLeftRef = useRef(null)
-  let itemRightRef = useRef(null)
-  let itemCenterRef = useRef(null)
+  let itemLeftRef = useRef(null);
+  let itemRightRef = useRef(null);
+  let itemCenterRef = useRef(null);
 
   useEffect(() => {
     const itemLeft = itemLeftRef.current;
@@ -22,19 +23,18 @@ export default function Home() {
     gsap.from(itemLeft, {
       duration: 0.5,
       x: -100,
-      opacity: 0
-    })
+      opacity: 0,
+    });
     gsap.from(itemRight, {
       duration: 0.5,
       x: 100,
-      opacity: 0
-    })
+      opacity: 0,
+    });
     gsap.from(itemCenter, {
       duration: 1,
-      opacity: 0
-    })
-
-  }, [])
+      opacity: 0,
+    });
+  }, []);
 
   return (
     <div className="w-full h-[1000px]">
@@ -47,7 +47,10 @@ export default function Home() {
           </div>
         </div>
         <div className="relative w-7/12 opacity-1">
-          <div ref={itemCenterRef} className="absolute w-full flex flex-col gap-5">
+          <div
+            ref={itemCenterRef}
+            className="absolute w-full flex flex-col gap-5"
+          >
             <SearchBar />
             <ItemsTable />
           </div>
@@ -59,6 +62,19 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }

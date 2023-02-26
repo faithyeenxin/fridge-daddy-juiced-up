@@ -12,6 +12,9 @@ import {
   createItem,
   showAddItemLoadingState,
 } from "../../app/slices/itemsSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 interface IShelfLife {
   id: number;
   name: string;
@@ -49,16 +52,19 @@ const AddItemCard = () => {
 
   const handleSubmit = (e: any) => {
     let data = { ...newItem, userId: token.id };
-    dispatch(createItem(data))
-      .unwrap()
-      .then((originalPromiseResult) => {
-        // handle result here
-        console.log("item has been added to database");
-      })
-      .catch((rejectedValueOrSerializedError) => {
-        // handle error here
-        console.log("item could not be added to database");
-      });
+    if (Object.values(data).includes("")) {
+      toast.error("All fields have to be filled.");
+    } else {
+      toast("Item is being added");
+      dispatch(createItem(data))
+        .unwrap()
+        .then((originalPromiseResult) => {
+          toast.success("Your item has been added!");
+        })
+        .catch((rejectedValueOrSerializedError) => {
+          toast.error("We could not add your item! Please try again.");
+        });
+    }
   };
 
   return (
