@@ -84,9 +84,10 @@ const DropdownSelect = ({
       setNewItem({ ...newItem, storedIn: item.name.split(" ")[0] });
       setDaysInFocus(item.days);
       console.log(item.days);
-      setExpiryDate(
-        format(add(new Date(purchaseDate), { days: item.days }), "yyyy-MM-dd")
-      );
+      let newExpiryDate = new Date();
+      newExpiryDate.setDate(new Date(purchaseDate).getDate() + item.days);
+      console.log(newExpiryDate);
+      setExpiryDate(format(newExpiryDate, "yyyy-MM-dd"));
     }
   };
 

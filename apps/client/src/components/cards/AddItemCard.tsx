@@ -14,6 +14,7 @@ import {
 } from "../../app/slices/itemsSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { parse } from "path";
 
 interface IShelfLife {
   id: number;
@@ -38,7 +39,6 @@ const AddItemCard = () => {
   const [purchaseDate, setPurchaseDate] = useState(todayStr);
   const [expiryDate, setExpiryDate] = useState(todayStr);
   const [daysInFocus, setDaysInFocus] = useState(0);
-  console.log(token);
   const [newItem, setNewItem] = useState<IItem>({
     userId: token.id,
     name: "",
@@ -51,11 +51,16 @@ const AddItemCard = () => {
   });
 
   const handleSubmit = (e: any) => {
-    let data = { ...newItem, userId: token.id };
+    let data = {
+      ...newItem,
+      userId: token.id,
+      purchaseDate: parseISO(format(new Date(purchaseDate), "yyyy-MM-dd")),
+      expiryDate: parseISO(format(new Date(expiryDate), "yyyy-MM-dd")),
+    };
     if (Object.values(data).includes("")) {
       toast.error("All fields have to be filled.");
     } else {
-      toast("Item is being added");
+      toast("We're adding your item!");
       dispatch(createItem(data))
         .unwrap()
         .then((originalPromiseResult) => {
@@ -85,7 +90,7 @@ const AddItemCard = () => {
           name="itemName"
           placeholder="Name"
           spellCheck={true}
-          maxLength={20}
+          maxLength={23}
           autoComplete="off"
           className="w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none"
           onChange={(e) => {
@@ -182,6 +187,7 @@ const AddItemCard = () => {
             defaultValue={purchaseDate}
             value={expiryDate}
             onChange={(e) => {
+              setExpiryDate(e.target.value);
               setNewItem({
                 ...newItem,
                 expiryDate: parseISO(
