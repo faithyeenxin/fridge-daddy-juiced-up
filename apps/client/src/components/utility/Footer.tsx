@@ -29,7 +29,7 @@ const Footer = () => {
                 {SOCIAL_LINKS.map((item, idx) => <div key={idx}><a href={item.url}><img src={item.icon} /></a></div>)}
             </div>
             <div className="flex justify-center pb-1 text-orange text-sm">
-                This full-stack application is brought to you by a Singapore-based web developer named Faith. Feel free to connect with her!
+                This website is brought to you by Faith, a Singapore-based full stack web developer. Feel free to connect with her!
             </div>
         </div>
     )

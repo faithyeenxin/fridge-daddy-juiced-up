@@ -158,6 +158,16 @@ const LoggedInNavBar = () => {
           <div
             className="hover:text-orange pt-2 md:text-2xl tracking-wider"
             onClick={() => {
+              navigate(`/shopping-list`);
+              setNavStatus("");
+              setHamburgMenuStatus("hidden");
+            }}
+          >
+            Groceries List
+          </div>
+          <div
+            className="hover:text-orange pt-2 md:text-2xl tracking-wider"
+            onClick={() => {
               navigate(`/recipes`);
               setNavStatus("");
               setHamburgMenuStatus("hidden");

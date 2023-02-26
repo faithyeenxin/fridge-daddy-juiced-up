@@ -1,6 +1,40 @@
 import React, { useState } from "react";
+import { showUserItems } from "../../app/slices/itemsSlice";
+import { useAppSelector } from "../../app/store";
+import differenceInDays from "date-fns/differenceInDays";
+import { isAfter } from "date-fns";
+import { filter } from "lodash";
+import { IItem } from "../../interface";
+
+interface ICheckboxStatus {
+    evergreen: boolean;
+    rotten: boolean;
+    trashed: boolean;
+    pantry: boolean;
+    fridge: boolean;
+    freezer: boolean;
+    today: boolean;
+    in3Days: boolean;
+    inAWeek: boolean;
+}
 
 const FilterCard = () => {
+    const allUserItems = useAppSelector(showUserItems);
+    console.log(allUserItems)
+    console.log(`all items array length ${allUserItems.length}`);
+    let filteredData: IItem[] = [];
+    let result: IItem[] = [];
+
+    // DATES
+    let today = new Date()
+    let in3Days = new Date()
+    in3Days.setDate(today.getDate() + 3)
+    let inAWeek = new Date()
+    inAWeek.setDate(today.getDate() + 7)
+
+
+    const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>();
+
     const [checkboxStatus, setCheckboxStatus] = useState({
         evergreen: false,
         rotten: false,
@@ -12,6 +46,73 @@ const FilterCard = () => {
         in3Days: false,
         inAWeek: false,
     });
+
+    const filterData = (data: ICheckboxStatus) => {
+        if (data.evergreen) {
+            allUserItems.forEach((item) => {
+                if (
+                    isAfter(new Date(item.expiryDate), new Date()) &&
+                    item.trashed === false
+                ) {
+                    filteredData.push(item);
+                }
+            });
+        }
+        if (data.rotten) {
+            allUserItems.forEach((item) => {
+                if (
+                    isAfter(new Date(), new Date(item.expiryDate)) &&
+                    item.trashed === false
+                ) {
+                    filteredData.push(item);
+                }
+            });
+        }
+        if (data.trashed) {
+            allUserItems.forEach((item) => {
+                if (
+                    item.trashed === true
+                ) {
+                    filteredData.push(item);
+                }
+            });
+        }
+        if (!data.evergreen && !data.rotten && !data.trashed) {
+            filteredData = allUserItems
+        }
+        if (data.pantry) {
+            let newData = filteredData.filter((item) => item.storedIn === 'Pantry')
+            result = newData
+        }
+        if (data.fridge) {
+            let newData = filteredData.filter((item) => item.storedIn === 'Fridge')
+            result = newData
+        }
+        if (data.freezer) {
+            let newData = filteredData.filter((item) => item.storedIn === 'Freezer')
+            result = newData
+        }
+        if (!data.pantry && !data.fridge && !data.freezer) {
+            result = filteredData
+        }
+        if (data.today) {
+            result = result.filter((item) => today === new Date(item.expiryDate))
+        } else if (data.in3Days) {
+            result = result.filter((item) => in3Days === new Date(item.expiryDate))
+        } else if (data.inAWeek) {
+            result = result.filter((item) => inAWeek === new Date(item.expiryDate))
+        }
+        console.log(result)
+        console.log(`result array length ${result.length}`);
+    };
+
+    const updateCheckboxStatus = (data: ICheckboxStatus) => {
+        console.log("data is being updated");
+        setCheckboxStatus(data);
+        clearTimeout(timeoutId);
+        const newTimeoutId = setTimeout(() => filterData(data), 3000);
+        setTimeoutId(newTimeoutId);
+    };
 
     return (
         <div className="w-full h-full flex bg-offWhite rounded-lg">
@@ -35,12 +136,10 @@ const FilterCard = () => {
                                         : `images/cards/uncheck_ring.svg`
                                 }
                                 onClick={() => {
-
-                                    setCheckboxStatus({
+                                    updateCheckboxStatus({
                                         ...checkboxStatus,
                                         evergreen: !checkboxStatus.evergreen,
                                     });
-
                                 }}
                             />
                         </div>
@@ -55,12 +154,10 @@ const FilterCard = () => {
                                         : `images/cards/uncheck_ring.svg`
                                 }
                                 onClick={() => {
-
-                                    setCheckboxStatus({
+                                    updateCheckboxStatus({
                                         ...checkboxStatus,
                                         rotten: !checkboxStatus.rotten,
                                     });
-
                                 }}
                             />
                         </div>
@@ -75,12 +172,10 @@ const FilterCard = () => {
                                         : `images/cards/uncheck_ring.svg`
                                 }
                                 onClick={() => {
-
-                                    setCheckboxStatus({
+                                    updateCheckboxStatus({
                                         ...checkboxStatus,
                                         trashed: !checkboxStatus.trashed,
                                     });
-
                                 }}
                             />
                         </div>
@@ -102,12 +197,10 @@ const FilterCard = () => {
                                         : `images/cards/uncheck_ring.svg`
                                 }
                                 onClick={() => {
-
-                                    setCheckboxStatus({
+                                    updateCheckboxStatus({
                                         ...checkboxStatus,
                                         pantry: !checkboxStatus.pantry,
                                     });
-
                                 }}
                             />
                         </div>
@@ -122,12 +215,10 @@ const FilterCard = () => {
                                         : `images/cards/uncheck_ring.svg`
                                 }
                                 onClick={() => {
-
-                                    setCheckboxStatus({
+                                    updateCheckboxStatus({
                                         ...checkboxStatus,
                                         fridge: !checkboxStatus.fridge,
                                     });
-
                                 }}
                             />
                         </div>
@@ -142,12 +233,10 @@ const FilterCard = () => {
                                         : `images/cards/uncheck_ring.svg`
                                 }
                                 onClick={() => {
-
-                                    setCheckboxStatus({
+                                    updateCheckboxStatus({
                                         ...checkboxStatus,
                                         freezer: !checkboxStatus.freezer,
                                     });
-
                                 }}
                             />
                         </div>
@@ -169,12 +258,12 @@ const FilterCard = () => {
                                         : `images/cards/uncheck_ring.svg`
                                 }
                                 onClick={() => {
-
-                                    setCheckboxStatus({
+                                    updateCheckboxStatus({
                                         ...checkboxStatus,
                                         today: !checkboxStatus.today,
+                                        in3Days: false,
+                                        inAWeek: false,
                                     });
-
                                 }}
                             />
                         </div>
@@ -189,12 +278,12 @@ const FilterCard = () => {
                                         : `images/cards/uncheck_ring.svg`
                                 }
                                 onClick={() => {
-
-                                    setCheckboxStatus({
+                                    updateCheckboxStatus({
                                         ...checkboxStatus,
+                                        today: false,
                                         in3Days: !checkboxStatus.in3Days,
+                                        inAWeek: false,
                                     });
-
                                 }}
                             />
                         </div>
@@ -209,12 +298,12 @@ const FilterCard = () => {
                                         : `images/cards/uncheck_ring.svg`
                                 }
                                 onClick={() => {
-
-                                    setCheckboxStatus({
+                                    updateCheckboxStatus({
                                         ...checkboxStatus,
+                                        today: false,
+                                        in3Days: false,
                                         inAWeek: !checkboxStatus.inAWeek,
                                     });
-
                                 }}
                             />
                         </div>

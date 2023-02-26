@@ -5,14 +5,6 @@ import DropdownButton from "../button/DropdownButton";
 import { capitalizeWords } from "../utility/functions/capitalizeWord";
 
 const AddCategoryCard = () => {
-    const categories = useAppSelector(showCategories);
-    console.log(categories);
-    const categoriesNameOnly = categories.map((item, idx) =>
-        capitalizeWords(item.name)
-    );
-    console.log(categoriesNameOnly);
-    const [purchasedClicked, setPurchasedClicked] = useState(false);
-    const [expirationClicked, setexpirationClicked] = useState(false);
 
     return (
         <div className="flex flex-col w-full h-[260px] bg-offWhite rounded-lg">
