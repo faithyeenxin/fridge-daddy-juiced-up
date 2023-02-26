@@ -4,9 +4,9 @@ import { useAppDispatch, useAppSelector } from "../app/store";
 import isAfter from "date-fns/isAfter";
 
 import {
-  getEvergreenItems,
-  getRottenItems,
-  getTrashedItems,
+  // getEvergreenItems,
+  // getRottenItems,
+  // getTrashedItems,
   showUserItems,
 } from "../app/slices/itemsSlice";
 import { useEffect, useState } from "react";
@@ -25,9 +25,9 @@ function classNames(...classes: any) {
 
 export default function Home() {
   let userItems = useAppSelector(showUserItems);
-  let evergreen = useAppSelector(getEvergreenItems);
-  let rotten = useAppSelector(getRottenItems);
-  let trashed = useAppSelector(getTrashedItems);
+  // let evergreen = useAppSelector(getEvergreenItems);
+  // let rotten = useAppSelector(getRottenItems);
+  // let trashed = useAppSelector(getTrashedItems);
 
   return (
     <div>

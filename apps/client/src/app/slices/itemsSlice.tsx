@@ -8,9 +8,10 @@ interface ItemsState {
   items: IItem[];
   item: IItem;
   userItems: IItem[];
-  evergreen: IItem[];
-  rotten: IItem[];
-  trashed: IItem[];
+  // evergreen: IItem[];
+  // rotten: IItem[];
+  // trashed: IItem[];
+  filteredUserItems: IItem[];
   status: string;
   error: any;
 }
@@ -41,39 +42,40 @@ const initialState: ItemsState = {
   },
   // Items based on User ID
   userItems: [],
-  evergreen: [
-    // {
-    //   id: "",
-    //   name: "",
-    //   purchaseDate: "2022-02-18T16:00:00.000Z",
-    //   expiryDate: "2022-02-18T16:00:00.000Z",
-    //   storedIn: "",
-    //   quantity: "",
-    //   trashed: false,
-    // },
-  ],
-  rotten: [
-    // {
-    //   id: "",
-    //   name: "",
-    //   purchaseDate: "2022-02-18T16:00:00.000Z",
-    //   expiryDate: "2022-02-18T16:00:00.000Z",
-    //   storedIn: "",
-    //   quantity: "",
-    //   trashed: false,
-    // },
-  ],
-  trashed: [
-    // {
-    //   id: "",
-    //   name: "",
-    //   purchaseDate: "2022-02-18T16:00:00.000Z",
-    //   expiryDate: "2022-02-18T16:00:00.000Z",
-    //   storedIn: "",
-    //   quantity: "",
-    //   trashed: false,
-    // },
-  ],
+  // evergreen: [
+  //   {
+  //     id: "",
+  //     name: "",
+  //     purchaseDate: "2022-02-18T16:00:00.000Z",
+  //     expiryDate: "2022-02-18T16:00:00.000Z",
+  //     storedIn: "",
+  //     quantity: "",
+  //     trashed: false,
+  //   },
+  // ],
+  // rotten: [
+  //   {
+  //     id: "",
+  //     name: "",
+  //     purchaseDate: "2022-02-18T16:00:00.000Z",
+  //     expiryDate: "2022-02-18T16:00:00.000Z",
+  //     storedIn: "",
+  //     quantity: "",
+  //     trashed: false,
+  //   },
+  // ],
+  // trashed: [
+  //   {
+  //     id: "",
+  //     name: "",
+  //     purchaseDate: "2022-02-18T16:00:00.000Z",
+  //     expiryDate: "2022-02-18T16:00:00.000Z",
+  //     storedIn: "",
+  //     quantity: "",
+  //     trashed: false,
+  //   },
+  // ],
+  filteredUserItems: [],
   status: "idle",
   error: null,
 };
@@ -160,6 +162,11 @@ export const itemsSlice = createSlice({
       console.log("items reset");
       Object.assign(state, initialState);
     },
+    updateFilteredItems(state, action: PayloadAction<IItem[]>) {
+      console.log("items filtered in slice");
+      console.log(action.payload)
+      Object.assign(state.filteredUserItems, action.payload);
+    }
   },
   extraReducers: (builder) => {
     // fetch all items in database
@@ -183,19 +190,20 @@ export const itemsSlice = createSlice({
       .addCase(getItemsByUserId.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.userItems = action.payload;
-        state.evergreen = action.payload.filter(
-          (item: any) =>
-            isAfter(new Date(item.expiryDate), new Date()) &&
-            item.trashed === false
-        );
-        state.rotten = action.payload.filter(
-          (item: any) =>
-            isAfter(new Date(), new Date(item.expiryDate)) &&
-            item.trashed === false
-        );
-        state.trashed = action.payload.filter(
-          (item: any) => item.trashed === true
-        );
+        state.filteredUserItems = action.payload;
+        // state.evergreen = action.payload.filter(
+        //   (item: any) =>
+        //     isAfter(new Date(item.expiryDate), new Date()) &&
+        //     item.trashed === false
+        // );
+        // state.rotten = action.payload.filter(
+        //   (item: any) =>
+        //     isAfter(new Date(), new Date(item.expiryDate)) &&
+        //     item.trashed === false
+        // );
+        // state.trashed = action.payload.filter(
+        //   (item: any) => item.trashed === true
+        // );
       })
       .addCase(getItemsByUserId.rejected, (state, action) => {
         state.status = "failed";
@@ -209,19 +217,19 @@ export const itemsSlice = createSlice({
       .addCase(createItem.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.userItems.unshift(action.payload);
-        if (
-          isAfter(new Date(action.payload.expiryDate), new Date()) &&
-          action.payload.trashed === false
-        ) {
-          state.evergreen.unshift(action.payload);
-        } else if (
-          isAfter(new Date(), new Date(action.payload.expiryDate)) &&
-          action.payload.trashed === false
-        ) {
-          state.rotten.unshift(action.payload);
-        } else if (action.payload.trashed === true) {
-          state.trashed.unshift(action.payload);
-        }
+        // if (
+        //   isAfter(new Date(action.payload.expiryDate), new Date()) &&
+        //   action.payload.trashed === false
+        // ) {
+        //   state.evergreen.unshift(action.payload);
+        // } else if (
+        //   isAfter(new Date(), new Date(action.payload.expiryDate)) &&
+        //   action.payload.trashed === false
+        // ) {
+        //   state.rotten.unshift(action.payload);
+        // } else if (action.payload.trashed === true) {
+        //   state.trashed.unshift(action.payload);
+        // }
         state.item = action.payload;
       })
       .addCase(createItem.rejected, (state, action) => {
@@ -275,17 +283,17 @@ export const itemsSlice = createSlice({
             return item;
           }
         });
-        if (isAfter(new Date(action.payload.expiryDate), new Date())) {
-          state.evergreen = state.evergreen.filter(
-            (item) => item.id !== action.payload.id
-          );
-          state.trashed.unshift(action.payload);
-        } else if (isAfter(new Date(), new Date(action.payload.expiryDate))) {
-          state.rotten = state.rotten.filter(
-            (item) => item.id !== action.payload.id
-          );
-          state.trashed.unshift(action.payload);
-        }
+        // if (isAfter(new Date(action.payload.expiryDate), new Date())) {
+        //   state.evergreen = state.evergreen.filter(
+        //     (item) => item.id !== action.payload.id
+        //   );
+        //   state.trashed.unshift(action.payload);
+        // } else if (isAfter(new Date(), new Date(action.payload.expiryDate))) {
+        //   state.rotten = state.rotten.filter(
+        //     (item) => item.id !== action.payload.id
+        //   );
+        //   state.trashed.unshift(action.payload);
+        // }
       })
       .addCase(trashItem.rejected, (state, action) => {
         state.status = "failed";
@@ -314,23 +322,23 @@ export const itemsSlice = createSlice({
             return item;
           }
         });
-        if (
-          isAfter(new Date(action.payload.expiryDate), new Date()) &&
-          action.payload.trashed !== true
-        ) {
-          state.evergreen.unshift(action.payload);
-          state.trashed = state.trashed.filter(
-            (item) => item.id !== action.payload.id
-          );
-        } else if (
-          isAfter(new Date(), new Date(action.payload.expiryDate)) &&
-          action.payload.trashed !== true
-        ) {
-          state.rotten.unshift(action.payload);
-          state.trashed = state.trashed.filter(
-            (item) => item.id !== action.payload.id
-          );
-        }
+        // if (
+        //   isAfter(new Date(action.payload.expiryDate), new Date()) &&
+        //   action.payload.trashed !== true
+        // ) {
+        //   state.evergreen.unshift(action.payload);
+        //   state.trashed = state.trashed.filter(
+        //     (item) => item.id !== action.payload.id
+        //   );
+        // } else if (
+        //   isAfter(new Date(), new Date(action.payload.expiryDate)) &&
+        //   action.payload.trashed !== true
+        // ) {
+        //   state.rotten.unshift(action.payload);
+        //   state.trashed = state.trashed.filter(
+        //     (item) => item.id !== action.payload.id
+        //   );
+        // }
       })
       .addCase(untrashItem.rejected, (state, action) => {
         state.status = "failed";
@@ -339,11 +347,11 @@ export const itemsSlice = createSlice({
   },
 });
 
-export const { resetItems } = itemsSlice.actions;
+export const { resetItems, updateFilteredItems } = itemsSlice.actions;
 export const showItems = (state: RootState) => state.items.items;
 export const showUserItems = (state: RootState) => state.items.userItems;
 export const getItemAdded = (state: RootState) => state.items.item;
 export default itemsSlice.reducer;
-export const getEvergreenItems = (state: RootState) => state.items.evergreen;
-export const getRottenItems = (state: RootState) => state.items.rotten;
-export const getTrashedItems = (state: RootState) => state.items.trashed;
+// export const getEvergreenItems = (state: RootState) => state.items.evergreen;
+// export const getRottenItems = (state: RootState) => state.items.rotten;
+// export const getTrashedItems = (state: RootState) => state.items.trashed;

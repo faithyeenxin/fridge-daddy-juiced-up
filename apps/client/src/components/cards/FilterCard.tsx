@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { showUserItems } from "../../app/slices/itemsSlice";
-import { useAppSelector } from "../../app/store";
+import { showUserItems, updateFilteredItems } from "../../app/slices/itemsSlice";
+import { useAppDispatch, useAppSelector } from "../../app/store";
 import differenceInDays from "date-fns/differenceInDays";
 import { isAfter } from "date-fns";
 import { filter } from "lodash";
@@ -19,6 +19,7 @@ interface ICheckboxStatus {
 }
 
 const FilterCard = () => {
+    const dispatch = useAppDispatch()
     const allUserItems = useAppSelector(showUserItems);
     console.log(allUserItems)
     console.log(`all items array length ${allUserItems.length}`);
@@ -104,6 +105,7 @@ const FilterCard = () => {
         }
         console.log(result)
         console.log(`result array length ${result.length}`);
+        dispatch(updateFilteredItems(result))
     };
 
     const updateCheckboxStatus = (data: ICheckboxStatus) => {
