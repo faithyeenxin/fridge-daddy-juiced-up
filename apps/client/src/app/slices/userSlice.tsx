@@ -1,7 +1,8 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
-import { IGoogleUser, IUser } from "../../interface";
-import { RootState } from "../store";
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { IGoogleUser, IUser } from '../../interface';
+import { RootState } from '../store';
 
 interface UsersState {
   users: IUser[];
@@ -11,25 +12,25 @@ interface UsersState {
   token: {};
 }
 
-const USERS_URL = "/api/user";
+const USERS_URL = '/api/user';
 
 const initialState: UsersState = {
   users: [],
   user: {
-    id: "",
-    password: "",
-    name: "",
-    image: "",
-    email: "",
-    dateJoined: "",
+    id: '',
+    password: '',
+    name: '',
+    image: '',
+    email: '',
+    dateJoined: '',
   },
-  status: "idle",
+  status: 'idle',
   error: {},
-  token: "",
+  token: '',
 };
 
 export const fetchUsers = createAsyncThunk<IUser[]>(
-  "users/fetchUsers",
+  'users/fetchUsers',
   async (_, thunkAPI) => {
     try {
       const response = await axios.get(USERS_URL);
@@ -41,7 +42,7 @@ export const fetchUsers = createAsyncThunk<IUser[]>(
 );
 
 export const getUserById = createAsyncThunk<IUser, string>(
-  "users/getUsersById",
+  'users/getUsersById',
   async (id, thunkAPI) => {
     try {
       const response = await axios.get(`${USERS_URL}/${id}`);
@@ -53,7 +54,7 @@ export const getUserById = createAsyncThunk<IUser, string>(
 );
 
 export const getUserByEmail = createAsyncThunk<IUser, string>(
-  "users/getUserByEmail",
+  'users/getUserByEmail',
   async (email, thunkAPI) => {
     try {
       const response = await axios.get(`${USERS_URL}/findByEmail/${email}`);
@@ -65,7 +66,7 @@ export const getUserByEmail = createAsyncThunk<IUser, string>(
 );
 
 export const createUser = createAsyncThunk<IUser, Object>(
-  "/users/createUser",
+  '/users/createUser',
   async (data, thunkAPI) => {
     try {
       const response = await axios.post(USERS_URL, data);
@@ -78,7 +79,7 @@ export const createUser = createAsyncThunk<IUser, Object>(
 );
 
 export const authenticateUser = createAsyncThunk<Object, Object>(
-  "/users/authenticateUser",
+  '/users/authenticateUser',
   async (data, thunkAPI) => {
     try {
       const response = await axios.post(`${USERS_URL}/login`, data);
@@ -90,7 +91,7 @@ export const authenticateUser = createAsyncThunk<Object, Object>(
 );
 
 export const authenticateGoogleUser = createAsyncThunk<IUser, Object>(
-  "/users/authenticateGoogleUser",
+  '/users/authenticateGoogleUser',
   async (data, thunkAPI) => {
     try {
       const response = await axios.post(`${USERS_URL}/google`, data);
@@ -102,9 +103,9 @@ export const authenticateGoogleUser = createAsyncThunk<IUser, Object>(
 );
 
 export const updateUser = createAsyncThunk<IUser, Object | any>(
-  "/users/updateUser",
+  '/users/updateUser',
   async (data, thunkAPI) => {
-    let id = "3c0f0070-19cf-4961-9db9-10194539c177";
+    let id = '3c0f0070-19cf-4961-9db9-10194539c177';
     try {
       const response = await axios.put(`${USERS_URL}/${id}`, data);
       return response.data;
@@ -115,7 +116,7 @@ export const updateUser = createAsyncThunk<IUser, Object | any>(
 );
 
 export const usersSlice = createSlice({
-  name: "users",
+  name: 'users',
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<IUser>) => {
@@ -125,7 +126,7 @@ export const usersSlice = createSlice({
       state.token = action.payload;
     },
     resetUser(state) {
-      console.log("user reset");
+      console.log('user reset');
       Object.assign(state, initialState);
     },
   },
@@ -133,94 +134,96 @@ export const usersSlice = createSlice({
     // fetch Users
     builder
       .addCase(fetchUsers.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         state.users = action.payload;
       })
       .addCase(fetchUsers.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = 'failed';
         state.error = action.error.message;
       });
     // get User by ID
     builder
       .addCase(getUserById.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(getUserById.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         state.user = action.payload;
       })
       .addCase(getUserById.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = 'failed';
         state.error = action.error.message;
       });
     // get User by Email
     builder
       .addCase(getUserByEmail.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(getUserByEmail.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         // state.user = action.payload;
       })
       .addCase(getUserByEmail.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = 'failed';
         state.error = action.error.message;
       });
     // create User
     builder
       .addCase(createUser.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(createUser.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
+        toast.success('Welcome to the family!');
         state.user = action.payload;
         state.users.push(action.payload);
       })
       .addCase(createUser.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = 'failed';
         state.error = action.error.message;
       });
     // authenticate User
     builder
       .addCase(authenticateUser.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(authenticateUser.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        toast.success('You have successfully logged in!');
+        state.status = 'succeeded';
         state.token = action.payload;
       })
       .addCase(authenticateUser.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = 'failed';
         state.error = action.error.message;
       });
     // authenticate Google User
     builder
       .addCase(authenticateGoogleUser.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(authenticateGoogleUser.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         state.token = action.payload;
       })
       .addCase(authenticateGoogleUser.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = 'failed';
         console.log(action.payload);
         state.error = action.error.message;
       });
     // update User
     builder
       .addCase(updateUser.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(updateUser.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         state.user = action.payload;
       })
       .addCase(updateUser.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = 'failed';
         state.error = action.error.message;
       });
     // user login

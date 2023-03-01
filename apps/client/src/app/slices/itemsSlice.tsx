@@ -1,8 +1,9 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
-import isAfter from "date-fns/isAfter";
-import { IItem } from "../../interface";
-import { RootState } from "../store";
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import axios from 'axios';
+import isAfter from 'date-fns/isAfter';
+import { toast } from 'react-toastify';
+import { IItem } from '../../interface';
+import { RootState } from '../store';
 
 interface ItemsState {
   items: IItem[];
@@ -17,77 +18,34 @@ interface ItemsState {
   status: string;
   error: any;
 }
-const ITEMS_URL = "/api/item";
+const ITEMS_URL = '/api/item';
 
 const initialState: ItemsState = {
   // Get All Items in Database
-  items: [
-    // {
-    //   id: "",
-    //   name: "",
-    //   purchaseDate: "2022-02-18T16:00:00.000Z",
-    //   expiryDate: "2022-02-18T16:00:00.000Z",
-    //   storedIn: "",
-    //   quantity: "",
-    //   trashed: false,
-    // },
-  ],
+  items: [],
   // Item in focus (usually used when creation, updating or deleting of item)
   item: {
-    userId: "",
-    categoryId: "",
-    id: "",
-    name: "",
-    purchaseDate: "2022-02-18T16:00:00.000Z",
-    expiryDate: "2022-02-18T16:00:00.000Z",
-    storedIn: "",
-    quantity: "",
+    userId: '',
+    categoryId: '',
+    id: '',
+    name: '',
+    purchaseDate: '2022-02-18T16:00:00.000Z',
+    expiryDate: '2022-02-18T16:00:00.000Z',
+    storedIn: '',
+    quantity: '',
     trashed: false,
   },
   // Items based on User ID
   userItems: [],
-  // evergreen: [
-  //   {
-  //     id: "",
-  //     name: "",
-  //     purchaseDate: "2022-02-18T16:00:00.000Z",
-  //     expiryDate: "2022-02-18T16:00:00.000Z",
-  //     storedIn: "",
-  //     quantity: "",
-  //     trashed: false,
-  //   },
-  // ],
-  // rotten: [
-  //   {
-  //     id: "",
-  //     name: "",
-  //     purchaseDate: "2022-02-18T16:00:00.000Z",
-  //     expiryDate: "2022-02-18T16:00:00.000Z",
-  //     storedIn: "",
-  //     quantity: "",
-  //     trashed: false,
-  //   },
-  // ],
-  // trashed: [
-  //   {
-  //     id: "",
-  //     name: "",
-  //     purchaseDate: "2022-02-18T16:00:00.000Z",
-  //     expiryDate: "2022-02-18T16:00:00.000Z",
-  //     storedIn: "",
-  //     quantity: "",
-  //     trashed: false,
-  //   },
-  // ],
   filteredUserItems: [],
   userItemsLoading: false,
   addItemLoading: false,
-  status: "idle",
+  status: 'idle',
   error: null,
 };
 
 export const fetchAllItems = createAsyncThunk<IItem[]>(
-  "items/fetchAllItems",
+  'items/fetchAllItems',
   async (_, thunkAPI) => {
     try {
       const response = await axios.get(ITEMS_URL);
@@ -99,7 +57,7 @@ export const fetchAllItems = createAsyncThunk<IItem[]>(
 );
 
 export const getItemsByUserId = createAsyncThunk<IItem[], string>(
-  "users/getItemsByUserId",
+  'users/getItemsByUserId',
   async (id, thunkAPI) => {
     try {
       const response = await axios.get(`${ITEMS_URL}/user/${id}`);
@@ -110,8 +68,20 @@ export const getItemsByUserId = createAsyncThunk<IItem[], string>(
   }
 );
 
+export const getItemByItemId = createAsyncThunk<IItem, string | undefined>(
+  'users/getItemByItemId',
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.get(`${ITEMS_URL}/${id}`);
+      return response.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
 export const createItem = createAsyncThunk<IItem, Object>(
-  "/users/createItem",
+  '/users/createItem',
   async (data, thunkAPI) => {
     console.log(data);
     try {
@@ -123,8 +93,8 @@ export const createItem = createAsyncThunk<IItem, Object>(
   }
 );
 
-export const trashItem = createAsyncThunk<IItem, string>(
-  "/users/trashItem",
+export const trashItem = createAsyncThunk<IItem, string | undefined>(
+  '/users/trashItem',
   async (id, thunkAPI) => {
     try {
       const response = await axios.patch(`${ITEMS_URL}/${id}`);
@@ -135,8 +105,8 @@ export const trashItem = createAsyncThunk<IItem, string>(
   }
 );
 
-export const untrashItem = createAsyncThunk<IItem, string>(
-  "/users/untrashItem",
+export const untrashItem = createAsyncThunk<IItem, string | undefined>(
+  '/users/untrashItem',
   async (id, thunkAPI) => {
     try {
       const response = await axios.patch(`${ITEMS_URL}/${id}`);
@@ -148,9 +118,9 @@ export const untrashItem = createAsyncThunk<IItem, string>(
 );
 
 export const updateItem = createAsyncThunk<IItem, Object | any>(
-  "/users/updateItem",
+  '/users/updateItem',
   async (data, thunkAPI) => {
-    let id = "3c0f0070-19cf-4961-9db9-10194539c177";
+    let id = '3c0f0070-19cf-4961-9db9-10194539c177';
     try {
       const response = await axios.put(`${ITEMS_URL}/${id}`, data);
       return response.data;
@@ -161,7 +131,7 @@ export const updateItem = createAsyncThunk<IItem, Object | any>(
 );
 
 export const itemsSlice = createSlice({
-  name: "items",
+  name: 'items',
   initialState,
   reducers: {
     resetItems(state) {
@@ -179,105 +149,95 @@ export const itemsSlice = createSlice({
     // fetch all items in database
     builder
       .addCase(fetchAllItems.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(fetchAllItems.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         state.items = action.payload;
       })
       .addCase(fetchAllItems.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = 'failed';
         state.error = action.error.message;
       });
     // get Item by User ID
     builder
       .addCase(getItemsByUserId.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
         // state.userItemsLoading = true;
       })
       .addCase(getItemsByUserId.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         // state.userItemsLoading = false;
         state.userItems = action.payload;
         state.filteredUserItems = action.payload;
-        // state.evergreen = action.payload.filter(
-        //   (item: any) =>
-        //     isAfter(new Date(item.expiryDate), new Date()) &&
-        //     item.trashed === false
-        // );
-        // state.rotten = action.payload.filter(
-        //   (item: any) =>
-        //     isAfter(new Date(), new Date(item.expiryDate)) &&
-        //     item.trashed === false
-        // );
-        // state.trashed = action.payload.filter(
-        //   (item: any) => item.trashed === true
-        // );
       })
       .addCase(getItemsByUserId.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = 'failed';
         state.userItemsLoading = true;
         state.error = action.error.message;
+        toast.error('We could not get your items, try logging in again!');
+      });
+    // get Item by Item ID
+    builder
+      .addCase(getItemByItemId.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(getItemByItemId.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.item = action.payload;
+      })
+      .addCase(getItemByItemId.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+        toast.error('We could not get your item, try again!');
       });
     // create Item
     builder
       .addCase(createItem.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(createItem.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         state.userItems.unshift(action.payload);
         state.filteredUserItems.unshift(action.payload);
-
-        // if (
-        //   isAfter(new Date(action.payload.expiryDate), new Date()) &&
-        //   action.payload.trashed === false
-        // ) {
-        //   state.evergreen.unshift(action.payload);
-        // } else if (
-        //   isAfter(new Date(), new Date(action.payload.expiryDate)) &&
-        //   action.payload.trashed === false
-        // ) {
-        //   state.rotten.unshift(action.payload);
-        // } else if (action.payload.trashed === true) {
-        //   state.trashed.unshift(action.payload);
-        // }
         state.item = action.payload;
       })
       .addCase(createItem.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = 'failed';
         state.error = action.error.message;
+        toast.error('We could not update your item, try again!');
       });
     // update Item
     builder
       .addCase(updateItem.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(updateItem.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         state.item = action.payload;
       })
       .addCase(updateItem.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = 'failed';
         state.error = action.error.message;
+        toast.error('We could not update your item, try again!');
       });
     // trash Item
     builder
       .addCase(trashItem.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(trashItem.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         console.log(action.payload);
         state.item = {
-          userId: "",
-          id: "",
-          name: "",
-          categoryId: "",
-          purchaseDate: "",
-          expiryDate: "",
-          storedIn: "",
-          quantity: "",
+          userId: '',
+          id: '',
+          name: '',
+          categoryId: '',
+          purchaseDate: '',
+          expiryDate: '',
+          storedIn: '',
+          quantity: '',
           trashed: false,
         };
         console.log(action.payload);
@@ -299,28 +259,36 @@ export const itemsSlice = createSlice({
             return item;
           }
         });
-        // if (isAfter(new Date(action.payload.expiryDate), new Date())) {
-        //   state.evergreen = state.evergreen.filter(
-        //     (item) => item.id !== action.payload.id
-        //   );
-        //   state.trashed.unshift(action.payload);
-        // } else if (isAfter(new Date(), new Date(action.payload.expiryDate))) {
-        //   state.rotten = state.rotten.filter(
-        //     (item) => item.id !== action.payload.id
-        //   );
-        //   state.trashed.unshift(action.payload);
-        // }
+        state.filteredUserItems = state.userItems.map((item) => {
+          if (item.id === action.payload.id) {
+            let newItem = {
+              userId: item.userId,
+              id: item.id,
+              name: item.name,
+              categoryId: item.categoryId,
+              purchaseDate: item.purchaseDate,
+              expiryDate: item.expiryDate,
+              storedIn: item.storedIn,
+              quantity: item.quantity,
+              trashed: action.payload.trashed,
+            };
+            return newItem;
+          } else {
+            return item;
+          }
+        });
       })
       .addCase(trashItem.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = 'failed';
         state.error = action.error.message;
+        toast.error('We could not trash your item, try again!');
       });
     builder
       .addCase(untrashItem.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(untrashItem.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         console.log(action.payload);
         state.userItems = state.userItems.map((item) => {
           if (item.id === action.payload.id) {
@@ -340,33 +308,36 @@ export const itemsSlice = createSlice({
             return item;
           }
         });
-        // if (
-        //   isAfter(new Date(action.payload.expiryDate), new Date()) &&
-        //   action.payload.trashed !== true
-        // ) {
-        //   state.evergreen.unshift(action.payload);
-        //   state.trashed = state.trashed.filter(
-        //     (item) => item.id !== action.payload.id
-        //   );
-        // } else if (
-        //   isAfter(new Date(), new Date(action.payload.expiryDate)) &&
-        //   action.payload.trashed !== true
-        // ) {
-        //   state.rotten.unshift(action.payload);
-        //   state.trashed = state.trashed.filter(
-        //     (item) => item.id !== action.payload.id
-        //   );
-        // }
+        state.filteredUserItems = state.userItems.map((item) => {
+          if (item.id === action.payload.id) {
+            let newItem = {
+              userId: item.userId,
+              id: item.id,
+              name: item.name,
+              categoryId: item.categoryId,
+              purchaseDate: item.purchaseDate,
+              expiryDate: item.expiryDate,
+              storedIn: item.storedIn,
+              quantity: item.quantity,
+              trashed: action.payload.trashed,
+            };
+            return newItem;
+          } else {
+            return item;
+          }
+        });
       })
       .addCase(untrashItem.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = 'failed';
         state.error = action.error.message;
+        toast.error('We could not remove your item from trash, try again!');
       });
   },
 });
 
 export const { resetItems, updateFilteredItems, setFilterToLoading } =
   itemsSlice.actions;
+export const showItem = (state: RootState) => state.items.item;
 export const showItems = (state: RootState) => state.items.items;
 export const showUserItems = (state: RootState) => state.items.userItems;
 export const showFilteredItems = (state: RootState) =>
@@ -377,6 +348,3 @@ export const showAddItemLoadingState = (state: RootState) =>
   state.items.addItemLoading;
 export const getItemAdded = (state: RootState) => state.items.item;
 export default itemsSlice.reducer;
-// export const getEvergreenItems = (state: RootState) => state.items.evergreen;
-// export const getRottenItems = (state: RootState) => state.items.rotten;
-// export const getTrashedItems = (state: RootState) => state.items.trashed;

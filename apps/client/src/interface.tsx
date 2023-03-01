@@ -5,6 +5,7 @@ export interface IItem {
   purchaseDate: Date | string;
   expiryDate: Date | string;
   categoryId: string;
+  category?: ICategory;
   storedIn: string;
   quantity: string;
   trashed: Boolean;

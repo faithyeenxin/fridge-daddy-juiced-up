@@ -1,14 +1,14 @@
-import { gsap } from "gsap";
+import { gsap } from 'gsap';
 
-import { useEffect, useRef } from "react";
-import LandingHero from "../components/HomeHero";
-import AddItemCard from "../components/cards/AddItemCard";
-import AddCategoryCard from "../components/cards/AddCategoryCard";
-import SearchBar from "../components/SearchBar";
-import ItemsTable from "../components/ItemsTable";
-import FilterCard from "../components/cards/FilterCard";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useEffect, useRef } from 'react';
+import LandingHero from '../components/HomeHero';
+import AddItemCard from '../components/cards/AddItemCard';
+import AddCategoryCard from '../components/cards/AddCategoryCard';
+import SearchBar from '../components/SearchBar';
+import ItemsTable from '../components/ItemsTable';
+import FilterCard from '../components/cards/FilterCard';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
   let itemLeftRef = useRef(null);
@@ -37,34 +37,34 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="w-full h-[1000px]">
+    <div className='w-full h-[1000px]'>
       <LandingHero />
-      <div className="flex gap-5">
-        <div className="relative w-3/12 opacity-1">
-          <div ref={itemLeftRef} className="flex flex-col gap-6">
+      <div className='flex gap-5'>
+        <div className='relative w-3/12 opacity-1'>
+          <div ref={itemLeftRef} className='flex flex-col gap-6'>
             <AddItemCard />
             <AddCategoryCard />
           </div>
         </div>
-        <div className="relative w-7/12 opacity-1">
+        <div className='relative w-7/12 opacity-1'>
           <div
             ref={itemCenterRef}
-            className="absolute w-full flex flex-col gap-5"
+            className='absolute w-full flex flex-col gap-5'
           >
             <SearchBar />
             <ItemsTable />
           </div>
         </div>
 
-        <div className="relative w-2/12 opacity-1">
-          <div ref={itemRightRef} className="absolute w-full flex">
+        <div className='relative w-2/12 opacity-1'>
+          <div ref={itemRightRef} className='absolute w-full flex'>
             <FilterCard />
           </div>
         </div>
       </div>
 
       <ToastContainer
-        position="bottom-right"
+        position='bottom-right'
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -73,7 +73,7 @@ export default function Home() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme='light'
       />
     </div>
   );

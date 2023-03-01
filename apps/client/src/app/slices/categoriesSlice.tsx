@@ -1,42 +1,67 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { wordContainsSubstring } from '../../components/utility/functions/wordContainsSubstring';
 
-import { ICategory } from "../../interface";
-import { RootState } from "../store";
+import { ICategory } from '../../interface';
+import { RootState } from '../store';
 
 interface ItemsState {
   category: ICategory;
   categories: ICategory[];
+  addItemSelectedCategory: ICategory;
+  filteredCategories: ICategory[];
   status: string;
   error: any;
 }
-const CATEGORY_URL = "/api/category";
+const CATEGORY_URL = '/api/category';
 
 const initialState: ItemsState = {
   category: {
-    id: "",
-    name: "",
-    dateCreated: "2022-02-18T16:00:00.000Z",
+    userId: '',
+    id: '',
+    name: '',
+    dateCreated: '2022-02-18T16:00:00.000Z',
     pantryDays: 0,
     fridgeDays: 0,
     freezerDays: 0,
   },
   categories: [
     {
-      id: "-",
-      name: "-",
-      dateCreated: "2022-02-18T16:00:00.000Z",
+      userId: '',
+      id: '-',
+      name: '-',
+      dateCreated: '2022-02-18T16:00:00.000Z',
       pantryDays: 0,
       fridgeDays: 0,
       freezerDays: 0,
     },
   ],
-  status: "idle",
+  filteredCategories: [
+    {
+      userId: '',
+      id: '-',
+      name: '-',
+      dateCreated: '2022-02-18T16:00:00.000Z',
+      pantryDays: 0,
+      fridgeDays: 0,
+      freezerDays: 0,
+    },
+  ],
+  addItemSelectedCategory: {
+    userId: '',
+    id: '-',
+    name: '-',
+    dateCreated: '2022-02-18T16:00:00.000Z',
+    pantryDays: 0,
+    fridgeDays: 0,
+    freezerDays: 0,
+  },
+  status: 'idle',
   error: null,
 };
 
 export const fetchAllCategories = createAsyncThunk<ICategory[]>(
-  "items/fetchAllCategories",
+  'items/fetchAllCategories',
   async (_, thunkAPI) => {
     try {
       const response = await axios.get(CATEGORY_URL);
@@ -47,20 +72,8 @@ export const fetchAllCategories = createAsyncThunk<ICategory[]>(
   }
 );
 
-// export const getCategoryById = createAsyncThunk<ICategory, string>(
-//   "users/getCategoryById",
-//   async (id, thunkAPI) => {
-//     try {
-//       const response = await axios.get(`${CATEGORY_URL}/${id}`);
-//       return response.data;
-//     } catch (err) {
-//       return thunkAPI.rejectWithValue(err);
-//     }
-//   }
-// );
-
 export const createCategory = createAsyncThunk<ICategory, Object>(
-  "/users/createCategory",
+  '/users/createCategory',
   async (data, thunkAPI) => {
     try {
       const response = await axios.post(CATEGORY_URL, data);
@@ -72,7 +85,7 @@ export const createCategory = createAsyncThunk<ICategory, Object>(
 );
 
 export const deleteCategory = createAsyncThunk<ICategory, Object>(
-  "/users/deleteCategory",
+  '/users/deleteCategory',
   async (id, thunkAPI) => {
     try {
       const response = await axios.delete(CATEGORY_URL, id);
@@ -84,9 +97,9 @@ export const deleteCategory = createAsyncThunk<ICategory, Object>(
 );
 
 export const updateCategory = createAsyncThunk<ICategory, Object | any>(
-  "/users/updateCategory",
+  '/users/updateCategory',
   async (data, thunkAPI) => {
-    let id = "a2fb7a43-5aae-43df-a77c-f204f4ea2a35";
+    let id = 'a2fb7a43-5aae-43df-a77c-f204f4ea2a35';
     try {
       const response = await axios.put(`${CATEGORY_URL}/${id}`, data);
       return response.data;
@@ -96,66 +109,136 @@ export const updateCategory = createAsyncThunk<ICategory, Object | any>(
   }
 );
 
+export const getCategoryById = createAsyncThunk<ICategory, string | undefined>(
+  'users/getCategoryById',
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.get(`${CATEGORY_URL}/${id}`);
+      return response.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
 export const categoriesSlice = createSlice({
-  name: "categories",
+  name: 'categories',
   initialState,
   reducers: {
     resetCategories(state) {
-      console.log("categories reset");
+      console.log('categories reset');
       Object.assign(state, initialState);
+    },
+    setAddItemSelectedCategory(state, action: PayloadAction<ICategory>) {
+      state.addItemSelectedCategory = action.payload;
+    },
+    resetAddItemSelectedCategory(state) {
+      Object.assign(
+        state.addItemSelectedCategory,
+        initialState.addItemSelectedCategory
+      );
+    },
+    filterCategories(state, action: PayloadAction<string>) {
+      // state.filteredCategories
+      // let res: any = [];
+      // for (let category of state.categories) {
+      //   if (category.name.split(' ').length > 0) {
+      //     for (let word of category.name.split(' ')) {
+      //       if (wordContainsSubstring(word, action.payload)) {
+      //         res.push(category);
+      //       }
+      //     }
+      //   } else {
+      //     if (wordContainsSubstring(category.name, action.payload)) {
+      //       res.push(category);
+      //     }
+      //   }
+      // }
+      // console.log(res);
+      // state.filteredCategories = res;
+      const res: ICategory[] = [];
+
+      for (const category of state.categories) {
+        const words = category.name.split(' ');
+        const found = words.some((word) =>
+          wordContainsSubstring(word, action.payload)
+        );
+        if (found && !res.includes(category)) {
+          res.push(category);
+        }
+      }
+
+      state.filteredCategories = res;
     },
   },
   extraReducers: (builder) => {
     // fetch Categories
     builder
       .addCase(fetchAllCategories.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(fetchAllCategories.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.categories = state.categories.concat(action.payload);
+        state.status = 'succeeded';
+        console.log(action.payload);
+        state.categories = action.payload;
+        state.filteredCategories = action.payload;
       })
       .addCase(fetchAllCategories.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = 'failed';
+        state.error = action.payload;
+      });
+    // get Category by ID
+    builder
+      .addCase(getCategoryById.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(getCategoryById.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        console.log(action.payload);
+        state.category = action.payload;
+      })
+      .addCase(getCategoryById.rejected, (state, action) => {
+        state.status = 'failed';
         state.error = action.payload;
       });
     // create Category
     builder
       .addCase(createCategory.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(createCategory.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         state.categories.push(action.payload);
       })
       .addCase(createCategory.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = 'failed';
         state.error = action.payload;
       });
     // update Item
     builder
       .addCase(updateCategory.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(updateCategory.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         state.category = action.payload;
       })
       .addCase(updateCategory.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = 'failed';
         state.error = action.payload;
       });
     // delete Category
     builder
       .addCase(deleteCategory.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(deleteCategory.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         state.category = {
-          id: "",
-          name: "",
-          dateCreated: "",
+          userId: '',
+          id: '',
+          name: '',
+          dateCreated: '',
           pantryDays: 0,
           fridgeDays: 0,
           freezerDays: 0,
@@ -165,15 +248,26 @@ export const categoriesSlice = createSlice({
         );
       })
       .addCase(deleteCategory.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = 'failed';
         state.error = action.payload;
       });
   },
 });
 
-export const { resetCategories } = categoriesSlice.actions;
+export const {
+  resetCategories,
+  filterCategories,
+  resetAddItemSelectedCategory,
+  setAddItemSelectedCategory,
+} = categoriesSlice.actions;
 
 export const showCategories = (state: RootState) => state.category.categories;
+export const showAddItemSelectedCategory = (state: RootState) =>
+  state.category.addItemSelectedCategory;
+
+export const showFilteredCategories = (state: RootState) =>
+  state.category.filteredCategories;
+
 export const getCategory = (state: RootState) => state.category.category;
 
 export default categoriesSlice.reducer;
