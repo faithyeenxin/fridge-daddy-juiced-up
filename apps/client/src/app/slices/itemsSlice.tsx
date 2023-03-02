@@ -9,9 +9,6 @@ interface ItemsState {
   items: IItem[];
   item: IItem;
   userItems: IItem[];
-  // evergreen: IItem[];
-  // rotten: IItem[];
-  // trashed: IItem[];
   filteredUserItems: IItem[];
   userItemsLoading: boolean;
   addItemLoading: boolean;
