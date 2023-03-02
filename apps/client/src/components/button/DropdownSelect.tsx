@@ -173,7 +173,7 @@ const DropdownSelect = ({
               //   handleSelectedValue={() => handleSelectedValue(name, item)}
               // />
               <li
-                key={idx}
+                key={item.id}
                 className='flex items-center rounded-2xl pl-2 text-orange font-lora hover:bg-white hover:cursor-pointer'
                 onClick={() => {
                   handleSelectedValue(name, item);
