@@ -117,12 +117,23 @@ export const untrashItem = createAsyncThunk<IItem, string | undefined>(
   }
 );
 
+export const trashAllItems = createAsyncThunk<IItem[], string>(
+  'users/trashAllItems',
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.delete(`${ITEMS_URL}/user/${id}/trash-all`);
+      return response.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
 export const updateItem = createAsyncThunk<IItem, Object | any>(
   '/users/updateItem',
   async (data, thunkAPI) => {
-    let id = '3c0f0070-19cf-4961-9db9-10194539c177';
     try {
-      const response = await axios.put(`${ITEMS_URL}/${id}`, data);
+      const response = await axios.put(`${ITEMS_URL}/${data.id}`, data);
       return response.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -144,6 +155,11 @@ export const itemsSlice = createSlice({
       state.filteredUserItems = action.payload;
       state.userItemsLoading = false;
     },
+    getItemById(state, action: PayloadAction<string>) {
+      state.item = state.userItems.filter(
+        (item) => item.id === action.payload
+      )[0];
+    },
   },
   extraReducers: (builder) => {
     // fetch all items in database
@@ -163,11 +179,11 @@ export const itemsSlice = createSlice({
     builder
       .addCase(getItemsByUserId.pending, (state) => {
         state.status = 'loading';
-        // state.userItemsLoading = true;
+        state.userItemsLoading = true;
       })
       .addCase(getItemsByUserId.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        // state.userItemsLoading = false;
+        state.userItemsLoading = false;
         state.userItems = action.payload;
         state.filteredUserItems = action.payload;
       })
@@ -214,14 +230,21 @@ export const itemsSlice = createSlice({
       })
       .addCase(updateItem.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        // state.userItems = state.userItems.filter(
+        //   (item) => item.id !== action.payload.id
+        // );
+        // state.filteredUserItems = state.filteredUserItems.filter(
+        //   (item) => item.id !== action.payload.id
+        // );
+        // state.userItems.unshift(action.payload);
+        // state.filteredUserItems.unshift(action.payload);
         state.item = action.payload;
       })
       .addCase(updateItem.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
-        toast.error('We could not update your item, try again!');
       });
-    // trash Item
+    // trash Item by ID
     builder
       .addCase(trashItem.pending, (state) => {
         state.status = 'loading';
@@ -283,6 +306,25 @@ export const itemsSlice = createSlice({
         state.error = action.error.message;
         toast.error('We could not trash your item, try again!');
       });
+    // trash all items
+    builder
+      .addCase(trashAllItems.pending, (state) => {
+        state.status = 'loading';
+        state.userItemsLoading = true;
+      })
+      .addCase(trashAllItems.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.userItemsLoading = false;
+        state.userItems = action.payload;
+        state.filteredUserItems = action.payload;
+      })
+      .addCase(trashAllItems.rejected, (state, action) => {
+        state.status = 'failed';
+        state.userItemsLoading = true;
+        state.error = action.error.message;
+        toast.error('We could not trash all your items, try again!');
+      });
+    // untrash items by id
     builder
       .addCase(untrashItem.pending, (state) => {
         state.status = 'loading';
@@ -335,8 +377,12 @@ export const itemsSlice = createSlice({
   },
 });
 
-export const { resetItems, updateFilteredItems, setFilterToLoading } =
-  itemsSlice.actions;
+export const {
+  resetItems,
+  updateFilteredItems,
+  setFilterToLoading,
+  getItemById,
+} = itemsSlice.actions;
 export const showItem = (state: RootState) => state.items.item;
 export const showItems = (state: RootState) => state.items.items;
 export const showUserItems = (state: RootState) => state.items.userItems;

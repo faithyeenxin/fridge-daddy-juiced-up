@@ -1,12 +1,14 @@
-import { differenceInDays } from 'date-fns';
+import { differenceInDays, parseISO } from 'date-fns';
 import format from 'date-fns/format';
 import React, { useState, Fragment, useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
   getItemByItemId,
+  getItemsByUserId,
   trashItem,
   untrashItem,
+  updateItem,
 } from '../app/slices/itemsSlice';
 import { useAppDispatch, useAppSelector } from '../app/store';
 import { IItem } from '../interface';
@@ -17,9 +19,11 @@ import {
   filterCategories,
   getCategory,
   getCategoryById,
+  showCategories,
   showFilteredCategories,
 } from '../app/slices/categoriesSlice';
 import { getUserId } from '../app/slices/userSlice';
+import isAfter from 'date-fns/isAfter';
 
 interface ISingleItemProps {
   item: IItem;
@@ -34,11 +38,13 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
   const todayStr = format(today, 'yyyy-MM-dd');
   const [purchaseDate, setPurchaseDate] = useState(todayStr);
   const [expiryDate, setExpiryDate] = useState(todayStr);
+  const [expiryError, setExpiryError] = useState(false);
   const [daysInFocus, setDaysInFocus] = useState(0);
   const [binHoverState, setbinHoverState] = useState(false);
   const [isTrashedHoverState, setisTrashedHoverState] = useState(false);
   let [isOpen, setIsOpen] = useState(false);
   const [resetState, setResetState] = useState(false);
+  const allCategories = useAppSelector(showCategories);
   const filteredCategories = useAppSelector(showFilteredCategories);
   const [shelfLife, setShelfLife] = useState([
     { id: 1, name: 'Pantry', days: 0 },
@@ -62,9 +68,10 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
 
   const [newItem, setNewItem] = useState<IItem>({
     userId: token.id,
+    id: item.id,
     name: item.name,
-    purchaseDate: new Date(),
-    expiryDate: new Date(),
+    purchaseDate: new Date(item.purchaseDate),
+    expiryDate: new Date(item.expiryDate),
     categoryId: item.categoryId,
     storedIn: item.storedIn,
     quantity: item.quantity,
@@ -82,7 +89,10 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
       <div className='w-2/12 tracking-wide'>
         {differenceInDays(new Date(item.expiryDate), today)}
       </div>
-      <div className='w-4/12 hover:cursor-pointer' onClick={openModal}>
+      <div
+        className='w-4/12 hover:cursor-pointer hover:text-orangeLight'
+        onClick={openModal}
+      >
         {capitalizeWords(item.name)}
       </div>
       <div className='w-1/12 hover:cursor-default'>
@@ -199,17 +209,18 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                       </label>
                       {!edit && (
                         <div className='w-full h=[40px] hover:cursor-default  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'>
-                          {capitalizeWords(item?.category?.name)}
+                          {capitalizeWords(
+                            allCategories.filter(
+                              (i) => i.id === item.categoryId
+                            )[0].name
+                          )}
                         </div>
                       )}
                       {edit && (
                         <DropdownSelect
-                          name='Category'
-                          items={filteredCategories}
-                          handleFilteredCategories={handleFilteredCategories}
+                          name={`${capitalizeWords(item?.category?.name)}`}
                           newItem={newItem}
                           setNewItem={setNewItem}
-                          setShelfLife={setShelfLife}
                           purchaseDate={purchaseDate}
                           setExpiryDate={setExpiryDate}
                           setDaysInFocus={setDaysInFocus}
@@ -228,12 +239,9 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                       )}
                       {edit && (
                         <DropdownSelect
-                          name='Compartment'
-                          items={shelfLife}
-                          handleFilteredCategories={handleFilteredCategories}
+                          name={`${capitalizeWords(item?.storedIn)}`}
                           newItem={newItem}
                           setNewItem={setNewItem}
-                          setShelfLife={setShelfLife}
                           purchaseDate={purchaseDate}
                           setExpiryDate={setExpiryDate}
                           setDaysInFocus={setDaysInFocus}
@@ -255,15 +263,21 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                         placeholder='Purchased On'
                         autoComplete='off'
                         defaultValue={format(
-                          new Date(item.purchaseDate),
+                          new Date(newItem.purchaseDate),
                           'yyyy-MM-dd'
                         )}
                         className='w-full h=[40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-90 focus:outline-none'
                         onChange={(e) => {
                           setNewItem({
                             ...newItem,
-                            purchaseDate: new Date(e.target.value),
+                            purchaseDate: format(
+                              new Date(e.target.value),
+                              'yyyy-MM-dd'
+                            ),
                           });
+                          setPurchaseDate(
+                            format(new Date(e.target.value), 'yyyy-MM-dd')
+                          );
                         }}
                       />
                     </div>
@@ -286,17 +300,30 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                         placeholder='Expire On'
                         autoComplete='off'
                         defaultValue={format(
-                          new Date(item.expiryDate),
+                          new Date(newItem.expiryDate),
                           'yyyy-MM-dd'
                         )}
                         className='w-full h=[40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-90 focus:outline-none'
                         onChange={(e) => {
                           setNewItem({
                             ...newItem,
-                            expiryDate: new Date(e.target.value),
+                            expiryDate: format(
+                              new Date(e.target.value),
+                              'yyyy-MM-dd'
+                            ),
                           });
+                          setExpiryDate(
+                            format(new Date(e.target.value), 'yyyy-MM-dd')
+                          );
                         }}
                       />
+                      <p
+                        className={`text-xs text-red-400 text-center ${
+                          expiryError ? '' : 'hidden'
+                        }`}
+                      >
+                        Expiry Date must be after Purchase Date!
+                      </p>
                     </div>
                   </div>
                   <div className='mt-4 flex justify-center'>
@@ -316,6 +343,44 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                         onClick={(e) => {
                           console.log('submit edit');
                           console.log(newItem);
+                          if (
+                            !isAfter(
+                              new Date(newItem.expiryDate),
+                              new Date(newItem.purchaseDate)
+                            )
+                          ) {
+                            setExpiryError(true);
+                          } else {
+                            let data = {
+                              ...newItem,
+                              userId: token.id,
+                              purchaseDate: parseISO(
+                                format(
+                                  new Date(newItem.purchaseDate),
+                                  'yyyy-MM-dd'
+                                )
+                              ),
+                              expiryDate: parseISO(
+                                format(
+                                  new Date(newItem.expiryDate),
+                                  'yyyy-MM-dd'
+                                )
+                              ),
+                            };
+                            console.log(data);
+                            dispatch(updateItem(data))
+                              .unwrap()
+                              .then((originalPromiseResult) => {
+                                toast.success('Your item has been updated!');
+                                dispatch(getItemsByUserId(token.id));
+                                closeModal();
+                              })
+                              .catch((rejectedValueOrSerializedError) => {
+                                toast.error(
+                                  'We could not update your item! Please try again.'
+                                );
+                              });
+                          }
                         }}
                       >
                         Submit

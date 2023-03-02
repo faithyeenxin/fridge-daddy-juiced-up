@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   setFilterToLoading,
   showFilteredItems,
   showUserItems,
   updateFilteredItems,
-} from "../../app/slices/itemsSlice";
-import { useAppDispatch, useAppSelector } from "../../app/store";
-import { isAfter, isWithinInterval } from "date-fns";
-import { IItem } from "../../interface";
+} from '../../app/slices/itemsSlice';
+import { useAppDispatch, useAppSelector } from '../../app/store';
+import { isAfter, isWithinInterval } from 'date-fns';
+import { IItem } from '../../interface';
 
 interface ICheckboxStatus {
   evergreen: boolean;
@@ -29,6 +29,20 @@ const FilterCard = () => {
   // console.log(`all items array length ${allUserItems.length}`);
   let filteredData: IItem[] = [];
   let result: IItem[] = [];
+
+  useEffect(() => {
+    setCheckboxStatus({
+      evergreen: false,
+      rotten: false,
+      trashed: false,
+      pantry: false,
+      fridge: false,
+      freezer: false,
+      today: false,
+      in3Days: false,
+      inAWeek: false,
+    });
+  }, [allUserItems]);
 
   // DATES
   let today = new Date();
@@ -78,16 +92,16 @@ const FilterCard = () => {
       filteredData = allUserItems;
     }
     if (data.pantry) {
-      let newData = filteredData.filter((item) => item.storedIn === "Pantry");
+      let newData = filteredData.filter((item) => item.storedIn === 'Pantry');
       result = [...result, ...newData];
     }
     if (data.fridge) {
-      let newData = filteredData.filter((item) => item.storedIn === "Fridge");
+      let newData = filteredData.filter((item) => item.storedIn === 'Fridge');
       // console.log(newData)
       result = [...result, ...newData];
     }
     if (data.freezer) {
-      let newData = filteredData.filter((item) => item.storedIn === "Freezer");
+      let newData = filteredData.filter((item) => item.storedIn === 'Freezer');
       result = [...result, ...newData];
     }
     if (!data.pantry && !data.fridge && !data.freezer) {
@@ -133,18 +147,18 @@ const FilterCard = () => {
   };
 
   return (
-    <div className="w-full h-[665px] flex bg-offWhite rounded-lg">
-      <div className="flex flex-col m-5 justify-between w-full">
-        <div className="flex items-center justify-center text-3xl font-lora text-orange">
+    <div className='w-full h-[665px] flex bg-offWhite rounded-lg'>
+      <div className='flex flex-col m-5 justify-between w-full'>
+        <div className='flex items-center justify-center text-3xl font-lora text-orange'>
           Filters
         </div>
         <div>
-          <div className=" text-2xl font-lora font-bold text-orange">
+          <div className=' text-2xl font-lora font-bold text-orange'>
             Condition
           </div>
-          <div className="flex flex-col gap-2 py-2">
-            <div className="flex justify-between pr-3 items-center">
-              <div className="font-lora tracking-wider text-orange font-bolder text-lg">
+          <div className='flex flex-col gap-2 py-2'>
+            <div className='flex justify-between pr-3 items-center'>
+              <div className='font-lora tracking-wider text-orange font-bolder text-lg'>
                 Evergreen
               </div>
               <img
@@ -161,8 +175,8 @@ const FilterCard = () => {
                 }}
               />
             </div>
-            <div className="flex justify-between pr-3">
-              <div className="font-lora tracking-wider text-orange font-bolder text-lg">
+            <div className='flex justify-between pr-3'>
+              <div className='font-lora tracking-wider text-orange font-bolder text-lg'>
                 Rotten
               </div>
               <img
@@ -179,8 +193,8 @@ const FilterCard = () => {
                 }}
               />
             </div>
-            <div className="flex justify-between pr-3">
-              <div className="font-lora tracking-wider text-orange font-bolder text-lg">
+            <div className='flex justify-between pr-3'>
+              <div className='font-lora tracking-wider text-orange font-bolder text-lg'>
                 Trashed
               </div>
               <img
@@ -200,12 +214,12 @@ const FilterCard = () => {
           </div>
         </div>
         <div>
-          <div className="my-3 text-2xl font-lora font-bold text-orange">
+          <div className='my-3 text-2xl font-lora font-bold text-orange'>
             Compartment
           </div>
-          <div className="flex flex-col gap-2">
-            <div className="flex justify-between pr-3">
-              <div className="font-lora tracking-wider text-orange font-bolder text-lg">
+          <div className='flex flex-col gap-2'>
+            <div className='flex justify-between pr-3'>
+              <div className='font-lora tracking-wider text-orange font-bolder text-lg'>
                 Pantry
               </div>
               <img
@@ -222,8 +236,8 @@ const FilterCard = () => {
                 }}
               />
             </div>
-            <div className="flex justify-between pr-3">
-              <div className="font-lora tracking-wider text-orange font-bolder text-lg">
+            <div className='flex justify-between pr-3'>
+              <div className='font-lora tracking-wider text-orange font-bolder text-lg'>
                 Fridge
               </div>
               <img
@@ -240,8 +254,8 @@ const FilterCard = () => {
                 }}
               />
             </div>
-            <div className="flex justify-between pr-3">
-              <div className="font-lora tracking-wider text-orange font-bolder text-lg">
+            <div className='flex justify-between pr-3'>
+              <div className='font-lora tracking-wider text-orange font-bolder text-lg'>
                 Freezer
               </div>
               <img
@@ -261,12 +275,12 @@ const FilterCard = () => {
           </div>
         </div>
         <div>
-          <div className="my-3 text-2xl font-lora font-bold text-orange">
+          <div className='my-3 text-2xl font-lora font-bold text-orange'>
             Expiring Soon
           </div>
-          <div className="flex flex-col gap-2">
-            <div className="flex justify-between pr-3">
-              <div className="font-lora tracking-wider text-orange font-bolder text-lg">
+          <div className='flex flex-col gap-2'>
+            <div className='flex justify-between pr-3'>
+              <div className='font-lora tracking-wider text-orange font-bolder text-lg'>
                 Today
               </div>
               <img
@@ -285,8 +299,8 @@ const FilterCard = () => {
                 }}
               />
             </div>
-            <div className="flex justify-between pr-3">
-              <div className="font-lora tracking-wider text-orange font-bolder text-lg">
+            <div className='flex justify-between pr-3'>
+              <div className='font-lora tracking-wider text-orange font-bolder text-lg'>
                 In 3 Days
               </div>
               <img
@@ -305,8 +319,8 @@ const FilterCard = () => {
                 }}
               />
             </div>
-            <div className="flex justify-between pr-3">
-              <div className="font-lora tracking-wider text-orange font-bolder text-lg">
+            <div className='flex justify-between pr-3'>
+              <div className='font-lora tracking-wider text-orange font-bolder text-lg'>
                 In A Week
               </div>
               <img
@@ -327,9 +341,9 @@ const FilterCard = () => {
             </div>
           </div>
         </div>
-        <div className="flex justify-center">
+        <div className='flex justify-center'>
           <div
-            className="flex w-2/3 bg-orange font-lora font-bolder text-white justify-center rounded-3xl p-1 hover:bg-gradient-to-r from-orange to-pink"
+            className='flex w-2/3 bg-orange font-lora font-bolder text-white justify-center rounded-3xl p-1 hover:bg-gradient-to-r from-orange to-pink'
             onClick={() => {
               dispatch(updateFilteredItems(allUserItems));
               setCheckboxStatus({

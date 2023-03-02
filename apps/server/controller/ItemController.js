@@ -175,4 +175,29 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
+//* Trash All Trashed Items
+router.delete("/user/:id/trash-all", async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const deletedItems = await prisma.item.deleteMany({
+      where: {
+        trashed: true,
+      },
+    });
+    console.log(deletedItems)
+    const items = await prisma.item.findMany({
+      where: {
+        userId: userId,
+      },
+      include: {
+        category: true,
+      },
+      orderBy: { expiryDate: "asc" },
+    });
+    res.status(200).send(items);
+  } catch {
+    res.status(400).send({ error: "unable to trash items" });
+  }
+});
+
 module.exports = router;

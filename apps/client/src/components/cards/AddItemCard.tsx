@@ -30,23 +30,13 @@ const AddItemCard = () => {
   const today = new Date();
   const todayStr = format(today, 'yyyy-MM-dd');
   const token: any = useAppSelector(getUserId);
-  const addItemLoading = useAppSelector(showAddItemLoadingState);
   const dispatch = useAppDispatch();
-  const categories = useAppSelector(showCategories);
-  const filteredCategories = useAppSelector(showFilteredCategories);
-
   const [resetState, setResetState] = useState(false);
-  const [shelfLife, setShelfLife] = useState([
-    { id: 1, name: 'Pantry', days: 0 },
-    { id: 2, name: 'Fridge', days: 0 },
-    { id: 3, name: 'Freezer', days: 0 },
-  ]);
   const [purchasedOnDisplay, setPurchasedOnDisplay] = useState(false);
   const [expirationOnDisplay, setExpirationOnDisplay] = useState(false);
   const [purchaseDate, setPurchaseDate] = useState(todayStr);
   const [expiryDate, setExpiryDate] = useState(todayStr);
   const [daysInFocus, setDaysInFocus] = useState(0);
-  const [resetData, setResetData] = useState(false);
   const [newItem, setNewItem] = useState<IItem>({
     userId: token.id,
     name: '',
@@ -90,9 +80,6 @@ const AddItemCard = () => {
         });
     }
   };
-  const handleFilteredCategories = (e: any) => {
-    dispatch(filterCategories(e.target.value));
-  };
 
   return (
     <div
@@ -129,7 +116,7 @@ const AddItemCard = () => {
           placeholder='Quantity'
           autoComplete='off'
           value={newItem.quantity}
-          className='w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+          className='w-full h-[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
           onChange={(e) => {
             setNewItem({ ...newItem, quantity: e.target.value });
           }}
@@ -141,11 +128,8 @@ const AddItemCard = () => {
                 /> */}
         <DropdownSelect
           name='Category'
-          items={filteredCategories}
-          handleFilteredCategories={handleFilteredCategories}
           newItem={newItem}
           setNewItem={setNewItem}
-          setShelfLife={setShelfLife}
           purchaseDate={purchaseDate}
           setExpiryDate={setExpiryDate}
           setDaysInFocus={setDaysInFocus}
@@ -153,11 +137,8 @@ const AddItemCard = () => {
         />
         <DropdownSelect
           name='Compartment'
-          items={shelfLife}
-          handleFilteredCategories={handleFilteredCategories}
           newItem={newItem}
           setNewItem={setNewItem}
-          setShelfLife={setShelfLife}
           purchaseDate={purchaseDate}
           setExpiryDate={setExpiryDate}
           setDaysInFocus={setDaysInFocus}

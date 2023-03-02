@@ -4,12 +4,18 @@ import { wordContainsSubstring } from '../../components/utility/functions/wordCo
 
 import { ICategory } from '../../interface';
 import { RootState } from '../store';
+interface IShelfLife {
+  id: number;
+  name: string;
+  days: number;
+}
 
 interface ItemsState {
   category: ICategory;
   categories: ICategory[];
   addItemSelectedCategory: ICategory;
   filteredCategories: ICategory[];
+  shelfLife: IShelfLife[];
   status: string;
   error: any;
 }
@@ -46,6 +52,11 @@ const initialState: ItemsState = {
       fridgeDays: 0,
       freezerDays: 0,
     },
+  ],
+  shelfLife: [
+    { id: 1, name: 'Pantry', days: 0 },
+    { id: 2, name: 'Fridge', days: 0 },
+    { id: 3, name: 'Freezer', days: 0 },
   ],
   addItemSelectedCategory: {
     userId: '',
@@ -138,37 +149,34 @@ export const categoriesSlice = createSlice({
         initialState.addItemSelectedCategory
       );
     },
+    resetShelfLife(state) {
+      console.log('shelflife reset');
+      Object.assign(state.shelfLife, initialState.shelfLife);
+    },
+    setShelfLife(state, action: PayloadAction<ICategory>) {
+      let newShelfLife = [
+        {
+          id: 1,
+          name: `Pantry - ${action.payload.pantryDays} Days`,
+          days: action.payload.pantryDays,
+        },
+        {
+          id: 2,
+          name: `Fridge - ${action.payload.fridgeDays} Days`,
+          days: action.payload.fridgeDays,
+        },
+        {
+          id: 3,
+          name: `Freezer - ${action.payload.freezerDays} Days`,
+          days: action.payload.freezerDays,
+        },
+      ];
+      state.shelfLife = newShelfLife;
+    },
     filterCategories(state, action: PayloadAction<string>) {
-      // state.filteredCategories
-      // let res: any = [];
-      // for (let category of state.categories) {
-      //   if (category.name.split(' ').length > 0) {
-      //     for (let word of category.name.split(' ')) {
-      //       if (wordContainsSubstring(word, action.payload)) {
-      //         res.push(category);
-      //       }
-      //     }
-      //   } else {
-      //     if (wordContainsSubstring(category.name, action.payload)) {
-      //       res.push(category);
-      //     }
-      //   }
-      // }
-      // console.log(res);
-      // state.filteredCategories = res;
-      const res: ICategory[] = [];
-
-      for (const category of state.categories) {
-        const words = category.name.split(' ');
-        const found = words.some((word) =>
-          wordContainsSubstring(word, action.payload)
-        );
-        if (found && !res.includes(category)) {
-          res.push(category);
-        }
-      }
-
-      state.filteredCategories = res;
+      state.filteredCategories = state.categories.filter((item) => {
+        return wordContainsSubstring(item.name, action.payload);
+      });
     },
   },
   extraReducers: (builder) => {
@@ -259,6 +267,8 @@ export const {
   filterCategories,
   resetAddItemSelectedCategory,
   setAddItemSelectedCategory,
+  resetShelfLife,
+  setShelfLife,
 } = categoriesSlice.actions;
 
 export const showCategories = (state: RootState) => state.category.categories;
@@ -269,5 +279,6 @@ export const showFilteredCategories = (state: RootState) =>
   state.category.filteredCategories;
 
 export const getCategory = (state: RootState) => state.category.category;
+export const getShelfLife = (state: RootState) => state.category.shelfLife;
 
 export default categoriesSlice.reducer;

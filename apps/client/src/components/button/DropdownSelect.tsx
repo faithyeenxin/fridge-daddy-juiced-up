@@ -5,7 +5,14 @@ import { ICategory } from '../../interface';
 import { capitalizeWords } from '../utility/functions/capitalizeWord';
 import DropdownOption from './DropdownOption';
 import { format, min, max, add } from 'date-fns';
-import { filterCategories } from '../../app/slices/categoriesSlice';
+import {
+  filterCategories,
+  getShelfLife,
+  resetShelfLife,
+  setShelfLife,
+  showCategories,
+  showFilteredCategories,
+} from '../../app/slices/categoriesSlice';
 interface IShelfLife {
   id: number;
   name: string;
@@ -13,10 +20,7 @@ interface IShelfLife {
 }
 interface IDropdownProps {
   name: string;
-  items: IShelfLife[] | ICategory[];
-  handleFilteredCategories: any;
   purchaseDate: any;
-  setShelfLife: any;
   setExpiryDate: any;
   setDaysInFocus: any;
   newItem: any;
@@ -26,9 +30,6 @@ interface IDropdownProps {
 
 const DropdownSelect = ({
   name,
-  items,
-  handleFilteredCategories,
-  setShelfLife,
   purchaseDate,
   setExpiryDate,
   setDaysInFocus,
@@ -40,6 +41,9 @@ const DropdownSelect = ({
   const [openDropdown, setOpenDropdown] = useState(false);
   const [selectedValue, setSelectedValue] = useState<IShelfLife | ICategory>();
   const dispatch = useAppDispatch();
+  const categories = useAppSelector(showCategories);
+  const filteredCategories = useAppSelector(showFilteredCategories);
+  const shelfLife = useAppSelector(getShelfLife);
   useEffect(() => {
     function handleClickOutside(event: any) {
       if (divRef.current && !divRef.current.contains(event.target)) {
@@ -58,48 +62,43 @@ const DropdownSelect = ({
     setSelectedValue(undefined);
   }, [resetState]);
 
-  const handleSelectedValue = (dropdownName: string, item: any) => {
-    console.log(item);
-    setSelectedValue(item);
-    if (dropdownName === 'Category') {
-      setNewItem({ ...newItem, categoryId: item.id });
-      if (item.name !== '-') {
-        const newItem = [
-          {
-            id: 1,
-            name: `Pantry - ${item.pantryDays} Days`,
-            days: item.pantryDays,
-          },
-          {
-            id: 2,
-            name: `Fridge - ${item.fridgeDays} Days`,
-            days: item.fridgeDays,
-          },
-          {
-            id: 3,
-            name: `Freezer - ${item.freezerDays} Days`,
-            days: item.freezerDays,
-          },
-        ];
-        setShelfLife(newItem);
-      } else {
-        setShelfLife([
-          { id: 1, name: 'Pantry', days: 0 },
-          { id: 2, name: 'Fridge', days: 0 },
-          { id: 3, name: 'Freezer', days: 0 },
-        ]);
-      }
+  // const handleSelectedValue = (dropdownName: string, item: any) => {
+  //   setOpenDropdown(!openDropdown);
+  //   console.log(`${item} has been clicked`);
+  //   setSelectedValue(item);
+  //   if (dropdownName === 'Category') {
+  //     setNewItem({ ...newItem, categoryId: item.id });
+  //     if (item.name !== '-') {
+  //       dispatch(setShelfLife(item));
+  //     } else {
+  //       dispatch(resetShelfLife());
+  //     }
+  //   }
+  //   if (dropdownName === 'Compartment') {
+  //     setNewItem({ ...newItem, storedIn: item.name.split(' ')[0] });
+  //     setDaysInFocus(item.days);
+  //     console.log(item.days);
+  //     let newExpiryDate = new Date();
+  //     newExpiryDate.setDate(new Date(purchaseDate).getDate() + item.days);
+  //     console.log(newExpiryDate);
+  //     setExpiryDate(format(newExpiryDate, 'yyyy-MM-dd'));
+  //   }
+  // };
+
+  const [itemsToRender, setItemsToRender] = useState<
+    ICategory[] | IShelfLife[]
+  >();
+  useEffect(() => {
+    if (name === 'Category' && filteredCategories.length > 0) {
+      setItemsToRender(filteredCategories);
+    } else if (name === 'Category' && filteredCategories.length <= 0) {
+      setItemsToRender(categories);
+    } else if (name !== 'Compartment') {
+      setItemsToRender(categories);
+    } else {
+      setItemsToRender(shelfLife);
     }
-    if (dropdownName === 'Compartment') {
-      setNewItem({ ...newItem, storedIn: item.name.split(' ')[0] });
-      setDaysInFocus(item.days);
-      console.log(item.days);
-      let newExpiryDate = new Date();
-      newExpiryDate.setDate(new Date(purchaseDate).getDate() + item.days);
-      console.log(newExpiryDate);
-      setExpiryDate(format(newExpiryDate, 'yyyy-MM-dd'));
-    }
-  };
+  }, [filteredCategories, shelfLife]);
 
   return (
     <div className='w-full' ref={divRef}>
@@ -122,7 +121,7 @@ const DropdownSelect = ({
             name === 'Compartment' ? 'h-[100px]' : 'h-[180px]'
           }`}
         >
-          {name === 'Category' && (
+          {name !== 'Compartment' && (
             <div className='p-3'>
               <label htmlFor='input-group-search' className='sr-only'>
                 Search
@@ -149,29 +148,32 @@ const DropdownSelect = ({
                   autoComplete='off'
                   className='block w-full p-1 pl-10 text-md text-mutedPink border border-gray-300 rounded-3xl bg-white placeholder:text-mutedPink placeholder:font-bold font-lora focus:outline-none'
                   placeholder={`Search ${name}`}
-                  onChange={handleFilteredCategories}
+                  onChange={(e) => dispatch(filterCategories(e.target.value))}
                 />
               </div>
             </div>
           )}
           <ul
-            className={`h-24 px-3 ${
+            className={`h-[60%] mx-3 ${
               name === 'Category' ? 'pb-3' : 'py-3'
             } overflow-y-auto text-md text-white`}
             aria-labelledby='dropdownSearchButton'
           >
-            {items.map((item, idx) => {
-              return (
-                <DropdownOption
-                  key={idx}
-                  dropdownName={name}
-                  item={item}
-                  openDropdown={openDropdown}
-                  setOpenDropdown={setOpenDropdown}
-                  handleSelectedValue={handleSelectedValue}
-                />
-              );
-            })}
+            {itemsToRender?.map((item, idx) => (
+              <DropdownOption
+                item={item}
+                key={`${item.id}-${idx}`}
+                dropdownName={name}
+                openDropdown={openDropdown}
+                setOpenDropdown={setOpenDropdown}
+                setSelectedValue={setSelectedValue}
+                newItem={newItem}
+                setNewItem={setNewItem}
+                setDaysInFocus={setDaysInFocus}
+                purchaseDate={purchaseDate}
+                setExpiryDate={setExpiryDate}
+              />
+            ))}
           </ul>
         </div>
       </div>
