@@ -55,7 +55,7 @@ const DropdownSelect = ({
     function handleClickOutside(event: any) {
       if (divRef.current && !divRef.current.contains(event.target)) {
         // Clicked outside the div, so hide it
-        dispatch(filterCategories(''));
+        // dispatch(filterCategories(''));
         setOpenDropdown(false);
       }
     }
