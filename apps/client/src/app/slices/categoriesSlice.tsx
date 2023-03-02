@@ -178,6 +178,9 @@ export const categoriesSlice = createSlice({
         return wordContainsSubstring(item.name, action.payload);
       });
     },
+    setFilteredCategories(state, action: PayloadAction<ICategory[]>) {
+      state.filteredCategories = action.payload;
+    },
   },
   extraReducers: (builder) => {
     // fetch Categories
@@ -269,6 +272,7 @@ export const {
   setAddItemSelectedCategory,
   resetShelfLife,
   setShelfLife,
+  setFilteredCategories,
 } = categoriesSlice.actions;
 
 export const showCategories = (state: RootState) => state.category.categories;

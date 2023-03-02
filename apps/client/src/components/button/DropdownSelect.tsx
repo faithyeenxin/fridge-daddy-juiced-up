@@ -13,6 +13,8 @@ import {
   showCategories,
   showFilteredCategories,
 } from '../../app/slices/categoriesSlice';
+import { toast } from 'react-toastify';
+import { sortedIndex } from 'lodash';
 interface IShelfLife {
   id: number;
   name: string;
@@ -44,6 +46,11 @@ const DropdownSelect = ({
   const categories = useAppSelector(showCategories);
   const filteredCategories = useAppSelector(showFilteredCategories);
   const shelfLife = useAppSelector(getShelfLife);
+  const [searchValue, setSearchValue] = useState('');
+  useEffect(() => {
+    dispatch(filterCategories(searchValue));
+  }, [searchValue]);
+
   useEffect(() => {
     function handleClickOutside(event: any) {
       if (divRef.current && !divRef.current.contains(event.target)) {
@@ -62,32 +69,32 @@ const DropdownSelect = ({
     setSelectedValue(undefined);
   }, [resetState]);
 
-  // const handleSelectedValue = (dropdownName: string, item: any) => {
-  //   setOpenDropdown(!openDropdown);
-  //   console.log(`${item} has been clicked`);
-  //   setSelectedValue(item);
-  //   if (dropdownName === 'Category') {
-  //     setNewItem({ ...newItem, categoryId: item.id });
-  //     if (item.name !== '-') {
-  //       dispatch(setShelfLife(item));
-  //     } else {
-  //       dispatch(resetShelfLife());
-  //     }
-  //   }
-  //   if (dropdownName === 'Compartment') {
-  //     setNewItem({ ...newItem, storedIn: item.name.split(' ')[0] });
-  //     setDaysInFocus(item.days);
-  //     console.log(item.days);
-  //     let newExpiryDate = new Date();
-  //     newExpiryDate.setDate(new Date(purchaseDate).getDate() + item.days);
-  //     console.log(newExpiryDate);
-  //     setExpiryDate(format(newExpiryDate, 'yyyy-MM-dd'));
-  //   }
-  // };
+  const handleSelectedValue = (dropdownName: string, item: any) => {
+    setOpenDropdown(!openDropdown);
+    setSelectedValue(item);
+    if (dropdownName === 'Category') {
+      setNewItem({ ...newItem, categoryId: item.id });
+      if (item.name !== '-') {
+        dispatch(setShelfLife(item));
+      } else {
+        dispatch(resetShelfLife());
+      }
+    }
+    if (dropdownName === 'Compartment') {
+      setNewItem({ ...newItem, storedIn: item.name.split(' ')[0] });
+      setDaysInFocus(item.days);
+      console.log(item.days);
+      let newExpiryDate = new Date();
+      newExpiryDate.setDate(new Date(purchaseDate).getDate() + item.days);
+      console.log(newExpiryDate);
+      setExpiryDate(format(newExpiryDate, 'yyyy-MM-dd'));
+    }
+  };
 
   const [itemsToRender, setItemsToRender] = useState<
     ICategory[] | IShelfLife[]
   >();
+
   useEffect(() => {
     if (name === 'Category' && filteredCategories.length > 0) {
       setItemsToRender(filteredCategories);
@@ -98,7 +105,7 @@ const DropdownSelect = ({
     } else {
       setItemsToRender(shelfLife);
     }
-  }, [filteredCategories, shelfLife]);
+  }, [categories, filteredCategories, shelfLife]);
 
   return (
     <div className='w-full' ref={divRef}>
@@ -118,7 +125,7 @@ const DropdownSelect = ({
           className={`z-10 ${
             openDropdown ? '' : 'hidden'
           } rounded-lg shadow absolute bg-extraMutedPink mt-2 inset-0 ${
-            name === 'Compartment' ? 'h-[100px]' : 'h-[180px]'
+            name === 'Compartment' ? 'h-[100px]' : 'h-[220px]'
           }`}
         >
           {name !== 'Compartment' && (
@@ -148,31 +155,34 @@ const DropdownSelect = ({
                   autoComplete='off'
                   className='block w-full p-1 pl-10 text-md text-mutedPink border border-gray-300 rounded-3xl bg-white placeholder:text-mutedPink placeholder:font-bold font-lora focus:outline-none'
                   placeholder={`Search ${name}`}
-                  onChange={(e) => dispatch(filterCategories(e.target.value))}
+                  onChange={(e) => setSearchValue(e.target.value)}
                 />
               </div>
             </div>
           )}
           <ul
-            className={`h-[60%] mx-3 ${
+            className={`h-36 px-3 ${
               name === 'Category' ? 'pb-3' : 'py-3'
             } overflow-y-auto text-md text-white`}
             aria-labelledby='dropdownSearchButton'
           >
             {itemsToRender?.map((item, idx) => (
-              <DropdownOption
-                item={item}
-                key={`${item.id}-${idx}`}
-                dropdownName={name}
-                openDropdown={openDropdown}
-                setOpenDropdown={setOpenDropdown}
-                setSelectedValue={setSelectedValue}
-                newItem={newItem}
-                setNewItem={setNewItem}
-                setDaysInFocus={setDaysInFocus}
-                purchaseDate={purchaseDate}
-                setExpiryDate={setExpiryDate}
-              />
+              // <DropdownOption
+              //   key={idx}
+              //   item={item}
+              //   handleSelectedValue={() => handleSelectedValue(name, item)}
+              // />
+              <li
+                key={idx}
+                className='flex items-center rounded-2xl pl-2 text-orange font-lora hover:bg-white hover:cursor-pointer'
+                onClick={() => {
+                  handleSelectedValue(name, item);
+                  toast(`${item.name}`);
+                  toast('item was clicked');
+                }}
+              >
+                {capitalizeWords(item.name)}
+              </li>
             ))}
           </ul>
         </div>

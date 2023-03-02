@@ -209,16 +209,13 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                       </label>
                       {!edit && (
                         <div className='w-full h=[40px] hover:cursor-default  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'>
-                          {capitalizeWords(
-                            allCategories.filter(
-                              (i) => i.id === item.categoryId
-                            )[0].name
-                          )}
+                          {capitalizeWords(item?.category?.name)}
                         </div>
                       )}
                       {edit && (
                         <DropdownSelect
-                          name={`${capitalizeWords(item?.category?.name)}`}
+                          // name={`${capitalizeWords(item?.category?.name)}`}
+                          name='Category'
                           newItem={newItem}
                           setNewItem={setNewItem}
                           purchaseDate={purchaseDate}
@@ -239,7 +236,8 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                       )}
                       {edit && (
                         <DropdownSelect
-                          name={`${capitalizeWords(item?.storedIn)}`}
+                          // name={`${capitalizeWords(item?.storedIn)}`}
+                          name='Compartment'
                           newItem={newItem}
                           setNewItem={setNewItem}
                           purchaseDate={purchaseDate}
