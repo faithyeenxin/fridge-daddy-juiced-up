@@ -45,7 +45,10 @@ export default function Home() {
       {/* Content Section */}
       <div className='w-full h-[700px] flex gap-2'>
         {/* Left Container */}
-        <div className='w-3/12 h-full hidden lg:flex lg:flex-col justify-between gap-2'>
+        <div
+          ref={itemLeftRef}
+          className='w-3/12 h-full hidden lg:flex lg:flex-col justify-between gap-2'
+        >
           <div className='w-full h-full bg-offWhite rounded-lg flex justify-center items-center'>
             Totals will be displayed here
           </div>
@@ -53,13 +56,19 @@ export default function Home() {
           <AddCategoryCard />
         </div>
         {/* Middle Container */}
-        <div className='w-full lg:w-8/12 h-full  flex flex-col gap-2'>
+        <div
+          ref={itemMiddleRef}
+          className='w-full lg:w-8/12 h-full  flex flex-col gap-2'
+        >
           <SearchBar />
           <ItemsTable />
         </div>
 
         {/* Right Container */}
-        <div className='w-2/12 h-full hidden lg:flex lg:flex-col  gap-2'>
+        <div
+          ref={itemRightRef}
+          className='w-2/12 h-full hidden lg:flex lg:flex-col  gap-2'
+        >
           <FilterCard />
         </div>
       </div>
