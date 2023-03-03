@@ -206,7 +206,7 @@ const LoggedInNavBar = () => {
                   <div className='mt-4'>
                     <button
                       type='button'
-                      className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
+                      className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none'
                       onClick={() => {
                         console.log('add model will close');
                         closeAddModal();
@@ -217,7 +217,7 @@ const LoggedInNavBar = () => {
                     </button>
                     <button
                       type='button'
-                      className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
+                      className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none'
                       onClick={() => {
                         closeAddModal();
                         openAddCategoryModal();
