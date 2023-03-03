@@ -113,7 +113,7 @@ const DropdownSelect = ({
       <button
         id='dropdownSearchButton'
         onClick={() => setOpenDropdown(!openDropdown)}
-        className='relative items-center text-center justify-center inline-flex w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white disabled:text-gray-100 placeholder-white bg-mutedPink placeholder:font-bold font-lora focus:bg-opacity-80 focus:outline-none'
+        className='relative items-center text-center justify-center inline-flex w-full h-[30px] xl:h-[40px]  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white disabled:text-gray-100 placeholder-white bg-mutedPink placeholder:font-bold font-lora focus:bg-opacity-80 focus:outline-none'
         data-value={selectedValue?.id}
       >
         {selectedValue ? capitalizeWords(selectedValue?.name) : name}

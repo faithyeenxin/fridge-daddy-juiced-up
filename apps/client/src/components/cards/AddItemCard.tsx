@@ -7,7 +7,7 @@ import {
 import { getUserId } from '../../app/slices/userSlice';
 import { useAppDispatch, useAppSelector } from '../../app/store';
 import { ICategory, IItem } from '../../interface';
-import DropdownSelect from '../button/DropdownSelect';
+import DropdownSelect from '../dropdown/DropdownSelect';
 import { capitalizeWords } from '../utility/functions/capitalizeWord';
 import { format, min, max, add, parseISO } from 'date-fns';
 import { getDurationFromDays } from '../utility/functions/getDurationFromDays';
@@ -83,14 +83,14 @@ const AddItemCard = () => {
 
   return (
     <div
-      className='flex flex-col w-full h-[380px] bg-offWhite rounded-lg'
+      className='flex flex-col bg-offWhite rounded-lg w-full h-full'
       onMouseLeave={() => {
         setPurchasedOnDisplay(false);
         setExpirationOnDisplay(false);
       }}
     >
-      <div className='flex items-center justify-evenly flex-col h-full m-5'>
-        <div className='text-3xl font-lora font-bold text-orange tracking-wider'>
+      <div className='flex items-center justify-evenly flex-col m-5 gap-2'>
+        <div className='text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider'>
           Add an Item
         </div>
         <input
@@ -102,7 +102,7 @@ const AddItemCard = () => {
           maxLength={23}
           value={newItem.name}
           autoComplete='off'
-          className='w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+          className='w-full h-[30px] xl:h-[40px]  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
           onChange={(e) => {
             setNewItem({ ...newItem, name: e.target.value });
           }}
@@ -116,7 +116,7 @@ const AddItemCard = () => {
           placeholder='Quantity'
           autoComplete='off'
           value={newItem.quantity}
-          className='w-full h-[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+          className='w-full h-[30px] xl:h-[40px]  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
           onChange={(e) => {
             setNewItem({ ...newItem, quantity: e.target.value });
           }}
@@ -145,11 +145,11 @@ const AddItemCard = () => {
           resetState={resetState}
         />
 
-        <div className='flex gap-2 justify-around w-full'>
+        <div className='flex flex-col xl:flex-row gap-2 justify-between w-full'>
           <div
             className={`${
               purchasedOnDisplay ? 'hidden' : ''
-            } px-1 w-full gap-1 flex items-center justify-center rounded-3xl bg-opacity-60 text- tracking-wide  text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none`}
+            } h-[30px] xl:h-[40px] px-1 w-full gap-1 flex text-sm items-center justify-center rounded-3xl bg-opacity-60 text-tracking-wide  text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none`}
             onMouseEnter={() => setPurchasedOnDisplay(!purchasedOnDisplay)}
           >
             Purchased <img src='images/cards/date_small.svg' />
@@ -157,7 +157,7 @@ const AddItemCard = () => {
           <input
             className={`${
               purchasedOnDisplay ? '' : 'hidden'
-            } px-1 w-full rounded-3xl bg-opacity-60 text-sm tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none`}
+            } h-[30px] xl:h-[40px]  px-1 w-full  rounded-3xl bg-opacity-60 text-sm md:text-sm tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none`}
             placeholder='Purchased'
             defaultValue={todayStr}
             type='date'
@@ -181,7 +181,7 @@ const AddItemCard = () => {
           <div
             className={`${
               expirationOnDisplay ? 'hidden' : ''
-            } px-1 w-full gap-1 flex items-center justify-center rounded-3xl bg-opacity-60 text- tracking-wide  text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none`}
+            } h-[30px] xl:h-[40px] px-1 w-full gap-1 flex text-sm items-center justify-center rounded-3xl bg-opacity-60 text-tracking-wide  text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none`}
             onMouseEnter={() => setExpirationOnDisplay(!expirationOnDisplay)}
           >
             Expiration <img src='images/cards/date_small.svg' />
@@ -189,7 +189,7 @@ const AddItemCard = () => {
           <input
             className={`${
               expirationOnDisplay ? '' : 'hidden'
-            } px-1 w-full rounded-3xl bg-opacity-60 text-sm tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none `}
+            } h-[40px] px-1 w-full rounded-3xl bg-opacity-60 text-xs tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none `}
             placeholder='Expiration'
             type='date'
             min={purchaseDate}
@@ -205,10 +205,12 @@ const AddItemCard = () => {
               });
             }}
           />
+        </div>
+        <div className='flex justify-center w-full bg-orange rounded-3xl'>
           <img
             onClick={handleSubmit}
             src='images/cards/add.svg'
-            className='bg-orange rounded-3xl hover:bg-gradient-to-r from-orange to-pink'
+            className=' hover:bg-gradient-to-r from-orange to-pink'
           />
         </div>
       </div>

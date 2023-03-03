@@ -147,18 +147,18 @@ const FilterCard = () => {
   };
 
   return (
-    <div className='w-full h-[665px] flex bg-offWhite rounded-lg'>
+    <div className='w-full h-full flex bg-offWhite rounded-lg'>
       <div className='flex flex-col m-5 justify-between w-full'>
-        <div className='flex items-center justify-center text-3xl font-lora text-orange'>
+        <div className='flex text-2xl xl:text-3xl  items-center justify-center font-lora text-orange'>
           Filters
         </div>
         <div>
-          <div className=' text-2xl font-lora font-bold text-orange'>
+          <div className='text-xl xl:text-2xl font-lora font-bold text-orange'>
             Condition
           </div>
           <div className='flex flex-col gap-2 py-2'>
             <div className='flex justify-between pr-3 items-center'>
-              <div className='font-lora tracking-wider text-orange font-bolder text-lg'>
+              <div className='font-lora tracking-wider text-gray-400 font-bold text-md xl:text-lg'>
                 Evergreen
               </div>
               <img
@@ -176,7 +176,7 @@ const FilterCard = () => {
               />
             </div>
             <div className='flex justify-between pr-3'>
-              <div className='font-lora tracking-wider text-orange font-bolder text-lg'>
+              <div className='font-lora tracking-wider text-gray-400 font-bold text-md xl:text-lg'>
                 Rotten
               </div>
               <img
@@ -194,7 +194,7 @@ const FilterCard = () => {
               />
             </div>
             <div className='flex justify-between pr-3'>
-              <div className='font-lora tracking-wider text-orange font-bolder text-lg'>
+              <div className='font-lora tracking-wider text-gray-400 font-bold text-md xl:text-lg'>
                 Trashed
               </div>
               <img
@@ -214,12 +214,12 @@ const FilterCard = () => {
           </div>
         </div>
         <div>
-          <div className='my-3 text-2xl font-lora font-bold text-orange'>
+          <div className='my-3 text-xl xl:text-2xl font-lora font-bold text-orange'>
             Compartment
           </div>
           <div className='flex flex-col gap-2'>
             <div className='flex justify-between pr-3'>
-              <div className='font-lora tracking-wider text-orange font-bolder text-lg'>
+              <div className='font-lora tracking-wider text-gray-400 font-bold text-md xl:text-lg'>
                 Pantry
               </div>
               <img
@@ -237,7 +237,7 @@ const FilterCard = () => {
               />
             </div>
             <div className='flex justify-between pr-3'>
-              <div className='font-lora tracking-wider text-orange font-bolder text-lg'>
+              <div className='font-lora tracking-wider text-gray-400 font-bold text-md xl:text-lg'>
                 Fridge
               </div>
               <img
@@ -255,7 +255,7 @@ const FilterCard = () => {
               />
             </div>
             <div className='flex justify-between pr-3'>
-              <div className='font-lora tracking-wider text-orange font-bolder text-lg'>
+              <div className='font-lora tracking-wider text-gray-400 font-bold text-md xl:text-lg'>
                 Freezer
               </div>
               <img
@@ -275,12 +275,12 @@ const FilterCard = () => {
           </div>
         </div>
         <div>
-          <div className='my-3 text-2xl font-lora font-bold text-orange'>
+          <div className='my-3 text-xl xl:text-2xl font-lora font-bold text-orange'>
             Expiring Soon
           </div>
           <div className='flex flex-col gap-2'>
             <div className='flex justify-between pr-3'>
-              <div className='font-lora tracking-wider text-orange font-bolder text-lg'>
+              <div className='font-lora tracking-wider text-gray-400 font-bold text-md xl:text-lg'>
                 Today
               </div>
               <img
@@ -300,7 +300,7 @@ const FilterCard = () => {
               />
             </div>
             <div className='flex justify-between pr-3'>
-              <div className='font-lora tracking-wider text-orange font-bolder text-lg'>
+              <div className='font-lora tracking-wider text-gray-400 font-bold text-md xl:text-lg'>
                 In 3 Days
               </div>
               <img
@@ -320,7 +320,7 @@ const FilterCard = () => {
               />
             </div>
             <div className='flex justify-between pr-3'>
-              <div className='font-lora tracking-wider text-orange font-bolder text-lg'>
+              <div className='font-lora tracking-wider text-gray-400 font-bold text-md xl:text-lg'>
                 In A Week
               </div>
               <img

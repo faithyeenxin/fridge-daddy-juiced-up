@@ -10,8 +10,8 @@ import Register from './pages/Register';
 import LoginRedirect from './pages/LoginRedirect';
 import RegisterRedirect from './pages/RegisterRedirect';
 import Aws_Test from './pages/Aws_Test';
-import LoggedOutLayout from './components/utility/LoggedOutLayout';
-import LoggedInLayout from './components/utility/LoggedInLayout';
+import LoggedOutLayout from './components/layout/LoggedOutLayout';
+import LoggedInLayout from './components/layout/LoggedInLayout';
 import Testing from './pages/Testing';
 import GroceriesList from './pages/GroceriesList';
 function App() {

@@ -5,7 +5,7 @@ import {
 } from '../../app/slices/categoriesSlice';
 import { useAppDispatch, useAppSelector } from '../../app/store';
 import { ICategory } from '../../interface';
-import DropdownButton from '../button/DropdownSelect';
+import DropdownButton from '../dropdown/DropdownSelect';
 import { capitalizeWords } from '../utility/functions/capitalizeWord';
 import { toast } from 'react-toastify';
 import { getUserId } from '../../app/slices/userSlice';
@@ -48,26 +48,26 @@ const AddCategoryCard = () => {
   };
 
   return (
-    <div className='flex flex-col w-full h-[260px] bg-offWhite rounded-lg'>
-      <div className='flex items-center justify-evenly flex-col h-full m-5'>
-        <div className='text-3xl font-lora font-bold text-orange tracking-wider'>
+    <div className='flex flex-col bg-offWhite rounded-lg w-full h-full'>
+      <div className='flex items-center justify-evenly flex-col m-5 gap-2'>
+        <div className='text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider'>
           Add a Category
         </div>
         <input
           type='text'
           placeholder='Name'
           value={newCategory.name}
-          className='w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+          className='w-full h-[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
           onChange={(e) => {
             setNewCategory({ ...newCategory, name: e.target.value });
           }}
         />
-        <div className='flex gap-2'>
+        <div className='flex md:flex-col lg:flex-row gap-1'>
           <input
             type='number'
             min={0}
             placeholder='Pantry'
-            className='w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+            className='w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-sm tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center justify-center focus:bg-opacity-80 focus:outline-none'
             onChange={(e) => {
               setNewCategory({
                 ...newCategory,
@@ -79,7 +79,7 @@ const AddCategoryCard = () => {
             type='number'
             min={0}
             placeholder='Fridge'
-            className='w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+            className='w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-sm  tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
             onChange={(e) => {
               setNewCategory({
                 ...newCategory,
@@ -91,7 +91,7 @@ const AddCategoryCard = () => {
             type='number'
             min={0}
             placeholder='Freezer'
-            className='w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+            className='w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-sm tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
             onChange={(e) => {
               setNewCategory({
                 ...newCategory,

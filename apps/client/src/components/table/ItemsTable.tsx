@@ -3,15 +3,15 @@ import {
   showFilteredItems,
   showUserItemsLoadingState,
   trashAllItems,
-} from '../app/slices/itemsSlice';
-import { useAppDispatch, useAppSelector } from '../app/store';
-import { capitalizeWords } from './utility/functions/capitalizeWord';
+} from '../../app/slices/itemsSlice';
+import { useAppDispatch, useAppSelector } from '../../app/store';
+import { capitalizeWords } from '../utility/functions/capitalizeWord';
 import differenceInDays from 'date-fns/differenceInDays';
 import format from 'date-fns/format';
 import SingleItemRow from './SingleItemRow';
 import { Dialog, Transition } from '@headlessui/react';
 import { toast } from 'react-toastify';
-import { getUserId } from '../app/slices/userSlice';
+import { getUserId } from '../../app/slices/userSlice';
 
 const ItemsTable = () => {
   const filteredItems = useAppSelector(showFilteredItems);
@@ -44,21 +44,21 @@ const ItemsTable = () => {
     setIsOpen(true);
   }
   return (
-    <div className='w-full h-[600px] bg-offWhite rounded-lg overflow-auto'>
+    <div className='w-full h-full bg-offWhite rounded-lg overflow-auto'>
       <div className='relative flex flex-col justify-between'>
         <div className='w-full'>
           <div
             id='table-head'
-            className='flex bg-orange font-lora text-white text-bold text-md text-center items-center h-[45px] shadow-xl'
+            className='flex sticky top-0  bg-orange font-lora text-white text-bold xl:text-lg lg:text-md md:text-sm sm:text-xs text-xs text-center items-center h-[45px] shadow-xl'
           >
-            <div className='w-2/12 tracking-wide'>Days Left</div>
-            <div className='w-4/12 tracking-wide'>Name</div>
-            <div className='w-1/12'>Quantity</div>
-            <div className='w-2/12'>Stored In</div>
-            <div className='w-2/12'>Purchased</div>
-            <div className='w-2/12'>Expiration</div>
+            <div className='w-2/12 xl:w-2/12 tracking-wide'>Days Left</div>
+            <div className='w-5/12 xl:w-4/12 tracking-wide'>Name</div>
+            <div className='w-2/12 xl:w-1/12'>Quantity</div>
+            <div className='w-2/12 xl:w-2/12'>Stored In</div>
+            <div className='hidden xl:flex xl:w-2/12'>Purchased</div>
+            <div className='hidden xl:flex xl:w-2/12'>Expiration</div>
             <div
-              className='w-1/12 flex items-center justify-center'
+              className='w-1/12  xl:w-1/12 flex items-center justify-center'
               onMouseEnter={() => setBinHover(true)}
               onMouseLeave={() => setBinHover(false)}
             >

@@ -9,20 +9,20 @@ import {
   trashItem,
   untrashItem,
   updateItem,
-} from '../app/slices/itemsSlice';
-import { useAppDispatch, useAppSelector } from '../app/store';
-import { IItem } from '../interface';
-import { capitalizeWords } from './utility/functions/capitalizeWord';
+} from '../../app/slices/itemsSlice';
+import { useAppDispatch, useAppSelector } from '../../app/store';
+import { IItem } from '../../interface';
+import { capitalizeWords } from '../utility/functions/capitalizeWord';
 import { Dialog, Transition } from '@headlessui/react';
-import DropdownSelect from './button/DropdownSelect';
+import DropdownSelect from '../dropdown/DropdownSelect';
 import {
   filterCategories,
   getCategory,
   getCategoryById,
   showCategories,
   showFilteredCategories,
-} from '../app/slices/categoriesSlice';
-import { getUserId } from '../app/slices/userSlice';
+} from '../../app/slices/categoriesSlice';
+import { getUserId } from '../../app/slices/userSlice';
 import isAfter from 'date-fns/isAfter';
 
 interface ISingleItemProps {
@@ -86,26 +86,33 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
         colorState ? 'bg-tableOffWhite' : 'bg-tablePink'
       } font-lora text-black text-sm text-center items-center h-[40px]`}
     >
-      <div className='w-2/12 tracking-wide'>
+      <div
+        className={`w-2/12 xl:w-2/12 tracking-wide ${
+          differenceInDays(new Date(item.expiryDate), today) <= 0 &&
+          'text-red-500'
+        }`}
+      >
         {differenceInDays(new Date(item.expiryDate), today)}
       </div>
       <div
-        className='w-4/12 hover:cursor-pointer hover:text-orangeLight'
+        className='w-5/12 xl:w-4/12 hover:cursor-pointer hover:text-orangeLight'
         onClick={openModal}
       >
         {capitalizeWords(item.name)}
       </div>
-      <div className='w-1/12 hover:cursor-default'>
+      <div className='w-2/12 xl:w-1/12 hover:cursor-default'>
         {capitalizeWords(item.quantity)}
       </div>
-      <div className='w-2/12 hover:cursor-default'>{item.storedIn}</div>
-      <div className='w-2/12 hover:cursor-default'>
+      <div className='w-2/12 xl:w-2/12 hover:cursor-default'>
+        {item.storedIn}
+      </div>
+      <div className='hidden xl:flex xl:justify-center xl:w-2/12 hover:cursor-default'>
         {format(new Date(item.purchaseDate), 'd MMM yy')}
       </div>
-      <div className='w-2/12 hover:cursor-default'>
+      <div className='hidden xl:flex xl:justify-center xl:w-2/12 hover:cursor-default'>
         {format(new Date(item.expiryDate), 'd MMM yy')}
       </div>
-      <div className='w-1/12 flex items-center justify-center hover:cursor-pointer'>
+      <div className='w-1/12 xl:w-1/12 flex items-center justify-center hover:cursor-pointer'>
         {item.trashed ? (
           <div
             onMouseEnter={() => setisTrashedHoverState(true)}

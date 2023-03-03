@@ -51,7 +51,7 @@ const SearchBar = () => {
         type='text'
         placeholder='Looking for something?'
         value={searchValue}
-        className='w-full p-2 rounded-3xl text-lg text-white opacity-80 placeholder-white bg-mutedPink placeholder:font-bold font-lora px-5 py-2 focus:outline-none'
+        className='w-full p-2 rounded-3xl text-md xl:text-lg text-white opacity-80 placeholder-white bg-mutedPink placeholder:font-bold font-lora px-5 py-2 focus:outline-none'
         onChange={(e) => {
           setSearchValue(e.target.value);
           updateSearchBox(e);

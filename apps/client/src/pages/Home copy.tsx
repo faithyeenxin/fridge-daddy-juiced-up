@@ -13,12 +13,12 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Home() {
   let itemLeftRef = useRef(null);
   let itemRightRef = useRef(null);
-  let itemMiddleRef = useRef(null);
+  let itemCenterRef = useRef(null);
 
   useEffect(() => {
     const itemLeft = itemLeftRef.current;
     const itemRight = itemRightRef.current;
-    const itemCenter = itemMiddleRef.current;
+    const itemCenter = itemCenterRef.current;
 
     gsap.from(itemLeft, {
       duration: 0.5,
@@ -37,32 +37,32 @@ export default function Home() {
   }, []);
 
   return (
-    <div className='w-full h-full flex flex-col gap-5'>
-      {/* Hero Section */}
-      <div className='w-full h-[250px] bg-red-400 flex justify-center items-center'>
-        <p>the hero section lies here</p>
-      </div>
-      {/* Content Section */}
-      <div className='w-full h-[700px] flex gap-2'>
-        {/* Left Container */}
-        <div className='w-3/12 h-full hidden lg:flex lg:flex-col justify-between gap-2'>
-          <div className='w-full h-full bg-offWhite rounded-lg flex justify-center items-center'>
-            Totals will be displayed here
+    <div className='w-full h-full'>
+      <LandingHero />
+      <div className='flex gap-5'>
+        <div className='relative w-2/12 h-full opacity-1 hidden lg:flex'>
+          <div ref={itemLeftRef} className='flex flex-col gap-6 '>
+            <AddItemCard />
+            <AddCategoryCard />
           </div>
-          <AddItemCard />
-          <AddCategoryCard />
         </div>
-        {/* Middle Container */}
-        <div className='w-full lg:w-8/12 h-full  flex flex-col gap-2'>
-          <SearchBar />
-          <ItemsTable />
+        <div className='relative w-8/12 h-full opacity-1'>
+          <div
+            ref={itemCenterRef}
+            className='absolute w-full flex flex-col gap-5'
+          >
+            <SearchBar />
+            <ItemsTable />
+          </div>
         </div>
 
-        {/* Right Container */}
-        <div className='w-2/12 h-full hidden lg:flex lg:flex-col  gap-2'>
-          <FilterCard />
+        <div className='relative w-2/12  h-full opacity-1'>
+          <div ref={itemRightRef} className='absolute w-full flex'>
+            <FilterCard />
+          </div>
         </div>
       </div>
+
       <ToastContainer
         position='bottom-right'
         autoClose={5000}
