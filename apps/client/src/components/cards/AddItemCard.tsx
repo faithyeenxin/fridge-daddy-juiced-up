@@ -83,7 +83,6 @@ const AddItemCard = () => {
 
   return (
     <div
-      className='flex flex-col bg-offWhite rounded-lg w-full h-full'
       onMouseLeave={() => {
         setPurchasedOnDisplay(false);
         setExpirationOnDisplay(false);
@@ -206,12 +205,8 @@ const AddItemCard = () => {
             }}
           />
         </div>
-        <div className='flex justify-center w-full bg-orange rounded-3xl'>
-          <img
-            onClick={handleSubmit}
-            src='images/cards/add.svg'
-            className=' hover:bg-gradient-to-r from-orange to-pink'
-          />
+        <div className='flex justify-center w-full bg-orange rounded-3xl hover:bg-gradient-to-r from-orange to-pink'>
+          <img onClick={handleSubmit} src='images/cards/add.svg' />
         </div>
       </div>
     </div>

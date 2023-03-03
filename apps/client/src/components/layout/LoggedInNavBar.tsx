@@ -3,12 +3,18 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import {} from '../../app/slices/itemsSlice';
 import { useAppDispatch, useAppSelector } from '../../app/store';
 import { Dialog, Transition } from '@headlessui/react';
+import AddItemCard from '../cards/AddItemCard';
+import AddCategoryCard from '../cards/AddCategoryCard';
+import FilterCard from '../cards/FilterCard';
 
 const LoggedInNavBar = () => {
   const dispatch = useAppDispatch();
   const [navStatus, setNavStatus] = useState('');
   const [hamburgMenuStatus, setHamburgMenuStatus] = useState('hidden');
   let [addIsOpen, setAddIsOpen] = useState(false);
+  let [addItemIsOpen, setAddItemIsOpen] = useState(false);
+  let [addCategoryIsOpen, setAddCategoryIsOpen] = useState(false);
+  let [filterIsOpen, setFilterIsOpen] = useState(false);
 
   const navigate = useNavigate();
   let divRef = useRef<any>();
@@ -19,6 +25,30 @@ const LoggedInNavBar = () => {
 
   function openAddModal() {
     setAddIsOpen(true);
+  }
+
+  function closeAddItemModal() {
+    setAddItemIsOpen(false);
+  }
+
+  function openAddItemModal() {
+    setAddItemIsOpen(true);
+  }
+
+  function closeAddCategoryModal() {
+    setAddCategoryIsOpen(false);
+  }
+
+  function openAddCategoryModal() {
+    setAddCategoryIsOpen(true);
+  }
+
+  function closeFilterModal() {
+    setFilterIsOpen(false);
+  }
+
+  function openFilterModal() {
+    setFilterIsOpen(true);
   }
 
   useEffect(() => {
@@ -75,7 +105,7 @@ const LoggedInNavBar = () => {
           <img
             className='flex lg:hidden hover:cursor-pointer'
             src='images/navbar/filter_icon.svg'
-            onClick={() => console.log('filter icon clicked')}
+            onClick={openFilterModal}
           />
 
           <div ref={divRef}>
@@ -140,6 +170,7 @@ const LoggedInNavBar = () => {
           </div>
         </div>
       </div>
+      {/* ADD BUTTON MODAL */}
       <Transition appear show={addIsOpen} as={Fragment}>
         <Dialog as='div' className='relative z-10' onClose={closeAddModal}>
           <Transition.Child
@@ -176,18 +207,150 @@ const LoggedInNavBar = () => {
                     <button
                       type='button'
                       className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
-                      onClick={closeAddModal}
+                      onClick={() => {
+                        console.log('add model will close');
+                        closeAddModal();
+                        openAddItemModal();
+                      }}
                     >
                       Add Item
                     </button>
                     <button
                       type='button'
                       className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
-                      onClick={closeAddModal}
+                      onClick={() => {
+                        closeAddModal();
+                        openAddCategoryModal();
+                      }}
                     >
                       Add Category
                     </button>
                   </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+
+      {/* ADD ITEM BUTTON MODAL */}
+      <Transition appear show={addItemIsOpen} as={Fragment}>
+        <Dialog as='div' className='relative z-10' onClose={closeAddItemModal}>
+          <Transition.Child
+            as={Fragment}
+            enter='ease-out duration-300'
+            enterFrom='opacity-0'
+            enterTo='opacity-100'
+            leave='ease-in duration-200'
+            leaveFrom='opacity-100'
+            leaveTo='opacity-0'
+          >
+            <div className='fixed inset-0 bg-black bg-opacity-25' />
+          </Transition.Child>
+
+          <div className='fixed inset-0 overflow-y-auto'>
+            <div className='flex min-h-full items-center justify-center p-4 text-center'>
+              <Transition.Child
+                as={Fragment}
+                enter='ease-out duration-300'
+                enterFrom='opacity-0 scale-95'
+                enterTo='opacity-100 scale-100'
+                leave='ease-in duration-200'
+                leaveFrom='opacity-100 scale-100'
+                leaveTo='opacity-0 scale-95'
+              >
+                <Dialog.Panel className='w-full max-w-md flex flex-col items-center justify-center transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                  {/* <Dialog.Title
+                    as='h3'
+                    className='flex text-lg font-medium leading-6 text-red-400'
+                  >
+                    Add An Item
+                  </Dialog.Title> */}
+                  <div className='w-full'>
+                    <AddItemCard />
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+
+      {/* ADD CATEGORY BUTTON MODAL */}
+      <Transition appear show={addCategoryIsOpen} as={Fragment}>
+        <Dialog
+          as='div'
+          className='relative z-10'
+          onClose={closeAddCategoryModal}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter='ease-out duration-300'
+            enterFrom='opacity-0'
+            enterTo='opacity-100'
+            leave='ease-in duration-200'
+            leaveFrom='opacity-100'
+            leaveTo='opacity-0'
+          >
+            <div className='fixed inset-0 bg-black bg-opacity-25' />
+          </Transition.Child>
+
+          <div className='fixed inset-0 overflow-y-auto'>
+            <div className='flex min-h-full items-center justify-center p-4 text-center'>
+              <Transition.Child
+                as={Fragment}
+                enter='ease-out duration-300'
+                enterFrom='opacity-0 scale-95'
+                enterTo='opacity-100 scale-100'
+                leave='ease-in duration-200'
+                leaveFrom='opacity-100 scale-100'
+                leaveTo='opacity-0 scale-95'
+              >
+                <Dialog.Panel className='w-full max-w-md flex flex-col items-center justify-center transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                  {/* <Dialog.Title
+                    as='h3'
+                    className='flex text-lg font-medium leading-6 text-red-400'
+                  >
+                    Add A Category
+                  </Dialog.Title> */}
+                  <div className='w-full'>
+                    <AddCategoryCard />
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+
+      {/* FILTER BUTTON MODAL */}
+      <Transition appear show={filterIsOpen} as={Fragment}>
+        <Dialog as='div' className='relative z-10' onClose={closeFilterModal}>
+          <Transition.Child
+            as={Fragment}
+            enter='ease-out duration-300'
+            enterFrom='opacity-0'
+            enterTo='opacity-100'
+            leave='ease-in duration-200'
+            leaveFrom='opacity-100'
+            leaveTo='opacity-0'
+          >
+            <div className='fixed inset-0 bg-black bg-opacity-25' />
+          </Transition.Child>
+
+          <div className='fixed inset-0 overflow-y-auto'>
+            <div className='flex min-h-full items-center justify-center p-4 text-center'>
+              <Transition.Child
+                as={Fragment}
+                enter='ease-out duration-300'
+                enterFrom='opacity-0 scale-95'
+                enterTo='opacity-100 scale-100'
+                leave='ease-in duration-200'
+                leaveFrom='opacity-100 scale-100'
+                leaveTo='opacity-0 scale-95'
+              >
+                <Dialog.Panel className='w-full max-w-md flex flex-col items-center justify-center transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                  <FilterCard />
                 </Dialog.Panel>
               </Transition.Child>
             </div>

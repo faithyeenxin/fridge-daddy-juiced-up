@@ -52,8 +52,12 @@ export default function Home() {
           <div className='w-full h-full bg-offWhite rounded-lg flex justify-center items-center'>
             Totals will be displayed here
           </div>
-          <AddItemCard />
-          <AddCategoryCard />
+          <div className='flex flex-col bg-offWhite rounded-lg w-full h-full'>
+            <AddItemCard />
+          </div>
+          <div className='flex flex-col bg-offWhite rounded-lg w-full h-full'>
+            <AddCategoryCard />
+          </div>
         </div>
         {/* Middle Container */}
         <div
@@ -69,7 +73,9 @@ export default function Home() {
           ref={itemRightRef}
           className='w-2/12 h-full hidden lg:flex lg:flex-col  gap-2'
         >
-          <FilterCard />
+          <div className='w-full h-full flex bg-offWhite rounded-lg'>
+            <FilterCard />
+          </div>
         </div>
       </div>
       <ToastContainer
