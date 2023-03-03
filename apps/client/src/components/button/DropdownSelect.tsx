@@ -47,6 +47,7 @@ const DropdownSelect = ({
   const filteredCategories = useAppSelector(showFilteredCategories);
   const shelfLife = useAppSelector(getShelfLife);
   const [searchValue, setSearchValue] = useState('');
+
   useEffect(() => {
     dispatch(filterCategories(searchValue));
   }, [searchValue]);
@@ -167,18 +168,11 @@ const DropdownSelect = ({
             aria-labelledby='dropdownSearchButton'
           >
             {itemsToRender?.map((item, idx) => (
-              // <DropdownOption
-              //   key={idx}
-              //   item={item}
-              //   handleSelectedValue={() => handleSelectedValue(name, item)}
-              // />
               <li
                 key={item.id}
                 className='flex items-center rounded-2xl pl-2 text-orange font-lora hover:bg-white hover:cursor-pointer'
                 onClick={() => {
                   handleSelectedValue(name, item);
-                  toast(`${item.name}`);
-                  toast('item was clicked');
                 }}
               >
                 {capitalizeWords(item.name)}
