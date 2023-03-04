@@ -114,11 +114,7 @@ const DropdownSelect = ({
         id='dropdownSearchButton'
         onClick={() => setOpenDropdown(!openDropdown)}
         // h-[30px] xl:h-[40px] px-1 w-full gap-1 flex text-sm items-center justify-center rounded-3xl bg-opacity-60 text-tracking-wide  text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none
-        className={`relative items-center text-center justify-center inline-flex w-full ${
-          name === 'Compartment' || name === 'Category'
-            ? 'h-[30px]'
-            : 'h-[40px]'
-        } xl:h-[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white disabled:text-gray-100 placeholder-white bg-mutedPink placeholder:font-bold font-lora focus:bg-opacity-80 focus:outline-none`}
+        className='relative items-center text-center justify-center inline-flex w-full h-[30px] xl:h-[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white disabled:text-gray-100 placeholder-white bg-mutedPink placeholder:font-bold font-lora focus:bg-opacity-80 focus:outline-none'
         data-value={selectedValue?.id}
       >
         {selectedValue ? capitalizeWords(selectedValue?.name) : name}

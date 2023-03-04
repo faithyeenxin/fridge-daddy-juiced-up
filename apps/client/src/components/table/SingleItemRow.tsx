@@ -172,7 +172,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                 leaveFrom='opacity-100 scale-100'
                 leaveTo='opacity-0 scale-95'
               >
-                <Dialog.Panel className=' font-lora w-[400px] transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                <Dialog.Panel className='font-lora w-[400px] transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
                   <Dialog.Title
                     as='h3'
                     className='flex text-2xl font-medium leading-6 text-orange'
@@ -185,7 +185,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                         Quantity
                       </label>
                       {!edit && (
-                        <div className='w-full h-[40px] hover:cursor-default p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'>
+                        <div className='w-full h-[30px] xl:h-[40px] flex justify-center items-center hover:cursor-default p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'>
                           {capitalizeWords(item.quantity)}
                         </div>
                       )}
@@ -199,7 +199,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                           placeholder='Quantity'
                           autoComplete='off'
                           defaultValue={capitalizeWords(item.quantity)}
-                          className='w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+                          className='w-full h-[30px] xl:h-[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
                           onChange={(e) => {
                             console.log(e.target.value);
                             setNewItem({
@@ -215,13 +215,12 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                         Category
                       </label>
                       {!edit && (
-                        <div className='w-full h=[40px] hover:cursor-default p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'>
-                          {capitalizeWords(item?.category?.name)}
+                        <div className='w-full h-[30px] xl:h-[40px] flex justify-center items-center hover:cursor-default p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'>
+                          {`${capitalizeWords(item?.category?.name)}`}
                         </div>
                       )}
                       {edit && (
                         <DropdownSelect
-                          // name={`${capitalizeWords(item?.category?.name)}`}
                           name='Category'
                           newItem={newItem}
                           setNewItem={setNewItem}
@@ -237,7 +236,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                         Stored In
                       </label>
                       {!edit && (
-                        <div className='w-full h=[40px] hover:cursor-default p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'>
+                        <div className='w-full h-[30px] xl:h-[40px] flex justify-center items-center hover:cursor-default p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'>
                           {capitalizeWords(item.storedIn)}
                         </div>
                       )}
@@ -260,7 +259,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                         <input
                           disabled={!edit}
                           // className='w-full h-[40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-90 focus:outline-none'
-                          className='w-full h-[40px] hover:cursor-default p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+                          className='w-full h-[30px] xl:h-[40px] hover:cursor-default p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
                           type='date'
                           id='purchasedOn'
                           name='purchasedOn'
@@ -291,7 +290,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                           Expiring On
                         </label>
                         <input
-                          className='w-full h-[40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-90 focus:outline-none'
+                          className='w-full h-[30px] xl:h-[40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-90 focus:outline-none'
                           disabled={!edit}
                           type='date'
                           id='expireOn'

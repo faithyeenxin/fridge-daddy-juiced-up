@@ -118,10 +118,10 @@ export default function Home() {
       {/* Hero Section */}
       <div
         ref={welcomeRef}
-        className='w-full h-[250px] bg-offWhite rounded-2xl flex justify-left items-center px-[10%] gap-10'
+        className='w-full h-[250px] bg-offWhite rounded-2xl flex justify-left items-center px-[10%] gap-2 md:gap-10'
       >
         <div
-          className={`w-1/3 h-full justify-center items-center ${
+          className={`w-2/3 lg:w-1/3 h-full justify-center items-center ${
             summarizedData[0].value === 0 &&
             summarizedData[1].value === 0 &&
             summarizedData[2].value === 0
@@ -132,22 +132,28 @@ export default function Home() {
           <Chart data={summarizedData} setPieStatus={setPieStatus} />
         </div>
         <div
-          className={`flex h-full justify-center items-center ${
+          className={`flex h-full justify-center items-center p-2 ${
             summarizedData[0].value === 0 &&
             summarizedData[1].value === 0 &&
             summarizedData[2].value === 0
               ? 'w-full'
-              : 'w-1/3'
+              : 'w-1/3 lg:w-2/3'
           }`}
         >
           {!pieStatus && (
-            <div className='text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider'>{`Welcome back ${capitalizeWords(
-              user.name
-            )}!`}</div>
+            <div>
+              <div className='sm:text-md md:text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider'>{`Welcome back ${capitalizeWords(
+                user.name
+              )}!`}</div>
+              <div className='text-xs md:text-md xl:text-lg font-lora font-bold text-orange tracking-wider'>{`What a champ! To date you have ${allUserItems.length} items with FridgeDaddy.`}</div>
+            </div>
           )}
           {pieStatus && (
             <div>
-              <p className='text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider'>
+              <div className='sm:text-md md:text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider'>{`Welcome back ${capitalizeWords(
+                user.name
+              )}!`}</div>
+              <p className='text-xs md:text-md xl:text-lg font-lora font-bold text-orange tracking-wider'>
                 You have {pieStatus?.value} {pieStatus?.title} item(s)!
               </p>
             </div>
