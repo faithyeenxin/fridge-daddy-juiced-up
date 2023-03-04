@@ -260,6 +260,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                       </label>
                       <input
                         disabled={!edit}
+                        className='w-full h-[40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-90 focus:outline-none'
                         type='date'
                         id='purchasedOn'
                         name='purchasedOn'
@@ -271,7 +272,6 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                           new Date(newItem.purchaseDate),
                           'yyyy-MM-dd'
                         )}
-                        className='w-full h=[40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-90 focus:outline-none'
                         onChange={(e) => {
                           setNewItem({
                             ...newItem,
@@ -291,6 +291,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                         Expiring On
                       </label>
                       <input
+                        className='w-full h=-40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-90 focus:outline-none'
                         disabled={!edit}
                         type='date'
                         id='expireOn'
@@ -308,7 +309,6 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                           new Date(newItem.expiryDate),
                           'yyyy-MM-dd'
                         )}
-                        className='w-full h=[40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-90 focus:outline-none'
                         onChange={(e) => {
                           setNewItem({
                             ...newItem,

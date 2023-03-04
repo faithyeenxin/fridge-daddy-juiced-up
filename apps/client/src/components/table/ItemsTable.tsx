@@ -49,7 +49,7 @@ const ItemsTable = () => {
         <div className='w-full'>
           <div
             id='table-head'
-            className='flex sticky top-0  bg-orange font-lora text-white text-bold xl:text-lg lg:text-md md:text-sm sm:text-xs text-xs text-center items-center h-[45px] shadow-xl'
+            className='flex sticky top-0  bg-orange rounded-top-lg font-lora text-white text-bold xl:text-lg lg:text-md md:text-sm sm:text-xs text-xs text-center items-center h-[45px] shadow-xl'
           >
             <div className='w-2/12 xl:w-2/12 tracking-wide'>Days Left</div>
             <div className='w-5/12 xl:w-4/12 tracking-wide'>Name</div>
