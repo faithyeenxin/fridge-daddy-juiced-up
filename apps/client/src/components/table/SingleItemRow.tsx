@@ -185,7 +185,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                         Quantity
                       </label>
                       {!edit && (
-                        <div className='w-full h=[40px] hover:cursor-default p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'>
+                        <div className='w-full h-[40px] hover:cursor-default p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'>
                           {capitalizeWords(item.quantity)}
                         </div>
                       )}
@@ -254,13 +254,14 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                         />
                       )}
                     </div>
-                    <div>
+                    <div className='my-5 flex flex-col'>
                       <label className='text-xs px-2 text-gray-500 italic'>
                         Purchased On
                       </label>
                       <input
                         disabled={!edit}
-                        className='w-full h-[40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-90 focus:outline-none'
+                        // className='w-full h-[40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-90 focus:outline-none'
+                        className='w-full h-[40px] hover:cursor-default p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
                         type='date'
                         id='purchasedOn'
                         name='purchasedOn'
@@ -286,7 +287,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                         }}
                       />
                     </div>
-                    <div>
+                    <div className='flex flex-col'>
                       <label className='text-xs px-2 text-gray-500 italic'>
                         Expiring On
                       </label>
