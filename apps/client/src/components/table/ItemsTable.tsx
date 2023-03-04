@@ -46,7 +46,7 @@ const ItemsTable = () => {
   return (
     <div className='w-full h-full bg-offWhite rounded-lg overflow-auto'>
       <div className='relative flex flex-col justify-between'>
-        <div className='w-full'>
+        <div className='w-full overflow-clip'>
           <div
             id='table-head'
             className='flex sticky top-0  bg-orange rounded-top-lg font-lora text-white text-bold xl:text-lg lg:text-md md:text-sm sm:text-xs text-xs text-center items-center h-[45px] shadow-xl'
