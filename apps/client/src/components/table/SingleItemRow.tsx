@@ -291,7 +291,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                         Expiring On
                       </label>
                       <input
-                        className='w-full h=-40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-90 focus:outline-none'
+                        className='w-full h-[40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-90 focus:outline-none'
                         disabled={!edit}
                         type='date'
                         id='expireOn'
