@@ -253,83 +253,83 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                           resetState={resetState}
                         />
                       )}
-                    </div>
-                    <div className='my-5 flex flex-col'>
-                      <label className='text-xs px-2 text-gray-500 italic'>
-                        Purchased On
-                      </label>
-                      <input
-                        disabled={!edit}
-                        // className='w-full h-[40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-90 focus:outline-none'
-                        className='w-full h-[40px] hover:cursor-default p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
-                        type='date'
-                        id='purchasedOn'
-                        name='purchasedOn'
-                        spellCheck={true}
-                        maxLength={9}
-                        placeholder='Purchased On'
-                        autoComplete='off'
-                        defaultValue={format(
-                          new Date(newItem.purchaseDate),
-                          'yyyy-MM-dd'
-                        )}
-                        onChange={(e) => {
-                          setNewItem({
-                            ...newItem,
-                            purchaseDate: format(
-                              new Date(e.target.value),
-                              'yyyy-MM-dd'
-                            ),
-                          });
-                          setPurchaseDate(
-                            format(new Date(e.target.value), 'yyyy-MM-dd')
-                          );
-                        }}
-                      />
-                    </div>
-                    <div className='flex flex-col'>
-                      <label className='text-xs px-2 text-gray-500 italic'>
-                        Expiring On
-                      </label>
-                      <input
-                        className='w-full h-[40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-90 focus:outline-none'
-                        disabled={!edit}
-                        type='date'
-                        id='expireOn'
-                        name='expireOn'
-                        spellCheck={true}
-                        maxLength={9}
-                        min={
-                          new Date(newItem.purchaseDate)
-                            .toISOString()
-                            .split('T')[0]
-                        }
-                        placeholder='Expire On'
-                        autoComplete='off'
-                        defaultValue={format(
-                          new Date(newItem.expiryDate),
-                          'yyyy-MM-dd'
-                        )}
-                        onChange={(e) => {
-                          setNewItem({
-                            ...newItem,
-                            expiryDate: format(
-                              new Date(e.target.value),
-                              'yyyy-MM-dd'
-                            ),
-                          });
-                          setExpiryDate(
-                            format(new Date(e.target.value), 'yyyy-MM-dd')
-                          );
-                        }}
-                      />
-                      <p
-                        className={`text-xs text-red-400 text-center ${
-                          expiryError ? '' : 'hidden'
-                        }`}
-                      >
-                        Expiry Date must be after Purchase Date!
-                      </p>
+                      <div>
+                        <label className='text-xs px-2 text-gray-500 italic'>
+                          Purchased On
+                        </label>
+                        <input
+                          disabled={!edit}
+                          // className='w-full h-[40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-90 focus:outline-none'
+                          className='w-full h-[40px] hover:cursor-default p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+                          type='date'
+                          id='purchasedOn'
+                          name='purchasedOn'
+                          spellCheck={true}
+                          maxLength={9}
+                          placeholder='Purchased On'
+                          autoComplete='off'
+                          defaultValue={format(
+                            new Date(newItem.purchaseDate),
+                            'yyyy-MM-dd'
+                          )}
+                          onChange={(e) => {
+                            setNewItem({
+                              ...newItem,
+                              purchaseDate: format(
+                                new Date(e.target.value),
+                                'yyyy-MM-dd'
+                              ),
+                            });
+                            setPurchaseDate(
+                              format(new Date(e.target.value), 'yyyy-MM-dd')
+                            );
+                          }}
+                        />
+                      </div>
+                      <div>
+                        <label className='text-xs px-2 text-gray-500 italic'>
+                          Expiring On
+                        </label>
+                        <input
+                          className='w-full h-[40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-90 focus:outline-none'
+                          disabled={!edit}
+                          type='date'
+                          id='expireOn'
+                          name='expireOn'
+                          spellCheck={true}
+                          maxLength={9}
+                          min={
+                            new Date(newItem.purchaseDate)
+                              .toISOString()
+                              .split('T')[0]
+                          }
+                          placeholder='Expire On'
+                          autoComplete='off'
+                          defaultValue={format(
+                            new Date(newItem.expiryDate),
+                            'yyyy-MM-dd'
+                          )}
+                          onChange={(e) => {
+                            setNewItem({
+                              ...newItem,
+                              expiryDate: format(
+                                new Date(e.target.value),
+                                'yyyy-MM-dd'
+                              ),
+                            });
+                            setExpiryDate(
+                              format(new Date(e.target.value), 'yyyy-MM-dd')
+                            );
+                          }}
+                        />
+                        <p
+                          className={`text-xs text-red-400 text-center ${
+                            expiryError ? '' : 'hidden'
+                          }`}
+                        >
+                          Expiry Date must be after Purchase Date!
+                        </p>
+                      </div>
                     </div>
                   </div>
                   <div className='mt-4 flex justify-center'>
