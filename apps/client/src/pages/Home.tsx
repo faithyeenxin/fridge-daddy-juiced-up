@@ -137,7 +137,7 @@ export default function Home() {
             summarizedData[1].value === 0 &&
             summarizedData[2].value === 0
               ? 'w-full'
-              : 'w-1/3 lg:w-2/3'
+              : 'w-1/3 lg:w-2/3 '
           }`}
         >
           {!pieStatus && (
