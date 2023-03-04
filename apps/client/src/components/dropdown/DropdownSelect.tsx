@@ -126,7 +126,7 @@ const DropdownSelect = ({
           className={`z-10 ${
             openDropdown ? '' : 'hidden'
           } rounded-lg shadow absolute bg-extraMutedPink mt-2 inset-0 ${
-            name === 'Compartment' ? 'h-[100px]' : 'h-[220px]'
+            name === 'Compartment' ? 'h-[100px]' : 'h-[150px]'
           }`}
         >
           {name !== 'Compartment' && (
@@ -162,7 +162,7 @@ const DropdownSelect = ({
             </div>
           )}
           <ul
-            className={`h-36 px-3 ${
+            className={`h-20 px-3 ${
               name === 'Category' ? 'pb-3' : 'py-3'
             } overflow-y-auto text-md text-white`}
             aria-labelledby='dropdownSearchButton'
