@@ -68,21 +68,21 @@ const FilterCard = () => {
   const filterData = (data: ICheckboxStatus) => {
     if (data.evergreen) {
       allUserItems.forEach((item) => {
-        if (isAfter(new Date(item.expiryDate), new Date())) {
+        if (isAfter(new Date(item.expiryDate), new Date()) && !item.trashed) {
           filteredData.push(item);
         }
       });
     }
     if (data.rotten) {
       allUserItems.forEach((item) => {
-        if (isAfter(new Date(), new Date(item.expiryDate))) {
+        if (isAfter(new Date(), new Date(item.expiryDate)) && !item.trashed) {
           filteredData.push(item);
         }
       });
     }
     if (data.trashed) {
       allUserItems.forEach((item) => {
-        if (item.trashed === true) {
+        if (item.trashed) {
           filteredData.push(item);
         }
       });

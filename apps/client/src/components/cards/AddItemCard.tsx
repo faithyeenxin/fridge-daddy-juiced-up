@@ -156,7 +156,7 @@ const AddItemCard = () => {
           <input
             className={`${
               purchasedOnDisplay ? '' : 'hidden'
-            } h-[30px] xl:h-[40px]  px-1 w-full  rounded-3xl bg-opacity-60 text-sm md:text-sm tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none`}
+            } h-[30px] xl:h-[40px] px-1 w-full gap-1 flex text-sm items-center justify-center rounded-3xl bg-opacity-60 text-tracking-wide  text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none`}
             placeholder='Purchased'
             defaultValue={todayStr}
             type='date'
@@ -188,7 +188,7 @@ const AddItemCard = () => {
           <input
             className={`${
               expirationOnDisplay ? '' : 'hidden'
-            } h-[40px] px-1 w-full rounded-3xl bg-opacity-60 text-xs tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none `}
+            } h-[30px] xl:h-[40px] px-1 w-full gap-1 flex text-sm items-center justify-center rounded-3xl bg-opacity-60 text-tracking-wide  text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none`}
             placeholder='Expiration'
             type='date'
             min={purchaseDate}
