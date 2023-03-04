@@ -349,7 +349,7 @@ const LoggedInNavBar = () => {
                 leaveFrom='opacity-100 scale-100'
                 leaveTo='opacity-0 scale-95'
               >
-                <Dialog.Panel className='w-[300px] max-w-md flex flex-col items-center justify-center transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                <Dialog.Panel className='w-[250px] max-h-[580px] max-w-md flex flex-col items-center justify-center transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
                   <FilterCard />
                 </Dialog.Panel>
               </Transition.Child>
