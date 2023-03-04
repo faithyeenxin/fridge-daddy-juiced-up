@@ -14,6 +14,7 @@ import Chart from '../components/Chart';
 import { useAppSelector } from '../app/store';
 import { isAfter, isWithinInterval } from 'date-fns';
 import { capitalizeWords } from '../components/utility/functions/capitalizeWord';
+import { differenceInDays, parseISO } from 'date-fns';
 
 export interface IDataItem {
   title: string;
@@ -22,11 +23,11 @@ export interface IDataItem {
 }
 
 export default function Home() {
+  const today = new Date();
   let welcomeRef = useRef(null);
   let itemLeftRef = useRef(null);
   let itemRightRef = useRef(null);
   let itemMiddleRef = useRef(null);
-
   const [pieStatus, setPieStatus] = useState<IDataItem>();
   const allUserItems = useAppSelector(showUserItems);
   const user = useAppSelector(showUser);
@@ -36,9 +37,14 @@ export default function Home() {
     { title: 'Trashed', value: 20, color: '#445765' },
     { title: 'Evergreen', value: 10, color: '#2DD1AC' },
   ]);
-
+  const [totalCountState, setTotalCountState] = useState({
+    rotten: 0,
+    trashed: 0,
+    evergreen: 0,
+    expiring: 0,
+  });
   useEffect(() => {
-    let totalCount = { rotten: 0, trashed: 0, evergreen: 0 };
+    let totalCount = { rotten: 0, trashed: 0, evergreen: 0, expiring: 0 };
     allUserItems.forEach((item) => {
       // count evergreen items
       if (isAfter(new Date(item.expiryDate), new Date()) && !item.trashed) {
@@ -51,6 +57,13 @@ export default function Home() {
       // count trashed items
       if (item.trashed) {
         totalCount.trashed += 1;
+      }
+      // count expiring soon items
+      if (
+        isAfter(new Date(item.expiryDate), new Date()) &&
+        differenceInDays(new Date(item.expiryDate), today) < 8
+      ) {
+        totalCount.expiring += 1;
       }
     });
     const newData = [
@@ -71,6 +84,7 @@ export default function Home() {
       },
     ];
     setSummarizedData(newData);
+    setTotalCountState(totalCount);
   }, [allUserItems]);
 
   useEffect(() => {
@@ -148,7 +162,9 @@ export default function Home() {
           className='w-3/12 h-full hidden lg:flex lg:flex-col justify-between gap-2'
         >
           <div className='w-full h-full bg-offWhite rounded-lg flex justify-center items-center px-10'>
-            You have 123 items expiring soon!
+            <p className='text-lg font-lora font-bold text-orange tracking-wider'>
+              {`You have ${totalCountState.expiring} item(s) expiring in 7 days!`}
+            </p>
           </div>
           <div className='flex flex-col bg-offWhite rounded-lg w-full h-full'>
             <AddItemCard />
