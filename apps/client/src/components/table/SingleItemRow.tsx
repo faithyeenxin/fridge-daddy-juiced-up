@@ -215,7 +215,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                         Category
                       </label>
                       {!edit && (
-                        <div className='w-full h=[40px] hover:cursor-default  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'>
+                        <div className='w-full h=[40px] hover:cursor-default p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'>
                           {capitalizeWords(item?.category?.name)}
                         </div>
                       )}
