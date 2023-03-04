@@ -109,25 +109,28 @@ const FilterCard = () => {
     }
     if (data.today) {
       console.log(today);
-      result = result.filter((item) =>
-        isWithinInterval(new Date(item.expiryDate), {
-          start: today,
-          end: in3Days,
-        })
+      result = result.filter(
+        (item) =>
+          isWithinInterval(new Date(item.expiryDate), {
+            start: today,
+            end: in3Days,
+          }) && !item.trashed
       );
     } else if (data.in3Days) {
-      result = result.filter((item) =>
-        isWithinInterval(new Date(item.expiryDate), {
-          start: today,
-          end: in3Days,
-        })
+      result = result.filter(
+        (item) =>
+          isWithinInterval(new Date(item.expiryDate), {
+            start: today,
+            end: in3Days,
+          }) && !item.trashed
       );
     } else if (data.inAWeek) {
-      result = result.filter((item) =>
-        isWithinInterval(new Date(item.expiryDate), {
-          start: today,
-          end: inAWeek,
-        })
+      result = result.filter(
+        (item) =>
+          isWithinInterval(new Date(item.expiryDate), {
+            start: today,
+            end: inAWeek,
+          }) && !item.trashed
       );
     }
     // console.log(result);
