@@ -84,7 +84,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
       key={item.id}
       className={`flex hover:cursor-default ${
         colorState ? 'bg-tableOffWhite' : 'bg-tablePink'
-      } font-lora text-black text-bold xl:text-lg lg:text-md md:text-sm sm:text-xs text-xs text-center items-center h-[40px]`}
+      } font-lora text-black xl:text-md lg:text-md md:text-sm sm:text-xs text-xs text-center items-center h-[40px]`}
     >
       <div
         className={`w-2/12 xl:w-2/12 tracking-wide ${
