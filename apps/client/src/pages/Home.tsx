@@ -140,7 +140,7 @@ export default function Home() {
           <Chart data={summarizedData} setPieStatus={setPieStatus} />
         </div>
         <div
-          className={`flex h-auto md:h-full justify-center items-center p-2 ${
+          className={`flex h-full md:h-full justify-center items-center p-2 ${
             summarizedData[0].value === 0 &&
             summarizedData[1].value === 0 &&
             summarizedData[2].value === 0
@@ -149,15 +149,20 @@ export default function Home() {
           }`}
         >
           {!pieStatus && (
-            <div className='w-full flex flex-col items-center'>
+            <div className='w-full flex flex-col items-center justify-center'>
               <div className='text-xl md:text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider'>{`Welcome back ${capitalizeWords(
                 user.name
               )},`}</div>
-              <div className='text-xs md:text-md xl:text-lg font-lora italic text-mutedPink tracking-wider'>{`FridgeDaddy is watching ${allUserItems.length} items for you!`}</div>
+              {allUserItems.length > 0 && (
+                <div className='text-xs md:text-md xl:text-lg font-lora italic text-mutedPink tracking-wider'>{`FridgeDaddy is watching ${allUserItems.length} items for you!`}</div>
+              )}
+              {allUserItems.length === 0 && (
+                <div className='text-xs md:text-md xl:text-lg font-lora italic text-mutedPink tracking-wider'>{`You do not have any items with us! Add some now!`}</div>
+              )}
             </div>
           )}
           {pieStatus && (
-            <div className='flex items-center flex-col'>
+            <div className='flex items-center justify-center flex-col'>
               <div className='text-xl md:text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider'>{`Welcome back ${capitalizeWords(
                 user.name
               )}!`}</div>
