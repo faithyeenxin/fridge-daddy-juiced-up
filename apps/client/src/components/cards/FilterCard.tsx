@@ -46,6 +46,8 @@ const FilterCard = () => {
 
   // DATES
   let today = new Date();
+  let yesterday = new Date();
+  yesterday.setDate(today.getDate() - 1);
   let in3Days = new Date();
   in3Days.setDate(today.getDate() + 3);
   let inAWeek = new Date();
@@ -112,15 +114,15 @@ const FilterCard = () => {
       result = result.filter(
         (item) =>
           isWithinInterval(new Date(item.expiryDate), {
-            start: today,
-            end: in3Days,
+            start: yesterday,
+            end: today,
           }) && !item.trashed
       );
     } else if (data.in3Days) {
       result = result.filter(
         (item) =>
           isWithinInterval(new Date(item.expiryDate), {
-            start: today,
+            start: yesterday,
             end: in3Days,
           }) && !item.trashed
       );
@@ -128,7 +130,7 @@ const FilterCard = () => {
       result = result.filter(
         (item) =>
           isWithinInterval(new Date(item.expiryDate), {
-            start: today,
+            start: yesterday,
             end: inAWeek,
           }) && !item.trashed
       );
