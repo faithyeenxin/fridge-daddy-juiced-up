@@ -23,7 +23,15 @@ export interface IDataItem {
 }
 
 export default function Home() {
+  // DATES
   const today = new Date();
+  let yesterday = new Date();
+  yesterday.setDate(today.getDate() - 1);
+  let in3Days = new Date();
+  in3Days.setDate(today.getDate() + 3);
+  let inAWeek = new Date();
+  inAWeek.setDate(today.getDate() + 7);
+
   let welcomeRef = useRef(null);
   let itemLeftRef = useRef(null);
   let itemRightRef = useRef(null);
@@ -60,8 +68,8 @@ export default function Home() {
       }
       // count expiring soon items
       if (
-        isAfter(new Date(item.expiryDate), new Date()) &&
-        differenceInDays(new Date(item.expiryDate), today) < 8
+        isAfter(new Date(item.expiryDate), yesterday) &&
+        differenceInDays(new Date(item.expiryDate), yesterday) < 8
       ) {
         totalCount.expiring += 1;
       }
@@ -118,10 +126,10 @@ export default function Home() {
       {/* Hero Section */}
       <div
         ref={welcomeRef}
-        className='w-full h-[250px] bg-offWhite rounded-2xl flex justify-left items-center px-[10%] gap-2 md:gap-10'
+        className='w-full h-[350px] bg-offWhite rounded-2xl flex-col flex md:flex-row justify-left items-center px-[10%] gap-2 md:gap-10'
       >
         <div
-          className={`w-2/3 lg:w-1/3 h-full justify-center items-center ${
+          className={`w-full lg:w-1/3 justify-center items-center ${
             summarizedData[0].value === 0 &&
             summarizedData[1].value === 0 &&
             summarizedData[2].value === 0
@@ -132,28 +140,28 @@ export default function Home() {
           <Chart data={summarizedData} setPieStatus={setPieStatus} />
         </div>
         <div
-          className={`flex h-full justify-center items-center p-2 ${
+          className={`flex h-auto md:h-full justify-center items-center p-2 ${
             summarizedData[0].value === 0 &&
             summarizedData[1].value === 0 &&
             summarizedData[2].value === 0
               ? 'w-full'
-              : 'w-1/3 lg:w-2/3 '
+              : 'w-full lg:w-2/3'
           }`}
         >
           {!pieStatus && (
-            <div>
-              <div className='sm:text-md md:text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider'>{`Welcome back ${capitalizeWords(
+            <div className='w-full flex flex-col items-center'>
+              <div className='text-xl md:text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider'>{`Welcome back ${capitalizeWords(
                 user.name
-              )}!`}</div>
-              <div className='text-xs md:text-md xl:text-lg font-lora font-bold text-orange tracking-wider'>{`What a champ! To date you have ${allUserItems.length} items with FridgeDaddy.`}</div>
+              )},`}</div>
+              <div className='text-xs md:text-md xl:text-lg font-lora italic text-mutedPink tracking-wider'>{`FridgeDaddy is watching ${allUserItems.length} items for you!`}</div>
             </div>
           )}
           {pieStatus && (
-            <div>
-              <div className='sm:text-md md:text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider'>{`Welcome back ${capitalizeWords(
+            <div className='flex items-center flex-col'>
+              <div className='text-xl md:text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider'>{`Welcome back ${capitalizeWords(
                 user.name
               )}!`}</div>
-              <p className='text-xs md:text-md xl:text-lg font-lora font-bold text-orange tracking-wider'>
+              <p className='text-xs md:text-md xl:text-lg font-lora font-bold text-mutedPink tracking-wider'>
                 You have {pieStatus?.value} {pieStatus?.title} item(s)!
               </p>
             </div>
@@ -168,7 +176,7 @@ export default function Home() {
           className='w-3/12 h-full hidden lg:flex lg:flex-col justify-between gap-2'
         >
           <div className='w-full h-full bg-offWhite rounded-lg flex justify-center items-center px-10'>
-            <p className='text-lg font-lora font-bold text-orange tracking-wider'>
+            <p className='text-lg font-lora font-bold text-mutedPink tracking-wider'>
               {`You have ${totalCountState.expiring} item(s) expiring in 7 days!`}
             </p>
           </div>

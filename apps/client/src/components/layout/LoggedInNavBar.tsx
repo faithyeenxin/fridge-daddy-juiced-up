@@ -125,7 +125,7 @@ const LoggedInNavBar = () => {
               id='menu'
               className={`${hamburgMenuStatus} absolute flex flex-col items-center self-end mx-[10%] py-8 mt-8 space-y-6 font-bold bg-white sm:self-center left-2 right-2 drop-shadow-md bg-opacity-80 rounded-2xl`}
             >
-              <div
+              {/* <div
                 className='hover:text-orange pt-2 md:text-2xl tracking-wider'
                 onClick={() => {
                   navigate(`/shopping-list`);
@@ -134,7 +134,7 @@ const LoggedInNavBar = () => {
                 }}
               >
                 Groceries List
-              </div>
+              </div> */}
               <div
                 className='hover:text-orange pt-2 md:text-2xl tracking-wider'
                 onClick={() => {

@@ -27,7 +27,7 @@ const Chart = ({ data, setPieStatus }: IChartProps) => {
 
   const lineWidth = 60;
   return (
-    <div className='w-[230px] h-[230px]'>
+    <div className='w-[250px] m-2'>
       <PieChart
         style={{
           fontFamily:
