@@ -154,9 +154,10 @@ const AddItemCard = () => {
             Purchased <img src='images/cards/date_small.svg' />
           </div>
           <input
+            style={{ width: '100% !important' }}
             className={`${
               purchasedOnDisplay ? '' : 'hidden'
-            } h-[30px] xl:h-[40px] px-1 w-full gap-1 flex text-sm items-center justify-center rounded-3xl bg-opacity-60 text-tracking-wide  text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none`}
+            } w-full h-[30px] xl:h-[40px] px-1 gap-1 flex text-sm items-center justify-center rounded-3xl bg-opacity-60 text-tracking-wide  text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none`}
             placeholder='Purchased'
             defaultValue={todayStr}
             type='date'

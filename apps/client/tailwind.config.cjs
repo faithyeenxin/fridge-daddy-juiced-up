@@ -21,6 +21,7 @@ module.exports = {
         orange: "#FF5C39",
         pink: "#FD3379",
         orangeLight: "#FF5C39",
+        blueGray: "#445765"
         // bgBeige: "#F9DCC4",
         // bgPeach: "#FFD4B7",
         // bgSand: "#FEC89A",
