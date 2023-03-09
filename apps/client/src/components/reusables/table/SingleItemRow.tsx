@@ -9,10 +9,10 @@ import {
   trashItem,
   untrashItem,
   updateItem,
-} from '../../app/slices/itemsSlice';
-import { useAppDispatch, useAppSelector } from '../../app/store';
-import { IItem } from '../../interface';
-import { capitalizeWords } from '../utility/functions/capitalizeWord';
+} from '../../../app/slices/itemsSlice';
+import { useAppDispatch, useAppSelector } from '../../../app/store';
+import { IItem } from '../../../interface';
+import { capitalizeWords } from '../../utility/functions/capitalizeWord';
 import { Dialog, Transition } from '@headlessui/react';
 import DropdownSelect from '../dropdown/DropdownSelect';
 import {
@@ -21,8 +21,8 @@ import {
   getCategoryById,
   showCategories,
   showFilteredCategories,
-} from '../../app/slices/categoriesSlice';
-import { getUserId } from '../../app/slices/userSlice';
+} from '../../../app/slices/categoriesSlice';
+import { getUserId } from '../../../app/slices/userSlice';
 import isAfter from 'date-fns/isAfter';
 
 interface ISingleItemProps {
@@ -252,14 +252,16 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                           resetState={resetState}
                         />
                       )}
-                      <div>
+                    </div>
+                    <div className='w-full flex justify-evenly pt-2'>
+                      <div className='flex flex-col justify-between'>
                         <label className='text-xs px-2 text-gray-500 italic'>
                           Purchased On
                         </label>
                         <input
                           disabled={!edit}
                           // className='w-full h-[40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-90 focus:outline-none'
-                          className='w-full h-[30px] xl:h-[40px] hover:cursor-default p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+                          className='w-full h-[30px] xl:h-[40px] hover:cursor-default p-3 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
                           type='date'
                           id='purchasedOn'
                           name='purchasedOn'
@@ -285,7 +287,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                           }}
                         />
                       </div>
-                      <div>
+                      <div className='flex flex-col justify-between'>
                         <label className='text-xs px-2 text-gray-500 italic'>
                           Expiring On
                         </label>

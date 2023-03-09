@@ -1,9 +1,12 @@
 import React from 'react';
-import { useAppDispatch } from '../../app/store';
-import { ICategory } from '../../interface';
-import { capitalizeWords } from '../utility/functions/capitalizeWord';
+import { useAppDispatch } from '../../../app/store';
+import { ICategory } from '../../../interface';
+import { capitalizeWords } from '../../utility/functions/capitalizeWord';
 import { format, min, max, add } from 'date-fns';
-import { resetShelfLife, setShelfLife } from '../../app/slices/categoriesSlice';
+import {
+  resetShelfLife,
+  setShelfLife,
+} from '../../../app/slices/categoriesSlice';
 import { toast } from 'react-toastify';
 
 const DropdownOption = ({ item, handleSelectedValue }: any) => {

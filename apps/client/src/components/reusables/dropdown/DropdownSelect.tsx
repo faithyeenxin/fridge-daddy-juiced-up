@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { getUserId } from '../../app/slices/userSlice';
-import { useAppDispatch, useAppSelector } from '../../app/store';
-import { ICategory } from '../../interface';
-import { capitalizeWords } from '../utility/functions/capitalizeWord';
+import { getUserId } from '../../../app/slices/userSlice';
+import { useAppDispatch, useAppSelector } from '../../../app/store';
+import { ICategory } from '../../../interface';
+import { capitalizeWords } from '../../utility/functions/capitalizeWord';
 import DropdownOption from './DropdownOption';
 import { format, min, max, add } from 'date-fns';
 import {
@@ -12,7 +12,7 @@ import {
   setShelfLife,
   showCategories,
   showFilteredCategories,
-} from '../../app/slices/categoriesSlice';
+} from '../../../app/slices/categoriesSlice';
 import { toast } from 'react-toastify';
 import { sortedIndex } from 'lodash';
 interface IShelfLife {

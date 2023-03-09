@@ -3,9 +3,9 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import {} from '../../app/slices/itemsSlice';
 import { useAppDispatch, useAppSelector } from '../../app/store';
 import { Dialog, Transition } from '@headlessui/react';
-import AddItemCard from '../cards/AddItemCard';
-import AddCategoryCard from '../cards/AddCategoryCard';
-import FilterCard from '../cards/FilterCard';
+import AddItemCard from '../reusables/cards/AddItemCard';
+import AddCategoryCard from '../reusables/cards/AddCategoryCard';
+import FilterCard from '../reusables/cards/FilterCard';
 
 const LoggedInNavBar = () => {
   const dispatch = useAppDispatch();

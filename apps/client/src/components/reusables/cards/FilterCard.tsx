@@ -4,10 +4,10 @@ import {
   showFilteredItems,
   showUserItems,
   updateFilteredItems,
-} from '../../app/slices/itemsSlice';
-import { useAppDispatch, useAppSelector } from '../../app/store';
+} from '../../../app/slices/itemsSlice';
+import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { isAfter, isWithinInterval } from 'date-fns';
-import { IItem } from '../../interface';
+import { IItem } from '../../../interface';
 
 interface ICheckboxStatus {
   evergreen: boolean;
@@ -68,6 +68,10 @@ const FilterCard = () => {
   });
 
   const filterData = (data: ICheckboxStatus) => {
+    console.log('filtering is happening');
+    console.log(filteredUserItems);
+    // let dataToUse =
+    //   filteredUserItems.length > 0 ? filteredUserItems : allUserItems;
     if (data.evergreen) {
       allUserItems.forEach((item) => {
         if (isAfter(new Date(item.expiryDate), new Date()) && !item.trashed) {
@@ -89,7 +93,6 @@ const FilterCard = () => {
         }
       });
     }
-
     if (!data.evergreen && !data.rotten && !data.trashed) {
       filteredData = allUserItems;
     }

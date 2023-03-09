@@ -5,11 +5,11 @@ import {
   showUserItems,
   updateFilteredItems,
   getItemsByUserId,
-} from '../app/slices/itemsSlice';
-import { getUserId } from '../app/slices/userSlice';
-import { useAppDispatch, useAppSelector } from '../app/store';
-import { capitalizeSpecificObjKey } from './utility/functions/capitalizeSpecificObjKey';
-import { lowercaseSpecificObjKey } from './utility/functions/lowercaseSpecificObjKey';
+} from '../../app/slices/itemsSlice';
+import { getUserId } from '../../app/slices/userSlice';
+import { useAppDispatch, useAppSelector } from '../../app/store';
+import { capitalizeSpecificObjKey } from '../utility/functions/capitalizeSpecificObjKey';
+import { lowercaseSpecificObjKey } from '../utility/functions/lowercaseSpecificObjKey';
 
 const SearchBar = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -18,6 +18,7 @@ const SearchBar = () => {
   const filteredItems = useAppSelector(showFilteredItems);
   const allUserItems = useAppSelector(showUserItems);
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>();
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     // e.preventDefault();
     if (e.target.value === '') {

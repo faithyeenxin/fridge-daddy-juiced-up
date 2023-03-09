@@ -1,18 +1,18 @@
 import React, { Fragment, MouseEvent, useState, useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
-import { useAppDispatch } from '../../app/store';
+import { useAppDispatch } from '../../../app/store';
 import { useNavigate } from 'react-router-dom';
 import {
   authenticateGoogleUser,
   authenticateUser,
   getUserByEmail,
   resetUser,
-} from '../../app/slices/userSlice';
+} from '../../../app/slices/userSlice';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Dialog, Transition } from '@headlessui/react';
-import { resetItems } from '../../app/slices/itemsSlice';
-import { resetCategories } from '../../app/slices/categoriesSlice';
+import { resetItems } from '../../../app/slices/itemsSlice';
+import { resetCategories } from '../../../app/slices/categoriesSlice';
 import { toast } from 'react-toastify';
 
 const LoginCard = () => {

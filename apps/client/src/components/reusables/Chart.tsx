@@ -4,7 +4,7 @@ import {
   pieChartDefaultProps,
   PieChartProps,
 } from 'react-minimal-pie-chart';
-import { IDataItem } from '../pages/Home';
+import { IDataItem } from '../../components/home/HomeHero';
 
 interface IChartProps {
   data: IDataItem[];

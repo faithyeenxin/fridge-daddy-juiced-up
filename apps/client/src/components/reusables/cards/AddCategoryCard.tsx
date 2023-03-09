@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import {
   createCategory,
   showCategories,
-} from '../../app/slices/categoriesSlice';
-import { useAppDispatch, useAppSelector } from '../../app/store';
-import { ICategory } from '../../interface';
+} from '../../../app/slices/categoriesSlice';
+import { useAppDispatch, useAppSelector } from '../../../app/store';
+import { ICategory } from '../../../interface';
 import DropdownButton from '../dropdown/DropdownSelect';
-import { capitalizeWords } from '../utility/functions/capitalizeWord';
+import { capitalizeWords } from '../../utility/functions/capitalizeWord';
 import { toast } from 'react-toastify';
-import { getUserId } from '../../app/slices/userSlice';
+import { getUserId } from '../../../app/slices/userSlice';
 
 const AddCategoryCard = () => {
   const token: any = useAppSelector(getUserId);

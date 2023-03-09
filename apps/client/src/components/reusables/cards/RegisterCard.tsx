@@ -4,14 +4,14 @@ import {
   createUser,
   getUserByEmail,
   resetUser,
-} from '../../app/slices/userSlice';
-import { useAppDispatch } from '../../app/store';
+} from '../../../app/slices/userSlice';
+import { useAppDispatch } from '../../../app/store';
 import jwt_decode from 'jwt-decode';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
-import { resetItems } from '../../app/slices/itemsSlice';
-import { resetCategories } from '../../app/slices/categoriesSlice';
+import { resetItems } from '../../../app/slices/itemsSlice';
+import { resetCategories } from '../../../app/slices/categoriesSlice';
 import { toast } from 'react-toastify';
 
 export const RegisterCard = () => {

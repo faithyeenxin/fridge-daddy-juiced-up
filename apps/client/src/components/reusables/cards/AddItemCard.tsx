@@ -3,23 +3,23 @@ import {
   filterCategories,
   showCategories,
   showFilteredCategories,
-} from '../../app/slices/categoriesSlice';
-import { getUserId } from '../../app/slices/userSlice';
-import { useAppDispatch, useAppSelector } from '../../app/store';
-import { ICategory, IItem } from '../../interface';
+} from '../../../app/slices/categoriesSlice';
+import { getUserId } from '../../../app/slices/userSlice';
+import { useAppDispatch, useAppSelector } from '../../../app/store';
+import { ICategory, IItem } from '../../../interface';
 import DropdownSelect from '../dropdown/DropdownSelect';
-import { capitalizeWords } from '../utility/functions/capitalizeWord';
+import { capitalizeWords } from '../../utility/functions/capitalizeWord';
 import { format, min, max, add, parseISO } from 'date-fns';
-import { getDurationFromDays } from '../utility/functions/getDurationFromDays';
-import { addDurationToDate } from '../utility/functions/addDurationToDate';
+import { getDurationFromDays } from '../../utility/functions/getDurationFromDays';
+import { addDurationToDate } from '../../utility/functions/addDurationToDate';
 import {
   createItem,
   showAddItemLoadingState,
-} from '../../app/slices/itemsSlice';
+} from '../../../app/slices/itemsSlice';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { parse } from 'path';
-import { wordContainsSubstring } from '../utility/functions/wordContainsSubstring';
+import { wordContainsSubstring } from '../../utility/functions/wordContainsSubstring';
 
 interface IShelfLife {
   id: number;
