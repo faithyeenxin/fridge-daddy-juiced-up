@@ -3,7 +3,7 @@ import AddCategoryCard from '../reusables/cards/AddCategoryCard';
 import AddItemCard from '../reusables/cards/AddItemCard';
 import FilterCard from '../reusables/cards/FilterCard';
 import SearchBar from '../reusables/SearchBar';
-import ItemsTable from '../reusables/table/ItemsTable';
+import ItemsTable from '../reusables/table/full/ItemsTable';
 import { gsap } from 'gsap';
 
 const HomeContent = () => {

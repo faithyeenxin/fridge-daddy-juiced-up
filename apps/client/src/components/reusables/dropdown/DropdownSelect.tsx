@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { getUserId } from '../../../app/slices/userSlice';
 import { useAppDispatch, useAppSelector } from '../../../app/store';
-import { ICategory } from '../../../interface';
+import { ICategory, IRecipeType } from '../../../interface';
 import { capitalizeWords } from '../../utility/functions/capitalizeWord';
 import DropdownOption from './DropdownOption';
 import { format, min, max, add } from 'date-fns';
@@ -15,16 +15,20 @@ import {
 } from '../../../app/slices/categoriesSlice';
 import { toast } from 'react-toastify';
 import { sortedIndex } from 'lodash';
+import {
+  filterCuisines,
+  filterMeals,
+  showCuisines,
+  showFilteredCuisines,
+  showFilteredMeals,
+  showMeals,
+} from '../../../app/slices/recipesSlice';
 interface IShelfLife {
   id: number;
   name: string;
   days: number;
 }
 
-interface IRecipeType {
-  id: number;
-  name: string;
-}
 interface IDropdownProps {
   name: string;
   purchaseDate?: any;
@@ -33,6 +37,8 @@ interface IDropdownProps {
   newItem?: any;
   setNewItem?: any;
   resetState?: any;
+  setCuisineSelected?: any;
+  setMealSelected?: any;
 }
 
 const DropdownSelect = ({
@@ -43,18 +49,39 @@ const DropdownSelect = ({
   newItem,
   setNewItem,
   resetState,
+  setCuisineSelected,
+  setMealSelected,
 }: IDropdownProps) => {
   const divRef: any = useRef(null);
   const [openDropdown, setOpenDropdown] = useState(false);
   const [selectedValue, setSelectedValue] = useState<IShelfLife | ICategory>();
   const dispatch = useAppDispatch();
+
+  // Categories
   const categories = useAppSelector(showCategories);
   const filteredCategories = useAppSelector(showFilteredCategories);
+
+  // Shelf Life
   const shelfLife = useAppSelector(getShelfLife);
+
+  // Cuisines
+  const cuisines = useAppSelector(showCuisines);
+  const filteredCuisines = useAppSelector(showFilteredCuisines);
+
+  // Meals
+  const meals = useAppSelector(showMeals);
+  const filteredMeals = useAppSelector(showFilteredMeals);
+
   const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
-    dispatch(filterCategories(searchValue));
+    if (name === 'Categories') {
+      dispatch(filterCategories(searchValue));
+    } else if (name === 'Cuisine') {
+      dispatch(filterCuisines(searchValue));
+    } else if (name === 'Meal') {
+      dispatch(filterMeals(searchValue));
+    }
   }, [searchValue]);
 
   useEffect(() => {
@@ -95,6 +122,12 @@ const DropdownSelect = ({
       console.log(newExpiryDate);
       setExpiryDate(format(newExpiryDate, 'yyyy-MM-dd'));
     }
+    if (dropdownName === 'Cuisine') {
+      setCuisineSelected(item);
+    }
+    if (dropdownName === 'Meal') {
+      setMealSelected(item);
+    }
   };
 
   const [itemsToRender, setItemsToRender] = useState<
@@ -108,56 +141,24 @@ const DropdownSelect = ({
       setItemsToRender(categories);
     } else if (name === 'Compartment') {
       setItemsToRender(shelfLife);
-    } else if (name === 'Cuisine') {
-      setItemsToRender([
-        { id: 1, name: '-' },
-        { id: 2, name: 'african' },
-        { id: 3, name: 'american' },
-        { id: 4, name: 'british' },
-        { id: 5, name: 'cajun' },
-        { id: 6, name: 'caribbean' },
-        { id: 7, name: 'chinese' },
-        { id: 8, name: 'eastern european' },
-        { id: 9, name: 'european' },
-        { id: 10, name: 'french' },
-        { id: 11, name: 'german' },
-        { id: 12, name: 'greek' },
-        { id: 13, name: 'indian' },
-        { id: 14, name: 'irish' },
-        { id: 15, name: 'italian' },
-        { id: 16, name: 'japanese' },
-        { id: 17, name: 'jewish' },
-        { id: 18, name: 'korean' },
-        { id: 19, name: 'latin american' },
-        { id: 20, name: 'mediterranean' },
-        { id: 21, name: 'mexican' },
-        { id: 22, name: 'middle eastern' },
-        { id: 23, name: 'nordic' },
-        { id: 24, name: 'southern' },
-        { id: 25, name: 'spanish' },
-        { id: 26, name: 'thai' },
-        { id: 27, name: 'vietnamese' },
-      ]);
-    } else if (name === 'Meal') {
-      setItemsToRender([
-        { id: 1, name: '-' },
-        { id: 2, name: 'main course' },
-        { id: 3, name: 'side dish' },
-        { id: 4, name: 'dessert' },
-        { id: 5, name: 'appetizer' },
-        { id: 6, name: 'salad' },
-        { id: 7, name: 'bread' },
-        { id: 8, name: 'breakfast' },
-        { id: 9, name: 'soup' },
-        { id: 10, name: 'beverage' },
-        { id: 11, name: 'sauce' },
-        { id: 12, name: 'marinade' },
-        { id: 13, name: 'fingerfood' },
-        { id: 14, name: 'snack' },
-        { id: 15, name: 'drink' },
-      ]);
+    } else if (name === 'Cuisine' && filteredCuisines.length > 0) {
+      setItemsToRender(filteredCuisines);
+    } else if (name === 'Cuisine' && filteredCuisines.length <= 0) {
+      setItemsToRender(cuisines);
+    } else if (name === 'Meal' && filteredMeals.length > 0) {
+      setItemsToRender(filteredMeals);
+    } else if (name === 'Meal' && filteredMeals.length <= 0) {
+      setItemsToRender(meals);
     }
-  }, [categories, filteredCategories, shelfLife]);
+  }, [
+    categories,
+    filteredCategories,
+    shelfLife,
+    cuisines,
+    filteredCuisines,
+    meals,
+    filteredMeals,
+  ]);
 
   return (
     <div className='w-full' ref={divRef}>
@@ -165,11 +166,13 @@ const DropdownSelect = ({
         id='dropdownSearchButton'
         onClick={() => setOpenDropdown(!openDropdown)}
         // h-[30px] xl:h-[40px] px-1 w-full gap-1 flex text-sm items-center justify-center rounded-3xl bg-opacity-60 text-tracking-wide  text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none
-        className='relative items-center text-center justify-center inline-flex w-full h-[30px] xl:h-[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white disabled:text-gray-100 placeholder-white bg-mutedPink placeholder:font-bold font-lora focus:bg-opacity-80 focus:outline-none'
+        className='relative items-center text-center justify-between inline-flex w-full h-[30px] xl:h-[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white disabled:text-gray-100 placeholder-white bg-mutedPink placeholder:font-bold font-lora focus:bg-opacity-80 focus:outline-none'
         data-value={selectedValue?.id}
       >
-        {selectedValue ? capitalizeWords(selectedValue?.name) : name}
-        <img src='/images/cards/dropdown.svg' className='absolute right-7' />
+        <div className='flex w-full items-center justify-center'>
+          {selectedValue ? capitalizeWords(selectedValue?.name) : name}
+        </div>
+        <img src='/images/cards/dropdown.svg' />
       </button>
       {/* <!-- Dropdown menu --> */}
       <div className='relative w-full'>
@@ -178,7 +181,11 @@ const DropdownSelect = ({
           className={`z-10 ${
             openDropdown ? '' : 'hidden'
           } rounded-lg shadow absolute bg-extraMutedPink mt-2 inset-0 ${
-            name === 'Compartment' ? 'h-[100px]' : 'h-[150px]'
+            name === 'Compartment'
+              ? 'h-[100px]'
+              : name === 'Category'
+              ? 'h-[150px]'
+              : 'h-[300px]'
           }`}
         >
           {name !== 'Compartment' && (
@@ -207,14 +214,18 @@ const DropdownSelect = ({
                   id='input-group-search'
                   autoComplete='off'
                   className='block w-full p-1 pl-10 text-md text-mutedPink border border-gray-300 rounded-3xl bg-white placeholder:text-mutedPink placeholder:font-bold font-lora focus:outline-none'
-                  placeholder={`Search ${name}`}
+                  placeholder={'Search'}
                   onChange={(e) => setSearchValue(e.target.value)}
                 />
               </div>
             </div>
           )}
           <ul
-            className={`h-20 px-3 ${
+            className={`${
+              name === 'Compartment' || name === 'Category'
+                ? 'h-20'
+                : 'h-[220px]'
+            } px-3 ${
               name === 'Category' ? 'pb-3' : 'py-3'
             } overflow-y-auto text-md text-white`}
             aria-labelledby='dropdownSearchButton'

@@ -9,21 +9,22 @@ import {
   trashItem,
   untrashItem,
   updateItem,
-} from '../../../app/slices/itemsSlice';
-import { useAppDispatch, useAppSelector } from '../../../app/store';
-import { IItem } from '../../../interface';
-import { capitalizeWords } from '../../utility/functions/capitalizeWord';
+} from '../../../../app/slices/itemsSlice';
+import { useAppDispatch, useAppSelector } from '../../../../app/store';
+import { IItem } from '../../../../interface';
+import { capitalizeWords } from '../../../utility/functions/capitalizeWord';
 import { Dialog, Transition } from '@headlessui/react';
-import DropdownSelect from '../dropdown/DropdownSelect';
+import DropdownSelect from '../../dropdown/DropdownSelect';
 import {
   filterCategories,
   getCategory,
   getCategoryById,
   showCategories,
   showFilteredCategories,
-} from '../../../app/slices/categoriesSlice';
-import { getUserId } from '../../../app/slices/userSlice';
+} from '../../../../app/slices/categoriesSlice';
+import { getUserId } from '../../../../app/slices/userSlice';
 import isAfter from 'date-fns/isAfter';
+import { addSelectedItem } from '../../../../app/slices/recipesSlice';
 
 interface ISingleItemProps {
   item: IItem;
@@ -41,7 +42,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
   const [expiryError, setExpiryError] = useState(false);
   const [daysInFocus, setDaysInFocus] = useState(0);
   const [binHoverState, setbinHoverState] = useState(false);
-  const [isTrashedHoverState, setisTrashedHoverState] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   let [isOpen, setIsOpen] = useState(false);
   const [resetState, setResetState] = useState(false);
   const allCategories = useAppSelector(showCategories);
@@ -87,7 +88,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
       } font-lora text-black xl:text-md lg:text-md md:text-sm sm:text-xs text-xs text-center items-center h-[40px]`}
     >
       <div
-        className={`w-2/12 xl:w-2/12 tracking-wide ${
+        className={`w-2/5 xl:w-2/12 tracking-wide ${
           differenceInDays(new Date(item.expiryDate), today) <= 0 &&
           'text-red-500'
         }`}
@@ -95,57 +96,27 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
         {differenceInDays(new Date(item.expiryDate), today)}
       </div>
       <div
-        className='w-5/12 xl:w-4/12 hover:cursor-pointer hover:text-orangeLight'
+        className='w-2/5 xl:w-4/12 hover:cursor-pointer hover:text-orangeLight'
         onClick={openModal}
       >
         {capitalizeWords(item.name)}
       </div>
-      <div className='w-2/12 xl:w-1/12 hover:cursor-default'>
-        {capitalizeWords(item.quantity)}
-      </div>
-      <div className='w-2/12 xl:w-2/12 hover:cursor-default'>
-        {item.storedIn}
-      </div>
-      <div className='hidden xl:flex xl:justify-center xl:w-2/12 hover:cursor-default'>
-        {format(new Date(item.purchaseDate), 'd MMM yy')}
-      </div>
-      <div className='hidden xl:flex xl:justify-center xl:w-2/12 hover:cursor-default'>
-        {format(new Date(item.expiryDate), 'd MMM yy')}
-      </div>
-      <div className='w-1/12 xl:w-1/12 flex items-center justify-center hover:cursor-pointer'>
-        {item.trashed ? (
-          <div
-            onMouseEnter={() => setisTrashedHoverState(true)}
-            onMouseLeave={() => setisTrashedHoverState(false)}
-            onClick={() => {
-              dispatch(untrashItem(item?.id));
-            }}
-          >
-            <img
-              src={
-                isTrashedHoverState
-                  ? 'images/table/unchecked.svg'
-                  : 'images/table/checked.svg'
-              }
-            />
-          </div>
-        ) : (
-          <div
-            onMouseEnter={() => setbinHoverState(true)}
-            onMouseLeave={() => setbinHoverState(false)}
-            onClick={() => {
-              dispatch(trashItem(item?.id));
-            }}
-          >
-            <img
-              src={
-                binHoverState
-                  ? 'images/table/untrashed-red.svg'
-                  : 'images/table/untrashed-black.svg'
-              }
-            />
-          </div>
-        )}
+      <div className='w-1/5 xl:w-1/12 flex items-center justify-center hover:cursor-pointer'>
+        <div
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onClick={() => {
+            dispatch(addSelectedItem(item));
+          }}
+        >
+          <img
+            src={
+              isHovered
+                ? 'images/table/partial/add_hovered.svg'
+                : 'images/table/partial/add_unhovered.svg'
+            }
+          />
+        </div>
       </div>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as='div' className='relative z-10' onClose={closeModal}>

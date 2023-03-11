@@ -190,7 +190,6 @@ export const categoriesSlice = createSlice({
       })
       .addCase(fetchAllCategories.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        console.log(action.payload);
         state.categories = action.payload;
         state.filteredCategories = action.payload;
       })

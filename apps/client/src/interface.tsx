@@ -61,3 +61,8 @@ export interface IToken {
   iat: number;
   exp: number;
 }
+
+export interface IRecipeType {
+  id: number;
+  name: string;
+}

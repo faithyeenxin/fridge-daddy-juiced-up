@@ -3,15 +3,15 @@ import {
   showFilteredItems,
   showUserItemsLoadingState,
   trashAllItems,
-} from '../../../app/slices/itemsSlice';
-import { useAppDispatch, useAppSelector } from '../../../app/store';
-import { capitalizeWords } from '../../utility/functions/capitalizeWord';
+} from '../../../../app/slices/itemsSlice';
+import { useAppDispatch, useAppSelector } from '../../../../app/store';
+import { capitalizeWords } from '../../../utility/functions/capitalizeWord';
 import differenceInDays from 'date-fns/differenceInDays';
 import format from 'date-fns/format';
 import SingleItemRow from './SingleItemRow';
 import { Dialog, Transition } from '@headlessui/react';
 import { toast } from 'react-toastify';
-import { getUserId } from '../../../app/slices/userSlice';
+import { getUserId } from '../../../../app/slices/userSlice';
 
 const ItemsTable = () => {
   const filteredItems = useAppSelector(showFilteredItems);
@@ -62,7 +62,7 @@ const ItemsTable = () => {
               onMouseEnter={() => setBinHover(true)}
               onMouseLeave={() => setBinHover(false)}
             >
-              {!binHover && <img src='images/table/untrashed.svg' />}
+              {!binHover && <img src='images/table/full/untrashed.svg' />}
               {binHover && (
                 <p className='text-xs px-2 cursor-pointer' onClick={openModal}>
                   Empty Trash
@@ -75,7 +75,7 @@ const ItemsTable = () => {
             <div className='flex justify-center items-center text-center'>
               <img
                 className='flex w-[100px] h-[400px]'
-                src='images/table/loading-animation.svg'
+                src='images/table/full/loading-animation.svg'
               />
             </div>
           )}

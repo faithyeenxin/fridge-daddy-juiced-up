@@ -69,13 +69,12 @@ const RecipesDisplay = () => {
   const apiKey2 = `a15745668f894779b75adf57f9d76136`;
   const apiKey3 = `8e4e45b4d72f4a74b59440190f82116e`;
 
-  const randomRecipeUrl = `https://api.spoonacular.com/recipes/random?number=${numberOfRecipes}&apiKey=${apiKey3}`;
+  const randomRecipeUrl = `https://api.spoonacular.com/recipes/random?number=${numberOfRecipes}&apiKey=${apiKey}`;
 
   useEffect(() => {
     fetch(randomRecipeUrl)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.recipes);
         setRandomRecipe(data.recipes);
       })
       .catch((err) => {
@@ -99,7 +98,7 @@ const RecipesDisplay = () => {
         {randomRecipe.map((recipe, idx) => (
           <div
             key={idx}
-            className='w-[270px] h-[320px] bg-tablePink rounded-lg overflow-clip'
+            className='w-[200px] h-[250px] bg-tablePink rounded-lg overflow-clip'
           >
             <img src={recipe.image} />
             <div

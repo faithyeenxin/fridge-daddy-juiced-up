@@ -1,8 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import userReducer from "./slices/userSlice";
-import itemsReducer from "./slices/itemsSlice";
-import categoriesReducer from "./slices/categoriesSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import userReducer from './slices/userSlice';
+import itemsReducer from './slices/itemsSlice';
+import categoriesReducer from './slices/categoriesSlice';
+import recipesReducer from './slices/recipesSlice';
 
 export const store = configureStore({
   // you can add all the different slices you have here!
@@ -10,6 +11,7 @@ export const store = configureStore({
     users: userReducer,
     items: itemsReducer,
     category: categoriesReducer,
+    recipes: recipesReducer,
   },
 });
 

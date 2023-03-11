@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import RecipesDisplay from '../components/recipes/RecipesDisplay';
+import RecipesItemCard from '../components/recipes/RecipesItemCard';
 import DropdownSelect from '../components/reusables/dropdown/DropdownSelect';
+import SearchBar from '../components/reusables/SearchBar';
+import ItemsTableSmall from '../components/reusables/table/partial/ItemsTableSmall';
 
 interface IRandomRecipe {
   id: number;
@@ -63,36 +66,14 @@ interface IRandomRecipe {
 const Recipes = () => {
   return (
     <div className='w-full h-full overflow-auto flex justify-center gap-5'>
-      <div className='w-3/4 h-full'>
+      <div className='w-4/6 h-full'>
         <RecipesDisplay />
       </div>
       {/* Filtering Section */}
-      <div className='w-1/4 h-full'>
-        <div className='h-full bg-offWhite rounded-lg flex justify-center p-5'>
-          <div
-            id='recipeSearchBox'
-            className='w-full h-auto py-5 bg-offWhite flex flex-col justify-between gap-5'
-          >
-            <div className='text-2xl xl:text-3xl font-lora font-bold text-orange tracking-widest text-center'>
-              Items you've selected
-            </div>
-            <div className='text-md xl:text-md tracking-wider italic text-blueGray opacity-50 text-center'>
-              you have not selected any items yet
-            </div>
-
-            <div id='buttonsContainer' className='flex gap-2'>
-              <div className='w-2/5'>
-                <DropdownSelect name='Cuisine' />
-              </div>
-              <div className='w-2/5'>
-                <DropdownSelect name='Meal' />
-              </div>
-              <div className='w-1/5 flex justify-center'>
-                <img src='images/recipes/search_button.svg' />
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className='w-2/6 h-full flex flex-col gap-5'>
+        <RecipesItemCard />
+        <SearchBar />
+        <ItemsTableSmall />
       </div>
     </div>
   );
