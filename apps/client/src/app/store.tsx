@@ -4,6 +4,7 @@ import userReducer from './slices/userSlice';
 import itemsReducer from './slices/itemsSlice';
 import categoriesReducer from './slices/categoriesSlice';
 import recipesReducer from './slices/recipesSlice';
+import modalReducer from './slices/modalSlice';
 
 export const store = configureStore({
   // you can add all the different slices you have here!
@@ -12,6 +13,7 @@ export const store = configureStore({
     items: itemsReducer,
     category: categoriesReducer,
     recipes: recipesReducer,
+    modal: modalReducer,
   },
 });
 

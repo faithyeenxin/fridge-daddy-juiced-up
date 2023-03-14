@@ -128,3 +128,7 @@ the hamburger button will change from 3 lines into an X
 .open .hamburger-bottom {
   transform: rotate(-45deg) translateY(6px) translate(-6px);
 }
+
+input[type="date"] {
+  width: 100%;
+}

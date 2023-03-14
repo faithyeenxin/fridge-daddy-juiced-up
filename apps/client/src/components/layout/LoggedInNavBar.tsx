@@ -1,56 +1,34 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import {} from '../../app/slices/itemsSlice';
 import { useAppDispatch, useAppSelector } from '../../app/store';
 import { Dialog, Transition } from '@headlessui/react';
 import AddItemCard from '../reusables/cards/AddItemCard';
 import AddCategoryCard from '../reusables/cards/AddCategoryCard';
 import FilterCard from '../reusables/cards/FilterCard';
+import {
+  setAddCategoryModalOpen,
+  setAddItemModalOpen,
+  setAddModalOpen,
+  setFilterModalOpen,
+  showAddCategoryIsOpen,
+  showAddIsOpen,
+  showAddItemIsOpen,
+  showFilterIsOpen,
+} from '../../app/slices/modalSlice';
 
 const LoggedInNavBar = () => {
+  const location = useLocation();
   const dispatch = useAppDispatch();
   const [navStatus, setNavStatus] = useState('');
   const [hamburgMenuStatus, setHamburgMenuStatus] = useState('hidden');
-  let [addIsOpen, setAddIsOpen] = useState(false);
-  let [addItemIsOpen, setAddItemIsOpen] = useState(false);
-  let [addCategoryIsOpen, setAddCategoryIsOpen] = useState(false);
-  let [filterIsOpen, setFilterIsOpen] = useState(false);
-
+  const addIsOpen = useAppSelector(showAddIsOpen);
+  const addItemIsOpen = useAppSelector(showAddItemIsOpen);
+  const addCategoryIsOpen = useAppSelector(showAddCategoryIsOpen);
+  const filterIsOpen = useAppSelector(showFilterIsOpen);
   const navigate = useNavigate();
   let divRef = useRef<any>();
-
-  function closeAddModal() {
-    setAddIsOpen(false);
-  }
-
-  function openAddModal() {
-    setAddIsOpen(true);
-  }
-
-  function closeAddItemModal() {
-    setAddItemIsOpen(false);
-  }
-
-  function openAddItemModal() {
-    setAddItemIsOpen(true);
-  }
-
-  function closeAddCategoryModal() {
-    setAddCategoryIsOpen(false);
-  }
-
-  function openAddCategoryModal() {
-    setAddCategoryIsOpen(true);
-  }
-
-  function closeFilterModal() {
-    setFilterIsOpen(false);
-  }
-
-  function openFilterModal() {
-    setFilterIsOpen(true);
-  }
-
+  console.log(location.pathname);
   useEffect(() => {
     const handler = (event: any) => {
       if (divRef.current && !divRef.current.contains(event.target)) {
@@ -97,16 +75,20 @@ const LoggedInNavBar = () => {
         </div>
         {/* Menu Items */}
         <div className='flex space-x-3 md:text-l lg:text-xl tracking-wide items-center align-center justify-between'>
-          <img
-            className='flex lg:hidden hover:cursor-pointer'
-            src='/images/navbar/add_icon.svg'
-            onClick={openAddModal}
-          />
-          <img
-            className='flex lg:hidden hover:cursor-pointer'
-            src='/images/navbar/filter_icon.svg'
-            onClick={openFilterModal}
-          />
+          {location.pathname === '/home' && (
+            <>
+              <img
+                className='flex lg:hidden hover:cursor-pointer'
+                src='/images/navbar/add_icon.svg'
+                onClick={() => dispatch(setAddModalOpen())}
+              />
+              <img
+                className='flex lg:hidden hover:cursor-pointer'
+                src='/images/navbar/filter_icon.svg'
+                onClick={() => dispatch(setFilterModalOpen())}
+              />
+            </>
+          )}
 
           <div ref={divRef}>
             {/* Hambuger Icon */}
@@ -125,16 +107,6 @@ const LoggedInNavBar = () => {
               id='menu'
               className={`${hamburgMenuStatus} absolute flex flex-col items-center self-end mx-[10%] py-8 mt-8 space-y-6 font-bold bg-white sm:self-center left-2 right-2 drop-shadow-md bg-opacity-80 rounded-2xl`}
             >
-              {/* <div
-                className='hover:text-orange pt-2 md:text-2xl tracking-wider'
-                onClick={() => {
-                  navigate(`/shopping-list`);
-                  setNavStatus('');
-                  setHamburgMenuStatus('hidden');
-                }}
-              >
-                Groceries List
-              </div> */}
               <div
                 className='hover:text-orange pt-2 md:text-2xl tracking-wider'
                 onClick={() => {
@@ -172,7 +144,11 @@ const LoggedInNavBar = () => {
       </div>
       {/* ADD BUTTON MODAL */}
       <Transition appear show={addIsOpen} as={Fragment}>
-        <Dialog as='div' className='relative z-10' onClose={closeAddModal}>
+        <Dialog
+          as='div'
+          className='relative z-10'
+          onClose={() => dispatch(setAddModalOpen())}
+        >
           <Transition.Child
             as={Fragment}
             enter='ease-out duration-300'
@@ -208,8 +184,10 @@ const LoggedInNavBar = () => {
                       type='button'
                       className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none'
                       onClick={() => {
-                        closeAddModal();
-                        openAddItemModal();
+                        // closeAddModal();
+                        dispatch(setAddModalOpen());
+                        // openAddItemModal();
+                        dispatch(setAddItemModalOpen());
                       }}
                     >
                       Add Item
@@ -218,8 +196,10 @@ const LoggedInNavBar = () => {
                       type='button'
                       className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none'
                       onClick={() => {
-                        closeAddModal();
-                        openAddCategoryModal();
+                        // closeAddModal();
+                        dispatch(setAddModalOpen());
+                        // openAddCategoryModal();
+                        dispatch(setAddCategoryModalOpen());
                       }}
                     >
                       Add Category
@@ -234,7 +214,11 @@ const LoggedInNavBar = () => {
 
       {/* ADD ITEM BUTTON MODAL */}
       <Transition appear show={addItemIsOpen} as={Fragment}>
-        <Dialog as='div' className='relative z-10' onClose={closeAddItemModal}>
+        <Dialog
+          as='div'
+          className='relative z-10'
+          onClose={() => dispatch(setAddItemModalOpen())}
+        >
           <Transition.Child
             as={Fragment}
             enter='ease-out duration-300'
@@ -280,7 +264,8 @@ const LoggedInNavBar = () => {
         <Dialog
           as='div'
           className='relative z-10'
-          onClose={closeAddCategoryModal}
+          // onClose={closeAddCategoryModal}
+          onClose={() => dispatch(setAddCategoryModalOpen())}
         >
           <Transition.Child
             as={Fragment}
@@ -324,7 +309,12 @@ const LoggedInNavBar = () => {
 
       {/* FILTER BUTTON MODAL */}
       <Transition appear show={filterIsOpen} as={Fragment}>
-        <Dialog as='div' className='relative z-10' onClose={closeFilterModal}>
+        <Dialog
+          as='div'
+          className='relative z-10'
+          // onClose={closeFilterModal}
+          onClose={() => dispatch(setFilterModalOpen())}
+        >
           <Transition.Child
             as={Fragment}
             enter='ease-out duration-300'

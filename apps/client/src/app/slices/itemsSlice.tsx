@@ -247,6 +247,7 @@ export const itemsSlice = createSlice({
       .addCase(getItemsByUserId.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.userItemsLoading = false;
+        console.log(action.payload);
         state.userItems = action.payload.map((item) => {
           let newItem = {
             userId: item.userId,
@@ -258,6 +259,7 @@ export const itemsSlice = createSlice({
             storedIn: item.storedIn,
             quantity: item.quantity,
             trashed: item.trashed,
+            category: item.category,
             selected: false,
           };
           return newItem;
@@ -273,6 +275,7 @@ export const itemsSlice = createSlice({
             storedIn: item.storedIn,
             quantity: item.quantity,
             trashed: item.trashed,
+            category: item.category,
             selected: false,
           };
           return newItem;
@@ -315,6 +318,7 @@ export const itemsSlice = createSlice({
           storedIn: action.payload.storedIn,
           quantity: action.payload.quantity,
           trashed: action.payload.trashed,
+          category: action.payload.category,
           selected: false,
         };
         state.userItems.unshift(newItem);
@@ -333,19 +337,34 @@ export const itemsSlice = createSlice({
       })
       .addCase(updateItem.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        let newItem = {
-          userId: action.payload.userId,
-          id: action.payload.id,
-          name: action.payload.name,
-          categoryId: action.payload.categoryId,
-          purchaseDate: action.payload.purchaseDate,
-          expiryDate: action.payload.expiryDate,
-          storedIn: action.payload.storedIn,
-          quantity: action.payload.quantity,
-          trashed: action.payload.trashed,
-          selected: false,
-        };
-        state.item = newItem;
+
+        // state.userItems = state.userItems.map((item) => {
+        //   if (item.id === action.payload.id) {
+        //     let newItem = {
+        //       userId: action.payload.userId,
+        //       id: action.payload.id,
+        //       name: action.payload.name,
+        //       categoryId: action.payload.categoryId,
+        //       purchaseDate: action.payload.purchaseDate,
+        //       expiryDate: action.payload.expiryDate,
+        //       storedIn: action.payload.storedIn,
+        //       quantity: action.payload.quantity,
+        //       trashed: action.payload.trashed,
+        //       selected: false,
+        //     };
+        //     return newItem;
+        //   } else {
+        //     return item;
+        //   }
+        // });
+        state.userItems = state.userItems.filter(
+          (item) => item.id !== action.payload.id
+        );
+        state.userItems.unshift(action.payload);
+        state.filteredUserItems = state.filteredUserItems.filter(
+          (item) => item.id !== action.payload.id
+        );
+        state.filteredUserItems.unshift(action.payload);
       })
       .addCase(updateItem.rejected, (state, action) => {
         state.status = 'failed';

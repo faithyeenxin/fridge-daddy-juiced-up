@@ -77,7 +77,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
     quantity: item.quantity,
     trashed: item.trashed,
   });
-
+  console.log(item);
   return (
     <div
       id={`item-${item.id}`}
@@ -375,7 +375,6 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                               .unwrap()
                               .then((originalPromiseResult) => {
                                 toast.success('Your item has been updated!');
-                                dispatch(getItemsByUserId(token.id));
                                 closeModal();
                               })
                               .catch((rejectedValueOrSerializedError) => {

@@ -9,6 +9,7 @@ import DropdownButton from '../dropdown/DropdownSelect';
 import { capitalizeWords } from '../../utility/functions/capitalizeWord';
 import { toast } from 'react-toastify';
 import { getUserId } from '../../../app/slices/userSlice';
+import { setAddCategoryModalOpen } from '../../../app/slices/modalSlice';
 
 const AddCategoryCard = () => {
   const token: any = useAppSelector(getUserId);
@@ -39,6 +40,7 @@ const AddCategoryCard = () => {
         .then((originalPromiseResult) => {
           // handle result here
           toast.success('Your category has been added!');
+          dispatch(setAddCategoryModalOpen());
         })
         .catch((rejectedValueOrSerializedError) => {
           // handle error here
@@ -106,14 +108,6 @@ const AddCategoryCard = () => {
         className='flex justify-center w-full bg-orange rounded-3xl items-center hover:bg-gradient-to-r from-orange to-pink cursor-pointer'
         onClick={() => {
           handleSubmit();
-          // setNewCategory({
-          //   userId: '',
-          //   name: '',
-          //   dateCreated: new Date(),
-          //   pantryDays: 0,
-          //   fridgeDays: 0,
-          //   freezerDays: 0,
-          // });
         }}
       >
         <img src='images/cards/add.svg' />

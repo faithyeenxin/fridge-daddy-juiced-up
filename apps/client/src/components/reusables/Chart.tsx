@@ -48,6 +48,7 @@ const Chart = ({ data, setPieStatus }: IChartProps) => {
           pointerEvents: 'none',
         }}
         onClick={(_, index) => {
+          console.log(_);
           setSelected(index === selected ? undefined : index);
           setPieStatus(myData[index]);
         }}
