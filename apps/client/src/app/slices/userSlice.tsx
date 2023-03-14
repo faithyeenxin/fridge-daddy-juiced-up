@@ -190,7 +190,7 @@ export const usersSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(authenticateUser.fulfilled, (state, action) => {
-        toast.success('You have successfully logged in!');
+        // toast.success('You have successfully logged in!');
         state.status = 'succeeded';
         state.token = action.payload;
       })

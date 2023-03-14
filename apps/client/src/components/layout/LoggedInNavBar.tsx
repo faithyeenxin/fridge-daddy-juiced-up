@@ -99,12 +99,12 @@ const LoggedInNavBar = () => {
         <div className='flex space-x-3 md:text-l lg:text-xl tracking-wide items-center align-center justify-between'>
           <img
             className='flex lg:hidden hover:cursor-pointer'
-            src='images/navbar/add_icon.svg'
+            src='/images/navbar/add_icon.svg'
             onClick={openAddModal}
           />
           <img
             className='flex lg:hidden hover:cursor-pointer'
-            src='images/navbar/filter_icon.svg'
+            src='/images/navbar/filter_icon.svg'
             onClick={openFilterModal}
           />
 

@@ -80,6 +80,7 @@ const RecipesDisplay = () => {
   const apiKey = `5962ec749418426c81fa226be6317343`;
   const apiKey2 = `a15745668f894779b75adf57f9d76136`;
   const apiKey3 = `8e4e45b4d72f4a74b59440190f82116e`;
+  const apiKey4 = `fc30ca941c9141489055ff119a8ac01c`;
 
   const randomRecipeUrl = `https://api.spoonacular.com/recipes/random?number=${numberOfRecipes}&apiKey=${apiKey}`;
   console.log(randomRecipeUrl);
@@ -112,7 +113,7 @@ const RecipesDisplay = () => {
       {/* All Recipes */}
       <div className='flex flex-wrap w-full h-full gap-5 justify-center overflow-auto'>
         {!recipesLoading ? (
-          recipes.length > 0 ? (
+          recipes?.length > 0 ? (
             recipes.map((recipe) => (
               <RecipeCard key={recipe.id} recipe={recipe} />
             ))

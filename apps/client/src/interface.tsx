@@ -109,3 +109,57 @@ export type IRecipe = {
   missedIngredientCount?: number;
   usedIngredientCount?: number;
 };
+
+interface Nutrient {
+  name: string;
+  amount: number;
+  unit: string;
+  percentOfDailyNeeds: number;
+}
+
+interface Property {
+  name: string;
+  amount: number;
+  unit: string;
+}
+
+interface Flavonoid {
+  name: string;
+  amount: number;
+  unit: string;
+}
+
+interface IngredientNutrient {
+  name: string;
+  amount: number;
+  unit: string;
+  percentOfDailyNeeds: number;
+}
+
+interface Ingredient {
+  id: number;
+  name: string;
+  amount: number;
+  unit: string;
+  nutrients: IngredientNutrient[];
+}
+
+interface CaloricBreakdown {
+  percentProtein: number;
+  percentFat: number;
+  percentCarbs: number;
+}
+
+interface WeightPerServing {
+  amount: number;
+  unit: string;
+}
+
+export interface IRecipeNutrition {
+  nutrients: Nutrient[];
+  properties: Property[];
+  flavonoids: Flavonoid[];
+  ingredients: Ingredient[];
+  caloricBreakdown: CaloricBreakdown;
+  weightPerServing: WeightPerServing;
+}

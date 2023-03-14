@@ -78,7 +78,7 @@ const LoginCard = () => {
       password: Yup.string().required('Required'),
     }),
     onSubmit: (values: any) => {
-      toast("We're logging you in!");
+      // toast("We're logging you in!");
       dispatch(resetUser());
       dispatch(resetItems());
       dispatch(resetCategories());
