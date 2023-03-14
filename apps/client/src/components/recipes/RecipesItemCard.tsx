@@ -43,7 +43,7 @@ const RecipesItemCard = () => {
     const cuisine = cuisineInput.name;
     const meal = mealInput.name;
     dispatch(setRecipesLoading(true));
-    const queryUrl = `https://api.spoonacular.com/recipes/complexSearch?number=${numberOfRecipes}&sort=min-missing-ingredients&sortDirection=asc&instructionsRequired=true&ignorePantry=true&includeIngredients=${ingredients}&cuisine=${cuisine}&type=${meal}&apiKey=${apiKey}`;
+    const queryUrl = `https://api.spoonacular.com/recipes/complexSearch?number=${numberOfRecipes}&sort=min-missing-ingredients&sortDirection=asc&instructionsRequired=true&ignorePantry=true&includeIngredients=${ingredients}&cuisine=${cuisine}&type=${meal}&apiKey=${apiKey3}`;
     fetch(queryUrl)
       .then((res) => res.json())
       .then((data) => {
@@ -64,7 +64,7 @@ const RecipesItemCard = () => {
         className='w-full h-auto py-5 bg-offWhite flex flex-col justify-between gap-5'
       >
         <div className='text-2xl xl:text-3xl font-lora font-bold text-orange tracking-widest text-center'>
-          Items you've selected
+          Items You've Selected
         </div>
         <div className='text-md xl:text-md tracking-wider italic text-blueGray opacity-50 text-center'>
           {/* {you have not selected any items yet} */}

@@ -8,6 +8,7 @@ import {
   showRecipesLoading,
 } from '../../app/slices/recipesSlice';
 import { useAppDispatch, useAppSelector } from '../../app/store';
+import RecipeCard from '../reusables/cards/RecipeCard';
 interface IRandomRecipe {
   id: number;
   title: string;
@@ -80,8 +81,8 @@ const RecipesDisplay = () => {
   const apiKey2 = `a15745668f894779b75adf57f9d76136`;
   const apiKey3 = `8e4e45b4d72f4a74b59440190f82116e`;
 
-  const randomRecipeUrl = `https://api.spoonacular.com/recipes/random?number=${numberOfRecipes}&apiKey=${apiKey2}`;
-
+  const randomRecipeUrl = `https://api.spoonacular.com/recipes/random?number=${numberOfRecipes}&apiKey=${apiKey}`;
+  console.log(randomRecipeUrl);
   useEffect(() => {
     dispatch(setRecipesLoading(true));
     fetch(randomRecipeUrl)
@@ -112,31 +113,8 @@ const RecipesDisplay = () => {
       <div className='flex flex-wrap w-full h-full gap-5 justify-center overflow-auto'>
         {!recipesLoading ? (
           recipes.length > 0 ? (
-            recipes.map((recipe, idx) => (
-              <div
-                key={idx}
-                className='w-[230px] h-[280px] bg-tablePink rounded-lg overflow-clip'
-              >
-                <img src={recipe.image} />
-                <div
-                  id='recipeTitleSection'
-                  className='flex flex-col justify-center p-2'
-                >
-                  <h1 className='text-md font-lora text-orange text-center'>
-                    {recipe?.title}
-                  </h1>
-                  <h1 className='text-xs  text-blueGray text-center italic opacity-50'>
-                    {recipe?.readyInMinutes
-                      ? `Ready In ${recipe?.readyInMinutes} Minutes`
-                      : ''}
-                  </h1>
-                  <h1 className='text-xs  text-blueGray text-center italic opacity-50'>
-                    {recipe?.servings
-                      ? `Serves ${recipe?.servings}`
-                      : `Ingredients utilised: ${recipe?.usedIngredientCount}`}
-                  </h1>
-                </div>
-              </div>
+            recipes.map((recipe) => (
+              <RecipeCard key={recipe.id} recipe={recipe} />
             ))
           ) : (
             <div className='font-lora text-orange opacity-70 text-lg tracking-wider font-light flex justify-center items-center'>

@@ -14,6 +14,7 @@ import LoggedOutLayout from './components/layout/LoggedOutLayout';
 import LoggedInLayout from './components/layout/LoggedInLayout';
 import Testing from './pages/Testing';
 import GroceriesList from './pages/GroceriesList';
+import SingleRecipe from './pages/SingleRecipe';
 function App() {
   return (
     <BrowserRouter>
@@ -34,6 +35,7 @@ function App() {
         <Route path='/' element={<PrivateRoute outlet={<LoggedInLayout />} />}>
           <Route path='/home' element={<Home />} />
           <Route path='/recipes' element={<Recipes />} />
+          <Route path='/recipes/:id' element={<SingleRecipe />} />
           <Route path='/shopping-list' element={<GroceriesList />} />
           <Route path='/account' element={<Account />} />
         </Route>
