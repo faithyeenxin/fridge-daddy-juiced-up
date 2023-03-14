@@ -206,8 +206,11 @@ const AddItemCard = () => {
             }}
           />
         </div>
-        <div className='flex justify-center w-full bg-orange rounded-3xl hover:bg-gradient-to-r from-orange to-pink'>
-          <img onClick={handleSubmit} src='images/cards/add.svg' />
+        <div
+          className='flex justify-center w-full bg-orange rounded-3xl hover:bg-gradient-to-r from-orange to-pink cursor-pointer'
+          onClick={handleSubmit}
+        >
+          <img src='images/cards/add.svg' />
         </div>
       </div>
     </div>

@@ -6,7 +6,9 @@ import { toast } from 'react-toastify';
 import {
   getItemByItemId,
   getItemsByUserId,
+  selectItem,
   trashItem,
+  unselectItem,
   untrashItem,
   updateItem,
 } from '../../../../app/slices/itemsSlice';
@@ -88,7 +90,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
       } font-lora text-black xl:text-md lg:text-md md:text-sm sm:text-xs text-xs text-center items-center h-[40px]`}
     >
       <div
-        className={`w-2/5 xl:w-2/12 tracking-wide ${
+        className={`w-2/5 tracking-wide ${
           differenceInDays(new Date(item.expiryDate), today) <= 0 &&
           'text-red-500'
         }`}
@@ -96,27 +98,45 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
         {differenceInDays(new Date(item.expiryDate), today)}
       </div>
       <div
-        className='w-2/5 xl:w-4/12 hover:cursor-pointer hover:text-orangeLight'
+        className='w-2/5 hover:cursor-pointer hover:text-orangeLight'
         onClick={openModal}
       >
         {capitalizeWords(item.name)}
       </div>
-      <div className='w-1/5 xl:w-1/12 flex items-center justify-center hover:cursor-pointer'>
-        <div
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          onClick={() => {
-            dispatch(addSelectedItem(item));
-          }}
-        >
-          <img
-            src={
-              isHovered
-                ? 'images/table/partial/add_hovered.svg'
-                : 'images/table/partial/add_unhovered.svg'
-            }
-          />
-        </div>
+      <div className='w-1/5 flex items-center justify-center hover:cursor-pointer'>
+        {!item.selected ? (
+          <div
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onClick={() => {
+              dispatch(selectItem(item));
+            }}
+          >
+            <img
+              src={
+                isHovered
+                  ? 'images/table/partial/add_hovered.svg'
+                  : 'images/table/partial/add_unhovered.svg'
+              }
+            />
+          </div>
+        ) : (
+          <div
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onClick={() => {
+              dispatch(unselectItem(item));
+            }}
+          >
+            <img
+              src={
+                isHovered
+                  ? 'images/table/partial/unselect_hovered.svg'
+                  : 'images/table/partial/unselect_unhovered.svg'
+              }
+            />
+          </div>
+        )}
       </div>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as='div' className='relative z-10' onClose={closeModal}>
@@ -172,7 +192,6 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                           defaultValue={capitalizeWords(item.quantity)}
                           className='w-full h-[30px] xl:h-[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
                           onChange={(e) => {
-                            console.log(e.target.value);
                             setNewItem({
                               ...newItem,
                               quantity: e.target.value,
@@ -319,8 +338,6 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                         type='button'
                         className='mr-2 w-[200px] inline-flex justify-center rounded-3xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none focus-visible:ring-2'
                         onClick={(e) => {
-                          console.log('submit edit');
-                          console.log(newItem);
                           if (
                             !isAfter(
                               new Date(newItem.expiryDate),
@@ -345,7 +362,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                                 )
                               ),
                             };
-                            console.log(data);
+
                             dispatch(updateItem(data))
                               .unwrap()
                               .then((originalPromiseResult) => {

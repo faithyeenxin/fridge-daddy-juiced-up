@@ -37,7 +37,6 @@ const SearchBar = () => {
   };
 
   const updateSearchBox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log("data is being updated");
     clearTimeout(timeoutId);
     dispatch(setFilterToLoading());
     const newTimeoutId = setTimeout(() => {

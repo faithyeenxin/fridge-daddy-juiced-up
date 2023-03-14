@@ -20,10 +20,6 @@ const Account = () => {
     console.log('password changed');
   };
 
-  const clearTrash = () => {
-    console.log('trash cleared');
-  };
-
   return (
     <div>
       <div className='flex mt-6 md:mt-10 mx-auto'>
@@ -63,12 +59,6 @@ const Account = () => {
                 >
                   Change Password
                 </button>
-                {/* <button
-                  onClick={clearTrash}
-                  className="disabled:opacity-40 text-white bg-gradient-to-br from-gray-500 disabled:cursor-not-allowed to-purple-400 hover:bg-gradient-to-bl  font-medium rounded-lg text-xs px-2 py-2 md:px-5 md:py-2.5 text-center m-auto"
-                >
-                  Clear Trash
-                </button> */}
               </div>
             </div>
           </div>

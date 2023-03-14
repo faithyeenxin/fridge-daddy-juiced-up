@@ -108,7 +108,6 @@ router.post("/", async (req, res) => {
     const user = await prisma.user.create({
       data: newUser,
     });
-    console.log(user);
     const token = jwt.sign(user, SECRET, { expiresIn: "30m" });
     res.status(200).send({ token: token });
   } catch {

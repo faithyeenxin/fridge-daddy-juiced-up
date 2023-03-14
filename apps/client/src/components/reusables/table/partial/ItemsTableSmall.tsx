@@ -3,6 +3,7 @@ import {
   showFilteredItems,
   showUserItemsLoadingState,
   trashAllItems,
+  unselectAllItem,
 } from '../../../../app/slices/itemsSlice';
 import { useAppDispatch, useAppSelector } from '../../../../app/store';
 import { capitalizeWords } from '../../../utility/functions/capitalizeWord';
@@ -24,15 +25,8 @@ const ItemsTableSmall = () => {
   let colorState = true;
 
   const handleUnselectAll = () => {
-    toast.warning('Trashing in progress');
-    // dispatch(trashAllItems(token.id))
-    //   .unwrap()
-    //   .then((originalPromiseResult) => {
-    //     toast.success('Your bin has been emptied!');
-    //   })
-    //   .catch((rejectedValueOrSerializedError) => {
-    //     toast.error('We could not empty your bin! Please try again.');
-    //   });
+    console.log('unselect all');
+    dispatch(unselectAllItem());
     closeModal();
   };
 
@@ -46,52 +40,50 @@ const ItemsTableSmall = () => {
   return (
     <div className='w-full h-full bg-offWhite rounded-lg overflow-auto'>
       <div className='relative flex flex-col justify-between'>
-        <div className='w-full'>
+        <div
+          id='table-head'
+          className='flex sticky top-0 rounded-t-lg bg-orange rounded-top-lg font-lora text-white text-bold xl:text-lg lg:text-md md:text-sm sm:text-xs text-xs text-center items-center h-[45px] shadow-xl'
+        >
+          <div className='w-2/5 tracking-wide'>Days Left</div>
+          <div className='w-2/5 tracking-wide'>Name</div>
           <div
-            id='table-head'
-            className='flex sticky top-0 rounded-t-lg bg-orange rounded-top-lg font-lora text-white text-bold xl:text-lg lg:text-md md:text-sm sm:text-xs text-xs text-center items-center h-[45px] shadow-xl'
+            className='w-1/5 flex items-center justify-center'
+            onMouseEnter={() => setUnselectAll(true)}
+            onMouseLeave={() => setUnselectAll(false)}
           >
-            <div className='w-2/5 xl:w-2/12 tracking-wide'>Days Left</div>
-            <div className='w-2/5 xl:w-4/12 tracking-wide'>Name</div>
-            <div
-              className='w-1/5  xl:w-1/12 flex items-center justify-center'
-              onMouseEnter={() => setUnselectAll(true)}
-              onMouseLeave={() => setUnselectAll(false)}
-            >
-              {!unselectAll && (
-                <img src='images/table/partial/unselect_all.svg' />
-              )}
-              {unselectAll && (
-                <p className='text-xs px-2 cursor-pointer' onClick={openModal}>
-                  Unselect All
-                </p>
-              )}
+            {!unselectAll && (
+              <img src='images/table/partial/unselect_all.svg' />
+            )}
+            {unselectAll && (
+              <p className='text-xs px-2 cursor-pointer' onClick={openModal}>
+                Unselect All
+              </p>
+            )}
+          </div>
+        </div>
+
+        {filterStatus && (
+          <div className='flex justify-center items-center text-center'>
+            <img
+              className='flex w-[100px] h-[400px]'
+              src='images/table/full/loading-animation.svg'
+            />
+          </div>
+        )}
+        {!filterStatus && filteredItems.length === 0 && (
+          <div className='flex w-full h-[400px] justify-center items-center'>
+            <div className='font-lora text-orange opacity-70 text-lg tracking-wider font-light'>
+              You don't have any items here!
             </div>
           </div>
-
-          {filterStatus && (
-            <div className='flex justify-center items-center text-center'>
-              <img
-                className='flex w-[100px] h-[400px]'
-                src='images/table/full/loading-animation.svg'
-              />
-            </div>
-          )}
-          {!filterStatus && filteredItems.length === 0 && (
-            <div className='flex w-full h-[400px] justify-center items-center'>
-              <div className='font-lora text-orange opacity-70 text-lg tracking-wider font-light'>
-                You don't have any items here!
-              </div>
-            </div>
-          )}
-          {!filterStatus &&
-            filteredItems.map((item, idx) => {
-              colorState = !colorState;
-              return (
-                <SingleItemRow key={idx} item={item} colorState={colorState} />
-              );
-            })}
-        </div>
+        )}
+        {!filterStatus &&
+          filteredItems.map((item, idx) => {
+            colorState = !colorState;
+            return (
+              <SingleItemRow key={idx} item={item} colorState={colorState} />
+            );
+          })}
       </div>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as='div' className='relative z-10' onClose={closeModal}>
@@ -141,8 +133,7 @@ const ItemsTableSmall = () => {
                   </Dialog.Title>
                   <div className='mt-2'>
                     <p className='text-sm text-gray-500'>
-                      You are trying to unselect all items.
-                      <br /> Proceed with caution!
+                      This is irreversible, proceed with caution!
                     </p>
                   </div>
 
@@ -152,7 +143,7 @@ const ItemsTableSmall = () => {
                       className='mr-2 inline-flex justify-center rounded-md border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
                       onClick={handleUnselectAll}
                     >
-                      Yes, Unselect all!
+                      Yes please!
                     </button>
                     <button
                       type='button'

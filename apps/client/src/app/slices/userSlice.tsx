@@ -126,7 +126,6 @@ export const usersSlice = createSlice({
       state.token = action.payload;
     },
     resetUser(state) {
-      console.log('user reset');
       Object.assign(state, initialState);
     },
   },
@@ -210,7 +209,6 @@ export const usersSlice = createSlice({
       })
       .addCase(authenticateGoogleUser.rejected, (state, action) => {
         state.status = 'failed';
-        console.log(action.payload);
         state.error = action.error.message;
       });
     // update User

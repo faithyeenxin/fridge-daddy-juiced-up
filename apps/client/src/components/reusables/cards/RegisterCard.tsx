@@ -38,22 +38,9 @@ export const RegisterCard = () => {
       })
       .catch((rejectedValueOrSerializedError) => {
         // handle error here
-        console.log(rejectedValueOrSerializedError);
+        toast.error(rejectedValueOrSerializedError);
       });
   };
-
-  // const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
-  //   e.preventDefault();
-  //   console.log("register form has been submitted");
-  //   console.log(user);
-  //   dispatch(createUser(user));
-  //   setUser({
-  //     name: "",
-  //     email: "",
-  //     password: "",
-  //     dateJoined: new Date(),
-  //   });
-  // };
 
   useEffect(() => {
     //global google
@@ -95,7 +82,7 @@ export const RegisterCard = () => {
             })
             .catch((rejectedValueOrSerializedError) => {
               // handle error here
-              console.log(rejectedValueOrSerializedError);
+              toast.error(rejectedValueOrSerializedError);
             });
           return Boolean(!emailExist);
         }),
@@ -122,7 +109,7 @@ export const RegisterCard = () => {
         })
         .catch((rejectedValueOrSerializedError) => {
           // handle error here
-          console.log(rejectedValueOrSerializedError);
+          toast.error(rejectedValueOrSerializedError);
         });
     },
   });

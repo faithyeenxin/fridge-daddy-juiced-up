@@ -31,6 +31,7 @@ const initialState: ItemsState = {
     storedIn: '',
     quantity: '',
     trashed: false,
+    selected: false,
   },
   // Items based on User ID
   userItems: [],
@@ -80,7 +81,6 @@ export const getItemByItemId = createAsyncThunk<IItem, string | undefined>(
 export const createItem = createAsyncThunk<IItem, Object>(
   '/users/createItem',
   async (data, thunkAPI) => {
-    console.log(data);
     try {
       const response = await axios.post(ITEMS_URL, data);
       return response.data;
@@ -157,6 +157,72 @@ export const itemsSlice = createSlice({
         (item) => item.id === action.payload
       )[0];
     },
+    selectItem(state, action: PayloadAction<IItem>) {
+      const updatedItems = state.userItems.map((item) => {
+        if (item.id === action.payload.id) {
+          let newItem = {
+            userId: item.userId,
+            id: item.id,
+            name: item.name,
+            categoryId: item.categoryId,
+            purchaseDate: item.purchaseDate,
+            expiryDate: item.expiryDate,
+            storedIn: item.storedIn,
+            quantity: item.quantity,
+            trashed: item.trashed,
+            selected: true,
+          };
+          return newItem;
+        } else {
+          return item;
+        }
+      });
+      state.userItems = updatedItems;
+      state.filteredUserItems = updatedItems;
+    },
+    unselectItem(state, action: PayloadAction<IItem>) {
+      const updatedItems = state.userItems.map((item) => {
+        if (item.id === action.payload.id) {
+          let newItem = {
+            userId: item.userId,
+            id: item.id,
+            name: item.name,
+            categoryId: item.categoryId,
+            purchaseDate: item.purchaseDate,
+            expiryDate: item.expiryDate,
+            storedIn: item.storedIn,
+            quantity: item.quantity,
+            trashed: item.trashed,
+            selected: false,
+          };
+          return newItem;
+        } else {
+          return item;
+        }
+      });
+      state.userItems = updatedItems;
+      state.filteredUserItems = updatedItems;
+    },
+    unselectAllItem(state) {
+      const updatedItems = state.userItems.map((item) => {
+        let newItem = {
+          userId: item.userId,
+          id: item.id,
+          name: item.name,
+          categoryId: item.categoryId,
+          purchaseDate: item.purchaseDate,
+          expiryDate: item.expiryDate,
+          storedIn: item.storedIn,
+          quantity: item.quantity,
+          trashed: item.trashed,
+          selected: false,
+        };
+        return newItem;
+      });
+      console.log(updatedItems);
+      state.userItems = updatedItems;
+      state.filteredUserItems = updatedItems;
+    },
   },
   extraReducers: (builder) => {
     // fetch all items in database
@@ -181,8 +247,36 @@ export const itemsSlice = createSlice({
       .addCase(getItemsByUserId.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.userItemsLoading = false;
-        state.userItems = action.payload;
-        state.filteredUserItems = action.payload;
+        state.userItems = action.payload.map((item) => {
+          let newItem = {
+            userId: item.userId,
+            id: item.id,
+            name: item.name,
+            categoryId: item.categoryId,
+            purchaseDate: item.purchaseDate,
+            expiryDate: item.expiryDate,
+            storedIn: item.storedIn,
+            quantity: item.quantity,
+            trashed: item.trashed,
+            selected: false,
+          };
+          return newItem;
+        });
+        state.filteredUserItems = action.payload.map((item) => {
+          let newItem = {
+            userId: item.userId,
+            id: item.id,
+            name: item.name,
+            categoryId: item.categoryId,
+            purchaseDate: item.purchaseDate,
+            expiryDate: item.expiryDate,
+            storedIn: item.storedIn,
+            quantity: item.quantity,
+            trashed: item.trashed,
+            selected: false,
+          };
+          return newItem;
+        });
       })
       .addCase(getItemsByUserId.rejected, (state, action) => {
         state.status = 'failed';
@@ -211,9 +305,21 @@ export const itemsSlice = createSlice({
       })
       .addCase(createItem.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.userItems.unshift(action.payload);
-        state.filteredUserItems.unshift(action.payload);
-        state.item = action.payload;
+        let newItem = {
+          userId: action.payload.userId,
+          id: action.payload.id,
+          name: action.payload.name,
+          categoryId: action.payload.categoryId,
+          purchaseDate: action.payload.purchaseDate,
+          expiryDate: action.payload.expiryDate,
+          storedIn: action.payload.storedIn,
+          quantity: action.payload.quantity,
+          trashed: action.payload.trashed,
+          selected: false,
+        };
+        state.userItems.unshift(newItem);
+        state.filteredUserItems.unshift(newItem);
+        state.item = newItem;
       })
       .addCase(createItem.rejected, (state, action) => {
         state.status = 'failed';
@@ -227,15 +333,19 @@ export const itemsSlice = createSlice({
       })
       .addCase(updateItem.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        // state.userItems = state.userItems.filter(
-        //   (item) => item.id !== action.payload.id
-        // );
-        // state.filteredUserItems = state.filteredUserItems.filter(
-        //   (item) => item.id !== action.payload.id
-        // );
-        // state.userItems.unshift(action.payload);
-        // state.filteredUserItems.unshift(action.payload);
-        state.item = action.payload;
+        let newItem = {
+          userId: action.payload.userId,
+          id: action.payload.id,
+          name: action.payload.name,
+          categoryId: action.payload.categoryId,
+          purchaseDate: action.payload.purchaseDate,
+          expiryDate: action.payload.expiryDate,
+          storedIn: action.payload.storedIn,
+          quantity: action.payload.quantity,
+          trashed: action.payload.trashed,
+          selected: false,
+        };
+        state.item = newItem;
       })
       .addCase(updateItem.rejected, (state, action) => {
         state.status = 'failed';
@@ -248,7 +358,6 @@ export const itemsSlice = createSlice({
       })
       .addCase(trashItem.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        console.log(action.payload);
         state.item = {
           userId: '',
           id: '',
@@ -259,8 +368,8 @@ export const itemsSlice = createSlice({
           storedIn: '',
           quantity: '',
           trashed: false,
+          selected: false,
         };
-        console.log(action.payload);
         state.userItems = state.userItems.map((item) => {
           if (item.id === action.payload.id) {
             let newItem = {
@@ -273,6 +382,7 @@ export const itemsSlice = createSlice({
               storedIn: item.storedIn,
               quantity: item.quantity,
               trashed: action.payload.trashed,
+              selected: item.selected,
             };
             return newItem;
           } else {
@@ -291,6 +401,7 @@ export const itemsSlice = createSlice({
               storedIn: item.storedIn,
               quantity: item.quantity,
               trashed: action.payload.trashed,
+              selected: item.selected,
             };
             return newItem;
           } else {
@@ -312,8 +423,9 @@ export const itemsSlice = createSlice({
       .addCase(trashAllItems.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.userItemsLoading = false;
-        state.userItems = action.payload;
-        state.filteredUserItems = action.payload;
+        state.userItems = state.userItems.filter((item) => !item.trashed);
+        state.filteredUserItems = state.filteredUserItems =
+          state.userItems.filter((item) => !item.trashed);
       })
       .addCase(trashAllItems.rejected, (state, action) => {
         state.status = 'failed';
@@ -328,7 +440,6 @@ export const itemsSlice = createSlice({
       })
       .addCase(untrashItem.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        console.log(action.payload);
         state.userItems = state.userItems.map((item) => {
           if (item.id === action.payload.id) {
             let newItem = {
@@ -379,6 +490,9 @@ export const {
   updateFilteredItems,
   setFilterToLoading,
   getItemById,
+  selectItem,
+  unselectItem,
+  unselectAllItem,
 } = itemsSlice.actions;
 export const showItem = (state: RootState) => state.items.item;
 export const showItems = (state: RootState) => state.items.items;

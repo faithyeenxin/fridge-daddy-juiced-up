@@ -106,7 +106,6 @@ const NavBar = () => {
                 <a
                   className='hover:text-orange tracking-widest'
                   onClick={() => {
-                    console.log('navigate');
                     navigate('/creators');
                     setNavStatus('');
                     setHamburgMenuStatus('hidden');

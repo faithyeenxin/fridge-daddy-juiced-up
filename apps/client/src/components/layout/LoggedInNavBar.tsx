@@ -208,7 +208,6 @@ const LoggedInNavBar = () => {
                       type='button'
                       className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none'
                       onClick={() => {
-                        console.log('add model will close');
                         closeAddModal();
                         openAddItemModal();
                       }}

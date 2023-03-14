@@ -49,7 +49,6 @@ const Chart = ({ data, setPieStatus }: IChartProps) => {
         }}
         onClick={(_, index) => {
           setSelected(index === selected ? undefined : index);
-          console.log(_);
           setPieStatus(myData[index]);
         }}
         onMouseOver={(_, index) => {

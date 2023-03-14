@@ -32,7 +32,6 @@ const LoginCard = () => {
     setIsOpen(true);
   }
   const handleSignInWithGoogle = (response: any) => {
-    console.log('google sign in');
     dispatch(resetUser());
     dispatch(resetItems());
     dispatch(resetCategories());
@@ -44,7 +43,7 @@ const LoginCard = () => {
       })
       .catch((rejectedValueOrSerializedError) => {
         // handle error here
-        console.log(rejectedValueOrSerializedError);
+        toast.error(rejectedValueOrSerializedError);
       });
   };
 
@@ -96,7 +95,7 @@ const LoginCard = () => {
         })
         .catch((rejectedValueOrSerializedError) => {
           // handle error here
-          console.log(rejectedValueOrSerializedError);
+          toast.error(rejectedValueOrSerializedError);
           setIsOpen(true);
         });
     },
@@ -155,10 +154,10 @@ const LoginCard = () => {
 
             <div className='flex justify-center' id='logInDiv'></div>
 
-            <div className='text-center text-sm text-orangeLight mt-2 animate-pulse'>
+            <div className='text-center text-sm text-orangeLight my-2 animate-pulse'>
               Try us out using our {''}
               <a
-                className='no-underline border-b border-grey-dark text-orangeLight hover:text-green-500'
+                className='no-underline border-b border-grey-dark font-bold text-orange hover:text-green-500 cursor-pointer'
                 onClick={() =>
                   setUseTestUser({
                     email: 'testUser@hotmail.com',
@@ -176,7 +175,7 @@ const LoginCard = () => {
                 Privacy Policy
               </a> */}
             </div>
-            <div className='text-center text-sm text-grey-dark'>
+            <div className='text-center text-xs text-grey-dark'>
               Having issues logging in? {''}
               <a
                 className='no-underline border-b border-grey-dark text-grey-dark hover:text-orangeLight'

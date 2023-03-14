@@ -25,8 +25,6 @@ const FilterCard = () => {
   const dispatch = useAppDispatch();
   const allUserItems = useAppSelector(showUserItems);
   const filteredUserItems = useAppSelector(showFilteredItems);
-  // console.log(allUserItems);
-  // console.log(`all items array length ${allUserItems.length}`);
   let filteredData: IItem[] = [];
   let result: IItem[] = [];
 
@@ -68,8 +66,6 @@ const FilterCard = () => {
   });
 
   const filterData = (data: ICheckboxStatus) => {
-    console.log('filtering is happening');
-    console.log(filteredUserItems);
     // let dataToUse =
     //   filteredUserItems.length > 0 ? filteredUserItems : allUserItems;
     if (data.evergreen) {
@@ -102,7 +98,6 @@ const FilterCard = () => {
     }
     if (data.fridge) {
       let newData = filteredData.filter((item) => item.storedIn === 'Fridge');
-      // console.log(newData)
       result = [...result, ...newData];
     }
     if (data.freezer) {
@@ -113,7 +108,6 @@ const FilterCard = () => {
       result = filteredData;
     }
     if (data.today) {
-      console.log(today);
       result = result.filter(
         (item) =>
           isWithinInterval(new Date(item.expiryDate), {
@@ -138,13 +132,10 @@ const FilterCard = () => {
           }) && !item.trashed
       );
     }
-    // console.log(result);
-    // console.log(`result array length ${result.length}`);
     dispatch(updateFilteredItems(result));
   };
 
   const updateCheckboxStatus = (data: ICheckboxStatus) => {
-    // console.log("data is being updated");
     setCheckboxStatus(data);
     clearTimeout(timeoutId);
     dispatch(setFilterToLoading());
@@ -169,6 +160,7 @@ const FilterCard = () => {
               Evergreen
             </div>
             <img
+              className='cursor-pointer'
               src={
                 checkboxStatus.evergreen
                   ? `images/cards/check_ring.svg`
@@ -187,6 +179,7 @@ const FilterCard = () => {
               Rotten
             </div>
             <img
+              className='cursor-pointer'
               src={
                 checkboxStatus.rotten
                   ? `images/cards/check_ring.svg`
@@ -205,6 +198,7 @@ const FilterCard = () => {
               Trashed
             </div>
             <img
+              className='cursor-pointer'
               src={
                 checkboxStatus.trashed
                   ? `images/cards/check_ring.svg`
@@ -230,6 +224,7 @@ const FilterCard = () => {
               Pantry
             </div>
             <img
+              className='cursor-pointer'
               src={
                 checkboxStatus.pantry
                   ? `images/cards/check_ring.svg`
@@ -248,6 +243,7 @@ const FilterCard = () => {
               Fridge
             </div>
             <img
+              className='cursor-pointer'
               src={
                 checkboxStatus.fridge
                   ? `images/cards/check_ring.svg`
@@ -266,6 +262,7 @@ const FilterCard = () => {
               Freezer
             </div>
             <img
+              className='cursor-pointer'
               src={
                 checkboxStatus.freezer
                   ? `images/cards/check_ring.svg`
@@ -291,6 +288,7 @@ const FilterCard = () => {
               Today
             </div>
             <img
+              className='cursor-pointer'
               src={
                 checkboxStatus.today
                   ? `images/cards/check_ring.svg`
@@ -311,6 +309,7 @@ const FilterCard = () => {
               In 3 Days
             </div>
             <img
+              className='cursor-pointer'
               src={
                 checkboxStatus.in3Days
                   ? `images/cards/check_ring.svg`
@@ -331,6 +330,7 @@ const FilterCard = () => {
               In A Week
             </div>
             <img
+              className='cursor-pointer'
               src={
                 checkboxStatus.inAWeek
                   ? `images/cards/check_ring.svg`
@@ -350,7 +350,7 @@ const FilterCard = () => {
       </div>
       <div className='flex justify-center'>
         <div
-          className='flex w-2/3 bg-orange font-lora font-bolder text-white justify-center rounded-3xl p-1 hover:bg-gradient-to-r from-orange to-pink'
+          className='flex w-2/3 bg-orange font-lora font-bolder text-white justify-center rounded-3xl p-1 hover:bg-gradient-to-r from-orange to-pink cursor-pointer'
           onClick={() => {
             dispatch(updateFilteredItems(allUserItems));
             setCheckboxStatus({

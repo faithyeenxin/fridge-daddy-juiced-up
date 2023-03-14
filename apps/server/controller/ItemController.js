@@ -176,15 +176,15 @@ router.patch("/:id", async (req, res) => {
 });
 
 //* Trash All Trashed Items
-router.delete("/user/:id/trash-all", async (req, res) => {
+router.delete("/user/:userId/trash-all", async (req, res) => {
   const { userId } = req.params;
   try {
     const deletedItems = await prisma.item.deleteMany({
       where: {
+        userId: userId,
         trashed: true,
       },
     });
-    console.log(deletedItems)
     const items = await prisma.item.findMany({
       where: {
         userId: userId,

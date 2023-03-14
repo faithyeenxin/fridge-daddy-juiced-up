@@ -65,12 +65,12 @@ interface IRandomRecipe {
 
 const Recipes = () => {
   return (
-    <div className='w-full h-full overflow-auto flex justify-center gap-5'>
+    <div className='w-full h-[900px] flex justify-center gap-5'>
       <div className='w-4/6 h-full'>
         <RecipesDisplay />
       </div>
       {/* Filtering Section */}
-      <div className='w-2/6 h-full flex flex-col gap-5'>
+      <div className='w-2/6 h-full flex flex-col gap-2'>
         <RecipesItemCard />
         <SearchBar />
         <ItemsTableSmall />

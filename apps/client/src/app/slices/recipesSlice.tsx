@@ -2,7 +2,13 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { wordContainsSubstring } from '../../components/utility/functions/wordContainsSubstring';
-import { IGoogleUser, IItem, IRecipeType, IUser } from '../../interface';
+import {
+  IGoogleUser,
+  IItem,
+  IRecipe,
+  IRecipeType,
+  IUser,
+} from '../../interface';
 import { RootState } from '../store';
 
 interface recipesState {
@@ -11,6 +17,10 @@ interface recipesState {
   meals: IRecipeType[];
   filteredMeals: IRecipeType[];
   selectedItems: IItem[];
+  cuisineSelected: IRecipeType;
+  mealSelected: IRecipeType;
+  recipes: IRecipe[];
+  recipesLoading: boolean;
 }
 
 const initialState: recipesState = {
@@ -63,6 +73,10 @@ const initialState: recipesState = {
   ],
   filteredMeals: [],
   selectedItems: [],
+  cuisineSelected: { id: 1, name: '-' },
+  mealSelected: { id: 1, name: '-' },
+  recipes: [],
+  recipesLoading: true,
 };
 
 export const recipesSlice = createSlice({
@@ -87,8 +101,17 @@ export const recipesSlice = createSlice({
         (item) => item.id !== action.payload.id
       );
     },
-    unselectAllSelectedItem(state) {
-      Object.assign(state.selectedItems, initialState.selectedItems);
+    setCuisineSelected(state, action: PayloadAction<IRecipeType>) {
+      state.cuisineSelected = action.payload;
+    },
+    setMealSelected(state, action: PayloadAction<IRecipeType>) {
+      state.mealSelected = action.payload;
+    },
+    setRecipes(state, action: PayloadAction<IRecipe[]>) {
+      state.recipes = action.payload;
+    },
+    setRecipesLoading(state, action: PayloadAction<boolean>) {
+      state.recipesLoading = action.payload;
     },
   },
   extraReducers: (builder) => {},
@@ -99,7 +122,10 @@ export const {
   filterMeals,
   addSelectedItem,
   removeSelectedItem,
-  unselectAllSelectedItem,
+  setCuisineSelected,
+  setMealSelected,
+  setRecipes,
+  setRecipesLoading,
 } = recipesSlice.actions;
 
 export const showCuisines = (state: RootState) => state.recipes.cuisines;
@@ -108,9 +134,15 @@ export const showSelectedItems = (state: RootState) =>
 
 export const showFilteredCuisines = (state: RootState) =>
   state.recipes.filteredCuisines;
-
 export const showMeals = (state: RootState) => state.recipes.meals;
 export const showFilteredMeals = (state: RootState) =>
   state.recipes.filteredMeals;
+export const showSelectedCuisine = (state: RootState) =>
+  state.recipes.cuisineSelected;
+export const showSelectedMeal = (state: RootState) =>
+  state.recipes.mealSelected;
+export const showRecipes = (state: RootState) => state.recipes.recipes;
+export const showRecipesLoading = (state: RootState) =>
+  state.recipes.recipesLoading;
 
 export default recipesSlice.reducer;

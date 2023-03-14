@@ -137,7 +137,6 @@ export const categoriesSlice = createSlice({
   initialState,
   reducers: {
     resetCategories(state) {
-      console.log('categories reset');
       Object.assign(state, initialState);
     },
     setAddItemSelectedCategory(state, action: PayloadAction<ICategory>) {
@@ -150,7 +149,6 @@ export const categoriesSlice = createSlice({
       );
     },
     resetShelfLife(state) {
-      console.log('shelflife reset');
       Object.assign(state.shelfLife, initialState.shelfLife);
     },
     setShelfLife(state, action: PayloadAction<ICategory>) {
@@ -204,7 +202,6 @@ export const categoriesSlice = createSlice({
       })
       .addCase(getCategoryById.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        console.log(action.payload);
         state.category = action.payload;
       })
       .addCase(getCategoryById.rejected, (state, action) => {

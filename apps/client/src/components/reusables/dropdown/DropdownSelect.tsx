@@ -18,6 +18,8 @@ import { sortedIndex } from 'lodash';
 import {
   filterCuisines,
   filterMeals,
+  setCuisineSelected,
+  setMealSelected,
   showCuisines,
   showFilteredCuisines,
   showFilteredMeals,
@@ -37,8 +39,6 @@ interface IDropdownProps {
   newItem?: any;
   setNewItem?: any;
   resetState?: any;
-  setCuisineSelected?: any;
-  setMealSelected?: any;
 }
 
 const DropdownSelect = ({
@@ -49,8 +49,6 @@ const DropdownSelect = ({
   newItem,
   setNewItem,
   resetState,
-  setCuisineSelected,
-  setMealSelected,
 }: IDropdownProps) => {
   const divRef: any = useRef(null);
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -75,7 +73,7 @@ const DropdownSelect = ({
   const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
-    if (name === 'Categories') {
+    if (name === 'Category') {
       dispatch(filterCategories(searchValue));
     } else if (name === 'Cuisine') {
       dispatch(filterCuisines(searchValue));
@@ -116,17 +114,15 @@ const DropdownSelect = ({
     if (dropdownName === 'Compartment') {
       setNewItem({ ...newItem, storedIn: item.name.split(' ')[0] });
       setDaysInFocus(item.days);
-      console.log(item.days);
       let newExpiryDate = new Date();
       newExpiryDate.setDate(new Date(purchaseDate).getDate() + item.days);
-      console.log(newExpiryDate);
       setExpiryDate(format(newExpiryDate, 'yyyy-MM-dd'));
     }
     if (dropdownName === 'Cuisine') {
-      setCuisineSelected(item);
+      dispatch(setCuisineSelected(item));
     }
     if (dropdownName === 'Meal') {
-      setMealSelected(item);
+      dispatch(setMealSelected(item));
     }
   };
 

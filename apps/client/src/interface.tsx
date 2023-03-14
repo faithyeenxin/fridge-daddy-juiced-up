@@ -9,6 +9,7 @@ export interface IItem {
   storedIn: string;
   quantity: string;
   trashed: Boolean;
+  selected?: Boolean;
 }
 
 export interface ICategory {
@@ -66,3 +67,45 @@ export interface IRecipeType {
   id: number;
   name: string;
 }
+
+export type IRecipe = {
+  id: number;
+  title: string;
+  readyInMinutes: number;
+  servings: number;
+  aggregateLikes?: number;
+  analyzedInstructions?: any[];
+  cheap?: boolean;
+  cookingMinutes?: number;
+  creditsText?: string;
+  cuisines?: string[];
+  dairyFree?: boolean;
+  diets?: string[];
+  dishTypes?: string[];
+  extendedIngredients?: any[];
+  gaps?: string;
+  glutenFree?: boolean;
+  healthScore?: number;
+  image?: string;
+  imageType?: string;
+  instructions?: string;
+  license?: string;
+  lowFodmap?: boolean;
+  occasions?: string[];
+  originalId?: any;
+  preparationMinutes?: number;
+  pricePerServing?: number;
+  sourceName?: string;
+  sourceUrl?: string;
+  spoonacularSourceUrl?: string;
+  summary?: string;
+  sustainable?: boolean;
+  vegan?: boolean;
+  vegetarian?: boolean;
+  veryHealthy?: boolean;
+  veryPopular?: boolean;
+  weightWatcherSmartPoints?: number;
+  likes?: number;
+  missedIngredientCount?: number;
+  usedIngredientCount?: number;
+};

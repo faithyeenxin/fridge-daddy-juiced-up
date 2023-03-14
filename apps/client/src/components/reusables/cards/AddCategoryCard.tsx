@@ -55,7 +55,7 @@ const AddCategoryCard = () => {
       <input
         type='text'
         placeholder='Name'
-        value={newCategory.name}
+        // value={newCategory.name}
         className='w-full h-[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
         onChange={(e) => {
           setNewCategory({ ...newCategory, name: e.target.value });
@@ -65,6 +65,7 @@ const AddCategoryCard = () => {
         <input
           type='number'
           min={0}
+          // value={newCategory.pantryDays}
           placeholder='Pantry'
           className='w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-sm tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center justify-center focus:bg-opacity-80 focus:outline-none'
           onChange={(e) => {
@@ -77,6 +78,7 @@ const AddCategoryCard = () => {
         <input
           type='number'
           min={0}
+          // value={newCategory.fridgeDays}
           placeholder='Fridge'
           className='w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-sm  tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
           onChange={(e) => {
@@ -89,6 +91,7 @@ const AddCategoryCard = () => {
         <input
           type='number'
           min={0}
+          // value={newCategory.freezerDays}
           placeholder='Freezer'
           className='w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-sm tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
           onChange={(e) => {
@@ -100,8 +103,18 @@ const AddCategoryCard = () => {
         />
       </div>
       <div
-        className='flex justify-center w-full bg-orange rounded-3xl items-center hover:bg-gradient-to-r from-orange to-pink'
-        onClick={handleSubmit}
+        className='flex justify-center w-full bg-orange rounded-3xl items-center hover:bg-gradient-to-r from-orange to-pink cursor-pointer'
+        onClick={() => {
+          handleSubmit();
+          // setNewCategory({
+          //   userId: '',
+          //   name: '',
+          //   dateCreated: new Date(),
+          //   pantryDays: 0,
+          //   fridgeDays: 0,
+          //   freezerDays: 0,
+          // });
+        }}
       >
         <img src='images/cards/add.svg' />
       </div>

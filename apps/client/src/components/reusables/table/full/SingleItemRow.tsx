@@ -201,7 +201,6 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                           defaultValue={capitalizeWords(item.quantity)}
                           className='w-full h-[30px] xl:h-[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
                           onChange={(e) => {
-                            console.log(e.target.value);
                             setNewItem({
                               ...newItem,
                               quantity: e.target.value,
@@ -348,8 +347,6 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                         type='button'
                         className='mr-2 w-[200px] inline-flex justify-center rounded-3xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none focus-visible:ring-2'
                         onClick={(e) => {
-                          console.log('submit edit');
-                          console.log(newItem);
                           if (
                             !isAfter(
                               new Date(newItem.expiryDate),
@@ -374,7 +371,6 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                                 )
                               ),
                             };
-                            console.log(data);
                             dispatch(updateItem(data))
                               .unwrap()
                               .then((originalPromiseResult) => {
