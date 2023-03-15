@@ -23,6 +23,7 @@ const RecipesItemCard = () => {
   const apiKey = `5962ec749418426c81fa226be6317343`;
   const apiKey2 = `a15745668f894779b75adf57f9d76136`;
   const apiKey3 = `8e4e45b4d72f4a74b59440190f82116e`;
+  const apiKey4 = `fc30ca941c9141489055ff119a8ac01c`;
 
   const [allSelectedItems, setAllSelectedItems] = useState<string[]>();
   useEffect(() => {
@@ -43,7 +44,7 @@ const RecipesItemCard = () => {
     const cuisine = cuisineInput.name;
     const meal = mealInput.name;
     dispatch(setRecipesLoading(true));
-    const queryUrl = `https://api.spoonacular.com/recipes/complexSearch?number=${numberOfRecipes}&sort=min-missing-ingredients&sortDirection=asc&instructionsRequired=true&ignorePantry=true&includeIngredients=${ingredients}&cuisine=${cuisine}&type=${meal}&apiKey=${apiKey3}`;
+    const queryUrl = `https://api.spoonacular.com/recipes/complexSearch?number=${numberOfRecipes}&sort=min-missing-ingredients&sortDirection=asc&instructionsRequired=true&ignorePantry=true&includeIngredients=${ingredients}&cuisine=${cuisine}&type=${meal}&apiKey=${apiKey4}`;
     fetch(queryUrl)
       .then((res) => res.json())
       .then((data) => {
