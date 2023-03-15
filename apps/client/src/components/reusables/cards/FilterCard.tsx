@@ -163,8 +163,8 @@ const FilterCard = () => {
               className='cursor-pointer'
               src={
                 checkboxStatus.evergreen
-                  ? `images/cards/check_ring.svg`
-                  : `images/cards/uncheck_ring.svg`
+                  ? `/images/cards/check_ring.svg`
+                  : `/images/cards/uncheck_ring.svg`
               }
               onClick={() => {
                 updateCheckboxStatus({
@@ -182,8 +182,8 @@ const FilterCard = () => {
               className='cursor-pointer'
               src={
                 checkboxStatus.rotten
-                  ? `images/cards/check_ring.svg`
-                  : `images/cards/uncheck_ring.svg`
+                  ? `/images/cards/check_ring.svg`
+                  : `/images/cards/uncheck_ring.svg`
               }
               onClick={() => {
                 updateCheckboxStatus({
@@ -201,8 +201,8 @@ const FilterCard = () => {
               className='cursor-pointer'
               src={
                 checkboxStatus.trashed
-                  ? `images/cards/check_ring.svg`
-                  : `images/cards/uncheck_ring.svg`
+                  ? `/images/cards/check_ring.svg`
+                  : `/images/cards/uncheck_ring.svg`
               }
               onClick={() => {
                 updateCheckboxStatus({
@@ -227,8 +227,8 @@ const FilterCard = () => {
               className='cursor-pointer'
               src={
                 checkboxStatus.pantry
-                  ? `images/cards/check_ring.svg`
-                  : `images/cards/uncheck_ring.svg`
+                  ? `/images/cards/check_ring.svg`
+                  : `/images/cards/uncheck_ring.svg`
               }
               onClick={() => {
                 updateCheckboxStatus({
@@ -246,8 +246,8 @@ const FilterCard = () => {
               className='cursor-pointer'
               src={
                 checkboxStatus.fridge
-                  ? `images/cards/check_ring.svg`
-                  : `images/cards/uncheck_ring.svg`
+                  ? `/images/cards/check_ring.svg`
+                  : `/images/cards/uncheck_ring.svg`
               }
               onClick={() => {
                 updateCheckboxStatus({
@@ -265,8 +265,8 @@ const FilterCard = () => {
               className='cursor-pointer'
               src={
                 checkboxStatus.freezer
-                  ? `images/cards/check_ring.svg`
-                  : `images/cards/uncheck_ring.svg`
+                  ? `/images/cards/check_ring.svg`
+                  : `/images/cards/uncheck_ring.svg`
               }
               onClick={() => {
                 updateCheckboxStatus({
@@ -291,8 +291,8 @@ const FilterCard = () => {
               className='cursor-pointer'
               src={
                 checkboxStatus.today
-                  ? `images/cards/check_ring.svg`
-                  : `images/cards/uncheck_ring.svg`
+                  ? `/images/cards/check_ring.svg`
+                  : `/images/cards/uncheck_ring.svg`
               }
               onClick={() => {
                 updateCheckboxStatus({
@@ -312,8 +312,8 @@ const FilterCard = () => {
               className='cursor-pointer'
               src={
                 checkboxStatus.in3Days
-                  ? `images/cards/check_ring.svg`
-                  : `images/cards/uncheck_ring.svg`
+                  ? `/images/cards/check_ring.svg`
+                  : `/images/cards/uncheck_ring.svg`
               }
               onClick={() => {
                 updateCheckboxStatus({
@@ -333,8 +333,8 @@ const FilterCard = () => {
               className='cursor-pointer'
               src={
                 checkboxStatus.inAWeek
-                  ? `images/cards/check_ring.svg`
-                  : `images/cards/uncheck_ring.svg`
+                  ? `/images/cards/check_ring.svg`
+                  : `/images/cards/uncheck_ring.svg`
               }
               onClick={() => {
                 updateCheckboxStatus({

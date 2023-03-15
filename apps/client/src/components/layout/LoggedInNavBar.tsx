@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import {} from '../../app/slices/itemsSlice';
 import { useAppDispatch, useAppSelector } from '../../app/store';
 import { Dialog, Transition } from '@headlessui/react';
@@ -11,13 +11,25 @@ import {
   setAddItemModalOpen,
   setAddModalOpen,
   setFilterModalOpen,
+  setIngredientModalOpen,
+  setNutritionModalOpen,
   showAddCategoryIsOpen,
   showAddIsOpen,
   showAddItemIsOpen,
   showFilterIsOpen,
+  showIngredientIsOpen,
+  showNutritionIsOpen,
 } from '../../app/slices/modalSlice';
+import RecipeNutritionCard from '../reusables/cards/RecipeNutritionCard';
+import RecipeIngredientsCard from '../reusables/cards/RecipeIngredientsCard';
+import {
+  showSingleRecipeData,
+  showSingleRecipeNutrition,
+} from '../../app/slices/recipesSlice';
 
 const LoggedInNavBar = () => {
+  const { id } = useParams();
+  console.log(`id: ${id}`);
   const location = useLocation();
   const dispatch = useAppDispatch();
   const [navStatus, setNavStatus] = useState('');
@@ -26,9 +38,13 @@ const LoggedInNavBar = () => {
   const addItemIsOpen = useAppSelector(showAddItemIsOpen);
   const addCategoryIsOpen = useAppSelector(showAddCategoryIsOpen);
   const filterIsOpen = useAppSelector(showFilterIsOpen);
+  const recipeDataIsOpen = useAppSelector(showIngredientIsOpen);
+  const recipeNutritionIsOpen = useAppSelector(showNutritionIsOpen);
+
   const navigate = useNavigate();
   let divRef = useRef<any>();
-  console.log(location.pathname);
+  const recipeData = useAppSelector(showSingleRecipeData);
+  const recipeNutrition = useAppSelector(showSingleRecipeNutrition);
   useEffect(() => {
     const handler = (event: any) => {
       if (divRef.current && !divRef.current.contains(event.target)) {
@@ -89,7 +105,20 @@ const LoggedInNavBar = () => {
               />
             </>
           )}
-
+          {id && location.pathname === `/recipes/${id}` && (
+            <>
+              <img
+                className='flex lg:hidden hover:cursor-pointer'
+                src='/images/navbar/ingredients.svg'
+                onClick={() => dispatch(setIngredientModalOpen())}
+              />
+              <img
+                className='flex lg:hidden hover:cursor-pointer'
+                src='/images/navbar/nutrition.svg'
+                onClick={() => dispatch(setNutritionModalOpen())}
+              />
+            </>
+          )}
           <div ref={divRef}>
             {/* Hambuger Icon */}
             <button
@@ -211,7 +240,6 @@ const LoggedInNavBar = () => {
           </div>
         </Dialog>
       </Transition>
-
       {/* ADD ITEM BUTTON MODAL */}
       <Transition appear show={addItemIsOpen} as={Fragment}>
         <Dialog
@@ -258,7 +286,6 @@ const LoggedInNavBar = () => {
           </div>
         </Dialog>
       </Transition>
-
       {/* ADD CATEGORY BUTTON MODAL */}
       <Transition appear show={addCategoryIsOpen} as={Fragment}>
         <Dialog
@@ -291,12 +318,6 @@ const LoggedInNavBar = () => {
                 leaveTo='opacity-0 scale-95'
               >
                 <Dialog.Panel className='w-full max-w-md flex flex-col items-center justify-center transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
-                  {/* <Dialog.Title
-                    as='h3'
-                    className='flex text-lg font-medium leading-6 text-red-400'
-                  >
-                    Add A Category
-                  </Dialog.Title> */}
                   <div className='w-full'>
                     <AddCategoryCard />
                   </div>
@@ -306,13 +327,11 @@ const LoggedInNavBar = () => {
           </div>
         </Dialog>
       </Transition>
-
       {/* FILTER BUTTON MODAL */}
       <Transition appear show={filterIsOpen} as={Fragment}>
         <Dialog
           as='div'
           className='relative z-10'
-          // onClose={closeFilterModal}
           onClose={() => dispatch(setFilterModalOpen())}
         >
           <Transition.Child
@@ -340,6 +359,83 @@ const LoggedInNavBar = () => {
               >
                 <Dialog.Panel className='w-[250px] max-h-[580px] max-w-md flex flex-col items-center justify-center transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
                   <FilterCard />
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+      {/* INGREDIENTS BUTTON MODAL */}
+      <Transition appear show={recipeDataIsOpen} as={Fragment}>
+        <Dialog
+          as='div'
+          className='relative z-10'
+          // onClose={closeFilterModal}
+          onClose={() => dispatch(setIngredientModalOpen())}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter='ease-out duration-300'
+            enterFrom='opacity-0'
+            enterTo='opacity-100'
+            leave='ease-in duration-200'
+            leaveFrom='opacity-100'
+            leaveTo='opacity-0'
+          >
+            <div className='fixed inset-0 bg-black bg-opacity-25' />
+          </Transition.Child>
+
+          <div className='fixed inset-0 overflow-y-auto'>
+            <div className='flex min-h-full items-center justify-center p-4 text-center'>
+              <Transition.Child
+                as={Fragment}
+                enter='ease-out duration-300'
+                enterFrom='opacity-0 scale-95'
+                enterTo='opacity-100 scale-100'
+                leave='ease-in duration-200'
+                leaveFrom='opacity-100 scale-100'
+                leaveTo='opacity-0 scale-95'
+              >
+                <Dialog.Panel className='w-full max-h-[580px] max-w-md flex flex-col items-center justify-center transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                  <RecipeIngredientsCard recipeData={recipeData} />
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+      {/* NUTRITION BUTTON MODAL */}
+      <Transition appear show={recipeNutritionIsOpen} as={Fragment}>
+        <Dialog
+          as='div'
+          className='relative z-10'
+          onClose={() => dispatch(setNutritionModalOpen())}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter='ease-out duration-300'
+            enterFrom='opacity-0'
+            enterTo='opacity-100'
+            leave='ease-in duration-200'
+            leaveFrom='opacity-100'
+            leaveTo='opacity-0'
+          >
+            <div className='fixed inset-0 bg-black bg-opacity-25' />
+          </Transition.Child>
+
+          <div className='fixed inset-0 overflow-y-auto'>
+            <div className='flex min-h-full items-center justify-center p-4 text-center'>
+              <Transition.Child
+                as={Fragment}
+                enter='ease-out duration-300'
+                enterFrom='opacity-0 scale-95'
+                enterTo='opacity-100 scale-100'
+                leave='ease-in duration-200'
+                leaveFrom='opacity-100 scale-100'
+                leaveTo='opacity-0 scale-95'
+              >
+                <Dialog.Panel className='w-full max-h-[580px] max-w-md flex flex-col items-center justify-center transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                  <RecipeNutritionCard recipeNutrition={recipeNutrition} />
                 </Dialog.Panel>
               </Transition.Child>
             </div>

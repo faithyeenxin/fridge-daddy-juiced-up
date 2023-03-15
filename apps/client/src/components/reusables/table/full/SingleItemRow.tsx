@@ -124,8 +124,8 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
             <img
               src={
                 isTrashedHoverState
-                  ? 'images/table/full/unchecked.svg'
-                  : 'images/table/full/checked.svg'
+                  ? '/images/table/full/unchecked.svg'
+                  : '/images/table/full/checked.svg'
               }
             />
           </div>
@@ -140,8 +140,8 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
             <img
               src={
                 binHoverState
-                  ? 'images/table/full/untrashed-red.svg'
-                  : 'images/table/full/untrashed-black.svg'
+                  ? '/images/table/full/untrashed-red.svg'
+                  : '/images/table/full/untrashed-black.svg'
               }
             />
           </div>

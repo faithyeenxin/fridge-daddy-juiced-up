@@ -73,8 +73,8 @@ export type IRecipe = {
   title: string;
   readyInMinutes: number;
   servings: number;
-  aggregateLikes?: number;
   analyzedInstructions?: any[];
+  aggregateLikes?: number;
   cheap?: boolean;
   cookingMinutes?: number;
   creditsText?: string;
@@ -162,4 +162,22 @@ export interface IRecipeNutrition {
   ingredients: Ingredient[];
   caloricBreakdown: CaloricBreakdown;
   weightPerServing: WeightPerServing;
+}
+
+interface ISingleNutrition {
+  title: string;
+  amount: string;
+  indented: boolean;
+  percentOfDailyNeeds: number;
+}
+
+export interface NutritionInfo {
+  bad: ISingleNutrition[];
+  calories: string;
+  carbs: string;
+  expires: number;
+  fat: string;
+  good: ISingleNutrition[];
+  isStale: boolean;
+  protein: string;
 }

@@ -75,7 +75,7 @@ const ItemsTable = () => {
             <div className='flex justify-center items-center text-center'>
               <img
                 className='flex w-[100px] h-[400px]'
-                src='images/table/full/loading-animation.svg'
+                src='/images/table/full/loading-animation.svg'
               />
             </div>
           )}

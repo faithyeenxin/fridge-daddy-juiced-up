@@ -110,7 +110,7 @@ const AddCategoryCard = () => {
           handleSubmit();
         }}
       >
-        <img src='images/cards/add.svg' />
+        <img src='/images/cards/add.svg' />
       </div>
     </div>
   );

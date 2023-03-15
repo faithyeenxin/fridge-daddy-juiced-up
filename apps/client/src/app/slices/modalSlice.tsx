@@ -9,6 +9,8 @@ interface IModalState {
   addItemModalOpen: boolean;
   addCategoryModalOpen: boolean;
   filterModalOpen: boolean;
+  ingredientModalOpen: boolean;
+  nutritionModalOpen: boolean;
 }
 
 const initialState: IModalState = {
@@ -16,6 +18,8 @@ const initialState: IModalState = {
   addItemModalOpen: false,
   addCategoryModalOpen: false,
   filterModalOpen: false,
+  ingredientModalOpen: false,
+  nutritionModalOpen: false,
 };
 
 export const modalSlice = createSlice({
@@ -34,6 +38,12 @@ export const modalSlice = createSlice({
     setFilterModalOpen(state) {
       state.filterModalOpen = !state.filterModalOpen;
     },
+    setIngredientModalOpen(state) {
+      state.ingredientModalOpen = !state.ingredientModalOpen;
+    },
+    setNutritionModalOpen(state) {
+      state.nutritionModalOpen = !state.nutritionModalOpen;
+    },
   },
   extraReducers: (builder) => {},
 });
@@ -43,6 +53,8 @@ export const {
   setAddItemModalOpen,
   setAddCategoryModalOpen,
   setFilterModalOpen,
+  setIngredientModalOpen,
+  setNutritionModalOpen,
 } = modalSlice.actions;
 export const showAddIsOpen = (state: RootState) => state.modal.addModalOpen;
 export const showAddItemIsOpen = (state: RootState) =>
@@ -51,5 +63,9 @@ export const showAddCategoryIsOpen = (state: RootState) =>
   state.modal.addCategoryModalOpen;
 export const showFilterIsOpen = (state: RootState) =>
   state.modal.filterModalOpen;
+export const showIngredientIsOpen = (state: RootState) =>
+  state.modal.ingredientModalOpen;
+export const showNutritionIsOpen = (state: RootState) =>
+  state.modal.nutritionModalOpen;
 
 export default modalSlice.reducer;

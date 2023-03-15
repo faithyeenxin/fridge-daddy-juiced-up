@@ -8,6 +8,7 @@ import {
   IRecipe,
   IRecipeType,
   IUser,
+  NutritionInfo,
 } from '../../interface';
 import { RootState } from '../store';
 
@@ -21,6 +22,8 @@ interface recipesState {
   mealSelected: IRecipeType;
   recipes: IRecipe[];
   recipesLoading: boolean;
+  singleRecipeData: IRecipe;
+  singleRecipeNutritionData: NutritionInfo;
 }
 
 const initialState: recipesState = {
@@ -77,6 +80,17 @@ const initialState: recipesState = {
   mealSelected: { id: 1, name: '-' },
   recipes: [],
   recipesLoading: true,
+  singleRecipeData: { id: 0, title: '', readyInMinutes: 0, servings: 0 },
+  singleRecipeNutritionData: {
+    bad: [],
+    calories: '',
+    carbs: '',
+    expires: 0,
+    fat: '',
+    good: [],
+    isStale: false,
+    protein: '',
+  },
 };
 
 export const recipesSlice = createSlice({
@@ -113,6 +127,12 @@ export const recipesSlice = createSlice({
     setRecipesLoading(state, action: PayloadAction<boolean>) {
       state.recipesLoading = action.payload;
     },
+    setSingleRecipeData(state, action: PayloadAction<IRecipe>) {
+      state.singleRecipeData = action.payload;
+    },
+    setSingleRecipeNutrition(state, action: PayloadAction<NutritionInfo>) {
+      state.singleRecipeNutritionData = action.payload;
+    },
   },
   extraReducers: (builder) => {},
 });
@@ -126,6 +146,8 @@ export const {
   setMealSelected,
   setRecipes,
   setRecipesLoading,
+  setSingleRecipeData,
+  setSingleRecipeNutrition,
 } = recipesSlice.actions;
 
 export const showCuisines = (state: RootState) => state.recipes.cuisines;
@@ -144,5 +166,8 @@ export const showSelectedMeal = (state: RootState) =>
 export const showRecipes = (state: RootState) => state.recipes.recipes;
 export const showRecipesLoading = (state: RootState) =>
   state.recipes.recipesLoading;
-
+export const showSingleRecipeData = (state: RootState) =>
+  state.recipes.singleRecipeData;
+export const showSingleRecipeNutrition = (state: RootState) =>
+  state.recipes.singleRecipeNutritionData;
 export default recipesSlice.reducer;

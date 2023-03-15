@@ -86,7 +86,7 @@ const RecipesItemCard = () => {
             className='w-1/5 flex justify-center cursor-pointer'
             onClick={handleSearchRecipe}
           >
-            <img src='images/recipes/search_button.svg' />
+            <img src='/images/recipes/search_button.svg' />
           </div>
         </div>
       </div>

@@ -82,7 +82,7 @@ const RecipesDisplay = () => {
   const apiKey3 = `8e4e45b4d72f4a74b59440190f82116e`;
   const apiKey4 = `fc30ca941c9141489055ff119a8ac01c`;
 
-  const randomRecipeUrl = `https://api.spoonacular.com/recipes/random?number=${numberOfRecipes}&apiKey=${apiKey}`;
+  const randomRecipeUrl = `https://api.spoonacular.com/recipes/random?number=${numberOfRecipes}&apiKey=${apiKey3}`;
   console.log(randomRecipeUrl);
   useEffect(() => {
     dispatch(setRecipesLoading(true));
@@ -90,13 +90,13 @@ const RecipesDisplay = () => {
       .then((res) => res.json())
       .then((data) => {
         dispatch(setRecipes(data.recipes));
-        dispatch(setRecipesLoading(false));
       })
       .catch((err) => {
         toast.error(
           'Sorry we could not get you curated recipes. Please try again.'
         );
       });
+    dispatch(setRecipesLoading(false));
   }, []);
 
   return (
@@ -126,7 +126,7 @@ const RecipesDisplay = () => {
           <div className='flex justify-center items-center text-center'>
             <img
               className='flex w-[100px] h-[400px]'
-              src='images/table/full/loading-animation.svg'
+              src='/images/table/full/loading-animation.svg'
             />
           </div>
         )}

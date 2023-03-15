@@ -115,8 +115,8 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
             <img
               src={
                 isHovered
-                  ? 'images/table/partial/add_hovered.svg'
-                  : 'images/table/partial/add_unhovered.svg'
+                  ? '/images/table/partial/add_hovered.svg'
+                  : '/images/table/partial/add_unhovered.svg'
               }
             />
           </div>
@@ -131,8 +131,8 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
             <img
               src={
                 isHovered
-                  ? 'images/table/partial/unselect_hovered.svg'
-                  : 'images/table/partial/unselect_unhovered.svg'
+                  ? '/images/table/partial/unselect_hovered.svg'
+                  : '/images/table/partial/unselect_unhovered.svg'
               }
             />
           </div>
