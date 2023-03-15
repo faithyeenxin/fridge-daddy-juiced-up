@@ -111,7 +111,7 @@ const RecipesDisplay = () => {
         </div>
       </div>
       {/* All Recipes */}
-      <div className='flex flex-wrap w-full h-full gap-5 justify-center overflow-auto'>
+      <div className='flex flex-col lg:flex-row flex-wrap w-full h-full gap-5 justify-center overflow-auto'>
         {!recipesLoading ? (
           recipes?.length > 0 ? (
             recipes.map((recipe) => (
