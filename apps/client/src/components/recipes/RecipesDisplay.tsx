@@ -82,7 +82,7 @@ const RecipesDisplay = () => {
   const apiKey3 = `8e4e45b4d72f4a74b59440190f82116e`;
   const apiKey4 = `fc30ca941c9141489055ff119a8ac01c`;
 
-  const randomRecipeUrl = `https://api.spoonacular.com/recipes/random?number=${numberOfRecipes}&apiKey=${apiKey3}`;
+  const randomRecipeUrl = `https://api.spoonacular.com/recipes/random?number=${numberOfRecipes}&apiKey=${apiKey4}`;
   console.log(randomRecipeUrl);
   useEffect(() => {
     dispatch(setRecipesLoading(true));
@@ -111,7 +111,7 @@ const RecipesDisplay = () => {
         </div>
       </div>
       {/* All Recipes */}
-      <div className='flex flex-col lg:flex-row flex-wrap w-full h-full gap-5 justify-center overflow-auto'>
+      <div className='flex flex-col lg:flex-row flex-wrap w-full h-full gap-5 justify-center overflow-auto snap-x'>
         {!recipesLoading ? (
           recipes?.length > 0 ? (
             recipes.map((recipe) => (

@@ -22,8 +22,8 @@ const SingleRecipe = () => {
   const apiKey4 = `fc30ca941c9141489055ff119a8ac01c`;
   const recipeData = useAppSelector(showSingleRecipeData);
   const recipeNutrition = useAppSelector(showSingleRecipeNutrition);
-  const recipeUrl = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey3}`;
-  const nutritionUrl = `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=${apiKey3}`;
+  const recipeUrl = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey4}`;
+  const nutritionUrl = `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=${apiKey4}`;
   console.log(recipeUrl);
   console.log(nutritionUrl);
   const [loading, setLoading] = useState(false);

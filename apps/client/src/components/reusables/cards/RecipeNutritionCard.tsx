@@ -39,7 +39,7 @@ const RecipeNutritionCard = ({ recipeNutrition }: IRecipeNutritionProps) => {
               </td>
             </tr>
           ))}
-          {recipeNutrition?.good.map((item, idx) => (
+          {recipeNutrition?.good?.map((item, idx) => (
             <tr key={idx}>
               <td className='text-center text-teal-500'>{item?.title}</td>
               <td className='text-center text-teal-500'>{item?.amount}</td>

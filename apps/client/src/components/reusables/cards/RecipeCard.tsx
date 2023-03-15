@@ -11,7 +11,7 @@ const RecipeCard = ({ recipe }: IRecipeCardProps) => {
   return (
     <div
       key={recipe.id}
-      className='w-[230px] h-[280px] bg-tablePink rounded-lg overflow-clip cursor-pointer'
+      className='w-[230px] h-[300px] bg-tablePink rounded-lg overflow-clip cursor-pointer snap-center'
       onClick={() => navigate(`/recipes/${recipe.id}`)}
     >
       <img src={recipe.image} />
