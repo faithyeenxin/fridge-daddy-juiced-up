@@ -9,7 +9,7 @@ const RecipeNutritionCard = ({ recipeNutrition }: IRecipeNutritionProps) => {
   return (
     <div className='overflow-auto flex flex-col items-centers gap-5 p-5'>
       <h1 className='xs:text-md sm:text-lg md:text-2xl lg:text-3xl xl:text-4xl font-lora text-orange text-center tracking-wider w-full h-auto'>
-        Nutrition
+        Nutrition Facts
       </h1>
       <table className='table-auto'>
         <tbody>
