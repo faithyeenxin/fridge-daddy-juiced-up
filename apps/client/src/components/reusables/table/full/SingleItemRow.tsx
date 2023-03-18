@@ -24,6 +24,7 @@ import {
 } from '../../../../app/slices/categoriesSlice';
 import { getUserId } from '../../../../app/slices/userSlice';
 import isAfter from 'date-fns/isAfter';
+import ItemsTableSmall from '../partial/ItemsTableSmall';
 
 interface ISingleItemProps {
   item: IItem;
@@ -54,11 +55,15 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
   const [edit, setEdit] = useState(false);
 
   function closeModal() {
+    console.log('close modal');
+    console.log(item);
     setEdit(false);
     setIsOpen(false);
   }
 
   function openModal() {
+    console.log('open modal');
+    console.log(item);
     setIsOpen(true);
   }
 
@@ -77,7 +82,6 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
     quantity: item.quantity,
     trashed: item.trashed,
   });
-  console.log(item);
   return (
     <div
       id={`item-${item.id}`}

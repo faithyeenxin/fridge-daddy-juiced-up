@@ -1,12 +1,16 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
-import {} from '../../app/slices/itemsSlice';
+
 import { useAppDispatch, useAppSelector } from '../../app/store';
 import { Dialog, Transition } from '@headlessui/react';
 import AddItemCard from '../reusables/cards/AddItemCard';
 import AddCategoryCard from '../reusables/cards/AddCategoryCard';
 import FilterCard from '../reusables/cards/FilterCard';
 import {
+  closeAddCategoryModalOpen,
+  closeAddItemModalOpen,
+  closeAddModalOpen,
+  closeAllModals,
   setAddCategoryModalOpen,
   setAddItemModalOpen,
   setAddModalOpen,
@@ -40,6 +44,7 @@ const LoggedInNavBar = () => {
   const filterIsOpen = useAppSelector(showFilterIsOpen);
   const recipeDataIsOpen = useAppSelector(showIngredientIsOpen);
   const recipeNutritionIsOpen = useAppSelector(showNutritionIsOpen);
+  const [addModelOpen, setAddModelOpen] = useState(true);
 
   const navigate = useNavigate();
   let divRef = useRef<any>();
@@ -176,7 +181,7 @@ const LoggedInNavBar = () => {
         <Dialog
           as='div'
           className='relative z-10'
-          onClose={() => dispatch(setAddModalOpen())}
+          onClose={() => dispatch(closeAddModalOpen())}
         >
           <Transition.Child
             as={Fragment}
@@ -213,9 +218,6 @@ const LoggedInNavBar = () => {
                       type='button'
                       className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none'
                       onClick={() => {
-                        // closeAddModal();
-                        dispatch(setAddModalOpen());
-                        // openAddItemModal();
                         dispatch(setAddItemModalOpen());
                       }}
                     >
@@ -225,9 +227,6 @@ const LoggedInNavBar = () => {
                       type='button'
                       className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none'
                       onClick={() => {
-                        // closeAddModal();
-                        dispatch(setAddModalOpen());
-                        // openAddCategoryModal();
                         dispatch(setAddCategoryModalOpen());
                       }}
                     >
@@ -245,7 +244,7 @@ const LoggedInNavBar = () => {
         <Dialog
           as='div'
           className='relative z-10'
-          onClose={() => dispatch(setAddItemModalOpen())}
+          onClose={() => dispatch(closeAddItemModalOpen())}
         >
           <Transition.Child
             as={Fragment}
@@ -291,8 +290,7 @@ const LoggedInNavBar = () => {
         <Dialog
           as='div'
           className='relative z-10'
-          // onClose={closeAddCategoryModal}
-          onClose={() => dispatch(setAddCategoryModalOpen())}
+          onClose={() => dispatch(closeAddCategoryModalOpen())}
         >
           <Transition.Child
             as={Fragment}
@@ -332,7 +330,7 @@ const LoggedInNavBar = () => {
         <Dialog
           as='div'
           className='relative z-10'
-          onClose={() => dispatch(setFilterModalOpen())}
+          onClose={() => dispatch(closeAllModals())}
         >
           <Transition.Child
             as={Fragment}
@@ -370,8 +368,7 @@ const LoggedInNavBar = () => {
         <Dialog
           as='div'
           className='relative z-10'
-          // onClose={closeFilterModal}
-          onClose={() => dispatch(setIngredientModalOpen())}
+          onClose={() => dispatch(closeAllModals())}
         >
           <Transition.Child
             as={Fragment}
@@ -409,7 +406,7 @@ const LoggedInNavBar = () => {
         <Dialog
           as='div'
           className='relative z-10'
-          onClose={() => dispatch(setNutritionModalOpen())}
+          onClose={() => dispatch(closeAllModals())}
         >
           <Transition.Child
             as={Fragment}

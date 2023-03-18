@@ -26,11 +26,23 @@ export const modalSlice = createSlice({
   name: 'modal',
   initialState,
   reducers: {
+    closeAllModals(state) {
+      Object.assign(state, initialState);
+    },
+    closeAddModalOpen(state) {
+      state.addModalOpen = false;
+    },
     setAddModalOpen(state) {
       state.addModalOpen = !state.addModalOpen;
     },
+    closeAddItemModalOpen(state) {
+      state.addItemModalOpen = false;
+    },
     setAddItemModalOpen(state) {
       state.addItemModalOpen = !state.addItemModalOpen;
+    },
+    closeAddCategoryModalOpen(state) {
+      state.addCategoryModalOpen = false;
     },
     setAddCategoryModalOpen(state) {
       state.addCategoryModalOpen = !state.addCategoryModalOpen;
@@ -49,6 +61,10 @@ export const modalSlice = createSlice({
 });
 
 export const {
+  closeAllModals,
+  closeAddModalOpen,
+  closeAddItemModalOpen,
+  closeAddCategoryModalOpen,
   setAddModalOpen,
   setAddItemModalOpen,
   setAddCategoryModalOpen,
