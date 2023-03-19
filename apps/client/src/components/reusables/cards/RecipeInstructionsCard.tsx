@@ -10,9 +10,9 @@ const RecipeInstructionsCard = ({ recipeData }: IRecipeInstructionsProps) => {
     recipeData?.analyzedInstructions &&
     recipeData?.analyzedInstructions[0]?.steps?.map(
       (instruction: any, idx: number) => (
-        <li key={idx} className='list-decimal'>
+        <div key={idx} className='list-decimal'>
           {instruction.step}
-        </li>
+        </div>
       )
     );
   return (
