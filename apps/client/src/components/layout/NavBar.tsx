@@ -41,7 +41,7 @@ const NavBar = () => {
         <div className='flex'>
           {/* <img src={hammieBurg} alt="fridge daddy icon" /> */}
           <a
-            className='text-3xl font-bold tracking-wider text-orange'
+            className='text-3xl font-bold tracking-wider text-orange hover:cursor-pointer'
             onClick={() => {
               navigate('/');
             }}
@@ -52,7 +52,7 @@ const NavBar = () => {
         {/* Menu Items */}
         <div className='md:flex space-x-6  md:text-l lg:text-xl tracking-wide items-center'>
           <div
-            className='hover:text-orange hidden md:flex'
+            className='hover:text-orange hidden md:flex hover:cursor-pointer'
             onClick={() => {
               navigate('/creators');
             }}
@@ -60,7 +60,7 @@ const NavBar = () => {
             the Creator
           </div>
           <div
-            className='hover:text-orange  hidden md:flex'
+            className='hover:text-orange  hidden md:flex hover:cursor-pointer'
             onClick={() => {
               navigate('/login');
             }}
@@ -68,7 +68,7 @@ const NavBar = () => {
             Sign In
           </div>
           <div
-            className='hidden md:block p-1 px-6 text-white bg-orange rounded-full baseline hover:bg-gradient-to-r from-orange to-pink text-md '
+            className='hidden md:block p-1 px-6 text-white bg-orange rounded-full baseline hover:bg-gradient-to-r from-orange to-pink text-md hover:cursor-pointer'
             onClick={() => {
               navigate('/register');
             }}
