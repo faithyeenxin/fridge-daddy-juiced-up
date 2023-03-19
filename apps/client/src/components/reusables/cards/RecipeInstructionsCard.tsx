@@ -16,7 +16,7 @@ const RecipeInstructionsCard = ({ recipeData }: IRecipeInstructionsProps) => {
       )
     );
   return (
-    <div className='flex flex-col items-centers gap-5 p-5 w-full h-full'>
+    <div className='flex flex-col items-centers gap-5 p-5 w-full h-full overflow-auto'>
       <h1 className='xs:text-md sm:text-lg md:text-2xl lg:text-3xl xl:text-4xl font-lora text-orange text-center tracking-wider w-full h-auto'>
         Instructions
       </h1>
