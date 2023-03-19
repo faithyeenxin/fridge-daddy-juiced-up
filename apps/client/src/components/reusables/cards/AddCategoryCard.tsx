@@ -15,7 +15,7 @@ const AddCategoryCard = () => {
   const token: any = useAppSelector(getUserId);
   const dispatch = useAppDispatch();
   const [newCategory, setNewCategory] = useState<ICategory>({
-    userId: '',
+    // userId: '',
     name: '',
     dateCreated: new Date(),
     pantryDays: 0,
@@ -24,18 +24,17 @@ const AddCategoryCard = () => {
   });
 
   const handleSubmit = () => {
-    const data = { ...newCategory, userId: token.id };
     if (
       newCategory.pantryDays < 0 ||
       newCategory.fridgeDays < 0 ||
       newCategory.freezerDays < 0
     ) {
       toast.error('Pantry, Fridge & Freezer Days must be a positive value.');
-    } else if (Object.values(data).includes('')) {
+    } else if (Object.values(newCategory).includes('')) {
       toast.error('All fields have to be filled.');
     } else {
       toast("We're adding your category!");
-      dispatch(createCategory(data))
+      dispatch(createCategory(newCategory))
         .unwrap()
         .then((originalPromiseResult) => {
           // handle result here

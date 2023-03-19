@@ -90,13 +90,13 @@ const RecipesDisplay = () => {
       .then((res) => res.json())
       .then((data) => {
         dispatch(setRecipes(data.recipes));
+        dispatch(setRecipesLoading(false));
       })
       .catch((err) => {
         toast.error(
           'Sorry we could not get you curated recipes. Please try again.'
         );
       });
-    dispatch(setRecipesLoading(false));
   }, []);
 
   return (

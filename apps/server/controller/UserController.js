@@ -16,6 +16,14 @@ router.get("/seed", async (req, res) => {
   const seedUsers = await prisma.user.createMany({
     data: [
       {
+        name: "Test User",
+        email: "testUser@hotmail.com",
+        password: bcrypt.hashSync("Password123!", 10),
+        image:
+          "https://i.mydramalist.com/eJNje_5c.jpg",
+        dateJoined: new Date(2022, 10, 05),
+      },
+      {
         name: "Administrator",
         email: "admin123@hotmail.com",
         password: bcrypt.hashSync("password123", 10),
@@ -77,17 +85,6 @@ router.get("/:id", async (req, res) => {
   });
   res.status(200).send(user);
 });
-
-// //* Find by Username(Yup validate unique client username)
-// router.get("/findByUsername/:username", async (req, res) => {
-//   const { username } = req.params;
-//   const user = await prisma.user.findMany({ where: { username: username } });
-//   if (user.length === 0) {
-//     res.status(400).send([]);
-//   } else {
-//     res.status(200).send(user);
-//   }
-// });
 
 //* Find by Email
 router.get("/findByEmail/:email", async (req, res) => {
@@ -152,13 +149,38 @@ router.post("/login", async (req, res) => {
       email: email,
     },
   });
-  if (email === null) {
+  if (user === null) {
     res.status(400).send({ error: "User Not Found" });
   } else if (bcrypt.compareSync(password, user.password)) {
     const token = jwt.sign(user, SECRET, { expiresIn: "30m" });
     res.status(200).send({ token: token });
   } else {
     res.status(400).send({ error: "Wrong password" });
+  }
+});
+
+//* User Change Password
+router.put("/change-password", async (req, res) => {
+  const { id, password, newPassword } = req.body;
+  const user = await prisma.user.findUnique({
+    where: {
+      id: id,
+    },
+  });
+  if (user === null) {
+    res.status(400).send({ error: "User Not Found" });
+  } else if (bcrypt.compareSync(password, user.password)) {
+    const updatedData = user
+    updatedData.password = bcrypt.hashSync(newPassword, 10)
+    const updatedUser = await prisma.user.update({
+      where: {
+        id: id,
+      },
+      data: updatedData,
+    });
+    res.status(200).send(updatedUser);
+  } else {
+    res.status(400).send({ error: "Incorrect current password entered" });
   }
 });
 
@@ -179,16 +201,46 @@ router.post("/login-google", async (req, res) => {
 });
 
 //* Update
-router.put("/:id", async (req, res) => {
+// router.put("/:id", async (req, res) => {
+//   const { id } = req.params;
+//   const updatedData = req.body;
+//   const user = await prisma.user.update({
+//     where: {
+//       id: id,
+//     },
+//     data: updatedData,
+//   });
+//   res.status(200).send(user);
+// });
+
+//* Delete User
+router.delete("/:id", async (req, res) => {
   const { id } = req.params;
-  const updatedData = req.body;
-  const user = await prisma.user.update({
-    where: {
-      id: id,
-    },
-    data: updatedData,
-  });
-  res.status(200).send(user);
+  try {
+    const items = await prisma.item.deleteMany({
+      where: {
+        userId: id,
+      },
+    });
+    // const categories = await prisma.category.deleteMany({
+    //   where: {
+    //     userId: id,
+    //   },
+    // });
+    const userFound = await prisma.user.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    const userDeleted = await prisma.user.delete({
+      where: {
+        email: userFound.email,
+      },
+    });
+    res.status(200).send(userDeleted);
+  } catch {
+    res.status(400).send({ error: `Unable to delete user with id ${id}` });
+  }
 });
 
 module.exports = router;

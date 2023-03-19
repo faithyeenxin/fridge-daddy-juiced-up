@@ -6,11 +6,11 @@ const prisma = new PrismaClient();
 
 //* Seed Route
 router.get("/seed", async (req, res) => {
-  await prisma.category.deleteMany({});
+  // await prisma.category.deleteMany({});
   const seedItems = await prisma.category.createMany({
     data: [
       {
-        userId: "e4fca1e7-deb9-41c4-b8c7-b0fe9aebadea",
+        // userId: "e4fca1e7-deb9-41c4-b8c7-b0fe9aebadea",
         name: "beef steak",
         dateCreated: new Date(2022, 12, 19),
         pantryDays: 0,
@@ -18,7 +18,7 @@ router.get("/seed", async (req, res) => {
         freezerDays: 121,
       },
       {
-        userId: "e4fca1e7-deb9-41c4-b8c7-b0fe9aebadea",
+        // userId: "e4fca1e7-deb9-41c4-b8c7-b0fe9aebadea",
         name: "fresh juice",
         dateCreated: new Date(2022, 12, 19),
         pantryDays: 0,
@@ -26,7 +26,7 @@ router.get("/seed", async (req, res) => {
         freezerDays: 365,
       },
       {
-        userId: "e4fca1e7-deb9-41c4-b8c7-b0fe9aebadea",
+        // userId: "e4fca1e7-deb9-41c4-b8c7-b0fe9aebadea",
         name: "fruit pie",
         dateCreated: new Date(2022, 12, 19),
         pantryDays: 0,
@@ -34,7 +34,7 @@ router.get("/seed", async (req, res) => {
         freezerDays: 182,
       },
       {
-        userId: "e4fca1e7-deb9-41c4-b8c7-b0fe9aebadea",
+        // userId: "e4fca1e7-deb9-41c4-b8c7-b0fe9aebadea",
         name: "uncooked fresh sausages",
         dateCreated: new Date(2022, 12, 19),
         pantryDays: 0,
@@ -42,7 +42,7 @@ router.get("/seed", async (req, res) => {
         freezerDays: 62,
       },
       {
-        userId: "e4fca1e7-deb9-41c4-b8c7-b0fe9aebadea",
+        // userId: "e4fca1e7-deb9-41c4-b8c7-b0fe9aebadea",
         name: "cooked sausages",
         dateCreated: new Date(2022, 12, 19),
         pantryDays: 0,
@@ -50,7 +50,7 @@ router.get("/seed", async (req, res) => {
         freezerDays: 62,
       },
       {
-        userId: "e4fca1e7-deb9-41c4-b8c7-b0fe9aebadea",
+        // userId: "e4fca1e7-deb9-41c4-b8c7-b0fe9aebadea",
         name: "hard/dry sausages",
         dateCreated: new Date(2022, 12, 19),
         pantryDays: 0,
@@ -58,7 +58,7 @@ router.get("/seed", async (req, res) => {
         freezerDays: 62,
       },
       {
-        userId: "e4fca1e7-deb9-41c4-b8c7-b0fe9aebadea",
+        // userId: "e4fca1e7-deb9-41c4-b8c7-b0fe9aebadea",
         name: "cooked noodles",
         dateCreated: new Date(2022, 12, 19),
         pantryDays: 0,
@@ -89,15 +89,15 @@ router.get("/:id", async (req, res) => {
 });
 
 //* Show By User ID
-router.get("/user/:userId", async (req, res) => {
-  const { userId } = req.params;
-  const item = await prisma.category.findMany({
-    where: {
-      userId: userId,
-    },
-  });
-  res.status(200).send(item);
-});
+// router.get("/user/:userId", async (req, res) => {
+//   const { userId } = req.params;
+//   const item = await prisma.category.findMany({
+//     where: {
+//       userId: userId,
+//     },
+//   });
+//   res.status(200).send(item);
+// });
 
 //* Find by Item Name
 router.get("/findByCategoryName/:categoryName", async (req, res) => {

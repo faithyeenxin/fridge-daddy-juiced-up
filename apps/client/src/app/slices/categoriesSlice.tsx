@@ -23,7 +23,7 @@ const CATEGORY_URL = '/api/category';
 
 const initialState: ItemsState = {
   category: {
-    userId: '',
+    // userId: '',
     id: '',
     name: '',
     dateCreated: '2022-02-18T16:00:00.000Z',
@@ -33,7 +33,7 @@ const initialState: ItemsState = {
   },
   categories: [
     {
-      userId: '',
+      // userId: '',
       id: '-',
       name: '-',
       dateCreated: '2022-02-18T16:00:00.000Z',
@@ -44,7 +44,7 @@ const initialState: ItemsState = {
   ],
   filteredCategories: [
     {
-      userId: '',
+      // userId: '',
       id: '-',
       name: '-',
       dateCreated: '2022-02-18T16:00:00.000Z',
@@ -59,7 +59,7 @@ const initialState: ItemsState = {
     { id: 3, name: 'Freezer', days: 0 },
   ],
   addItemSelectedCategory: {
-    userId: '',
+    // userId: '',
     id: '-',
     name: '-',
     dateCreated: '2022-02-18T16:00:00.000Z',
@@ -242,7 +242,7 @@ export const categoriesSlice = createSlice({
       .addCase(deleteCategory.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.category = {
-          userId: '',
+          // userId: '',
           id: '',
           name: '',
           dateCreated: '',

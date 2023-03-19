@@ -1,126 +1,333 @@
-import { useState } from 'react';
-import { showUser } from '../app/slices/userSlice';
-import { useAppSelector } from '../app/store';
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment, useEffect, useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import { resetCategories } from '../app/slices/categoriesSlice';
+import { resetItems } from '../app/slices/itemsSlice';
+import {
+  deleteUser,
+  getUserId,
+  resetUser,
+  showUser,
+  updateUserPassword,
+} from '../app/slices/userSlice';
+import { useAppDispatch, useAppSelector } from '../app/store';
 import ChangePassword from '../components/account/ChangePassword';
 import ChangeProfilePicture from '../components/account/ChangeProfilePicture';
+import { capitalizeWords } from '../components/utility/functions/capitalizeWord';
 
 const Account = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const user = useAppSelector(showUser);
+  const [changePassword, setChangePassword] = useState(false);
+  const [deleteAccount, setDeleteAccount] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState<string | undefined>();
+  const [newPassword, setNewpassword] = useState<string | undefined>();
+  const [confirmNewPassword, setConfirmNewPassword] = useState<
+    string | undefined
+  >();
+  const [deleteConfirmSentence, setDeleteConfirmSentence] = useState<
+    string | undefined
+  >(undefined);
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+  const [deleteAccountErrorMessage, setDeleteAccountErrorMessage] = useState<
+    string | undefined
+  >();
 
-  const [showChangeProfilePicComponent, setShowChangeProfilePicComponent] =
-    useState(false);
-  const [showChangePasswordComponent, setChangePasswordComponent] =
+  const [changePasswordButtonStatus, setChangePasswordButtonStatus] =
     useState(false);
 
-  const changeProfilePhoto = () => {
-    console.log('profiled photo changed');
+  const [deleteAccountButtonStatus, setDeleteAccountButtonStatus] =
+    useState(true);
+
+  useEffect(() => {
+    // 1) check if newPassword and confirmNewPassword is the same
+    if (confirmNewPassword && newPassword !== confirmNewPassword) {
+      setPasswordErrorMessage('New passwords entered do not match.');
+      setChangePasswordButtonStatus(true);
+    }
+    if (newPassword === confirmNewPassword) {
+      setPasswordErrorMessage('');
+      setChangePasswordButtonStatus(false);
+    }
+    // 2) do backend call to check if password is correct and if yes, allow the change of password
+  }, [currentPassword, newPassword, confirmNewPassword]);
+
+  useEffect(() => {
+    if (deleteConfirmSentence && deleteConfirmSentence !== 'confirm delete') {
+      setDeleteAccountErrorMessage(
+        'Please enter the correct delete confirmation sentence'
+      );
+      setDeleteAccountButtonStatus(true);
+    }
+    if (deleteConfirmSentence === 'confirm delete') {
+      setDeleteAccountErrorMessage(undefined);
+      setDeleteAccountButtonStatus(false);
+    }
+  }, [deleteConfirmSentence]);
+
+  const handlePasswordChange = () => {
+    if (!currentPassword || !newPassword || !confirmNewPassword) {
+      setPasswordErrorMessage('Please fill in all fields.');
+    }
+    const data = {
+      id: user.id,
+      password: currentPassword,
+      newPassword: newPassword,
+    };
+    if (user.email !== 'testUser@hotmail.com') {
+      dispatch(updateUserPassword(data))
+        .unwrap()
+        .then((originalPromiseResult) => {
+          toast.success('Your password has been successfully changed!');
+          setChangePassword(false);
+        })
+        .catch((rejectedValueOrSerializedError) => {
+          setPasswordErrorMessage(
+            rejectedValueOrSerializedError.response.data.error
+          );
+          setChangePasswordButtonStatus(true);
+        });
+    } else {
+      setPasswordErrorMessage(
+        'You are not authorized to change Trial Account Password'
+      );
+      setChangePasswordButtonStatus(true);
+    }
   };
 
-  const changePassword = () => {
-    console.log('password changed');
+  const handleDeleteAccount = () => {
+    console.log(user);
+    if (user.email !== 'testUser@hotmail.com') {
+      dispatch(deleteUser(user.id))
+        .unwrap()
+        .then((originalPromiseResult) => {
+          toast.success('Successfully deleted your account');
+          dispatch(resetUser());
+          dispatch(resetItems());
+          dispatch(resetCategories());
+          navigate('/');
+        })
+        .catch((rejectedValueOrSerializedError) => {
+          setDeleteAccountErrorMessage(
+            rejectedValueOrSerializedError.response.data.error
+          );
+          setDeleteAccountButtonStatus(true);
+        });
+    } else {
+      setDeleteAccountErrorMessage(
+        'You are not authorized to delete our Trial Account'
+      );
+      setDeleteAccountButtonStatus(true);
+    }
   };
-
   return (
-    <div>
-      <div className='flex mt-6 md:mt-10 mx-auto'>
-        <div className='w-4/5 md:w-2/3 mx-auto p-10 bg-bgColor rounded-2xl'>
-          <div className='flex justify-center items-center gap-3 md:gap-10 '>
-            {/* <div className="flex md:w-1/3 justify-center"> */}
-            <img
-              className='w-1/3 h-1/3 md:w-40 md:h-40 rounded-full'
-              src={user.image}
-            />
-            {/* </div> */}
-            <div className='space-y-1 md:w-2/3'>
-              <h1 className='text-md md:text-3xl font-roboto tracking-wider'>
-                Hello, {user.name}
-              </h1>
-              <h1 className='text-sm md:text-lg italic text-gray-500'>
-                {user.email}
-              </h1>
-              <div className='hidden md:block justify-center'>
-                <button
-                  onClick={() => {
-                    setChangePasswordComponent(false);
-                    setShowChangeProfilePicComponent(
-                      !showChangeProfilePicComponent
-                    );
-                  }}
-                  className='mr-5 disabled:opacity-40 text-white bg-gradient-to-br from-blue-500 disabled:cursor-not-allowed to-green-400 hover:bg-gradient-to-bl  font-medium rounded-lg text-xs px-2 py-2 md:px-5 md:py-2.5 text-center m-auto'
-                >
-                  Change Profile Photo
-                </button>
-                <button
-                  onClick={() => {
-                    setShowChangeProfilePicComponent(false);
-                    setChangePasswordComponent(!showChangePasswordComponent);
-                  }}
-                  className='mr-5  disabled:opacity-40 text-white bg-gradient-to-br from-red-500 disabled:cursor-not-allowed to-pink-400 hover:bg-gradient-to-bl  font-medium rounded-lg text-xs px-2 py-2 md:px-5 md:py-2.5 text-center m-auto'
-                >
-                  Change Password
-                </button>
-              </div>
-            </div>
+    <div className='flex justify-center'>
+      <div className='w-[500px] h-[500px] bg-offWhite rounded-2xl flex flex-col justify-evenly items-center sm:px-[5%] md:px-0'>
+        <div className='flex justify-center items-center gap-5'>
+          <img className='w-[80px] rounded-full' src={user.image} />
+          <div className='text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider text-center'>
+            Hello, {capitalizeWords(user.name)}!
           </div>
-          <div className='block md:hidden my-10 space-y-2'>
-            <div className='flex justify-center'>
-              <button
-                onClick={() => {
-                  setChangePasswordComponent(false);
-                  setShowChangeProfilePicComponent(
-                    !showChangeProfilePicComponent
-                  );
-                }}
-                className='disabled:opacity-40 text-white bg-gradient-to-br from-blue-500 disabled:cursor-not-allowed to-green-400 hover:bg-gradient-to-bl font-medium rounded-lg text-xs px-2 py-2 w-52 text-center'
-              >
-                Change Profile Photo
-              </button>
-            </div>
-            <div className='flex justify-center'>
-              <button
-                onClick={() => {
-                  setShowChangeProfilePicComponent(false);
-                  setChangePasswordComponent(!showChangePasswordComponent);
-                }}
-                className='disabled:opacity-40 text-white bg-gradient-to-br from-red-500 disabled:cursor-not-allowed to-pink-400 hover:bg-gradient-to-bl font-medium rounded-lg text-xs px-2 py-2 w-52 text-center'
-              >
-                Change Password
-              </button>
-            </div>
-            {/* <div className="flex justify-center">
-              <button
-                onClick={clearTrash}
-                className="disabled:opacity-40 text-white bg-gradient-to-br from-gray-500 disabled:cursor-not-allowed to-purple-400 hover:bg-gradient-to-bl font-medium rounded-lg text-xs px-2 py-2 w-52 text-center"
-              >
-                Clear Trash
-              </button>{" "}
-            </div> */}
-          </div>
-          {/* <button className="mr-2 disabled:opacity-40 text-white bg-gradient-to-br from-blue-500 disabled:cursor-not-allowed to-green-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-xs px-2 py-2 md:px-5 md:py-2.5 text-center m-auto">
-            Change Profile Photo
-          </button>
-          <button className="mr-2 disabled:opacity-40 text-white bg-gradient-to-br from-red-500 disabled:cursor-not-allowed to-pink-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-xs px-2 py-2 md:px-5 md:py-2.5 text-center m-auto">
+        </div>
+
+        <div className='flex gap-5'>
+          <div
+            className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none'
+            onClick={() => setChangePassword(true)}
+          >
             Change Password
-          </button>
-          <button className="disabled:opacity-40 text-white bg-gradient-to-br from-gray-500 disabled:cursor-not-allowed to-purple-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-xs px-2 py-2 md:px-5 md:py-2.5 text-center m-auto">
-            Clear Trash
-          </button> */}
+          </div>
+          <div
+            className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none'
+            onClick={() => setDeleteAccount(true)}
+          >
+            Delete Account
+          </div>
         </div>
       </div>
-      <div
-        className={`flex justify-center mx-auto mt-5 md:mt-10 ${
-          showChangeProfilePicComponent ? '' : 'hidden'
-        }`}
-      >
-        <ChangeProfilePicture />
-      </div>
-      <div
-        className={`flex justify-center mx-auto mt-5 md:mt-10 ${
-          showChangePasswordComponent ? '' : 'hidden'
-        }`}
-      >
-        <ChangePassword />
-      </div>
+      {/* CHANGE PASSWORD */}
+      <Transition appear show={changePassword} as={Fragment}>
+        <Dialog
+          as='div'
+          className='relative z-10'
+          onClose={() => {
+            setChangePassword(false);
+            setCurrentPassword(undefined);
+            setNewpassword(undefined);
+            setConfirmNewPassword(undefined);
+          }}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter='ease-out duration-300'
+            enterFrom='opacity-0'
+            enterTo='opacity-100'
+            leave='ease-in duration-200'
+            leaveFrom='opacity-100'
+            leaveTo='opacity-0'
+          >
+            <div className='fixed inset-0 bg-black bg-opacity-25' />
+          </Transition.Child>
+
+          <div className='fixed inset-0 overflow-y-auto'>
+            <div className='flex min-h-full items-center justify-center p-4 text-center'>
+              <Transition.Child
+                as={Fragment}
+                enter='ease-out duration-300'
+                enterFrom='opacity-0 scale-95'
+                enterTo='opacity-100 scale-100'
+                leave='ease-in duration-200'
+                leaveFrom='opacity-100 scale-100'
+                leaveTo='opacity-0 scale-95'
+              >
+                <Dialog.Panel className='w-full max-w-md flex gap-3 flex-col items-center justify-center transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                  <Dialog.Title
+                    as='h3'
+                    className='flex text-lg font-medium leading-6 text-red-400'
+                  >
+                    Would you like to change your password?
+                  </Dialog.Title>
+                  <input
+                    type='password'
+                    id='currentPassword'
+                    name='currentPassword'
+                    value={currentPassword}
+                    placeholder='Current Password'
+                    autoComplete='off'
+                    className='w-[80%] h-[30px] xl:h-[40px]  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+                    onChange={(e) => {
+                      setCurrentPassword(e.target.value);
+                    }}
+                  />
+                  <input
+                    type='password'
+                    id='newPassword'
+                    name='newPassword'
+                    value={newPassword}
+                    placeholder='New Password'
+                    autoComplete='off'
+                    className='w-[80%] h-[30px] xl:h-[40px]  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+                    onChange={(e) => {
+                      setNewpassword(e.target.value);
+                    }}
+                  />
+                  <input
+                    type='password'
+                    id='reconfirmPassword'
+                    name='reconfirmPassword'
+                    value={confirmNewPassword}
+                    placeholder='Reconfirm Password'
+                    autoComplete='off'
+                    className='w-[80%] h-[30px] xl:h-[40px]  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+                    onChange={(e) => {
+                      setConfirmNewPassword(e.target.value);
+                    }}
+                  />
+                  <button
+                    type='button'
+                    disabled={changePasswordButtonStatus}
+                    className='w-[80%] inline-flex justify-center rounded-3xl border border-transparent bg-orange px-4 py-2 text-md font-lora text-white enabled:hover:bg-gradient-to-r from-orange to-pink focus:outline-none disabled:bg-blueGray disabled:bg-opacity-50'
+                    onClick={handlePasswordChange}
+                  >
+                    Change Password
+                  </button>
+                  <div className='text-red-500 italic text-sm'>
+                    {passwordErrorMessage}
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+      {/* DELETE ACCOUNT */}
+      <Transition appear show={deleteAccount} as={Fragment}>
+        <Dialog
+          as='div'
+          className='relative z-10'
+          onClose={() => {
+            setDeleteAccount(false);
+            setDeleteConfirmSentence(undefined);
+            setDeleteAccountErrorMessage(undefined);
+          }}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter='ease-out duration-300'
+            enterFrom='opacity-0'
+            enterTo='opacity-100'
+            leave='ease-in duration-200'
+            leaveFrom='opacity-100'
+            leaveTo='opacity-0'
+          >
+            <div className='fixed inset-0 bg-black bg-opacity-25' />
+          </Transition.Child>
+
+          <div className='fixed inset-0 overflow-y-auto'>
+            <div className='flex min-h-full items-center justify-center p-4 text-center'>
+              <Transition.Child
+                as={Fragment}
+                enter='ease-out duration-300'
+                enterFrom='opacity-0 scale-95'
+                enterTo='opacity-100 scale-100'
+                leave='ease-in duration-200'
+                leaveFrom='opacity-100 scale-100'
+                leaveTo='opacity-0 scale-95'
+              >
+                <Dialog.Panel className='w-full max-w-md flex gap-3 flex-col items-center justify-center transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                  <Dialog.Title
+                    as='h3'
+                    className='flex text-lg font-medium leading-6 text-red-500'
+                  >
+                    All your data will be irreversibly erased.
+                  </Dialog.Title>
+                  <div className='text-md xl:text-md tracking-wider text-blueGray opacity-50 text-center'>
+                    Enter phrase 'confirm delete' and click Delete Account
+                    button to execute.
+                  </div>
+                  <input
+                    type='deleteConfirm'
+                    id='deleteConfirm'
+                    name='deleteConfirm'
+                    value={deleteConfirmSentence}
+                    placeholder='enter delete phrase here'
+                    autoComplete='off'
+                    className='w-[80%] h-[30px] xl:h-[40px]  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+                    onChange={(e) => {
+                      setDeleteConfirmSentence(e.target.value);
+                    }}
+                  />
+                  <button
+                    type='button'
+                    disabled={deleteAccountButtonStatus}
+                    className='w-[80%] inline-flex justify-center rounded-3xl border border-transparent bg-red-500 px-4 py-2 text-md font-lora text-white enabled:hover:bg-gradient-to-r from-orange to-pink focus:outline-none disabled:bg-blueGray disabled:bg-opacity-50'
+                    onClick={handleDeleteAccount}
+                  >
+                    Delete Account
+                  </button>
+                  <div className='text-red-500 italic text-sm'>
+                    {deleteAccountErrorMessage}
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>{' '}
+      <ToastContainer
+        position='bottom-right'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='light'
+      />
     </div>
   );
 };

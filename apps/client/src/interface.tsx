@@ -14,7 +14,7 @@ export interface IItem {
 
 export interface ICategory {
   id?: string;
-  userId: string;
+  // userId: string;
   name: string;
   dateCreated: Date | string;
   pantryDays: number;

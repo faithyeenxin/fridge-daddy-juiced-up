@@ -102,12 +102,36 @@ export const authenticateGoogleUser = createAsyncThunk<IUser, Object>(
   }
 );
 
-export const updateUser = createAsyncThunk<IUser, Object | any>(
-  '/users/updateUser',
+// export const updateUser = createAsyncThunk<IUser, Object | any>(
+//   '/users/updateUser',
+//   async (data, thunkAPI) => {
+//     let id = '3c0f0070-19cf-4961-9db9-10194539c177';
+//     try {
+//       const response = await axios.put(`${USERS_URL}/${id}`, data);
+//       return response.data;
+//     } catch (err) {
+//       return thunkAPI.rejectWithValue(err);
+//     }
+//   }
+// );
+
+export const updateUserPassword = createAsyncThunk<IUser, Object | any>(
+  '/users/updateUserPassword',
   async (data, thunkAPI) => {
-    let id = '3c0f0070-19cf-4961-9db9-10194539c177';
     try {
-      const response = await axios.put(`${USERS_URL}/${id}`, data);
+      const response = await axios.put(`${USERS_URL}/change-password`, data);
+      return response.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
+export const deleteUser = createAsyncThunk<IUser, string | undefined>(
+  'users/deleteUser',
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.delete(`${USERS_URL}/${id}`);
       return response.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -212,19 +236,45 @@ export const usersSlice = createSlice({
         state.error = action.error.message;
       });
     // update User
+    // builder
+    //   .addCase(updateUser.pending, (state) => {
+    //     state.status = 'loading';
+    //   })
+    //   .addCase(updateUser.fulfilled, (state, action) => {
+    //     state.status = 'succeeded';
+    //     state.user = action.payload;
+    //   })
+    //   .addCase(updateUser.rejected, (state, action) => {
+    //     state.status = 'failed';
+    //     state.error = action.error.message;
+    //   });
+
+    // Update User Password
     builder
-      .addCase(updateUser.pending, (state) => {
+      .addCase(updateUserPassword.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(updateUser.fulfilled, (state, action) => {
+      .addCase(updateUserPassword.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.user = action.payload;
       })
-      .addCase(updateUser.rejected, (state, action) => {
+      .addCase(updateUserPassword.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });
-    // user login
+    // Delete user
+    builder
+      .addCase(deleteUser.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        Object.assign(state, initialState);
+      })
+      .addCase(deleteUser.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      });
   },
 });
 

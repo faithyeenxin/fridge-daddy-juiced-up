@@ -75,7 +75,6 @@ const AddItemCard = () => {
         .unwrap()
         .then((originalPromiseResult) => {
           toast.success('Your item has been added!');
-          dispatch(setAddItemModalOpen());
         })
         .catch((rejectedValueOrSerializedError) => {
           toast.error('We could not add your item! Please try again.');

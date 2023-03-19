@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { getUserId } from '../../../app/slices/userSlice';
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { ICategory, IRecipeType } from '../../../interface';
 import { capitalizeWords } from '../../utility/functions/capitalizeWord';
