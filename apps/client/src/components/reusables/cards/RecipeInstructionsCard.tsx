@@ -20,7 +20,7 @@ const RecipeInstructionsCard = ({ recipeData }: IRecipeInstructionsProps) => {
       <h1 className='xs:text-md sm:text-lg md:text-2xl lg:text-3xl xl:text-4xl font-lora text-orange text-center tracking-wider w-full h-auto'>
         Instructions
       </h1>
-      <ul className='text-md text-blueGray tracking-wider w-full px-5 h-full flex flex-col gap-5 overflow-auto'>
+      <ul className='text-md text-blueGray tracking-wider w-full px-10 h-full flex flex-col gap-5 overflow-auto'>
         {instructions}
       </ul>
     </div>
