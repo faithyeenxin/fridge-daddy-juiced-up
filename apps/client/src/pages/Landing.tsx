@@ -8,7 +8,10 @@ export const Landing = () => {
     <div className='w-full h-full'>
       <div>
         <div className='sticky w-full top-10 z-10 hidden lg:block'>
-          <img src={daddy} className='absolute right-0 w-[500px] top-20' />
+          <img
+            src={daddy}
+            className='absolute right-0 lg:w-[400px] xl:w-[500px] lg:top-28 xl:top-20'
+          />
         </div>
         <HeroSection />
         <WastedSection />
