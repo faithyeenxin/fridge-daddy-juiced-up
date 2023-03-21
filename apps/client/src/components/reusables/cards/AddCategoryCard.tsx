@@ -9,7 +9,10 @@ import DropdownButton from '../dropdown/DropdownSelect';
 import { capitalizeWords } from '../../utility/functions/capitalizeWord';
 import { toast } from 'react-toastify';
 import { getUserId } from '../../../app/slices/userSlice';
-import { setAddCategoryModalOpen } from '../../../app/slices/modalSlice';
+import {
+  setAddCategoryModalOpen,
+  setAddModalOpen,
+} from '../../../app/slices/modalSlice';
 
 const AddCategoryCard = () => {
   const token: any = useAppSelector(getUserId);
@@ -39,7 +42,7 @@ const AddCategoryCard = () => {
         .then((originalPromiseResult) => {
           // handle result here
           toast.success('Your category has been added!');
-          dispatch(setAddCategoryModalOpen());
+          dispatch(setAddCategoryModalOpen(false));
         })
         .catch((rejectedValueOrSerializedError) => {
           // handle error here

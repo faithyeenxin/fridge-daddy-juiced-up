@@ -20,7 +20,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { parse } from 'path';
 import { wordContainsSubstring } from '../../utility/functions/wordContainsSubstring';
-import { setAddItemModalOpen } from '../../../app/slices/modalSlice';
+import {
+  setAddItemModalOpen,
+  setAddModalOpen,
+} from '../../../app/slices/modalSlice';
 
 interface IShelfLife {
   id: number;
@@ -75,6 +78,7 @@ const AddItemCard = () => {
         .unwrap()
         .then((originalPromiseResult) => {
           toast.success('Your item has been added!');
+          dispatch(setAddItemModalOpen(false));
         })
         .catch((rejectedValueOrSerializedError) => {
           toast.error('We could not add your item! Please try again.');

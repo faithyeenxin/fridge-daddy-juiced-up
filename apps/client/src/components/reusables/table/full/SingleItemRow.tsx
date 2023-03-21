@@ -1,11 +1,9 @@
 import { differenceInDays, parseISO } from 'date-fns';
 import format from 'date-fns/format';
-import React, { useState, Fragment, useEffect } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useState, Fragment } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
-  getItemByItemId,
-  getItemsByUserId,
   trashItem,
   untrashItem,
   updateItem,
@@ -16,15 +14,12 @@ import { capitalizeWords } from '../../../utility/functions/capitalizeWord';
 import { Dialog, Transition } from '@headlessui/react';
 import DropdownSelect from '../../dropdown/DropdownSelect';
 import {
-  filterCategories,
   getCategory,
-  getCategoryById,
   showCategories,
   showFilteredCategories,
 } from '../../../../app/slices/categoriesSlice';
 import { getUserId } from '../../../../app/slices/userSlice';
 import isAfter from 'date-fns/isAfter';
-import ItemsTableSmall from '../partial/ItemsTableSmall';
 
 interface ISingleItemProps {
   item: IItem;
@@ -33,8 +28,6 @@ interface ISingleItemProps {
 const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
   const token: any = useAppSelector(getUserId);
   const dispatch = useAppDispatch();
-  const category = useAppSelector(getCategory);
-  const navigate = useNavigate();
   const today = new Date();
   const todayStr = format(today, 'yyyy-MM-dd');
   const [purchaseDate, setPurchaseDate] = useState(todayStr);
@@ -45,8 +38,6 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
   const [isTrashedHoverState, setisTrashedHoverState] = useState(false);
   let [isOpen, setIsOpen] = useState(false);
   const [resetState, setResetState] = useState(false);
-  const allCategories = useAppSelector(showCategories);
-  const filteredCategories = useAppSelector(showFilteredCategories);
   const [shelfLife, setShelfLife] = useState([
     { id: 1, name: 'Pantry', days: 0 },
     { id: 2, name: 'Fridge', days: 0 },
@@ -55,21 +46,14 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
   const [edit, setEdit] = useState(false);
 
   function closeModal() {
-    console.log('close modal');
-    console.log(item);
     setEdit(false);
     setIsOpen(false);
   }
 
   function openModal() {
-    console.log('open modal');
-    console.log(item);
+    setEdit(false);
     setIsOpen(true);
   }
-
-  const handleFilteredCategories = (e: any) => {
-    dispatch(filterCategories(e.target.value));
-  };
 
   const [newItem, setNewItem] = useState<IItem>({
     userId: token.id,
@@ -340,8 +324,19 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                     <button
                       type='button'
                       className='mr-2 w-[200px] inline-flex justify-center rounded-3xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none '
-                      onClick={(e) => {
+                      onClick={() => {
                         setEdit(!edit);
+                        setNewItem({
+                          userId: token.id,
+                          id: item.id,
+                          name: item.name,
+                          purchaseDate: new Date(item.purchaseDate),
+                          expiryDate: new Date(item.expiryDate),
+                          categoryId: item.categoryId,
+                          storedIn: item.storedIn,
+                          quantity: item.quantity,
+                          trashed: item.trashed,
+                        });
                       }}
                     >
                       {edit ? 'Cancel Edit' : 'Edit'}
@@ -350,7 +345,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                       <button
                         type='button'
                         className='mr-2 w-[200px] inline-flex justify-center rounded-3xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none focus-visible:ring-2'
-                        onClick={(e) => {
+                        onClick={() => {
                           if (
                             !isAfter(
                               new Date(newItem.expiryDate),
@@ -377,11 +372,11 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                             };
                             dispatch(updateItem(data))
                               .unwrap()
-                              .then((originalPromiseResult) => {
+                              .then(() => {
                                 toast.success('Your item has been updated!');
-                                closeModal();
+                                setEdit(false);
                               })
-                              .catch((rejectedValueOrSerializedError) => {
+                              .catch(() => {
                                 toast.error(
                                   'We could not update your item! Please try again.'
                                 );

@@ -129,6 +129,9 @@ router.post("/", async (req, res) => {
     const newItem = req.body;
     const item = await prisma.item.create({
       data: newItem,
+      include: {
+        category: true,
+      },
     });
     res.status(200).send(item);
   } catch {
@@ -143,6 +146,9 @@ router.put("/:id", async (req, res) => {
   const item = await prisma.item.update({
     where: {
       id: id,
+    },
+    include: {
+      category: true,
     },
     data: updatedData,
   });

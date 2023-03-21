@@ -44,7 +44,7 @@ const RecipesItemCard = () => {
     const cuisine = cuisineInput.name;
     const meal = mealInput.name;
     dispatch(setRecipesLoading(true));
-    const queryUrl = `https://api.spoonacular.com/recipes/complexSearch?number=${numberOfRecipes}&sort=min-missing-ingredients&sortDirection=asc&instructionsRequired=true&ignorePantry=true&includeIngredients=${ingredients}&cuisine=${cuisine}&type=${meal}&apiKey=${apiKey4}`;
+    const queryUrl = `https://api.spoonacular.com/recipes/complexSearch?number=${numberOfRecipes}&sort=min-missing-ingredients&sortDirection=asc&instructionsRequired=true&ignorePantry=true&includeIngredients=${ingredients}&cuisine=${cuisine}&type=${meal}&apiKey=${apiKey}`;
     fetch(queryUrl)
       .then((res) => res.json())
       .then((data) => {

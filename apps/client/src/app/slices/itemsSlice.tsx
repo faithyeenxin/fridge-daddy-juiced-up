@@ -328,7 +328,7 @@ export const itemsSlice = createSlice({
       .addCase(createItem.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
-        toast.error('We could not update your item, try again!');
+        toast.error('We could not create your item, try again!');
       });
     // update Item
     builder
@@ -337,26 +337,6 @@ export const itemsSlice = createSlice({
       })
       .addCase(updateItem.fulfilled, (state, action) => {
         state.status = 'succeeded';
-
-        // state.userItems = state.userItems.map((item) => {
-        //   if (item.id === action.payload.id) {
-        //     let newItem = {
-        //       userId: action.payload.userId,
-        //       id: action.payload.id,
-        //       name: action.payload.name,
-        //       categoryId: action.payload.categoryId,
-        //       purchaseDate: action.payload.purchaseDate,
-        //       expiryDate: action.payload.expiryDate,
-        //       storedIn: action.payload.storedIn,
-        //       quantity: action.payload.quantity,
-        //       trashed: action.payload.trashed,
-        //       selected: false,
-        //     };
-        //     return newItem;
-        //   } else {
-        //     return item;
-        //   }
-        // });
         state.userItems = state.userItems.filter(
           (item) => item.id !== action.payload.id
         );

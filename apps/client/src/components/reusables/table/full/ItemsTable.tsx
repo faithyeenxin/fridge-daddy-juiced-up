@@ -90,7 +90,11 @@ const ItemsTable = () => {
             filteredItems.map((item, idx) => {
               colorState = !colorState;
               return (
-                <SingleItemRow key={idx} item={item} colorState={colorState} />
+                <SingleItemRow
+                  key={item.id}
+                  item={item}
+                  colorState={colorState}
+                />
               );
             })}
         </div>

@@ -29,31 +29,22 @@ export const modalSlice = createSlice({
     closeAllModals(state) {
       Object.assign(state, initialState);
     },
-    closeAddModalOpen(state) {
-      state.addModalOpen = false;
-    },
-    setAddModalOpen(state) {
+    setAddModalOpen(state, action: PayloadAction<boolean>) {
       state.addModalOpen = !state.addModalOpen;
     },
-    closeAddItemModalOpen(state) {
-      state.addItemModalOpen = false;
-    },
-    setAddItemModalOpen(state) {
+    setAddItemModalOpen(state, action: PayloadAction<boolean>) {
       state.addItemModalOpen = !state.addItemModalOpen;
     },
-    closeAddCategoryModalOpen(state) {
-      state.addCategoryModalOpen = false;
-    },
-    setAddCategoryModalOpen(state) {
+    setAddCategoryModalOpen(state, action: PayloadAction<boolean>) {
       state.addCategoryModalOpen = !state.addCategoryModalOpen;
     },
-    setFilterModalOpen(state) {
+    setFilterModalOpen(state, action: PayloadAction<boolean>) {
       state.filterModalOpen = !state.filterModalOpen;
     },
-    setIngredientModalOpen(state) {
+    setIngredientModalOpen(state, action: PayloadAction<boolean>) {
       state.ingredientModalOpen = !state.ingredientModalOpen;
     },
-    setNutritionModalOpen(state) {
+    setNutritionModalOpen(state, action: PayloadAction<boolean>) {
       state.nutritionModalOpen = !state.nutritionModalOpen;
     },
   },
@@ -62,9 +53,6 @@ export const modalSlice = createSlice({
 
 export const {
   closeAllModals,
-  closeAddModalOpen,
-  closeAddItemModalOpen,
-  closeAddCategoryModalOpen,
   setAddModalOpen,
   setAddItemModalOpen,
   setAddCategoryModalOpen,
