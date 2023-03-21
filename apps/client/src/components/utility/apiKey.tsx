@@ -5,27 +5,20 @@ export const spoonacularApiKeys = [
   `fc30ca941c9141489055ff119a8ac01c`,
 ];
 
-export async function fetchWithBackupKeys(
+export const checkApiKey = async (
   apiKeys: string[],
   url: string
-): Promise<any> {
-  if (apiKeys.length === 0) {
-    throw new Error('No API keys provided');
-  }
-
-  const apiKey = apiKeys[0];
-  const apiKeyUrl = `${url}&apiKey=${apiKey}`;
-
-  try {
-    const response = await fetch(apiKeyUrl);
-    if (!response.ok) {
-      throw new Error(`Fetch failed with status ${response.status}`);
+): Promise<string> => {
+  for (const apiKey of apiKeys) {
+    const queryUrl = `${url}?apiKey=${apiKey}`;
+    try {
+      const response = await fetch(queryUrl);
+      if (response.ok) {
+        return apiKey;
+      }
+    } catch (error) {
+      console.error(`Failed to check API key ${apiKey}: ${error}`);
     }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(`Fetch failed with API key ${apiKey}: ${error}`);
-    const remainingApiKeys = apiKeys.slice(1);
-    return fetchWithBackupKeys(remainingApiKeys, url);
   }
-}
+  throw new Error('All provided API keys failed');
+};

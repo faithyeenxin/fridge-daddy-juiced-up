@@ -1,29 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { showFilteredItems } from '../../app/slices/itemsSlice';
 import {
-  setCuisineSelected,
-  setMealSelected,
   setRecipes,
   setRecipesLoading,
   showSelectedCuisine,
-  showSelectedItems,
   showSelectedMeal,
 } from '../../app/slices/recipesSlice';
 import { useAppDispatch, useAppSelector } from '../../app/store';
-import { IItem } from '../../interface';
 import DropdownSelect from '../reusables/dropdown/DropdownSelect';
-
+import { spoonacularApiKeys } from '../utility/apiKey';
 const RecipesItemCard = () => {
   const dispatch = useAppDispatch();
   const filteredItems = useAppSelector(showFilteredItems);
   const cuisineInput = useAppSelector(showSelectedCuisine);
   const mealInput = useAppSelector(showSelectedMeal);
   const numberOfRecipes = 20;
-  const apiKey = `5962ec749418426c81fa226be6317343`;
-  const apiKey2 = `a15745668f894779b75adf57f9d76136`;
-  const apiKey3 = `8e4e45b4d72f4a74b59440190f82116e`;
-  const apiKey4 = `fc30ca941c9141489055ff119a8ac01c`;
 
   const [allSelectedItems, setAllSelectedItems] = useState<string[]>();
   useEffect(() => {
@@ -44,7 +36,7 @@ const RecipesItemCard = () => {
     const cuisine = cuisineInput.name;
     const meal = mealInput.name;
     dispatch(setRecipesLoading(true));
-    const queryUrl = `https://api.spoonacular.com/recipes/complexSearch?number=${numberOfRecipes}&sort=min-missing-ingredients&sortDirection=asc&instructionsRequired=true&ignorePantry=true&includeIngredients=${ingredients}&cuisine=${cuisine}&type=${meal}&apiKey=${apiKey}`;
+    const queryUrl = `https://api.spoonacular.com/recipes/complexSearch?number=${numberOfRecipes}&sort=min-missing-ingredients&sortDirection=asc&instructionsRequired=true&ignorePantry=true&includeIngredients=${ingredients}&cuisine=${cuisine}&type=${meal}&apiKey=${spoonacularApiKeys[0]}`;
     fetch(queryUrl)
       .then((res) => res.json())
       .then((data) => {

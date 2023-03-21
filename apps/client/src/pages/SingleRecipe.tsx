@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { IRecipe, IRecipeNutrition, NutritionInfo } from '../interface';
 import { Markup } from 'interweave';
 import RecipeIngredientsCard from '../components/reusables/cards/RecipeIngredientsCard';
 import RecipeInstructionsCard from '../components/reusables/cards/RecipeInstructionsCard';
@@ -12,20 +11,16 @@ import {
   showSingleRecipeData,
   showSingleRecipeNutrition,
 } from '../app/slices/recipesSlice';
-
+import { checkApiKey } from '../components/utility/apiKey';
+import { spoonacularApiKeys } from '../components/utility/apiKey';
 const SingleRecipe = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const apiKey = `5962ec749418426c81fa226be6317343`;
-  const apiKey2 = `a15745668f894779b75adf57f9d76136`;
-  const apiKey3 = `8e4e45b4d72f4a74b59440190f82116e`;
-  const apiKey4 = `fc30ca941c9141489055ff119a8ac01c`;
   const recipeData = useAppSelector(showSingleRecipeData);
   const recipeNutrition = useAppSelector(showSingleRecipeNutrition);
-  const recipeUrl = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}`;
-  const nutritionUrl = `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=${apiKey}`;
-  console.log(recipeUrl);
-  console.log(nutritionUrl);
+  const recipeUrl = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${spoonacularApiKeys[0]}`;
+  const nutritionUrl = `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=${spoonacularApiKeys[0]}`;
+
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
