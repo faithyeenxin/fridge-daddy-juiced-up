@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PrivateRoute from './components/utility/PrivateRoute';
 import Account from './pages/Account';
 import Recipes from './pages/Recipes';
-import Creators from './pages/Creators';
+import LearnMore from './pages/LearnMore';
 import Home from './pages/Home';
 import { Landing } from './pages/Landing';
 import Login from './pages/Login';
@@ -24,7 +24,7 @@ function App() {
           <Route index element={<Landing />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
-          <Route path='/creators' element={<Creators />} />
+          <Route path='/learn-more' element={<LearnMore />} />
           <Route path='/login-redirect' element={<LoginRedirect />} />
           <Route path='/register-redirect' element={<RegisterRedirect />} />
           <Route path='/aws-testing' element={<Aws_Test />} />
