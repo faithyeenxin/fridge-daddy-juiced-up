@@ -42,7 +42,7 @@ const AddCategoryCard = () => {
         .then((originalPromiseResult) => {
           // handle result here
           toast.success('Your category has been added!');
-          dispatch(setAddCategoryModalOpen(false));
+          // dispatch(setAddCategoryModalOpen(false));
         })
         .catch((rejectedValueOrSerializedError) => {
           // handle error here

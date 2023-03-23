@@ -51,14 +51,14 @@ const NavBar = () => {
         </div>
         {/* Menu Items */}
         <div className='md:flex space-x-6  md:text-l lg:text-xl tracking-wide items-center'>
-          {/* <div
+          <div
             className='hover:text-orange hidden md:flex hover:cursor-pointer'
             onClick={() => {
               navigate('/learn-more');
             }}
           >
             Learn More
-          </div> */}
+          </div>
           <div
             className='hover:text-orange  hidden md:flex hover:cursor-pointer'
             onClick={() => {
@@ -103,7 +103,7 @@ const NavBar = () => {
             >
               Learn More
             </a> */}
-                {/* <a
+                <a
                   className='hover:text-orange tracking-widest'
                   onClick={() => {
                     navigate('/learn-more');
@@ -112,7 +112,7 @@ const NavBar = () => {
                   }}
                 >
                   Learn More
-                </a> */}
+                </a>
                 <a
                   className='hover:text-orange tracking-widest'
                   onClick={() => {
