@@ -8,7 +8,7 @@ const LearnMore = () => {
       <div className='w-full h-full'>
         <div
           id='hero'
-          className='w-full h-[80vh] lg:h-[90vh] flex flex-col-reverse lg:flex-row justify-evenly items-center'
+          className='w-full h-[80vh] lg:h-[90vh] flex flex-col lg:flex-row justify-evenly items-center'
         >
           {/* left item */}
           <div className='flex flex-col mb-10 md:mt-16 md:mb-32 h-auto lg:h-full w-full lg:w-3/6 justify-center items-center'>
@@ -28,7 +28,7 @@ const LearnMore = () => {
           <div className='h-auto lg:h-full w-full lg:w-3/6 flex justify-evenly items-center lg:relative'>
             <img
               src={addItemAndCategory}
-              className='w-[800px] h-[500px] border-2 border-orange rounded-2xl'
+              className='w-[750px] md:w-[800px] md:h-[500px] border-2 border-orange rounded-2xl'
               data-aos='fade-in'
               data-aos-duration='1000'
               data-aos-easing='ease-in-out'
@@ -46,7 +46,7 @@ const LearnMore = () => {
           <div className='h-auto lg:h-full w-full lg:w-3/6 flex justify-evenly items-center lg:relative'>
             <img
               src={searchFridge}
-              className='w-[800px] h-[500px] border-2 border-orange rounded-2xl'
+              className='w-[750px] md:w-[800px] md:h-[500px] border-2 border-orange rounded-2xl'
               data-aos='fade-in'
               data-aos-duration='1000'
               data-aos-easing='ease-in-out'
@@ -72,7 +72,7 @@ const LearnMore = () => {
       <div className='w-full h-full'>
         <div
           id='hero'
-          className='w-full h-[80vh] lg:h-[90vh] flex flex-col-reverse lg:flex-row justify-evenly items-center'
+          className='w-full h-[80vh] lg:h-[90vh] flex flex-col lg:flex-row justify-evenly items-center'
         >
           {/* left item */}
           <div className='flex flex-col mb-10 md:mt-16 md:mb-32 h-auto lg:h-full w-full lg:w-3/6 justify-center items-center'>
@@ -92,7 +92,7 @@ const LearnMore = () => {
           <div className='h-auto lg:h-full w-full lg:w-3/6 flex justify-evenly items-center lg:relative'>
             <img
               src={searchRecipe}
-              className='w-[800px] h-[500px] border-2 border-orange rounded-2xl'
+              className='w-[750px] md:w-[800px] md:h-[500px] border-2 border-orange rounded-2xl'
               data-aos='fade-in'
               data-aos-duration='1000'
               data-aos-easing='ease-in-out'
