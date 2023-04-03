@@ -1,7 +1,6 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '../../test-utils/testing-library-utils';
 import userEvent from '@testing-library/user-event';
-
-import Testing from './Testing';
+import Testing from '../Testing';
 test('initial conditions', () => {
   render(<Testing />);
   // test heading

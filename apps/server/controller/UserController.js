@@ -159,6 +159,22 @@ router.post("/login", async (req, res) => {
   }
 });
 
+//* User LOGIN GOOGLE
+router.post("/login-google", async (req, res) => {
+  const { email } = req.body;
+  const user = await prisma.user.findUnique({
+    where: {
+      email: email,
+    },
+  });
+  if (user === null) {
+    res.status(400).send({ error: "User Not Found" });
+  } else {
+    const token = jwt.sign(user, SECRET, { expiresIn: "30m" });
+    res.status(200).send({ token: token });
+  }
+});
+
 //* User Change Password
 router.put("/change-password", async (req, res) => {
   const { id, password, newPassword } = req.body;
@@ -181,22 +197,6 @@ router.put("/change-password", async (req, res) => {
     res.status(200).send(updatedUser);
   } else {
     res.status(400).send({ error: "Incorrect current password entered" });
-  }
-});
-
-//* User LOGIN GOOGLE
-router.post("/login-google", async (req, res) => {
-  const { email } = req.body;
-  const user = await prisma.user.findUnique({
-    where: {
-      email: email,
-    },
-  });
-  if (user === null) {
-    res.status(400).send({ error: "User Not Found" });
-  } else {
-    const token = jwt.sign(user, SECRET, { expiresIn: "30m" });
-    res.status(200).send({ token: token });
   }
 });
 

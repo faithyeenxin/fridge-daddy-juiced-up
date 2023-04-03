@@ -1,5 +1,5 @@
 import React from 'react';
-import { RegisterCard } from '../reusables/cards/RegisterCard';
+import { RegisterCard } from '../../reusables/cards/RegisterCard';
 
 export const RegisterSection = () => {
   return (

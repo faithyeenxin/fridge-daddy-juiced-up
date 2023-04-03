@@ -4,6 +4,7 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^18.8.5",
+    "jest-transform-stub": "^2.0.0",
     "turbo": "^1.5.5"
   },
   "workspaces": [
@@ -22,5 +23,8 @@
   "license": "ISC",
   "engines": {
     "node": ">=16"
+  },
+  "dependencies": {
+    "msw": "^1.2.1"
   }
 }

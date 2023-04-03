@@ -1,13 +1,9 @@
-import daddy from '../../../public/images/landing/daddy.svg';
-import rottenShelf from '../../../public/images/landing/rotten-shelf.svg';
-import freshShelf from '../../../public/images/landing/fresh-shelf.svg';
-
-import men from '../../../public/images/landing/8-men.svg';
 import { RegisterCard } from '../reusables/cards/RegisterCard';
 const JoinUsSection = () => {
   return (
     <div
       id='hero'
+      data-testid='join-us-section-container'
       className='w-full h-[80vh] lg:h-[90vh] flex flex-col lg:flex-row justify-evenly items-center'
     >
       {/* left item */}
@@ -32,7 +28,6 @@ const JoinUsSection = () => {
         </div>
       </div>
       {/* right item */}
-
       <div className='flex-col mb-10 md:mt-16 md:mb-32 h-auto lg:h-full w-full lg:w-3/6 justify-center items-center flex lg:hidden'>
         <RegisterCard />
       </div>

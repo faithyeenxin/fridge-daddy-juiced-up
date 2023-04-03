@@ -10,6 +10,7 @@ export const Landing = () => {
         <div className='sticky w-full top-10 z-10 hidden lg:block'>
           <img
             src={daddy}
+            // src='../assets/img/landing-page/daddy.svg'
             className='absolute right-0 lg:w-[400px] xl:w-[500px] lg:top-28 xl:top-20'
           />
         </div>

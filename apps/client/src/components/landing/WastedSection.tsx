@@ -8,7 +8,10 @@ const WastedSection = () => {
       className='w-full h-[60vh] lg:h-[90vh] flex flex-col lg:flex-row justify-evenly items-center'
     >
       {/* left item */}
-      <div className='flex flex-col mb-10 md:mt-16 md:mb-32 h-auto lg:h-full w-full lg:w-3/6 justify-center items-center'>
+      <div
+        data-testid='wasted-left-container'
+        className='flex flex-col mb-10 md:mt-16 md:mb-32 h-auto lg:h-full w-full lg:w-3/6 justify-center items-center'
+      >
         <div
           className='flex flex-col gap-2 w-[100%] lg:w-[90%] xl:w-[80%]'
           data-aos='fade-up'
@@ -16,7 +19,10 @@ const WastedSection = () => {
           data-aos-easing='ease-in-out'
           data-aos-once='false'
         >
-          <h1 className='w-lg font-bold text-center text-orange xs:text-lg sm:text-2xl md:text-4xl lg:text-4xl xl:text-5xl lg:text-left'>
+          <h1
+            data-testid='wasted-left-container-item'
+            className='w-lg font-bold text-center text-orange xs:text-lg sm:text-2xl md:text-4xl lg:text-4xl xl:text-5xl lg:text-left'
+          >
             Did you know that one third of all food produced are lost or wasted?
           </h1>
         </div>
