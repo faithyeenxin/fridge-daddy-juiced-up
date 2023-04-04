@@ -42,11 +42,8 @@ export const RegisterCard = () => {
             .then((originalPromiseResult: any) => {
               // handle result here
               setEmailExist(originalPromiseResult.length);
-            })
-            .catch((rejectedValueOrSerializedError) => {
-              // handle error here
-              toast.error(rejectedValueOrSerializedError);
             });
+
           return Boolean(!emailExist);
         }),
       password: Yup.string()
@@ -89,58 +86,65 @@ export const RegisterCard = () => {
           <form onSubmit={formik.handleSubmit}>
             <input
               type='text'
-              data-testid='register-card-field'
+              data-testid='register-card-field-name'
               className='block border border-grey-light w-full p-3 rounded'
               name='name'
               placeholder='Name'
-              id='name'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
               autoComplete='off'
             />
             {formik.touched.name && formik.errors.name ? (
-              <div className='px-2 text-orange italic text-sm'>
+              <div
+                data-testid='register-card-field-error-name'
+                className='px-2 text-orange italic text-sm'
+              >
                 {formik.errors.name}
               </div>
             ) : null}
             <input
               type='text'
-              data-testid='register-card-field'
+              data-testid='register-card-field-email'
               className='block border border-grey-light w-full p-3 rounded mt-2'
               name='email'
               placeholder='Email'
-              id='email'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
               autoComplete='off'
             />
             {formik.touched.email && formik.errors.email ? (
-              <div className='px-2 text-orange italic text-sm'>
+              <div
+                data-testid='register-card-field-error-email'
+                className='px-2 text-orange italic text-sm'
+              >
                 {formik.errors.email}
               </div>
             ) : null}
             <input
               type='password'
-              data-testid='register-card-field'
+              data-testid='register-card-field-password'
               className='block border border-grey-light w-full p-3 rounded mt-2'
               name='password'
               placeholder='Password'
-              id='password'
               autoComplete='current-password'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.password}
             />
             {formik.touched.password && formik.errors.password ? (
-              <div className='px-2 text-orange italic text-sm'>
+              <div
+                data-testid='register-card-field-error-password'
+                className='px-2 text-orange italic text-sm'
+              >
                 {formik.errors.password}
               </div>
             ) : null}
             <div className='flex justify-center'>
               <button
                 type='submit'
+                data-testid='create-account-button'
                 className='w-64 bg-orange text-center py-3 text-white my-1 rounded-full hover:bg-gradient-to-r from-orange to-pink mt-2'
               >
                 Create Account

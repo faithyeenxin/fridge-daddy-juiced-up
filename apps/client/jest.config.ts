@@ -14,4 +14,5 @@ export default {
   coverageDirectory: 'coverage',
   collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!src/**/*.d.ts'],
   coverageReporters: ['json', 'lcov', 'text', 'clover'],
+  testEnvironmentOptions: { url: 'http://localhost:5173' },
 };
