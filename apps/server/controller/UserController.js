@@ -83,17 +83,21 @@ router.get("/:id", async (req, res) => {
       id: id,
     },
   });
-  res.status(200).send(user);
+  if (user) {
+    res.status(200).send(user);
+  } else {
+    res.status(400).send({ error: 'User not found' })
+  }
 });
 
 //* Find by Email
 router.get("/findByEmail/:email", async (req, res) => {
   const { email } = req.params;
-  const user = await prisma.user.findMany({ where: { email: email } });
-  if (user.length === 0) {
-    res.status(200).send([]);
-  } else {
+  const user = await prisma.user.findUnique({ where: { email: email } });
+  if (user) {
     res.status(200).send(user);
+  } else {
+    res.status(400).send({ error: 'User not found' });
   }
 });
 
@@ -108,7 +112,7 @@ router.post("/", async (req, res) => {
     const token = jwt.sign(user, SECRET, { expiresIn: "30m" });
     res.status(200).send({ token: token });
   } catch {
-    res.status(400).send({ err: "User already exists" });
+    res.status(400).send({ error: "User already exists" });
   }
 });
 
@@ -137,7 +141,7 @@ router.post("/google", async (req, res) => {
       res.status(200).send({ token: token });
     }
   } catch {
-    res.status(400).send({ err: "There is an error" });
+    res.status(400).send({ error: "There is an error" });
   }
 });
 

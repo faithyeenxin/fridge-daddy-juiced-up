@@ -1,18 +1,17 @@
-import React, { MouseEvent, useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
-  authenticateGoogleUser,
   createUser,
   getUserByEmail,
   resetUser,
 } from '../../../app/slices/userSlice';
 import { useAppDispatch } from '../../../app/store';
-import jwt_decode from 'jwt-decode';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { resetItems } from '../../../app/slices/itemsSlice';
 import { resetCategories } from '../../../app/slices/categoriesSlice';
 import { toast } from 'react-toastify';
+import GoogleButton from '../GoogleButton';
 
 export const RegisterCard = () => {
   const dispatch = useAppDispatch();
@@ -26,42 +25,6 @@ export const RegisterCard = () => {
   //   dateJoined: new Date(),
   // });
 
-  const handleSignUpWithGoogle = (response: any) => {
-    dispatch(resetUser());
-    dispatch(resetItems());
-    dispatch(resetCategories());
-    dispatch(authenticateGoogleUser(jwt_decode(response.credential)))
-      .unwrap()
-      .then((originalPromiseResult: any) => {
-        sessionStorage.setItem('fridgeDaddyToken', originalPromiseResult.token);
-        navigate(`/home`);
-      })
-      .catch((rejectedValueOrSerializedError) => {
-        // handle error here
-        toast.error(rejectedValueOrSerializedError);
-      });
-  };
-
-  useEffect(() => {
-    //global google
-    google.accounts.id.initialize({
-      client_id:
-        '60536065681-el72it8okrce4mkj2ldg7la7aaqdvcgh.apps.googleusercontent.com',
-      callback: handleSignUpWithGoogle,
-    });
-    const googleRegisterDiv: HTMLElement =
-      document.getElementById('registerDiv')!;
-    google.accounts.id.renderButton(googleRegisterDiv, {
-      type: 'standard',
-      text: 'signup_with',
-      theme: 'outline',
-      size: 'large',
-      shape: 'circle',
-      width: '256',
-    });
-  }, []);
-
-  // google.accounts.id.prompt();
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -117,12 +80,16 @@ export const RegisterCard = () => {
     <div className='bg-grey-lighter flex flex-col'>
       <div className='container max-w-md mx-auto flex-1 flex flex-col items-center justify-center '>
         <div className='bg-white px-6 py-8 rounded-lg shadow-md text-black w-full '>
-          <h1 className='mb-8 text-3xl text-center font-bold text-orange'>
+          <h1
+            data-testid='register-card-heading'
+            className='mb-8 text-3xl text-center font-bold text-orange'
+          >
             Register
           </h1>
           <form onSubmit={formik.handleSubmit}>
             <input
               type='text'
+              data-testid='register-card-field'
               className='block border border-grey-light w-full p-3 rounded'
               name='name'
               placeholder='Name'
@@ -139,6 +106,7 @@ export const RegisterCard = () => {
             ) : null}
             <input
               type='text'
+              data-testid='register-card-field'
               className='block border border-grey-light w-full p-3 rounded mt-2'
               name='email'
               placeholder='Email'
@@ -155,6 +123,7 @@ export const RegisterCard = () => {
             ) : null}
             <input
               type='password'
+              data-testid='register-card-field'
               className='block border border-grey-light w-full p-3 rounded mt-2'
               name='password'
               placeholder='Password'
@@ -178,12 +147,11 @@ export const RegisterCard = () => {
               </button>
             </div>
           </form>
-
-          <div className='flex justify-center' id='registerDiv'></div>
-
+          <GoogleButton />
           <div className='text-center text-sm text-grey-dark mt-2'>
             Having issues registering? {''}
             <a
+              data-testid='register-card-email-link'
               className='no-underline border-b border-grey-dark text-grey-dark hover:text-orangeLight'
               href='mailto:faith.ye@hotmail.com?subject=Hi there! I am having issues regarding FridgeDaddy...'
             >

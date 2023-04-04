@@ -99,7 +99,7 @@ router.get("/:id", async (req, res) => {
 //   res.status(200).send(item);
 // });
 
-//* Find by Item Name
+//* Find by Category Name
 router.get("/findByCategoryName/:categoryName", async (req, res) => {
   try {
     const { categoryName } = req.params;
@@ -112,7 +112,7 @@ router.get("/findByCategoryName/:categoryName", async (req, res) => {
   }
 });
 
-//* Create Item
+//* Create Category
 router.post("/", async (req, res) => {
   try {
     const newCategory = req.body;
