@@ -16,7 +16,6 @@ describe('initial conditions', () => {
       'Get Started',
     ]);
   });
-
   test('right container 2 images', () => {
     render(<HeroSection />);
     const rightContainerImages = screen.getAllByRole('img');

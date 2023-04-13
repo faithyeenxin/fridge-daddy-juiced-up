@@ -53,7 +53,7 @@ export const getUserById = createAsyncThunk<IUser, string>(
   }
 );
 
-export const getUserByEmail = createAsyncThunk<IUser, string>(
+export const getUserByEmail = createAsyncThunk<Array<any>, string>(
   'users/getUserByEmail',
   async (email, thunkAPI) => {
     try {

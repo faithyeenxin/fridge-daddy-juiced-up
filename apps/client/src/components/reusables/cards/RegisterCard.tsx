@@ -43,9 +43,17 @@ export const RegisterCard = () => {
               // handle result here
               setEmailExist(originalPromiseResult.length);
             });
-
-          return Boolean(!emailExist);
+          return !Boolean(emailExist);
         }),
+      // .test('value-email', 'User already exist', (email: any): boolean => {
+      //   dispatch(getUserByEmail(email))
+      //     .unwrap()
+      //     .then((originalPromiseResult: any) => {
+      //       // handle result here
+      //       setEmailExist(originalPromiseResult.length);
+      //     });
+      //   return !Boolean(emailExist);
+      // }),
       password: Yup.string()
         .matches(
           /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,

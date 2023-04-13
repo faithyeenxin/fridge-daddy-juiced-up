@@ -79,7 +79,9 @@ export const handlers = [
     await sleep(100);
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const { email } = req.params;
-    if (regex.test(String(email)) || email !== 'test-email@hotmail.com') {
+    if (email === 'test-email@hotmail.com') {
+      return res(ctx.status(200), ctx.json([]));
+    } else {
       return res(
         ctx.json([
           {
@@ -92,11 +94,28 @@ export const handlers = [
             email: email,
             dateJoined: '2022-11-02T16:00:00.000Z',
           },
+          {
+            id: '4fe91baa-a7d2-4146-85aa-ab11a5fea37c',
+            password:
+              '$2b$10$wfPxMfrC8Nw0pSMf5QDQde9p2.ca0UHZaC8fG1XeKBi1rV4m1mM4G',
+            name: 'Chelsea',
+            image:
+              'https://res.cloudinary.com/dj6tlm5xx/image/upload/v1665411728/samples/people/new_user_fnx00w.jpg',
+            email: email,
+            dateJoined: '2022-11-02T16:00:00.000Z',
+          },
+          {
+            id: '4fe91baa-a7d2-4146-85aa-ab11a5fea37c',
+            password:
+              '$2b$10$wfPxMfrC8Nw0pSMf5QDQde9p2.ca0UHZaC8fG1XeKBi1rV4m1mM4G',
+            name: 'Chelsea',
+            image:
+              'https://res.cloudinary.com/dj6tlm5xx/image/upload/v1665411728/samples/people/new_user_fnx00w.jpg',
+            email: email,
+            dateJoined: '2022-11-02T16:00:00.000Z',
+          },
         ])
       );
-    } else {
-      // return an empty response if the email is not valid
-      return res(ctx.json([]));
     }
   }),
 

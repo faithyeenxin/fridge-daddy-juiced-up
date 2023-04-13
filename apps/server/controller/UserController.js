@@ -100,6 +100,7 @@ router.get("/:id", async (req, res) => {
 //     res.status(400).send({ error: 'User not found' });
 //   }
 // });
+
 //* Find by Email
 router.get("/findByEmail/:email", async (req, res) => {
   const { email } = req.params;
