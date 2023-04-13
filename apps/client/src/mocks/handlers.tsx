@@ -1,4 +1,5 @@
 import { rest } from 'msw';
+import { act } from 'react-dom/test-utils';
 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -76,8 +77,6 @@ export const handlers = [
 
   // * Find by Email (test-email@hotmail.com)
   rest.get('/api/user/findByEmail/:email', async (req, res, ctx) => {
-    await sleep(100);
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const { email } = req.params;
     if (email === 'test-email@hotmail.com') {
       return res(ctx.status(200), ctx.json([]));

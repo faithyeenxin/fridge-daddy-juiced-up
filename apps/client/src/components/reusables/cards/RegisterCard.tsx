@@ -35,16 +35,12 @@ export const RegisterCard = () => {
       name: Yup.string().required('Name is required'),
       email: Yup.string()
         .email('Invalid email address')
-        .required('Email is required')
-        .test('value-email', 'User already exist', (email: any): boolean => {
-          dispatch(getUserByEmail(email))
-            .unwrap()
-            .then((originalPromiseResult: any) => {
-              // handle result here
-              setEmailExist(originalPromiseResult.length);
-            });
-          return !Boolean(emailExist);
-        }),
+        .required('Email is required'),
+      // .test('value-email', 'User already exist', async (email: any) => {
+      //   const existingUsers = await dispatch(getUserByEmail(email)).unwrap();
+      //   console.log(existingUsers);
+      //   return existingUsers.length === 0;
+      // }),
       password: Yup.string()
         .matches(
           /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
@@ -68,7 +64,7 @@ export const RegisterCard = () => {
         })
         .catch((rejectedValueOrSerializedError) => {
           // handle error here
-          toast.error(rejectedValueOrSerializedError);
+          toast.error(rejectedValueOrSerializedError.response.data.error);
         });
     },
   });

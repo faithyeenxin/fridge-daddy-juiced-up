@@ -114,16 +114,17 @@ router.get("/findByEmail/:email", async (req, res) => {
 
 //* Create User
 router.post("/", async (req, res) => {
-  try {
-    const newUser = req.body;
+  const userData = req.body;
+  const userExists = await prisma.user.findUnique({ where: { email: userData.email } });
+  if (userExists !== null) {
+    res.status(400).send({ error: 'User already exist, please register with another email.' });
+  } else {
     newUser.password = bcrypt.hashSync(newUser.password, 10);
-    const user = await prisma.user.create({
+    const userCreated = await prisma.user.create({
       data: newUser,
     });
-    const token = jwt.sign(user, SECRET, { expiresIn: "30m" });
+    const token = jwt.sign(userCreated, SECRET, { expiresIn: "30m" });
     res.status(200).send({ token: token });
-  } catch {
-    res.status(400).send({ error: "User already exists" });
   }
 });
 

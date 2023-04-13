@@ -206,7 +206,6 @@ export const usersSlice = createSlice({
       })
       .addCase(createUser.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error.message;
       });
     // authenticate User
     builder

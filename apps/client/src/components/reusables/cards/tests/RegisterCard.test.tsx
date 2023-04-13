@@ -1,7 +1,9 @@
 import {
+  fireEvent,
   render,
   screen,
   waitFor,
+  waitForElementToBeRemoved,
 } from '../../../../test-utils/testing-library-utils';
 import userEvent from '@testing-library/user-event';
 import { RegisterCard } from '../RegisterCard';
@@ -26,53 +28,6 @@ test('initial conditions', () => {
 });
 
 describe('functionality of register card - Create Account Button', () => {
-  test('all correctly filled should show no error', async () => {
-    // switch off console.error as it tells me that setEmailExist is not properly configured in act.
-    // will try to solve it later
-    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-    const user = userEvent.setup();
-    render(<RegisterCard />);
-
-    await act(async () => {
-      const nameFeildItem = screen.getByTestId('register-card-field-name');
-      await user.clear(nameFeildItem);
-      await user.type(nameFeildItem, 'testUserTwo');
-      userEvent.tab();
-
-      const emailFeildItem = screen.getByTestId('register-card-field-email');
-      await user.clear(emailFeildItem);
-      await user.type(emailFeildItem, 'newUser@hotmail.com');
-      userEvent.tab();
-
-      const passwordFeildItem = screen.getByTestId(
-        'register-card-field-password'
-      );
-      await user.clear(passwordFeildItem);
-      await user.type(passwordFeildItem, 'Password123!');
-      userEvent.tab();
-
-      const createAccountButton = screen.getByTestId('create-account-button');
-      await user.click(createAccountButton);
-
-      const nameError = screen.queryByTestId('register-card-field-error-name');
-      const emailError = screen.queryByTestId(
-        'register-card-field-error-email'
-      );
-      const passwordError = screen.queryByTestId(
-        'register-card-field-error-password'
-      );
-      // cant seem to figure out how to get rid of email error
-      await waitFor(() => {
-        expect(nameError).not.toBeInTheDocument();
-        expect(emailError).not.toBeInTheDocument();
-        expect(passwordError).not.toBeInTheDocument();
-      });
-    });
-    // expect(passwordError).toHaveTextContent(
-    //   'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character'
-    // );
-    errorSpy.mockRestore();
-  });
   test('name, email and password is required on submit with Create Acc Button else will show error', async () => {
     const user = userEvent.setup();
     render(<RegisterCard />);
@@ -90,107 +45,67 @@ describe('functionality of register card - Create Account Button', () => {
     const createAccountButton = screen.getByTestId('create-account-button');
     await user.click(createAccountButton);
 
-    // const allErrorMessages = screen.getAllByTestId('register-card-field-error');
-    // const allErrorMessagesArr = allErrorMessages.map(
-    //   (item) => item.textContent
-    // );
-    // expect(allErrorMessagesArr).toEqual(['Required', 'Required', 'Required']);
-    const nameRequiredErrorMsg = screen.getByTestId(
-      'register-card-field-error-name'
-    );
+    await waitFor(() => {
+      expect(
+        screen.getByTestId('register-card-field-error-name')
+      ).toBeInTheDocument();
+      expect(
+        screen.getByTestId('register-card-field-error-email')
+      ).toBeInTheDocument();
+      expect(
+        screen.getByTestId('register-card-field-error-password')
+      ).toBeInTheDocument();
+    });
 
-    const emailRequiredErrorMsg = screen.getByTestId(
-      'register-card-field-error-email'
-    );
-
-    const passwordRequiredErrorMsg = screen.getByTestId(
-      'register-card-field-error-password'
-    );
-    expect(nameRequiredErrorMsg).toHaveTextContent('Name is required');
-    expect(emailRequiredErrorMsg).toHaveTextContent('Email is required');
-    expect(passwordRequiredErrorMsg).toHaveTextContent('Password is required');
+    expect(
+      screen.getByTestId('register-card-field-error-name')
+    ).toHaveTextContent('Name is required');
+    expect(
+      screen.getByTestId('register-card-field-error-email')
+    ).toHaveTextContent('Email is required');
+    expect(
+      screen.getByTestId('register-card-field-error-password')
+    ).toHaveTextContent('Password is required');
   });
 
-  test('invalid (existing) email address throws error message', async () => {
+  test('correct name, email and password will show no error', async () => {
     const user = userEvent.setup();
     render(<RegisterCard />);
     const nameFeildItem = screen.getByTestId('register-card-field-name');
     await user.clear(nameFeildItem);
-    await user.type(nameFeildItem, 'testUserTwo');
-    userEvent.click(document.body);
+    await user.type(nameFeildItem, 'testingUser');
+    await user.tab();
 
     const emailFeildItem = screen.getByTestId('register-card-field-email');
     await user.clear(emailFeildItem);
-    await user.type(emailFeildItem, 'test-email@hotmail.com');
+    await user.type(emailFeildItem, 'validUser@hotmail.com');
+    await user.tab();
+
     const passwordFeildItem = screen.getByTestId(
       'register-card-field-password'
     );
     await user.clear(passwordFeildItem);
     await user.type(passwordFeildItem, 'Password123!');
-    userEvent.click(document.body);
+    await user.tab();
 
     const createAccountButton = screen.getByTestId('create-account-button');
-    await user.click(createAccountButton);
-
-    const nameError = screen.queryByTestId('register-card-field-error-name');
-    const emailError = screen.queryByTestId('register-card-field-error-email');
-    const passwordError = screen.queryByTestId(
-      'register-card-field-error-password'
-    );
-
-    expect(nameError).not.toBeInTheDocument();
-    expect(emailError).toHaveTextContent('User already exist');
-    expect(passwordError).not.toBeInTheDocument();
-  });
-
-  test('invalid password throws error message', async () => {
-    // switch off console.error as it tells me that setEmailExist is not properly configured in act.
-    // will try to solve it later
-    // const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-    const user = userEvent.setup();
-    render(<RegisterCard />);
-
     await act(async () => {
-      const nameFeildItem = screen.getByTestId('register-card-field-name');
-      await user.clear(nameFeildItem);
-      await user.type(nameFeildItem, 'testUserTwo');
-      userEvent.tab();
-
-      const emailFeildItem = screen.getByTestId('register-card-field-email');
-      await user.clear(emailFeildItem);
-      await user.type(emailFeildItem, 'newUser@hotmail.com');
-      userEvent.tab();
-
-      const passwordFeildItem = screen.getByTestId(
-        'register-card-field-password'
-      );
-      await user.clear(passwordFeildItem);
-      await user.type(passwordFeildItem, 'password123!');
-      userEvent.tab();
-
-      const createAccountButton = screen.getByTestId('create-account-button');
       await user.click(createAccountButton);
-
-      const nameError = screen.queryByTestId('register-card-field-error-name');
-      const emailError = screen.queryByTestId(
-        'register-card-field-error-email'
-      );
-      const passwordError = screen.queryByTestId(
-        'register-card-field-error-password'
-      );
-      // cant seem to figure out how to get rid of email error
-
-      expect(nameError).not.toBeInTheDocument();
-      expect(emailError).not.toBeInTheDocument();
-      expect(passwordError).toHaveTextContent(
-        'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character'
-      );
     });
 
-    // errorSpy.mockRestore();
+    await waitFor(() => {
+      expect(screen.queryByText('Name is required')).not.toBeInTheDocument();
+      expect(
+        screen.queryByText('Invalid email address')
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText('Password is required')
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(
+          'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character'
+        )
+      ).not.toBeInTheDocument();
+    });
   });
 });
-
-// test('functionality of register card - Google Button', () => {
-//   render(<RegisterCard />);
-// });

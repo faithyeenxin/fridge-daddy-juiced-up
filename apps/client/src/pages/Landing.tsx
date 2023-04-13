@@ -3,6 +3,7 @@ import JoinUsSection from '../components/landing/JoinUsSection';
 import NotEnoughFoodSection from '../components/landing/NotEnoughFoodSection';
 import WastedSection from '../components/landing/WastedSection';
 import daddy from '../../src/assets/img/landing-page/daddy.svg';
+import { ToastContainer } from 'react-toastify';
 export const Landing = () => {
   return (
     <div className='w-full h-full'>
@@ -21,6 +22,18 @@ export const Landing = () => {
       <div className='relative'>
         <JoinUsSection />
       </div>
+      <ToastContainer
+        position='bottom-right'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='light'
+      />
     </div>
   );
 };
