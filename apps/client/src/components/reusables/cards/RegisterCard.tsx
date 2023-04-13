@@ -32,10 +32,10 @@ export const RegisterCard = () => {
       password: '',
     },
     validationSchema: Yup.object({
-      name: Yup.string().required('Required'),
+      name: Yup.string().required('Name is required'),
       email: Yup.string()
         .email('Invalid email address')
-        .required('Required')
+        .required('Email is required')
         .test('value-email', 'User already exist', (email: any): boolean => {
           dispatch(getUserByEmail(email))
             .unwrap()
@@ -45,21 +45,12 @@ export const RegisterCard = () => {
             });
           return !Boolean(emailExist);
         }),
-      // .test('value-email', 'User already exist', (email: any): boolean => {
-      //   dispatch(getUserByEmail(email))
-      //     .unwrap()
-      //     .then((originalPromiseResult: any) => {
-      //       // handle result here
-      //       setEmailExist(originalPromiseResult.length);
-      //     });
-      //   return !Boolean(emailExist);
-      // }),
       password: Yup.string()
         .matches(
           /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
           'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character'
         )
-        .required('Required'),
+        .required('Password is required'),
     }),
     onSubmit: (values: any) => {
       toast("We're registering you!");
