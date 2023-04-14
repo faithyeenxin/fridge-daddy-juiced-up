@@ -78,7 +78,7 @@ export const handlers = [
   // * Find by Email (test-email@hotmail.com)
   rest.get('/api/user/findByEmail/:email', async (req, res, ctx) => {
     const { email } = req.params;
-    if (email === 'test-email@hotmail.com') {
+    if (email === 'existing-email@hotmail.com') {
       return res(ctx.status(200), ctx.json([]));
     } else {
       return res(
@@ -122,7 +122,14 @@ export const handlers = [
   rest.post('/api/user', async (req, res, ctx) => {
     await sleep(100);
     const newUser = await req.json();
-    if (typeof newUser) {
+    if (newUser.email === 'existing-email@hotmail.com') {
+      return res(
+        ctx.status(400), // sets the HTTP status code to 500
+        ctx.json({
+          error: 'User already exist, please register with another email.',
+        })
+      );
+    } else if (typeof newUser) {
       return res(ctx.json({ token: 'this-is-my-test-token' }));
     } else {
       return res(

@@ -24,6 +24,7 @@ export const Landing = () => {
       </div>
       <ToastContainer
         position='bottom-right'
+        data-testid='landing-toast-msg'
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}

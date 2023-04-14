@@ -2,7 +2,7 @@ import { render, screen } from '../../../test-utils/testing-library-utils';
 import HeroSection from '../HeroSection';
 
 describe('initial conditions', () => {
-  test('left container', () => {
+  it('should have left container', () => {
     render(<HeroSection />);
     const leftContainerItems = screen.getAllByTestId(
       'hero-left-container-item'
@@ -16,7 +16,7 @@ describe('initial conditions', () => {
       'Get Started',
     ]);
   });
-  test('right container 2 images', () => {
+  it('should have right container with 2 images', () => {
     render(<HeroSection />);
     const rightContainerImages = screen.getAllByRole('img');
     expect(rightContainerImages.length).toBe(2);

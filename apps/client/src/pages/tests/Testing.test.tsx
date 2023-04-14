@@ -1,7 +1,7 @@
 import { render, screen } from '../../test-utils/testing-library-utils';
 import userEvent from '@testing-library/user-event';
 import Testing from '../Testing';
-test('initial conditions', () => {
+it('should have initial conditions', () => {
   render(<Testing />);
   // test heading
   const testHeading = screen.getByTestId('testing-page-heading');
@@ -13,7 +13,7 @@ test('initial conditions', () => {
   expect(testButton).not.toBeDisabled();
 });
 
-test('test button functionality', async () => {
+it('should have button functionality', async () => {
   // mock the alert function
   const alertMock = jest.spyOn(window, 'alert').mockImplementation(() => {});
   render(<Testing />);

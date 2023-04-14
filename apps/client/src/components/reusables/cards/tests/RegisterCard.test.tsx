@@ -1,21 +1,31 @@
 import {
-  fireEvent,
   render,
   screen,
   waitFor,
-  waitForElementToBeRemoved,
 } from '../../../../test-utils/testing-library-utils';
 import userEvent from '@testing-library/user-event';
 import { RegisterCard } from '../RegisterCard';
-import { act } from 'react-dom/test-utils';
-// import { act } from '@testing-library/react-hooks';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: jest.fn(),
+}));
+
+jest.mock('react-toastify', () => ({
+  toast: {
+    success: jest.fn(),
+    error: jest.fn(),
+  },
+}));
 
 // I will ignore the google login button as I do not know how to test it yet!
 jest.mock('../../GoogleButton.tsx', () => {
   return () => <div data-testid='mock-google-button' />;
 });
 
-test('initial conditions', () => {
+it('should have initial conditions', () => {
   render(<RegisterCard />);
   // test heading
   const testHeading = screen.getByTestId('register-card-heading');
@@ -27,8 +37,8 @@ test('initial conditions', () => {
   expect(testButton).not.toBeDisabled();
 });
 
-describe('functionality of register card - Create Account Button', () => {
-  test('name, email and password is required on submit with Create Acc Button else will show error', async () => {
+describe('register card functionality', () => {
+  it('should show error when no name, email and password on submit', async () => {
     const user = userEvent.setup();
     render(<RegisterCard />);
     const nameFeildItem = screen.getByTestId('register-card-field-name');
@@ -68,8 +78,9 @@ describe('functionality of register card - Create Account Button', () => {
     ).toHaveTextContent('Password is required');
   });
 
-  test('correct name, email and password will show no error', async () => {
+  it('should not show error on submission with correct data and redirect to /home', async () => {
     const user = userEvent.setup();
+
     render(<RegisterCard />);
     const nameFeildItem = screen.getByTestId('register-card-field-name');
     await user.clear(nameFeildItem);
@@ -89,9 +100,7 @@ describe('functionality of register card - Create Account Button', () => {
     await user.tab();
 
     const createAccountButton = screen.getByTestId('create-account-button');
-    await act(async () => {
-      await user.click(createAccountButton);
-    });
+    await user.click(createAccountButton);
 
     await waitFor(() => {
       expect(screen.queryByText('Name is required')).not.toBeInTheDocument();
@@ -106,6 +115,75 @@ describe('functionality of register card - Create Account Button', () => {
           'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character'
         )
       ).not.toBeInTheDocument();
+      expect(useNavigate).toHaveBeenCalled();
     });
+  });
+
+  it('should throw error with invalid email', async () => {
+    const user = userEvent.setup();
+    render(<RegisterCard />);
+
+    const emailFeildItem = screen.getByTestId('register-card-field-email');
+    await user.clear(emailFeildItem);
+    await user.type(emailFeildItem, 'invalid-email@hotmail');
+    await user.tab();
+
+    await waitFor(() => {
+      expect(screen.queryByText('Invalid email address')).toBeInTheDocument();
+    });
+  });
+
+  it('should throw error with invalid password', async () => {
+    const user = userEvent.setup();
+    render(<RegisterCard />);
+
+    const passwordFeildItem = screen.getByTestId(
+      'register-card-field-password'
+    );
+    await user.clear(passwordFeildItem);
+    await user.type(passwordFeildItem, 'password123!');
+    await user.tab();
+
+    await waitFor(() => {
+      expect(
+        screen.queryByText(
+          'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character'
+        )
+      ).toBeInTheDocument();
+    });
+  });
+
+  it('should throw error on submit when registering with existing email', async () => {
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const user = userEvent.setup();
+
+    render(<RegisterCard />);
+    const nameFeildItem = screen.getByTestId('register-card-field-name');
+    await user.clear(nameFeildItem);
+    await user.type(nameFeildItem, 'testingUser');
+    await user.tab();
+
+    const emailFeildItem = screen.getByTestId('register-card-field-email');
+    await user.clear(emailFeildItem);
+    await user.type(emailFeildItem, 'existing-email@hotmail.com');
+    await user.tab();
+
+    const passwordFeildItem = screen.getByTestId(
+      'register-card-field-password'
+    );
+    await user.clear(passwordFeildItem);
+    await user.type(passwordFeildItem, 'Password123!');
+    await user.tab();
+
+    const createAccountButton = screen.getByTestId('create-account-button');
+
+    await user.click(createAccountButton);
+    await waitFor(() => {
+      expect(toast.success).toHaveBeenCalledWith("We're registering you!");
+      expect(toast.error).toHaveBeenCalledWith(
+        'User already exist, please register with another email.'
+      );
+    });
+    errorSpy.mockRestore();
   });
 });

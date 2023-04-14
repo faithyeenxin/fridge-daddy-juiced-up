@@ -2,7 +2,7 @@ import { render, screen } from '../../../test-utils/testing-library-utils';
 import WastedSection from '../WastedSection';
 
 describe('initial conditions', () => {
-  test('left container', () => {
+  it('should have left container', () => {
     render(<WastedSection />);
     const leftContainerItem = screen.getByTestId('wasted-left-container-item');
     expect(leftContainerItem).toHaveTextContent(
@@ -10,7 +10,7 @@ describe('initial conditions', () => {
     );
   });
 
-  test('right container 2 images', () => {
+  it('should have right container 2 images', () => {
     render(<WastedSection />);
     const rightContainerImages = screen.getAllByRole('img');
     expect(rightContainerImages.length).toBe(2);

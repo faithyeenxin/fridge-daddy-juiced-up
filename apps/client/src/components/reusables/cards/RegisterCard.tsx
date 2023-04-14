@@ -16,14 +16,6 @@ import GoogleButton from '../GoogleButton';
 export const RegisterCard = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [emailExist, setEmailExist] = useState(false);
-
-  // const [user, setUser] = useState({
-  //   name: "",
-  //   email: "",
-  //   password: "",
-  //   dateJoined: new Date(),
-  // });
 
   const formik = useFormik({
     initialValues: {
@@ -36,11 +28,6 @@ export const RegisterCard = () => {
       email: Yup.string()
         .email('Invalid email address')
         .required('Email is required'),
-      // .test('value-email', 'User already exist', async (email: any) => {
-      //   const existingUsers = await dispatch(getUserByEmail(email)).unwrap();
-      //   console.log(existingUsers);
-      //   return existingUsers.length === 0;
-      // }),
       password: Yup.string()
         .matches(
           /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
@@ -49,7 +36,7 @@ export const RegisterCard = () => {
         .required('Password is required'),
     }),
     onSubmit: (values: any) => {
-      toast("We're registering you!");
+      toast.success("We're registering you!");
       dispatch(resetUser());
       dispatch(resetItems());
       dispatch(resetCategories());
@@ -62,9 +49,11 @@ export const RegisterCard = () => {
           );
           navigate(`/home`);
         })
-        .catch((rejectedValueOrSerializedError) => {
+        .catch(async (rejectedValueOrSerializedError) => {
           // handle error here
-          toast.error(rejectedValueOrSerializedError.response.data.error);
+          toast.error(
+            'User already exist, please register with another email.'
+          );
         });
     },
   });
