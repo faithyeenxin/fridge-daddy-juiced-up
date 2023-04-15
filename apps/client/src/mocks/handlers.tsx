@@ -124,7 +124,7 @@ export const handlers = [
     const newUser = await req.json();
     if (newUser.email === 'existing-email@hotmail.com') {
       return res(
-        ctx.status(400), // sets the HTTP status code to 500
+        ctx.status(400), // sets the HTTP status code to 400
         ctx.json({
           error: 'User already exist, please register with another email.',
         })
@@ -159,12 +159,11 @@ export const handlers = [
   rest.post('/api/user/login', async (req, res, ctx) => {
     await sleep(100);
     const existingUser = await req.json();
-    if (typeof existingUser) {
+    if (existingUser !== 'invalid-email@hotmail') {
       return res(ctx.json({ token: 'this-is-my-test-token' }));
     } else {
       return res(
-        ctx.delay(500), // adds a delay of 500ms before returning the response
-        ctx.status(500), // sets the HTTP status code to 500
+        ctx.status(400), // sets the HTTP status code to 400
         ctx.json({ error: 'User not found' })
       );
     }

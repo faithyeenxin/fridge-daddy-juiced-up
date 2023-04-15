@@ -11,15 +11,22 @@ const JoinUsSection = () => {
       <div className='flex mb-10 md:mt-16 md:mb-32 h-auto lg:h-full w-full lg:w-full justify-center lg:justify-start items-center'>
         <div
           className='w-[100%] lg:w-[60%] xl:w-[50%] lg:pl-[10%] flex flex-col gap-5'
+          data-testid='content-container'
           data-aos='fade-up'
           data-aos-duration='1500'
           data-aos-easing='ease-in-out'
           data-aos-once='false'
         >
-          <h1 className='w-lg font-bold text-center text-orange xs:text-lg sm:text-2xl md:text-4xl lg:text-4xl xl:text-5xl'>
+          <h1
+            className='w-lg font-bold text-center text-orange xs:text-lg sm:text-2xl md:text-4xl lg:text-4xl xl:text-5xl'
+            data-testid='content-container-items'
+          >
             It's terrible isn't it?
           </h1>
-          <h1 className='w-lg font-bold text-center text-orange xs:text-lg sm:text-2xl md:text-4xl lg:text-xl xl:text-2xl'>
+          <h1
+            className='w-lg font-bold text-center text-orange xs:text-lg sm:text-2xl md:text-4xl lg:text-xl xl:text-2xl'
+            data-testid='content-container-items'
+          >
             Let's all join FridgeDaddy in the fight against food wastage!
           </h1>
           <div className='hidden lg:block'>

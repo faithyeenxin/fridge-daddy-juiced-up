@@ -2,6 +2,7 @@ import { RenderOptions, RenderResult, render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from '../app/store';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+declare const google: typeof globalThis.google;
 
 type CustomRenderOptions = Omit<RenderOptions, 'wrapper'> & {
   transform?: Record<string, string>;

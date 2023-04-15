@@ -14,6 +14,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { resetItems } from '../../../app/slices/itemsSlice';
 import { resetCategories } from '../../../app/slices/categoriesSlice';
 import { toast } from 'react-toastify';
+import GoogleButton from '../GoogleButton';
 
 const LoginCard = () => {
   const dispatch = useAppDispatch();
@@ -31,41 +32,6 @@ const LoginCard = () => {
   function openModal() {
     setIsOpen(true);
   }
-  const handleSignInWithGoogle = (response: any) => {
-    dispatch(resetUser());
-    dispatch(resetItems());
-    dispatch(resetCategories());
-    dispatch(authenticateGoogleUser(jwt_decode(response.credential)))
-      .unwrap()
-      .then((originalPromiseResult: any) => {
-        sessionStorage.setItem('fridgeDaddyToken', originalPromiseResult.token);
-        navigate(`/home`);
-      })
-      .catch((rejectedValueOrSerializedError) => {
-        // handle error here
-        toast.error(rejectedValueOrSerializedError);
-      });
-  };
-
-  useEffect(() => {
-    //global google
-    google.accounts.id.initialize({
-      client_id:
-        '60536065681-el72it8okrce4mkj2ldg7la7aaqdvcgh.apps.googleusercontent.com',
-      callback: handleSignInWithGoogle,
-    });
-    const googleLoginDiv: HTMLElement = document.getElementById('logInDiv')!;
-    google.accounts.id.renderButton(googleLoginDiv, {
-      type: 'standard',
-      text: 'signin_with',
-      theme: 'outline',
-      size: 'large',
-      shape: 'circle',
-      width: '256',
-    });
-
-    // google.accounts.id.prompt();
-  }, []);
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -74,8 +40,15 @@ const LoginCard = () => {
       password: useTestUser.password,
     },
     validationSchema: Yup.object({
-      email: Yup.string().email('Invalid email address').required('Required'),
-      password: Yup.string().required('Required'),
+      email: Yup.string()
+        .email('Invalid email address')
+        .required('Email is required'),
+      password: Yup.string()
+        .matches(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+          'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character'
+        )
+        .required('Password is required'),
     }),
     onSubmit: (values: any) => {
       dispatch(resetUser());
@@ -89,7 +62,6 @@ const LoginCard = () => {
             'fridgeDaddyToken',
             originalPromiseResult.token
           );
-
           navigate(`/home`);
         })
         .catch((rejectedValueOrSerializedError) => {
@@ -105,13 +77,17 @@ const LoginCard = () => {
       <div className='bg-grey-lighter flex flex-col'>
         <div className='container max-w-md mx-auto flex-1 flex flex-col items-center justify-center'>
           <div className='bg-white px-6 py-8 rounded-lg shadow-md text-black w-full'>
-            <h1 className='mb-8 text-3xl text-center font-bold text-orange'>
+            <h1
+              className='mb-8 text-3xl text-center font-bold text-orange'
+              data-testid='login-card-heading'
+            >
               Sign In to FridgeDaddy!
             </h1>
             <form onSubmit={formik.handleSubmit}>
               <input
                 type='text'
-                className='block border border-grey-light w-full p-3 rounded '
+                className='block border border-grey-light w-full p-3 rounded'
+                data-testid='login-card-field-email'
                 name='email'
                 placeholder='Email'
                 id='email'
@@ -121,13 +97,17 @@ const LoginCard = () => {
                 autoComplete='off'
               />
               {formik.touched.email && formik.errors.email ? (
-                <div className='px-2 text-orange italic text-sm'>
+                <div
+                  className='px-2 text-orange italic text-sm'
+                  data-testid='login-card-field-error-email'
+                >
                   {formik.errors.email}
                 </div>
               ) : null}
               <input
                 type='password'
                 className='block border border-grey-light w-full p-3 rounded mt-2'
+                data-testid='login-card-field-password'
                 name='password'
                 autoComplete='current-password'
                 placeholder='Password'
@@ -137,7 +117,10 @@ const LoginCard = () => {
                 value={formik.values.password}
               />
               {formik.touched.password && formik.errors.password ? (
-                <div className='px-2 text-orange italic text-sm'>
+                <div
+                  className='px-2 text-orange italic text-sm'
+                  data-testid='login-card-field-error-password'
+                >
                   {formik.errors.password}
                 </div>
               ) : null}
@@ -145,18 +128,23 @@ const LoginCard = () => {
                 <button
                   type='submit'
                   className='w-64 bg-orange text-center py-3 mt-4 text-white my-1 rounded-full hover:bg-gradient-to-r from-orange to-pink'
+                  data-testid='login-account-button'
                 >
                   Let's Go!
                 </button>
               </div>
             </form>
 
-            <div className='flex justify-center' id='logInDiv'></div>
+            <GoogleButton />
 
-            <div className='text-center text-sm text-orangeLight my-2 animate-pulse'>
+            <div
+              className='text-center text-sm text-orangeLight my-2 animate-pulse'
+              data-testid='trial-account-container'
+            >
               Try us out using our {''}
               <a
                 className='no-underline border-b border-grey-dark font-bold text-orange hover:text-green-500 cursor-pointer'
+                data-testid='trial-anchor-tag'
                 onClick={() =>
                   setUseTestUser({
                     email: 'testUser@hotmail.com',
@@ -174,10 +162,14 @@ const LoginCard = () => {
                 Privacy Policy
               </a> */}
             </div>
-            <div className='text-center text-xs text-grey-dark'>
+            <div
+              className='text-center text-xs text-grey-dark'
+              data-testid='contact-developer-container'
+            >
               Having issues logging in? {''}
               <a
                 className='no-underline border-b border-grey-dark text-grey-dark hover:text-orangeLight'
+                data-testid='contact-dev-anchor-tag'
                 href='mailto:faith.ye@hotmail.com?subject=Hi there! I am having issues regarding FridgeDaddy...'
               >
                 Contact our developers here!
