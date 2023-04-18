@@ -66,7 +66,7 @@ const LoginCard = () => {
         })
         .catch((rejectedValueOrSerializedError) => {
           // handle error here
-          toast.error(rejectedValueOrSerializedError);
+          console.log('error');
           setIsOpen(true);
         });
     },
@@ -211,10 +211,14 @@ const LoginCard = () => {
                 leaveFrom='opacity-100 scale-100'
                 leaveTo='opacity-0 scale-95'
               >
-                <Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                <Dialog.Panel
+                  className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'
+                  data-testid='error-modal'
+                >
                   <Dialog.Title
                     as='h3'
                     className='flex text-lg font-medium leading-6 text-red-400'
+                    data-testid='error-modal-item'
                   >
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
@@ -233,7 +237,10 @@ const LoginCard = () => {
                     Login Unsuccessful
                   </Dialog.Title>
                   <div className='mt-2'>
-                    <p className='text-sm text-gray-500'>
+                    <p
+                      className='text-sm text-gray-500'
+                      data-testid='error-modal-item'
+                    >
                       You must have entered the wrong email or password. <br />{' '}
                       Please try again!
                     </p>

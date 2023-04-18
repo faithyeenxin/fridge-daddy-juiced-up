@@ -173,6 +173,24 @@ describe('login card functionality', () => {
       ).toBeInTheDocument();
     });
   });
+
+  // unable to get this test
+  // it('should open up  login failed modal when login rejected', async () => {
+  //   const user = userEvent.setup();
+  //   render(<LoginCard />);
+  //   const emailFeildItem = screen.getByTestId('login-card-field-email');
+  //   await user.clear(emailFeildItem);
+  //   await user.type(emailFeildItem, 'invalid-email@hotmail.com');
+  //   const passwordFeildItem = screen.getByTestId('login-card-field-password');
+  //   await user.clear(passwordFeildItem);
+  //   await user.type(passwordFeildItem, 'Password123!');
+
+  //   const loginAccountButton = screen.getByTestId('login-account-button');
+  //   await user.click(loginAccountButton);
+
+  //   const errorModal = screen.queryByTestId('error-modal');
+  //   expect(errorModal).toBeInTheDocument();
+  // });
 });
 
 interface IFormData {
