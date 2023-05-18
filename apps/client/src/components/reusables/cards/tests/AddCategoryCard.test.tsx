@@ -7,7 +7,6 @@ import userEvent from '@testing-library/user-event';
 import { RegisterCard } from '../RegisterCard';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import LoginCard from '../LoginCard';
 import AddCategoryCard from '../AddCategoryCard';
 
 // const axiosPostSpy = jest.spyOn(axios, 'post');

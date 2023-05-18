@@ -94,11 +94,15 @@ const AddItemCard = () => {
       }}
     >
       <div className='flex items-center justify-evenly flex-col m-5 gap-2'>
-        <div className='text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider'>
+        <div
+          className='text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider'
+          data-testid='add-item-heading'
+        >
           Add an Item
         </div>
         <input
           type='text'
+          data-testid='item-name'
           id='itemName'
           name='itemName'
           placeholder='Name'
@@ -113,6 +117,7 @@ const AddItemCard = () => {
         />
         <input
           type='text'
+          data-testid='quantity'
           id='quantity'
           name='quantity'
           spellCheck={true}
@@ -151,6 +156,7 @@ const AddItemCard = () => {
 
         <div className='flex flex-col xl:flex-row gap-2 justify-between w-full'>
           <div
+            data-testid='purchase-date-title'
             className={`${
               purchasedOnDisplay ? 'hidden' : ''
             } h-[30px] xl:h-[40px] px-1 w-full gap-1 flex text-sm items-center justify-center rounded-3xl bg-opacity-60 text-tracking-wide  text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none`}
@@ -159,6 +165,7 @@ const AddItemCard = () => {
             Purchased <img src='/images/cards/date_small.svg' />
           </div>
           <input
+            data-testid='purchase-date'
             style={{ width: '100% !important' }}
             className={`${
               purchasedOnDisplay ? '' : 'hidden'
@@ -184,6 +191,7 @@ const AddItemCard = () => {
             }}
           />
           <div
+            data-testid='expiry-date-title'
             className={`${
               expirationOnDisplay ? 'hidden' : ''
             } h-[30px] xl:h-[40px] px-1 w-full gap-1 flex text-sm items-center justify-center rounded-3xl bg-opacity-60 text-tracking-wide  text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none`}
@@ -192,6 +200,7 @@ const AddItemCard = () => {
             Expiration <img src='/images/cards/date_small.svg' />
           </div>
           <input
+            data-testid='expiry-date'
             className={`${
               expirationOnDisplay ? '' : 'hidden'
             } h-[30px] xl:h-[40px] px-1 w-full gap-1 flex text-sm items-center justify-center rounded-3xl bg-opacity-60 text-tracking-wide  text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none`}
@@ -212,6 +221,7 @@ const AddItemCard = () => {
           />
         </div>
         <div
+          data-testid='add-item-button'
           className='flex justify-center w-full bg-orange rounded-3xl hover:bg-gradient-to-r from-orange to-pink cursor-pointer'
           onClick={handleSubmit}
         >

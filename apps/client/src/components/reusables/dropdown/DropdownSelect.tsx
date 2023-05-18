@@ -157,7 +157,7 @@ const DropdownSelect = ({
   ]);
 
   return (
-    <div className='w-full' ref={divRef}>
+    <div className='w-full' ref={divRef} data-testid='dropdown-select'>
       <button
         id='dropdownSearchButton'
         onClick={() => setOpenDropdown(!openDropdown)}
