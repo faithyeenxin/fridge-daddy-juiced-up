@@ -742,7 +742,7 @@ export const handlers = [
   rest.post('/api/category', async (req, res, ctx) => {
     const newCategory = await req.json();
     await sleep(100);
-    if (typeof newCategory) {
+    if (typeof newCategory && newCategory.name !== 'invalid') {
       return res(
         ctx.json({
           id: 'a9a4cf31-4ca3-4856-9ce5-662ec5fe3723',

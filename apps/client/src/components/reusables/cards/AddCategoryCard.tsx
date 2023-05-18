@@ -36,7 +36,7 @@ const AddCategoryCard = () => {
     } else if (Object.values(newCategory).includes('')) {
       toast.error('All fields have to be filled.');
     } else {
-      toast("We're adding your category!");
+      toast.success("We're adding your category!");
       dispatch(createCategory(newCategory))
         .unwrap()
         .then((originalPromiseResult) => {
@@ -53,11 +53,15 @@ const AddCategoryCard = () => {
 
   return (
     <div className='flex items-center justify-evenly flex-col m-5 gap-2'>
-      <div className='text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider'>
+      <div
+        className='text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider'
+        data-testid='add-category-heading'
+      >
         Add a Category
       </div>
       <input
         type='text'
+        data-testid='add-category-name-input'
         placeholder='Name'
         // value={newCategory.name}
         className='w-full h-[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
@@ -68,6 +72,7 @@ const AddCategoryCard = () => {
       <div className='flex flex-row gap-1'>
         <input
           type='number'
+          data-testid='add-category-pantry-input'
           min={0}
           // value={newCategory.pantryDays}
           placeholder='Pantry'
@@ -81,6 +86,7 @@ const AddCategoryCard = () => {
         />
         <input
           type='number'
+          data-testid='add-category-fridge-input'
           min={0}
           // value={newCategory.fridgeDays}
           placeholder='Fridge'
@@ -94,6 +100,7 @@ const AddCategoryCard = () => {
         />
         <input
           type='number'
+          data-testid='add-category-freezer-input'
           min={0}
           // value={newCategory.freezerDays}
           placeholder='Freezer'
@@ -107,10 +114,9 @@ const AddCategoryCard = () => {
         />
       </div>
       <div
+        data-testid='add-category-button'
         className='flex justify-center w-full bg-orange rounded-3xl items-center hover:bg-gradient-to-r from-orange to-pink cursor-pointer'
-        onClick={() => {
-          handleSubmit();
-        }}
+        onClick={handleSubmit}
       >
         <img src='/images/cards/add.svg' />
       </div>
