@@ -159,10 +159,11 @@ export const handlers = [
   rest.post('/api/user/login', async (req, res, ctx) => {
     await sleep(100);
     const existingUser = await req.json();
-    if (existingUser !== 'invalid-email@hotmail') {
+    if (existingUser.email !== 'invalid-email@hotmail.com') {
       return res(ctx.json({ token: 'this-is-my-test-token' }));
     } else {
       return res(
+        ctx.delay(400), // adds a delay of 500ms before returning the response
         ctx.status(400), // sets the HTTP status code to 400
         ctx.json({ error: 'User not found' })
       );

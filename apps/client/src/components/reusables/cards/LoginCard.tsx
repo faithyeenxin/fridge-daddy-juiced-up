@@ -66,8 +66,7 @@ const LoginCard = () => {
         })
         .catch((rejectedValueOrSerializedError) => {
           // handle error here
-          console.log('error');
-          setIsOpen(true);
+          openModal();
         });
     },
   });
@@ -187,7 +186,12 @@ const LoginCard = () => {
       </div>
 
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as='div' className='relative z-10' onClose={closeModal}>
+        <Dialog
+          as='div'
+          className='relative z-10'
+          onClose={closeModal}
+          data-testid='error-modal'
+        >
           <Transition.Child
             as={Fragment}
             enter='ease-out duration-300'
@@ -211,10 +215,7 @@ const LoginCard = () => {
                 leaveFrom='opacity-100 scale-100'
                 leaveTo='opacity-0 scale-95'
               >
-                <Dialog.Panel
-                  className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'
-                  data-testid='error-modal'
-                >
+                <Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
                   <Dialog.Title
                     as='h3'
                     className='flex text-lg font-medium leading-6 text-red-400'
@@ -251,6 +252,7 @@ const LoginCard = () => {
                       type='button'
                       className='mr-2 inline-flex justify-center rounded-md border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
                       onClick={closeModal}
+                      data-testid='try-again-button'
                     >
                       Try Again!
                     </button>
@@ -258,6 +260,7 @@ const LoginCard = () => {
                       type='button'
                       className='inline-flex justify-center rounded-md border border-transparent bg-buttonBrightGreen px-4 py-2 text-sm font-medium text-fontGreen hover:bg-buttonLightGreen focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
                       onClick={() => navigate('/register')}
+                      data-testid='register-button'
                     >
                       Register with Us!
                     </button>

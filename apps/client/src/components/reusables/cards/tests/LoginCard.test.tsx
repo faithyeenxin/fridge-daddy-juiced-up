@@ -31,6 +31,16 @@ jest.mock('../../GoogleButton.tsx', () => {
   return () => <div data-testid='mock-google-button' />;
 });
 
+beforeEach(() => {
+  const mockIntersectionObserver = jest.fn();
+  mockIntersectionObserver.mockReturnValue({
+    observe: () => null,
+    unobserve: () => null,
+    disconnect: () => null,
+  });
+  window.IntersectionObserver = mockIntersectionObserver;
+});
+
 describe('should have initial conditions', () => {
   it('should have correct heading and button', () => {
     render(<LoginCard />);
@@ -174,23 +184,97 @@ describe('login card functionality', () => {
     });
   });
 
-  // unable to get this test
-  // it('should open up  login failed modal when login rejected', async () => {
-  //   const user = userEvent.setup();
-  //   render(<LoginCard />);
-  //   const emailFeildItem = screen.getByTestId('login-card-field-email');
-  //   await user.clear(emailFeildItem);
-  //   await user.type(emailFeildItem, 'invalid-email@hotmail.com');
-  //   const passwordFeildItem = screen.getByTestId('login-card-field-password');
-  //   await user.clear(passwordFeildItem);
-  //   await user.type(passwordFeildItem, 'Password123!');
+  // unsure why but the msw is not triggering the catch block
+  it('should open up login failed modal when login rejected', async () => {
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
-  //   const loginAccountButton = screen.getByTestId('login-account-button');
-  //   await user.click(loginAccountButton);
+    const user = userEvent.setup();
+    render(<LoginCard />);
+    const emailFeildItem = screen.getByTestId('login-card-field-email');
+    await user.clear(emailFeildItem);
+    await user.type(emailFeildItem, 'invalid-email@hotmail.com');
 
-  //   const errorModal = screen.queryByTestId('error-modal');
-  //   expect(errorModal).toBeInTheDocument();
-  // });
+    const passwordFeildItem = screen.getByTestId('login-card-field-password');
+    await user.clear(passwordFeildItem);
+    await user.type(passwordFeildItem, 'Password123!');
+
+    const loginAccountButton = screen.getByTestId('login-account-button');
+    await user.click(loginAccountButton);
+    await waitFor(() => {
+      const errorModal = screen.getByTestId('error-modal');
+      expect(errorModal).toBeInTheDocument();
+    });
+    expect(screen.getByText('Login Unsuccessful')).toBeInTheDocument();
+    expect(
+      screen.getByText(/entered the wrong email or password/i)
+    ).toBeInTheDocument();
+    errorSpy.mockRestore();
+  });
+
+  it('should close login unsuccessful modal upon Try Again button click', async () => {
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    const user = userEvent.setup();
+    render(<LoginCard />);
+    const emailFeildItem = screen.getByTestId('login-card-field-email');
+    await user.clear(emailFeildItem);
+    await user.type(emailFeildItem, 'invalid-email@hotmail.com');
+
+    const passwordFeildItem = screen.getByTestId('login-card-field-password');
+    await user.clear(passwordFeildItem);
+    await user.type(passwordFeildItem, 'Password123!');
+
+    const loginAccountButton = screen.getByTestId('login-account-button');
+    await user.click(loginAccountButton);
+    await waitFor(() => {
+      const errorModal = screen.getByTestId('error-modal');
+      expect(errorModal).toBeInTheDocument();
+    });
+    expect(screen.getByText('Login Unsuccessful')).toBeInTheDocument();
+    expect(
+      screen.getByText(/entered the wrong email or password/i)
+    ).toBeInTheDocument();
+
+    const tryAgainButton = screen.getByTestId('try-again-button');
+
+    user.click(tryAgainButton);
+    await waitFor(() => {
+      expect(screen.queryByTestId('error-modal')).not.toBeInTheDocument();
+    });
+    expect(screen.queryByTestId('error-modal')).toBeNull();
+    errorSpy.mockRestore();
+  });
+
+  it('should navigate to register page upon Register with us! button click', async () => {
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    const user = userEvent.setup();
+    render(<LoginCard />);
+    const emailFeildItem = screen.getByTestId('login-card-field-email');
+    await user.clear(emailFeildItem);
+    await user.type(emailFeildItem, 'invalid-email@hotmail.com');
+
+    const passwordFeildItem = screen.getByTestId('login-card-field-password');
+    await user.clear(passwordFeildItem);
+    await user.type(passwordFeildItem, 'Password123!');
+
+    const loginAccountButton = screen.getByTestId('login-account-button');
+    await user.click(loginAccountButton);
+    await waitFor(() => {
+      const errorModal = screen.getByTestId('error-modal');
+      expect(errorModal).toBeInTheDocument();
+    });
+    expect(screen.getByText('Login Unsuccessful')).toBeInTheDocument();
+    expect(
+      screen.getByText(/entered the wrong email or password/i)
+    ).toBeInTheDocument();
+
+    const registerButton = screen.getByTestId('register-button');
+    user.click(registerButton);
+
+    await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith('/register'));
+    errorSpy.mockRestore();
+  });
 });
 
 interface IFormData {
