@@ -148,18 +148,13 @@ describe('add item card functionality', () => {
   });
 
   // apparently we cannot persist a hover state in react testing library thus this test will fail
-  it('should not show purchase title when hovered', () => {
-    render(<AddItemCard />);
-
-    const purchaseTitle = screen.getByTestId('purchase-date-title');
-    expect(purchaseTitle).toBeInTheDocument();
-
-    fireEvent.mouseOver(purchaseTitle);
-
-    expect(purchaseTitle).toHaveStyle('visibility: hidden');
-
-    fireEvent.mouseOut(purchaseTitle);
-
-    expect(purchaseTitle).not.toHaveStyle('visibility: hidden');
-  });
+  //   it('should not show purchase title when hovered', () => {
+  //     render(<AddItemCard />);
+  //     const purchaseTitle = screen.getByTestId('purchase-date-title');
+  //     expect(purchaseTitle).toBeInTheDocument();
+  //     fireEvent.mouseOver(purchaseTitle);
+  //     expect(purchaseTitle).toHaveStyle('visibility: hidden');
+  //     fireEvent.mouseOut(purchaseTitle);
+  //     expect(purchaseTitle).not.toHaveStyle('visibility: hidden');
+  //   });
 });
