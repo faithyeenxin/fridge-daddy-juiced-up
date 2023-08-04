@@ -28,7 +28,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 const UserController = require("./controller/UserController");
 const ItemController = require("./controller/ItemController");
 const CategoryController = require("./controller/CategoryController");
-const AwsS3Controller = require("./controller/AwsS3Controller");
+// const AwsS3Controller = require("./controller/AwsS3Controller");
 
 app.use("/api/user", UserController);
 app.use("/api/item", ItemController);
@@ -37,7 +37,7 @@ app.use("/api/category", CategoryController);
 //////////////////////////////////////////////////////
 //// * AWS Routes
 //////////////////////////////////////////////////////
-app.post("/api/aws/uploadMultipleFiles", AwsS3Controller.createFiles);
+// app.post("/api/aws/uploadMultipleFiles", AwsS3Controller.createFiles);
 
 //////////////////////////////////////////////////////
 //// * General Routes
