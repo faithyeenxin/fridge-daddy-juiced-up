@@ -135,7 +135,7 @@ export const RegisterCard = () => {
               </button>
             </div>
           </form>
-          {/* <GoogleButton /> */}
+          <GoogleButton />
           <div className='text-center text-sm text-grey-dark mt-2'>
             Having issues registering? {''}
             <a
