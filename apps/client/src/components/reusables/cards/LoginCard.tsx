@@ -100,7 +100,7 @@ const LoginCard = () => {
                   className='px-2 text-orange italic text-sm'
                   data-testid='login-card-field-error-email'
                 >
-                  {formik.errors.email}
+                  {String(formik.errors.email)}
                 </div>
               ) : null}
               <input
@@ -120,7 +120,7 @@ const LoginCard = () => {
                   className='px-2 text-orange italic text-sm'
                   data-testid='login-card-field-error-password'
                 >
-                  {formik.errors.password}
+                  {String(formik.errors.password)}
                 </div>
               ) : null}
               <div className='flex justify-center'>

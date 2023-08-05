@@ -84,7 +84,7 @@ export const RegisterCard = () => {
                 data-testid='register-card-field-error-name'
                 className='px-2 text-orange italic text-sm'
               >
-                {formik.errors.name}
+                {String(formik.errors.name)}
               </div>
             ) : null}
             <input
@@ -103,7 +103,7 @@ export const RegisterCard = () => {
                 data-testid='register-card-field-error-email'
                 className='px-2 text-orange italic text-sm'
               >
-                {formik.errors.email}
+                {String(formik.errors.email)}
               </div>
             ) : null}
             <input
@@ -122,7 +122,7 @@ export const RegisterCard = () => {
                 data-testid='register-card-field-error-password'
                 className='px-2 text-orange italic text-sm'
               >
-                {formik.errors.password}
+                {String(formik.errors.password)}
               </div>
             ) : null}
             <div className='flex justify-center'>
@@ -135,7 +135,7 @@ export const RegisterCard = () => {
               </button>
             </div>
           </form>
-          <GoogleButton />
+          {/* <GoogleButton /> */}
           <div className='text-center text-sm text-grey-dark mt-2'>
             Having issues registering? {''}
             <a

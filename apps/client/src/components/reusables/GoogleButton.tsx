@@ -28,21 +28,26 @@ const GoogleButton = () => {
 
   useEffect(() => {
     //global google
-    google.accounts.id.initialize({
+    const ggl = google.accounts.id.initialize({
       client_id:
         '60536065681-el72it8okrce4mkj2ldg7la7aaqdvcgh.apps.googleusercontent.com',
       callback: handleSignUpWithGoogle,
     });
     const googleRegisterDiv: HTMLElement =
       document.getElementById('registerDiv')!;
-    google.accounts.id.renderButton(googleRegisterDiv, {
-      type: 'standard',
-      text: 'signup_with',
-      theme: 'outline',
-      size: 'large',
-      shape: 'circle',
-      width: '256',
-    });
+
+    try {
+      google.accounts.id.renderButton(googleRegisterDiv, {
+        type: 'standard',
+        text: 'signup_with',
+        theme: 'outline',
+        size: 'large',
+        shape: 'circle',
+        width: '256px',
+      });
+    } catch {
+      console.log('failed');
+    }
   }, []);
   // google.accounts.id.prompt();
   return <div className='flex justify-center' id='registerDiv'></div>;
