@@ -21,5 +21,5 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t fridgedaddy-juicedup:${{ github.sha }} .
-          docker push fridgedaddy-juicedup:${{ github.sha }}
+          docker build -t faithyeenx5/fridgedaddy-juicedup:${{ github.sha }} .
+          docker push faithyeenx5/fridgedaddy-juicedup:${{ github.sha }}
