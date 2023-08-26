@@ -4,7 +4,7 @@ const JoinUsSection = () => {
     <div
       id='hero'
       data-testid='join-us-section-container'
-      className='w-full h-[80vh] lg:h-[90vh] flex flex-col lg:flex-row justify-evenly items-center'
+      className='w-full h-[100vh] flex flex-col lg:flex-row justify-evenly items-center'
     >
       {/* left item */}
 
@@ -12,10 +12,10 @@ const JoinUsSection = () => {
         <div
           className='w-[100%] lg:w-[60%] xl:w-[50%] lg:pl-[10%] flex flex-col gap-5'
           data-testid='content-container'
-          data-aos='fade-up'
-          data-aos-duration='1500'
-          data-aos-easing='ease-in-out'
-          data-aos-once='false'
+          // data-aos='fade-up'
+          // data-aos-duration='1500'
+          // data-aos-easing='ease-in-out'
+          // data-aos-once='false'
         >
           <h1
             className='w-lg font-bold text-center text-orange xs:text-lg sm:text-2xl md:text-4xl lg:text-4xl xl:text-5xl'

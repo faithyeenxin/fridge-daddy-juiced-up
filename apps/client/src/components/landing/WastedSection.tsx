@@ -5,7 +5,7 @@ const WastedSection = () => {
   return (
     <div
       id='hero'
-      className='w-full h-[60vh] lg:h-[90vh] flex flex-col lg:flex-row justify-evenly items-center'
+      className='w-full h-[100vh] flex flex-col lg:flex-row justify-evenly items-center px-10'
     >
       {/* left item */}
       <div
@@ -14,10 +14,10 @@ const WastedSection = () => {
       >
         <div
           className='flex flex-col gap-2 w-[100%] lg:w-[90%] xl:w-[80%]'
-          data-aos='fade-up'
-          data-aos-duration='1500'
-          data-aos-easing='ease-in-out'
-          data-aos-once='false'
+          // data-aos='fade-up'
+          // data-aos-duration='1500'
+          // data-aos-easing='ease-in-out'
+          // data-aos-once='false'
         >
           <h1
             data-testid='wasted-left-container-item'
@@ -32,10 +32,10 @@ const WastedSection = () => {
         <img
           src={rottenShelf}
           className='w-[200px] md:w-[300px] lg:w-[400px] xl:w-[500px] lg:absolute lg:top-[8%] lg:left-0 xl:top-0 xl:left-0'
-          data-aos='fade-in'
-          data-aos-duration='1000'
-          data-aos-easing='ease-in-out'
-          data-aos-once='false'
+          // data-aos='fade-in'
+          // data-aos-duration='1000'
+          // data-aos-easing='ease-in-out'
+          // data-aos-once='false'
         />
         <img
           src={daddy}

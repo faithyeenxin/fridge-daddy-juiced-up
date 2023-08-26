@@ -20,8 +20,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* for all */}
+        <Route path='/' element={<Landing />} />
+
         <Route path='/' element={<LoggedOutLayout />}>
-          <Route index element={<Landing />} />
+          {/* <Route index element={<Landing />} /> */}
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/learn-more' element={<LearnMore />} />

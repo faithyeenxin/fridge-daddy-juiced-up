@@ -5,7 +5,7 @@ const HeroSection = () => {
   return (
     <div
       id='hero'
-      className='w-full h-[80vh] lg:h-[90vh] flex flex-col-reverse lg:flex-row justify-evenly items-center'
+      className='w-full h-full flex flex-col-reverse lg:flex-row justify-evenly items-center px-10 pt-20'
     >
       {/* left item */}
       <div

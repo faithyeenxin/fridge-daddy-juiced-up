@@ -4,15 +4,15 @@ const NotEnoughFoodSection = () => {
   return (
     <div
       id='hero'
-      className='w-full h-[80vh] lg:h-[90vh] flex flex-col justify-evenly items-center'
+      className='w-full h-[100vh] flex flex-col justify-evenly items-center md:pt-10 px-10'
     >
       {/* left item */}
       <h1
         className='w-lg font-bold text-center text-orange xs:text-lg sm:text-2xl md:text-4xl lg:text-4xl xl:text-5xl'
-        data-aos='fade-up'
-        data-aos-duration='1500'
-        data-aos-easing='ease-in-out'
-        data-aos-once='false'
+        // data-aos='fade-up'
+        // data-aos-duration='1500'
+        // data-aos-easing='ease-in-out'
+        // data-aos-once='false'
       >
         Or that 1 in 9 people do not have enough food to eat?
       </h1>
@@ -24,10 +24,10 @@ const NotEnoughFoodSection = () => {
           <img
             src={men}
             className='opacity-60'
-            data-aos='fade-in'
-            data-aos-duration='2000'
-            data-aos-easing='ease-in-out'
-            data-aos-once='false'
+            // data-aos='fade-in'
+            // data-aos-duration='2000'
+            // data-aos-easing='ease-in-out'
+            // data-aos-once='false'
           />
         </div>
         <img
