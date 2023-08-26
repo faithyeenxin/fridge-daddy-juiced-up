@@ -13,13 +13,13 @@ export const Landing = () => {
         <img
           src={daddy}
           // src='../assets/img/landing-page/daddy.svg'
-          className='absolute right-0 lg:w-[400px] xl:w-[500px] lg:top-28 xl:top-20'
+          className='absolute right-20 lg:w-[400px] xl:w-[500px] md:top-40'
         />
       </div>
-      <div className='w-full h-[100vh] snap-center'>
+      <div className='w-full h-[100vh] snap-center md:px-10'>
         <HeroSection />
       </div>
-      <div className='w-full h-[100vh] snap-center'>
+      <div className='w-full h-[100vh] snap-center md:px-10'>
         <WastedSection />
       </div>
       <div className='w-full h-[100vh] snap-center'>

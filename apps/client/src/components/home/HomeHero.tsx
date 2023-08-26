@@ -117,23 +117,23 @@ const HomeHero = () => {
       >
         {!pieStatus && (
           <div className='w-full flex flex-col items-center justify-center'>
-            <div className='text-xl md:text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider'>{`Welcome back ${capitalizeWords(
+            <div className='text-xl md:text-2xl xl:text-3xl font-lato font-bold text-orange tracking-wider'>{`Welcome back ${capitalizeWords(
               user.name
             )},`}</div>
             {allUserItems.length > 0 && (
-              <div className='text-xs md:text-md xl:text-lg font-lora italic text-mutedPink tracking-wider'>{`FridgeDaddy is watching ${allUserItems.length} items for you!`}</div>
+              <div className='text-xs md:text-md xl:text-lg font-lato italic text-mutedPink tracking-wider'>{`FridgeDaddy is watching ${allUserItems.length} items for you!`}</div>
             )}
             {allUserItems.length === 0 && (
-              <div className='text-xs md:text-md xl:text-lg font-lora italic text-mutedPink tracking-wider'>{`You do not have any items with us! Add some now!`}</div>
+              <div className='text-xs md:text-md xl:text-lg font-lato italic text-mutedPink tracking-wider'>{`You do not have any items with us! Add some now!`}</div>
             )}
           </div>
         )}
         {pieStatus && (
           <div className='flex items-center justify-center flex-col'>
-            <div className='text-xl md:text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider'>{`Welcome back ${capitalizeWords(
+            <div className='text-xl md:text-2xl xl:text-3xl font-lato font-bold text-orange tracking-wider'>{`Welcome back ${capitalizeWords(
               user.name
             )}!`}</div>
-            <p className='text-xs md:text-md xl:text-lg font-lora font-bold text-mutedPink tracking-wider'>
+            <p className='text-xs md:text-md xl:text-lg font-lato font-bold text-mutedPink tracking-wider'>
               You have {pieStatus?.value} {pieStatus?.title} item(s)!
             </p>
           </div>

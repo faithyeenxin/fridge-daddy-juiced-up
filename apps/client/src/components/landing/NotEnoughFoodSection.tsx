@@ -4,18 +4,26 @@ const NotEnoughFoodSection = () => {
   return (
     <div
       id='hero'
-      className='w-full h-[100vh] flex flex-col justify-evenly items-center md:pt-10 px-10'
+      className='w-full h-[100vh] flex flex-col-reverse md:flex-col justify-evenly md:pt-10 items-center py-60 md:p-0'
     >
       {/* left item */}
       <h1
-        className='w-lg font-bold text-center text-orange xs:text-lg sm:text-2xl md:text-4xl lg:text-4xl xl:text-5xl'
+        className='w-lg font-bold text-center text-orange text-3xl md:text-4xl xl:text-5xl font-lato hidden md:block'
         // data-aos='fade-up'
         // data-aos-duration='1500'
         // data-aos-easing='ease-in-out'
         // data-aos-once='false'
       >
-        Or that 1 in 9 people do not have enough food to eat?
+        1 in 9 people do not have enough food to eat
       </h1>
+      <div className='flex flex-col items-center'>
+        <h1 className='font-lato font-bold text-4xl block md:hidden text-orange'>
+          1 in 9
+        </h1>
+        <h1 className='font-lato block md:hidden text-3xl text-orange '>
+          do not have enough food to eat
+        </h1>
+      </div>
       {/* </div>
       </div> */}
       {/* right item */}
@@ -30,10 +38,10 @@ const NotEnoughFoodSection = () => {
             // data-aos-once='false'
           />
         </div>
-        <img
+        {/* <img
           src={daddy}
-          className='w-[100px] md:w-[300px] lg:w-[400px] xl:w-[500px] block lg:hidden'
-        />
+          className='w-[150px] md:w-[300px] lg:w-[400px] xl:w-[500px] block lg:hidden'
+        /> */}
       </div>
     </div>
   );

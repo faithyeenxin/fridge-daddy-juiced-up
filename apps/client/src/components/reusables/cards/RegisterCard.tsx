@@ -58,12 +58,12 @@ export const RegisterCard = () => {
     },
   });
   return (
-    <div className='bg-grey-lighter flex flex-col'>
-      <div className='container max-w-md mx-auto flex-1 flex flex-col items-center justify-center '>
+    <div className='bg-grey-lighter flex flex-col w-full'>
+      <div className='container max-w-md mx-auto flex-1 flex flex-col items-center justify-center w-full'>
         <div className='bg-white px-6 py-8 rounded-lg shadow-md text-black w-full '>
           <h1
             data-testid='register-card-heading'
-            className='mb-8 text-3xl text-center font-bold text-orange'
+            className='mb-8 text-3xl text-center font-bold text-orange font-lato'
           >
             Register
           </h1>
