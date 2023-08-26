@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { resetCategories } from '../../app/slices/categoriesSlice';
 import { resetItems } from '../../app/slices/itemsSlice';
 import { authenticateGoogleUser, resetUser } from '../../app/slices/userSlice';
@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 const GoogleButton = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [successfulGoogleInit, setSuccessfulGoogleInit] = useState(false);
   const handleSignUpWithGoogle = (response: any) => {
     dispatch(resetUser());
     dispatch(resetItems());
@@ -28,15 +29,14 @@ const GoogleButton = () => {
 
   useEffect(() => {
     //global google
-    const ggl = google.accounts.id.initialize({
-      client_id:
-        '60536065681-el72it8okrce4mkj2ldg7la7aaqdvcgh.apps.googleusercontent.com',
-      callback: handleSignUpWithGoogle,
-    });
-    const googleRegisterDiv: HTMLElement =
-      document.getElementById('registerDiv')!;
-
     try {
+      const ggl = google.accounts.id.initialize({
+        client_id:
+          '60536065681-el72it8okrce4mkj2ldg7la7aaqdvcgh.apps.googleusercontent.com',
+        callback: handleSignUpWithGoogle,
+      });
+      const googleRegisterDiv: HTMLElement =
+        document.getElementById('registerDiv')!;
       google.accounts.id.renderButton(googleRegisterDiv, {
         type: 'standard',
         text: 'signup_with',
@@ -45,12 +45,19 @@ const GoogleButton = () => {
         shape: 'circle',
         width: '256px',
       });
+      setSuccessfulGoogleInit(true);
     } catch {
-      console.log('failed');
+      setSuccessfulGoogleInit(false);
     }
   }, []);
   // google.accounts.id.prompt();
-  return <div className='flex justify-center' id='registerDiv'></div>;
+  return (
+    <>
+      {successfulGoogleInit && (
+        <div className='flex justify-center' id='registerDiv'></div>
+      )}
+    </>
+  );
 };
 
 export default GoogleButton;
