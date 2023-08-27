@@ -10,15 +10,15 @@ const UseFridgeDaddy = () => {
     >
       <img
         src={waves}
-        className='absolute z-[-1] w-[400px] left-[-60px] top-[80px] rotate-[-15deg]'
+        className='absolute z-[-1] w-[300px] md:w-[400px] left-[-60px] top-[80px] rotate-[-15deg]'
       />
       <img
         src={squareCircle}
-        className='absolute z-[-1] right-[-50px] top-[50px] w-[200px]'
+        className='absolute z-[-1] right-[-50px] top-[50px] w-[150px] md:w-[200px]'
       />
       <img
         src={circle}
-        className='absolute z-[-1] w-[350px] bottom-[-20%] left-[20%]'
+        className='absolute z-[-1] w-[300px] md:w-[350px] bottom-[-15%] md:bottom-[-20%] left-[10%] md:left-[20%]'
       />
 
       {/* left item */}
@@ -27,7 +27,7 @@ const UseFridgeDaddy = () => {
         className='flex flex-col h-full w-full lg:w-5/6 justify-center mt-2/3'
       >
         <div
-          className='flex flex-col justify-center md:justify-start items-center md:items-start px-5 md:px-10'
+          className='flex flex-col justify-center md:justify-start items-center md:items-start px-5 md:px-10 gap-3'
           // data-aos='fade-up'
           // data-aos-duration='1500'
           // data-aos-easing='ease-in-out'
@@ -46,6 +46,14 @@ const UseFridgeDaddy = () => {
             FridgeDaddy helps you take proactive steps towards reducing food
             wastage. Tracking your food inventory gives you a better overview of
             your groceries and reduces overspending and food item neglect.
+          </h1>
+          <h1
+            data-testid='wasted-left-container-item'
+            className='text-md md:text-xl text-center md:text-left text-gray-500 md:w-5/6 font-lato '
+          >
+            Learn more by clicking the{' '}
+            <strong className='text-orange'>Learn More</strong> button our
+            navigation bar above!
           </h1>
         </div>
       </div>

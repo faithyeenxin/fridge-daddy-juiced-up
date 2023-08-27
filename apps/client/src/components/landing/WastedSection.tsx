@@ -10,11 +10,11 @@ const WastedSection = () => {
     >
       <img
         src={exlaimation}
-        className='absolute z-[-1] top-[120px] left-[-20px] w-[50px]'
+        className='absolute z-[-1] top-[150px] md:top-[120px] left-[5px] md:left-[-20px] w-[30px] md:w-[50px] rotate-[-5deg]'
       />
       <img
         src={waves2}
-        className='absolute z-[-1] w-[350px] right-[-50px] top-[60px]'
+        className='absolute z-[-1] w-[200px] md:w-[350px] right-[-50px] top-[60px]'
       />
 
       {/* left item */}
@@ -47,7 +47,7 @@ const WastedSection = () => {
               tonnes.*
             </h1>
           </div>
-          <div className='md:flex-col gap-3 items-start border-solid border-2 border-orange w-full h-full rounded-xl text-left justify-start p-5 hidden md:block'>
+          <div className='md:flex-col gap-3 items-start border-solid border-2 border-orange w-full h-full rounded-xl text-left justify-start p-5 hidden lg:block'>
             <h1
               data-testid='wasted-left-container-item'
               className='w-lg font-bold text-center md:text-left text-2xl text-orange font-lato'
