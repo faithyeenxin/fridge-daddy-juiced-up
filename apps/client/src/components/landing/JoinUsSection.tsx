@@ -17,7 +17,7 @@ const JoinUsSection = () => {
           // data-aos-once='false'
         >
           <h1
-            className='font-bold text-center text-orange text-4xl md:text-4xl lg:text-4xl xl:text-5xl w-fit font-lato '
+            className='font-normal text-center text-orange text-4xl md:text-4xl lg:text-4xl xl:text-5xl w-fit font-lato '
             data-testid='content-container-items'
           >
             Make a difference today.

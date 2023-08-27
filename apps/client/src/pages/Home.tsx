@@ -5,7 +5,7 @@ import HomeContent from '../components/home/HomeContent';
 
 export default function Home() {
   return (
-    <div className='w-full h-full flex flex-col gap-5'>
+    <div className='w-full h-full flex flex-col gap-5 '>
       {/* Hero Section */}
       <HomeHero />
       {/* Content Section */}

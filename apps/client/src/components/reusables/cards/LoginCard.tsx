@@ -77,10 +77,10 @@ const LoginCard = () => {
         <div className='container max-w-md mx-auto flex-1 flex flex-col items-center justify-center'>
           <div className='bg-white px-6 py-8 rounded-lg shadow-md text-black w-full'>
             <h1
-              className='mb-8 text-3xl text-center font-bold text-orange'
+              className='mb-8 text-3xl text-center font-normal text-orange'
               data-testid='login-card-heading'
             >
-              Sign In to FridgeDaddy!
+              Log In to FridgeDaddy!
             </h1>
             <form onSubmit={formik.handleSubmit}>
               <input
@@ -142,7 +142,7 @@ const LoginCard = () => {
             >
               Try us out using our {''}
               <a
-                className='no-underline border-b border-grey-dark font-bold text-orange hover:text-green-500 cursor-pointer'
+                className='no-underline border-b border-grey-dark font-normal text-orange hover:text-green-500 cursor-pointer'
                 data-testid='trial-anchor-tag'
                 onClick={() =>
                   setUseTestUser({
@@ -250,7 +250,7 @@ const LoginCard = () => {
                   <div className='mt-4'>
                     <button
                       type='button'
-                      className='mr-2 inline-flex justify-center rounded-md border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
+                      className='mr-2 inline-flex justify-center rounded-md border border-transparent bg-orange px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gradient-to-r from-orange to-pink focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
                       onClick={closeModal}
                       data-testid='try-again-button'
                     >

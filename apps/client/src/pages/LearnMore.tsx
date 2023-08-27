@@ -16,7 +16,7 @@ const LearnMore = () => {
               data-aos-easing='ease-in-out'
               data-aos-once='false'
             >
-              <h1 className='w-lg font-bold text-center text-orange xs:text-lg sm:text-2xl md:text-4xl lg:text-4xl xl:text-5xl xl:text-left'>
+              <h1 className='w-lg font-normal text-center text-orange xs:text-lg sm:text-2xl md:text-4xl lg:text-4xl xl:text-5xl xl:text-left'>
                 Manage items in your fridge
               </h1>
             </div>
@@ -45,7 +45,7 @@ const LearnMore = () => {
               data-aos-easing='ease-in-out'
               data-aos-once='false'
             >
-              <h1 className='w-lg font-bold text-center text-orange xs:text-lg sm:text-2xl md:text-4xl lg:text-4xl xl:text-5xl xl:text-left'>
+              <h1 className='w-lg font-normal text-center text-orange xs:text-lg sm:text-2xl md:text-4xl lg:text-4xl xl:text-5xl xl:text-left'>
                 Keep track of what's in your inventory
               </h1>
             </div>
@@ -74,7 +74,7 @@ const LearnMore = () => {
               data-aos-easing='ease-in-out'
               data-aos-once='false'
             >
-              <h1 className='w-lg font-bold text-center text-orange xs:text-lg sm:text-2xl md:text-4xl lg:text-4xl xl:text-5xl xl:text-left'>
+              <h1 className='w-lg font-normal text-center text-orange xs:text-lg sm:text-2xl md:text-4xl lg:text-4xl xl:text-5xl xl:text-left'>
                 Get curated recipes based on your fridge's items
               </h1>
             </div>

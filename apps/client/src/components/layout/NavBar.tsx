@@ -65,7 +65,7 @@ const NavBar = () => {
               navigate('/login');
             }}
           >
-            Sign In
+            Log In
           </div>
           <div
             className='hidden md:block p-1 px-6 text-white bg-orange rounded-full baseline hover:bg-gradient-to-r from-orange to-pink text-md hover:cursor-pointer'
@@ -94,8 +94,8 @@ const NavBar = () => {
             <div className='md:hidden' ref={divRef}>
               <div
                 id='menu'
-                // className={`${hamburgMenuStatus} absolute flex flex-col items-center self-end  mx-10 py-8 mt-5 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-2 right-2 drop-shadow-md bg-opacity-80 rounded-2xl`}
-                className={`${hamburgMenuStatus} absolute flex flex-col items-center self-end mx-[10%] py-8 mt-8 space-y-6 font-bold bg-white sm:self-center left-2 right-2 drop-shadow-md bg-opacity-80 rounded-2xl`}
+                // className={`${hamburgMenuStatus} absolute flex flex-col items-center self-end  mx-10 py-8 mt-5 space-y-6 font-normal bg-white sm:w-auto sm:self-center left-2 right-2 drop-shadow-md bg-opacity-80 rounded-2xl`}
+                className={`${hamburgMenuStatus} absolute flex flex-col items-center self-end mx-[10%] py-8 mt-8 space-y-6 font-normal bg-white sm:self-center left-2 right-2 drop-shadow-md bg-opacity-80 rounded-2xl`}
               >
                 {/* <a
               className="hover:text-orange pt-2 tracking-widest"
@@ -121,7 +121,7 @@ const NavBar = () => {
                     setHamburgMenuStatus('hidden');
                   }}
                 >
-                  Sign In
+                  Log In
                 </a>
                 <a
                   className='md:block p-2 px-6 text-white bg-orange rounded-full baseline hover:bg-gradient-to-r from-orange to-pink text-md'

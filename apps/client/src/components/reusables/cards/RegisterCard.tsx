@@ -63,7 +63,7 @@ export const RegisterCard = () => {
         <div className='bg-white px-6 py-8 rounded-lg shadow-md text-black w-full '>
           <h1
             data-testid='register-card-heading'
-            className='mb-8 text-3xl text-center font-bold text-orange font-lato'
+            className='mb-8 text-3xl text-center font-normal text-orange font-lato'
           >
             Register
           </h1>

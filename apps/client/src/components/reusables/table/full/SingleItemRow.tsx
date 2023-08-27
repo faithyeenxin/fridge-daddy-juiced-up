@@ -71,8 +71,8 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
       id={`item-${item.id}`}
       key={item.id}
       className={`flex hover:cursor-default ${
-        colorState ? 'bg-tableOffWhite' : 'bg-tablePink'
-      } font-lora text-black xl:text-md lg:text-md md:text-sm sm:text-xs text-xs text-center items-center h-[40px]`}
+        colorState ? 'bg-tablebgColorPeachBeige' : 'bg-tablePink'
+      } font-lato text-black xl:text-md lg:text-md md:text-sm sm:text-xs text-xs text-center items-center h-[40px]`}
     >
       <div
         className={`w-2/12 xl:w-2/12 tracking-wide ${
@@ -160,7 +160,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                 leaveFrom='opacity-100 scale-100'
                 leaveTo='opacity-0 scale-95'
               >
-                <Dialog.Panel className='font-lora w-[400px] transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                <Dialog.Panel className='font-lato w-[400px] transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
                   <Dialog.Title
                     as='h3'
                     className='flex text-2xl font-medium leading-6 text-orange'
@@ -173,7 +173,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                         Quantity
                       </label>
                       {!edit && (
-                        <div className='w-full h-[30px] xl:h-[40px] flex justify-center items-center hover:cursor-default p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'>
+                        <div className='w-full h-[30px] xl:h-[40px] flex justify-center items-center hover:cursor-default p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-80 focus:outline-none'>
                           {capitalizeWords(item.quantity)}
                         </div>
                       )}
@@ -187,7 +187,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                           placeholder='Quantity'
                           autoComplete='off'
                           defaultValue={capitalizeWords(item.quantity)}
-                          className='w-full h-[30px] xl:h-[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+                          className='w-full h-[30px] xl:h-[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-80 focus:outline-none'
                           onChange={(e) => {
                             setNewItem({
                               ...newItem,
@@ -202,7 +202,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                         Category
                       </label>
                       {!edit && (
-                        <div className='w-full h-[30px] xl:h-[40px] flex justify-center items-center hover:cursor-default p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'>
+                        <div className='w-full h-[30px] xl:h-[40px] flex justify-center items-center hover:cursor-default p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-80 focus:outline-none'>
                           {`${capitalizeWords(item?.category?.name)}`}
                         </div>
                       )}
@@ -223,7 +223,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                         Stored In
                       </label>
                       {!edit && (
-                        <div className='w-full h-[30px] xl:h-[40px] flex justify-center items-center hover:cursor-default p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'>
+                        <div className='w-full h-[30px] xl:h-[40px] flex justify-center items-center hover:cursor-default p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-80 focus:outline-none'>
                           {capitalizeWords(item.storedIn)}
                         </div>
                       )}
@@ -247,8 +247,8 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                         </label>
                         <input
                           disabled={!edit}
-                          // className='w-full h-[40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-90 focus:outline-none'
-                          className='w-full h-[30px] xl:h-[40px] hover:cursor-default p-3 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+                          // className='w-full h-[40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-90 focus:outline-none'
+                          className='w-full h-[30px] xl:h-[40px] hover:cursor-default p-3 rounded-3xl bg-opacity-60 text-md tracking-wide text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-80 focus:outline-none'
                           type='date'
                           id='purchasedOn'
                           name='purchasedOn'
@@ -279,7 +279,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                           Expiring On
                         </label>
                         <input
-                          className='w-full h-[30px] xl:h-[40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-90 focus:outline-none'
+                          className='w-full h-[30px] xl:h-[40px] p-2 rounded-3xl bg-opacity-70 text-md tracking-wide text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-90 focus:outline-none'
                           disabled={!edit}
                           type='date'
                           id='expireOn'
@@ -323,7 +323,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                   <div className='mt-4 flex justify-center'>
                     <button
                       type='button'
-                      className='mr-2 w-[200px] inline-flex justify-center rounded-3xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none '
+                      className='mr-2 w-[200px] inline-flex justify-center rounded-3xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gradient-to-r from-orange to-pink focus:outline-none '
                       onClick={() => {
                         setEdit(!edit);
                         setNewItem({
@@ -344,7 +344,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                     {edit && (
                       <button
                         type='button'
-                        className='mr-2 w-[200px] inline-flex justify-center rounded-3xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none focus-visible:ring-2'
+                        className='mr-2 w-[200px] inline-flex justify-center rounded-3xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gradient-to-r from-orange to-pink focus:outline-none focus-visible:ring-2'
                         onClick={() => {
                           if (
                             !isAfter(

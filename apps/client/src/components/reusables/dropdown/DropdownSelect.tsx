@@ -161,8 +161,8 @@ const DropdownSelect = ({
       <button
         id='dropdownSearchButton'
         onClick={() => setOpenDropdown(!openDropdown)}
-        // h-[30px] xl:h-[40px] px-1 w-full gap-1 flex text-sm items-center justify-center rounded-3xl bg-opacity-60 text-tracking-wide  text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none
-        className='relative items-center text-center justify-between inline-flex w-full h-[30px] xl:h-[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white disabled:text-gray-100 placeholder-white bg-mutedPink placeholder:font-bold font-lora focus:bg-opacity-80 focus:outline-none'
+        // h-[30px] xl:h-[40px] px-1 w-full gap-1 flex text-sm items-center justify-center rounded-3xl bg-opacity-60 text-tracking-wide  text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-80 focus:outline-none
+        className='relative items-center text-center justify-between inline-flex w-full h-[30px] xl:h-[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-gray-500 disabled:text-gray-100 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato focus:bg-opacity-80 focus:outline-none'
         data-value={selectedValue?.id}
       >
         <div className='flex w-full items-center justify-center'>
@@ -209,7 +209,7 @@ const DropdownSelect = ({
                   type='text'
                   id='input-group-search'
                   autoComplete='off'
-                  className='block w-full p-1 pl-10 text-md text-mutedPink border border-gray-300 rounded-3xl bg-white placeholder:text-mutedPink placeholder:font-bold font-lora focus:outline-none'
+                  className='block w-full p-1 pl-10 text-md text-mutedPink border border-gray-300 rounded-3xl bg-white placeholder:text-mutedPink placeholder:font-normal font-lato focus:outline-none'
                   placeholder={'Search'}
                   onChange={(e) => setSearchValue(e.target.value)}
                 />
@@ -223,13 +223,13 @@ const DropdownSelect = ({
                 : 'h-[220px]'
             } px-3 ${
               name === 'Category' ? 'pb-3' : 'py-3'
-            } overflow-y-auto text-md text-white`}
+            } overflow-y-auto text-md text-gray-500`}
             aria-labelledby='dropdownSearchButton'
           >
             {itemsToRender?.map((item, idx) => (
               <li
                 key={item.id}
-                className='flex items-center rounded-2xl pl-2 text-orange font-lora hover:bg-white hover:cursor-pointer'
+                className='flex items-center rounded-2xl pl-2 text-orange font-lato hover:bg-white hover:cursor-pointer'
                 onClick={() => {
                   handleSelectedValue(name, item);
                 }}

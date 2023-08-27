@@ -57,11 +57,11 @@ const HomeContent = () => {
         ref={itemLeftRef}
         className='w-3/12 h-full hidden lg:flex lg:flex-col justify-between gap-2'
       >
-        <div className='w-full h-full bg-offWhite rounded-lg flex flex-col gap-1 justify-center items-center px-10'>
-          <p className='text-md font-lora text-orange tracking-widest'>
+        <div className='w-full h-full bg-tablePink rounded-lg flex flex-col gap-1 justify-center items-center px-10'>
+          <p className='text-md font-lato text-orange tracking-widest'>
             Food for Thought
           </p>
-          <div className='text-md font-lora text-mutedPink tracking-normal flex justify-between'>
+          <div className='text-md font-lato text-gray-500 tracking-normal flex justify-between'>
             {
               foodWasteFacts[
                 foodWasteFacts.length -
@@ -70,10 +70,10 @@ const HomeContent = () => {
             }
           </div>
         </div>
-        <div className='flex flex-col bg-offWhite rounded-lg w-full h-full'>
+        <div className='flex flex-col bg-tablePink rounded-lg w-full h-full'>
           <AddItemCard />
         </div>
-        <div className='flex flex-col bg-offWhite rounded-lg w-full h-full'>
+        <div className='flex flex-col bg-tablePink rounded-lg w-full h-full'>
           <AddCategoryCard />
         </div>
       </div>
@@ -91,7 +91,7 @@ const HomeContent = () => {
         ref={itemRightRef}
         className='w-2/12 h-full hidden lg:flex lg:flex-col  gap-2'
       >
-        <div className='w-full h-full flex bg-offWhite rounded-lg'>
+        <div className='w-full h-full flex bg-tablePink rounded-lg'>
           <FilterCard />
         </div>
       </div>

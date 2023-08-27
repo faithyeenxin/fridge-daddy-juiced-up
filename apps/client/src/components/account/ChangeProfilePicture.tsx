@@ -58,12 +58,12 @@ const ChangeProfilePicture = () => {
               id='default_size'
               type='file'
             ></input>
-            <button className='disabled:opacity-40 text-white bg-gradient-to-br from-blue-500 disabled:cursor-not-allowed to-green-400 hover:bg-gradient-to-bl font-medium rounded-lg text-xs px-1 py-1.5 w-52 text-center'>
+            <button className='disabled:opacity-40 text-gray-500 bg-gradient-to-br from-blue-500 disabled:cursor-not-allowed to-green-400 hover:bg-gradient-to-bl font-medium rounded-lg text-xs px-1 py-1.5 w-52 text-center'>
               Submit
             </button>
           </div>
           <div className='hidden md:flex w-full justify-center'>
-            <button className=' disabled:opacity-40 text-white bg-gradient-to-br from-blue-500 disabled:cursor-not-allowed to-green-400 hover:bg-gradient-to-bl font-medium rounded-lg text-lg px-1 py-1.5 w-1/2 text-center'>
+            <button className=' disabled:opacity-40 text-gray-500 bg-gradient-to-br from-blue-500 disabled:cursor-not-allowed to-green-400 hover:bg-gradient-to-bl font-medium rounded-lg text-lg px-1 py-1.5 w-1/2 text-center'>
               Submit
             </button>
           </div>

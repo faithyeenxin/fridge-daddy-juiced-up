@@ -15,7 +15,7 @@ const DropdownOption = ({ item, handleSelectedValue }: any) => {
   return (
     <li
       key={item.id}
-      className='flex items-center rounded-2xl pl-2 text-orange font-lora hover:bg-white hover:cursor-pointer'
+      className='flex items-center rounded-2xl pl-2 text-orange font-lato hover:bg-white hover:cursor-pointer'
       onClick={handleSelectedValue}
     >
       {capitalizeWords(item.name)}

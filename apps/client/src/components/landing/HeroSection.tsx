@@ -1,12 +1,29 @@
+import '../../index.css';
 import daddy from '../../assets/img/landing-page/daddy.svg';
 import freshShelf from '../../assets/img/landing-page/fresh-shelf.svg';
+import circle from '../../assets/img/landing-page/circle.svg';
+import square from '../../assets/img/landing-page/square.svg';
+import arrows from '../../assets/img/landing-page/arrows.svg';
 
 const HeroSection = () => {
   return (
     <div
       id='hero'
-      className='w-full h-full flex flex-col-reverse lg:flex-row justify-evenly items-center pt-20'
+      className='w-full  h-full flex flex-col-reverse lg:flex-row justify-evenly items-center pt-20 relative'
     >
+      <img
+        src={circle}
+        className='absolute right-[-10%] md:right-[-5%] top-[10%] md:top-[20%] sm:w-[300px] md:w-fit z-[-1]'
+      />
+      <img
+        src={square}
+        className='absolute left-[-5%] md:left-0 sm:bottom-10 md:bottom-20 sm:w-[300px] md:w-fit z-[-1]'
+      />
+      <img
+        src={arrows}
+        className='absolute z-[-1] bottom-10 blinking-element'
+      />
+
       {/* left item */}
       <div
         data-testid='hero-left-container'
@@ -22,25 +39,25 @@ const HeroSection = () => {
           <div className='flex flex-col gap-3'>
             <h1
               data-testid='hero-left-container-item'
-              className='w-lg font-bold text-orange text-4xl md:text-5xl xl:text-6xl text-center font-lato'
+              className='w-lg font-bold text-orange text-4xl md:text-5xl xl:text-6xl text-center md:text-left font-lato'
             >
               Maximize Taste <br />
               Minimize Food Wastage
             </h1>
             <p
               data-testid='hero-left-container-item'
-              className='w-lg text-gray-500 text-center text-lg md:text-xl font-lato'
+              className='w-lg text-gray-500 text-center md:text-left text-lg md:text-xl font-lato'
             >
               Join FridgeDaddy - Your Ultimate Food Inventory Solution.
             </p>
           </div>
           <div
             data-testid='hero-left-container-item'
-            className='flex justify-center'
+            className='flex justify-center md:justify-start'
           >
             <a
               href='/register'
-              className=' p-2 px-6 pt-2 text-white bg-orange rounded-full baseline hover:bg-gradient-to-r from-orange to-pink text-md font-lato font-bold'
+              className=' p-2 px-6 pt-2 text-white bg-orange rounded-full baseline hover:bg-gradient-to-r from-orange to-pink text-md font-lato font-normal'
             >
               Get Started
             </a>
@@ -54,7 +71,7 @@ const HeroSection = () => {
       >
         <img
           src={freshShelf}
-          className='w-[250px] md:w-[300px] lg:w-[400px] xl:w-[500px] lg:absolute lg:top-[8%] lg:left-0 xl:top-0 xl:left-0'
+          className='w-[250px] md:w-[300px] lg:w-[400px] xl:w-[500px] lg:absolute lg:top-[5%] lg:left-0 xl:top-0 xl:left-0'
           data-aos='fade-in'
           data-aos-duration='1000'
           data-aos-easing='ease-in-out'

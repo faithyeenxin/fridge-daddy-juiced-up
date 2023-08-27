@@ -93,7 +93,7 @@ const HomeHero = () => {
   return (
     <div
       ref={welcomeRef}
-      className='w-full h-[350px] bg-offWhite rounded-2xl flex-col flex md:flex-row justify-left items-center px-[10%] gap-2 md:gap-10'
+      className='w-full h-[350px] bg-bgColorPeachBeige rounded-2xl flex-col flex md:flex-row justify-left items-center px-[10%] gap-2 md:gap-10'
     >
       <div
         className={`w-full lg:w-1/3 justify-center items-center ${
@@ -117,11 +117,11 @@ const HomeHero = () => {
       >
         {!pieStatus && (
           <div className='w-full flex flex-col items-center justify-center'>
-            <div className='text-xl md:text-2xl xl:text-3xl font-lato font-bold text-orange tracking-wider'>{`Welcome back ${capitalizeWords(
+            <div className='text-xl md:text-2xl xl:text-3xl font-lato font-normal text-orange tracking-wider'>{`Welcome back ${capitalizeWords(
               user.name
             )},`}</div>
             {allUserItems.length > 0 && (
-              <div className='text-xs md:text-md xl:text-lg font-lato italic text-mutedPink tracking-wider'>{`FridgeDaddy is watching ${allUserItems.length} items for you!`}</div>
+              <div className='text-xs md:text-md xl:text-lg font-lato italic text-gray-500 tracking-wider'>{`FridgeDaddy is watching ${allUserItems.length} items for you!`}</div>
             )}
             {allUserItems.length === 0 && (
               <div className='text-xs md:text-md xl:text-lg font-lato italic text-mutedPink tracking-wider'>{`You do not have any items with us! Add some now!`}</div>
@@ -130,10 +130,10 @@ const HomeHero = () => {
         )}
         {pieStatus && (
           <div className='flex items-center justify-center flex-col'>
-            <div className='text-xl md:text-2xl xl:text-3xl font-lato font-bold text-orange tracking-wider'>{`Welcome back ${capitalizeWords(
+            <div className='text-xl md:text-2xl xl:text-3xl font-lato font-normal text-orange tracking-wider'>{`Welcome back ${capitalizeWords(
               user.name
             )}!`}</div>
-            <p className='text-xs md:text-md xl:text-lg font-lato font-bold text-mutedPink tracking-wider'>
+            <p className='text-xs md:text-md xl:text-lg font-lato font-normal text-mutedPink tracking-wider'>
               You have {pieStatus?.value} {pieStatus?.title} item(s)!
             </p>
           </div>

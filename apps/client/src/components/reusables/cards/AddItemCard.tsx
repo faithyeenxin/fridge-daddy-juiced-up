@@ -95,7 +95,7 @@ const AddItemCard = () => {
     >
       <div className='flex items-center justify-evenly flex-col m-5 gap-2'>
         <div
-          className='text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider'
+          className='text-2xl xl:text-3xl font-lato font-normal text-orange tracking-wider'
           data-testid='add-item-heading'
         >
           Add an Item
@@ -110,7 +110,7 @@ const AddItemCard = () => {
           maxLength={23}
           value={newItem.name}
           autoComplete='off'
-          className='w-full h-[30px] xl:h-[40px]  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+          className='w-full h-[30px] xl:h-[40px]  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-80 focus:outline-none'
           onChange={(e) => {
             setNewItem({ ...newItem, name: e.target.value });
           }}
@@ -125,7 +125,7 @@ const AddItemCard = () => {
           placeholder='Quantity'
           autoComplete='off'
           value={newItem.quantity}
-          className='w-full h-[30px] xl:h-[40px]  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+          className='w-full h-[30px] xl:h-[40px]  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-80 focus:outline-none'
           onChange={(e) => {
             setNewItem({ ...newItem, quantity: e.target.value });
           }}
@@ -133,7 +133,7 @@ const AddItemCard = () => {
         {/* <input
                     type="text"
                     placeholder="Category"
-                    className="w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none"
+                    className="w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-80 focus:outline-none"
                 /> */}
         <DropdownSelect
           name='Category'
@@ -159,7 +159,7 @@ const AddItemCard = () => {
             data-testid='purchase-date-title'
             className={`${
               purchasedOnDisplay ? 'hidden' : ''
-            } h-[30px] xl:h-[40px] px-1 w-full gap-1 flex text-sm items-center justify-center rounded-3xl bg-opacity-60 text-tracking-wide  text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none`}
+            } h-[30px] xl:h-[40px] px-1 w-full gap-1 flex text-sm items-center justify-center rounded-3xl bg-opacity-60 text-tracking-wide  text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-80 focus:outline-none`}
             onMouseEnter={() => setPurchasedOnDisplay(!purchasedOnDisplay)}
           >
             Purchased <img src='/images/cards/date_small.svg' />
@@ -169,7 +169,7 @@ const AddItemCard = () => {
             style={{ width: '100% !important' }}
             className={`${
               purchasedOnDisplay ? '' : 'hidden'
-            } w-full h-[30px] xl:h-[40px] px-1 gap-1 flex text-sm items-center justify-center rounded-3xl bg-opacity-60 text-tracking-wide  text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none`}
+            } w-full h-[30px] xl:h-[40px] px-1 gap-1 flex text-sm items-center justify-center rounded-3xl bg-opacity-60 text-tracking-wide  text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-80 focus:outline-none`}
             placeholder='Purchased'
             defaultValue={todayStr}
             type='date'
@@ -194,7 +194,7 @@ const AddItemCard = () => {
             data-testid='expiry-date-title'
             className={`${
               expirationOnDisplay ? 'hidden' : ''
-            } h-[30px] xl:h-[40px] px-1 w-full gap-1 flex text-sm items-center justify-center rounded-3xl bg-opacity-60 text-tracking-wide  text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none`}
+            } h-[30px] xl:h-[40px] px-1 w-full gap-1 flex text-sm items-center justify-center rounded-3xl bg-opacity-60 text-tracking-wide  text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-80 focus:outline-none`}
             onMouseEnter={() => setExpirationOnDisplay(!expirationOnDisplay)}
           >
             Expiration <img src='/images/cards/date_small.svg' />
@@ -203,7 +203,7 @@ const AddItemCard = () => {
             data-testid='expiry-date'
             className={`${
               expirationOnDisplay ? '' : 'hidden'
-            } h-[30px] xl:h-[40px] px-1 w-full gap-1 flex text-sm items-center justify-center rounded-3xl bg-opacity-60 text-tracking-wide  text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none`}
+            } h-[30px] xl:h-[40px] px-1 w-full gap-1 flex text-sm items-center justify-center rounded-3xl bg-opacity-60 text-tracking-wide  text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-80 focus:outline-none`}
             placeholder='Expiration'
             type='date'
             min={purchaseDate}

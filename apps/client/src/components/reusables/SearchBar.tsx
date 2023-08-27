@@ -51,14 +51,14 @@ const SearchBar = () => {
         type='text'
         placeholder='Looking for something?'
         value={searchValue}
-        className='w-full p-2 rounded-3xl text-md xl:text-lg text-white opacity-80 placeholder-white bg-mutedPink placeholder:font-bold font-lora px-5 py-2 focus:outline-none'
+        className='w-full p-2 rounded-3xl text-md xl:text-lg text-white opacity-80 placeholder-white bg-mutedPink placeholder:font-bold font-lato px-5 py-2 focus:outline-none'
         onChange={(e) => {
           setSearchValue(e.target.value);
           updateSearchBox(e);
         }}
       />
       {/* <button
-                className="w-2/12 bg-orange text-white p-2 rounded-3xl font-bold font-lora text-lg hover:bg-gradient-to-r from-orange to-pink"
+                className="w-2/12 bg-orange text-gray-500 p-2 rounded-3xl font-bold font-lato text-lg hover:bg-gradient-to-r from-orange to-pink"
                 type="submit"
             >
                 Search

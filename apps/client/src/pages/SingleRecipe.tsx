@@ -52,7 +52,7 @@ const SingleRecipe = () => {
       {!loading && (
         <>
           {/* Recipe Summary Section */}
-          <div className='w-full h-[350px] overflow-clip bg-offWhite rounded-2xl flex-col flex md:flex-row justify-left items-center gap-1 md:gap-10 '>
+          <div className='w-full h-[350px] overflow-clip bg-bgColorPeachBeige rounded-2xl flex-col flex md:flex-row justify-left items-center gap-1 md:gap-10 '>
             <div className='h-2/3 md:w-1/3 md:h-full overflow-hidden'>
               <img
                 className='object-fill md:w-full md:h-[350px]'
@@ -63,17 +63,17 @@ const SingleRecipe = () => {
               id='recipeContent'
               className='flex flex-col h-1/3 md:h-full justify-center p-5 gap-1 md:gap-3 w-full md:w-[90%] lg:w-[70%]'
             >
-              <h1 className='xs:text-md sm:text-lg md:text-2xl lg:text-3xl xl:text-5xl font-lora text-orange text-center tracking-wider'>
+              <h1 className='xs:text-md sm:text-lg md:text-2xl lg:text-3xl xl:text-5xl font-lato text-orange text-center tracking-wider'>
                 {recipeData?.title}
               </h1>
               <div className='flex justify-center gap-1'>
-                <h1 className='text-xs  text-blueGray text-center italic opacity-50 font-bold'>
+                <h1 className='text-xs  text-blueGray text-center italic opacity-50 font-normal'>
                   {recipeData?.readyInMinutes
                     ? `Ready In ${recipeData?.readyInMinutes} Minutes`
                     : ''}
                   ,{' '}
                 </h1>
-                <h1 className='text-xs  text-blueGray text-center italic opacity-50 font-bold '>
+                <h1 className='text-xs  text-blueGray text-center italic opacity-50 font-normal '>
                   {recipeData?.servings
                     ? `Serves ${recipeData?.servings}`
                     : `Ingredients utilised: ${recipeData?.usedIngredientCount}`}
@@ -85,13 +85,13 @@ const SingleRecipe = () => {
             </div>
           </div>
           <div className='flex gap-1 md:gap-5 h-[800px] md:h-[1200px]'>
-            <div className=' bg-offWhite rounded-2xl hidden lg:flex-col lg:flex lg:w-1/5'>
+            <div className=' bg-bgColorPeachBeige rounded-2xl hidden lg:flex-col lg:flex lg:w-1/5'>
               <RecipeIngredientsCard recipeData={recipeData} />
             </div>
-            <div className=' bg-offWhite rounded-2xl lg:flex-col lg:flex lg:w-2/5'>
+            <div className=' bg-bgColorPeachBeige rounded-2xl lg:flex-col lg:flex lg:w-2/5'>
               <RecipeInstructionsCard recipeData={recipeData} />
             </div>
-            <div className=' bg-offWhite rounded-2xl hidden lg:flex-col lg:flex lg:w-2/5'>
+            <div className=' bg-bgColorPeachBeige rounded-2xl hidden lg:flex-col lg:flex lg:w-2/5'>
               <RecipeNutritionCard recipeNutrition={recipeNutrition} />
             </div>
           </div>

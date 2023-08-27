@@ -54,7 +54,7 @@ const AddCategoryCard = () => {
   return (
     <div className='flex items-center justify-evenly flex-col m-5 gap-2'>
       <div
-        className='text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider'
+        className='text-2xl xl:text-3xl font-lato font-normal text-orange tracking-wider'
         data-testid='add-category-heading'
       >
         Add a Category
@@ -64,7 +64,7 @@ const AddCategoryCard = () => {
         data-testid='add-category-name-input'
         placeholder='Name'
         // value={newCategory.name}
-        className='w-full h-[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+        className='w-full h-[40px] p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-80 focus:outline-none'
         onChange={(e) => {
           setNewCategory({ ...newCategory, name: e.target.value });
         }}
@@ -76,7 +76,7 @@ const AddCategoryCard = () => {
           min={0}
           // value={newCategory.pantryDays}
           placeholder='Pantry'
-          className='w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-sm tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center justify-center focus:bg-opacity-80 focus:outline-none'
+          className='w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-sm tracking-wide text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center justify-center focus:bg-opacity-80 focus:outline-none'
           onChange={(e) => {
             setNewCategory({
               ...newCategory,
@@ -90,7 +90,7 @@ const AddCategoryCard = () => {
           min={0}
           // value={newCategory.fridgeDays}
           placeholder='Fridge'
-          className='w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-sm  tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+          className='w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-sm  tracking-wide text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-80 focus:outline-none'
           onChange={(e) => {
             setNewCategory({
               ...newCategory,
@@ -104,7 +104,7 @@ const AddCategoryCard = () => {
           min={0}
           // value={newCategory.freezerDays}
           placeholder='Freezer'
-          className='w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-sm tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+          className='w-full h=[40px] p-2 rounded-3xl bg-opacity-60 text-sm tracking-wide text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-80 focus:outline-none'
           onChange={(e) => {
             setNewCategory({
               ...newCategory,

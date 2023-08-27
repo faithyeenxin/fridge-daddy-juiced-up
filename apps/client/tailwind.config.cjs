@@ -10,14 +10,15 @@ module.exports = {
     },
     extend: {
       colors: {
-        bgColor: '#FEE9E7',
+        bgColor: '#FFE8E6',
         sand: '#FFF6F1',
         beige: '#FFD6C0',
         mutedPink: '#FEC5B9',
         tablePink: '#FFE3DD',
-        tableOffWhite: '#FFF6F1',
+        tablebgColorPeachBeige: '#FFF6F1',
         extraMutedPink: '#FED8CF',
-        offWhite: '#FFF6F1',
+        // bgColorPeachBeige: '#FFF6F1',
+        white: '#FFFFFF',
         orange: '#FF5C39',
         pink: '#FD3379',
         orangeLight: '#FF5C39',

@@ -44,12 +44,12 @@ const ItemsTable = () => {
     setIsOpen(true);
   }
   return (
-    <div className='w-full h-full bg-offWhite rounded-lg overflow-auto'>
+    <div className='w-full h-full bg-tablebgColorPeachBeige rounded-lg overflow-auto'>
       <div className='relative flex flex-col justify-between'>
         <div className='w-full'>
           <div
             id='table-head'
-            className='flex sticky top-0 rounded-t-lg bg-orange rounded-top-lg font-lora text-white text-bold xl:text-lg lg:text-md md:text-sm sm:text-xs text-xs text-center items-center h-[45px] shadow-xl'
+            className='flex sticky top-0 rounded-t-lg bg-orange rounded-top-lg font-lato text-white text-bold xl:text-lg lg:text-md md:text-sm sm:text-xs text-xs text-center items-center h-[45px] shadow-xl'
           >
             <div className='w-2/12 xl:w-2/12 tracking-wide'>Days Left</div>
             <div className='w-5/12 xl:w-4/12 tracking-wide'>Name</div>
@@ -81,7 +81,7 @@ const ItemsTable = () => {
           )}
           {!filterStatus && filteredItems.length === 0 && (
             <div className='flex w-full h-[400px] justify-center items-center'>
-              <div className='font-lora text-orange opacity-70 text-lg tracking-wider font-light'>
+              <div className='font-lato text-orange opacity-70 text-lg tracking-wider font-light'>
                 You don't have any items here!
               </div>
             </div>
@@ -156,7 +156,7 @@ const ItemsTable = () => {
                   <div className='mt-4'>
                     <button
                       type='button'
-                      className='mr-2 inline-flex justify-center rounded-md border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
+                      className='mr-2 inline-flex justify-center rounded-md border border-transparent bg-orange px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gradient-to-r from-orange to-pink focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
                       onClick={handleEmptyTrash}
                     >
                       Clear my Bin!

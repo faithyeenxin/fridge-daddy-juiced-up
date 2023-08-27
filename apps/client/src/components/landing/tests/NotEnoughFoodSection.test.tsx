@@ -1,5 +1,5 @@
 import { render, screen } from '../../../test-utils/testing-library-utils';
-import NotEnoughFoodSection from '../NotEnoughFoodSection';
+import NotEnoughFoodSection from '../UseFridgeDaddy';
 
 describe('initial conditions', () => {
   it('should contain 2 images', () => {

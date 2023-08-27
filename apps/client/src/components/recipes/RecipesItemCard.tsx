@@ -51,12 +51,12 @@ const RecipesItemCard = () => {
       });
   };
   return (
-    <div className='h-auto bg-offWhite rounded-lg flex justify-center p-5'>
+    <div className='h-auto bg-bgColorPeachBeige rounded-lg flex justify-center p-5'>
       <div
         id='recipeSearchBox'
-        className='w-full h-auto py-5 bg-offWhite flex flex-col justify-between gap-5'
+        className='w-full h-auto py-5 bg-bgColorPeachBeige flex flex-col justify-between gap-5'
       >
-        <div className='text-2xl xl:text-3xl font-lora font-bold text-orange tracking-widest text-center'>
+        <div className='text-2xl xl:text-3xl font-lato font-normal text-orange tracking-widest text-center'>
           Items You've Selected
         </div>
         <div className='text-md xl:text-md tracking-wider italic text-blueGray opacity-50 text-center'>

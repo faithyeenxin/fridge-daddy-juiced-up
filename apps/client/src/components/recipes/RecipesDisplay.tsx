@@ -38,10 +38,10 @@ const RecipesDisplay = () => {
   }, []);
 
   return (
-    <div className='w-full h-full bg-offWhite rounded-lg flex justify-center p-5 flex-col'>
+    <div className='w-full h-full bg-bgColorPeachBeige rounded-lg flex justify-center p-5 flex-col'>
       {/* Recipes Title */}
       <div className='py-5'>
-        <div className='text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider text-center'>
+        <div className='text-2xl xl:text-3xl font-lato font-normal text-orange tracking-wider text-center'>
           Recipes You'll Love
         </div>
         <div className='text-md xl:text-md tracking-wider italic text-orange text-center'>
@@ -56,7 +56,7 @@ const RecipesDisplay = () => {
               <RecipeCard key={recipe.id} recipe={recipe} />
             ))
           ) : (
-            <div className='font-lora text-orange opacity-70 text-lg tracking-wider font-light flex justify-center items-center'>
+            <div className='font-lato text-orange opacity-70 text-lg tracking-wider font-light flex justify-center items-center'>
               Sorry we could not find any recipes.
             </div>
           )

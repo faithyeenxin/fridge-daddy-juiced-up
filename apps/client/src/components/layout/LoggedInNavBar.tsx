@@ -81,7 +81,7 @@ const LoggedInNavBar = () => {
         {/* Logo*/}
         <div className='flex'>
           <div
-            className='text-3xl font-bold tracking-wider text-orange hover:cursor-pointer'
+            className='text-3xl font-normal tracking-wider text-orange hover:cursor-pointer'
             onClick={() => {
               navigate('/home');
               setNavStatus('');
@@ -136,7 +136,7 @@ const LoggedInNavBar = () => {
             {/* Mobile Menu */}
             <div
               id='menu'
-              className={`${hamburgMenuStatus} absolute flex flex-col items-center self-end mx-[10%] py-8 mt-8 space-y-6 font-bold bg-white sm:self-center left-2 right-2 drop-shadow-md bg-opacity-80 rounded-2xl`}
+              className={`${hamburgMenuStatus} absolute flex flex-col items-center self-end mx-[10%] py-8 mt-8 space-y-6 font-normal bg-white sm:self-center left-2 right-2 drop-shadow-md bg-opacity-80 rounded-2xl`}
             >
               <div
                 className='hover:text-orange pt-2 md:text-2xl tracking-wider hover:cursor-pointer'
@@ -159,7 +159,7 @@ const LoggedInNavBar = () => {
                 Account
               </div>
               <div
-                className='md:block p-2 px-6 pt-2 text-white bg-orange rounded-full baseline hover:bg-gradient-to-r from-orange to-pink md:text-2xl hover:cursor-pointer'
+                className='md:block p-2 px-6 pt-2 text-gray-500 bg-orange rounded-full baseline hover:bg-gradient-to-r from-orange to-pink md:text-2xl hover:cursor-pointer'
                 onClick={() => {
                   sessionStorage.removeItem('fridgeDaddyToken');
                   navigate(`/`);
@@ -213,7 +213,7 @@ const LoggedInNavBar = () => {
                   <div className='mt-4'>
                     <button
                       type='button'
-                      className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none'
+                      className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gradient-to-r from-orange to-pink focus:outline-none'
                       onClick={() => {
                         dispatch(setAddItemModalOpen(true));
                       }}
@@ -222,7 +222,7 @@ const LoggedInNavBar = () => {
                     </button>
                     <button
                       type='button'
-                      className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none'
+                      className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gradient-to-r from-orange to-pink focus:outline-none'
                       onClick={() => {
                         dispatch(setAddCategoryModalOpen(true));
                       }}

@@ -16,7 +16,7 @@ const RecipeCard = ({ recipe }: IRecipeCardProps) => {
     >
       <img src={recipe.image} />
       <div id='recipeTitleSection' className='flex flex-col justify-center p-2'>
-        <h1 className='text-md font-lora text-orange text-center'>
+        <h1 className='text-md font-lato text-orange text-center'>
           {recipe?.title}
         </h1>
         <h1 className='text-xs  text-blueGray text-center italic opacity-50'>

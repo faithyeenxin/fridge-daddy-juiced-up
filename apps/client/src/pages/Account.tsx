@@ -124,23 +124,23 @@ const Account = () => {
   };
   return (
     <div className='flex justify-center'>
-      <div className='w-[500px] h-[500px] bg-offWhite rounded-2xl flex flex-col justify-evenly items-center sm:px-[5%] md:px-0'>
+      <div className='w-[500px] h-[500px] bg-bgColorPeachBeige rounded-2xl flex flex-col justify-evenly items-center sm:px-[5%] md:px-0'>
         <div className='flex justify-center items-center gap-5'>
           <img className='w-[80px] rounded-full' src={user.image} />
-          <div className='text-2xl xl:text-3xl font-lora font-bold text-orange tracking-wider text-center'>
+          <div className='text-2xl xl:text-3xl font-lato font-normal text-orange tracking-wider text-center'>
             Hello, {capitalizeWords(user.name)}!
           </div>
         </div>
 
         <div className='flex gap-5'>
           <div
-            className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none'
+            className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gradient-to-r from-orange to-pink focus:outline-none'
             onClick={() => setChangePassword(true)}
           >
             Change Password
           </div>
           <div
-            className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none'
+            className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gradient-to-r from-orange to-pink focus:outline-none'
             onClick={() => setDeleteAccount(true)}
           >
             Delete Account
@@ -196,7 +196,7 @@ const Account = () => {
                     value={currentPassword}
                     placeholder='Current Password'
                     autoComplete='off'
-                    className='w-[80%] h-[30px] xl:h-[40px]  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+                    className='w-[80%] h-[30px] xl:h-[40px]  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-80 focus:outline-none'
                     onChange={(e) => {
                       setCurrentPassword(e.target.value);
                     }}
@@ -208,7 +208,7 @@ const Account = () => {
                     value={newPassword}
                     placeholder='New Password'
                     autoComplete='off'
-                    className='w-[80%] h-[30px] xl:h-[40px]  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+                    className='w-[80%] h-[30px] xl:h-[40px]  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-80 focus:outline-none'
                     onChange={(e) => {
                       setNewpassword(e.target.value);
                     }}
@@ -220,7 +220,7 @@ const Account = () => {
                     value={confirmNewPassword}
                     placeholder='Reconfirm Password'
                     autoComplete='off'
-                    className='w-[80%] h-[30px] xl:h-[40px]  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+                    className='w-[80%] h-[30px] xl:h-[40px]  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-80 focus:outline-none'
                     onChange={(e) => {
                       setConfirmNewPassword(e.target.value);
                     }}
@@ -228,7 +228,7 @@ const Account = () => {
                   <button
                     type='button'
                     disabled={changePasswordButtonStatus}
-                    className='w-[80%] inline-flex justify-center rounded-3xl border border-transparent bg-orange px-4 py-2 text-md font-lora text-white enabled:hover:bg-gradient-to-r from-orange to-pink focus:outline-none disabled:bg-blueGray disabled:bg-opacity-50'
+                    className='w-[80%] inline-flex justify-center rounded-3xl border border-transparent bg-orange px-4 py-2 text-md font-lato text-gray-500 enabled:hover:bg-gradient-to-r from-orange to-pink focus:outline-none disabled:bg-blueGray disabled:bg-opacity-50'
                     onClick={handlePasswordChange}
                   >
                     Change Password
@@ -294,7 +294,7 @@ const Account = () => {
                     value={deleteConfirmSentence}
                     placeholder='enter delete phrase here'
                     autoComplete='off'
-                    className='w-[80%] h-[30px] xl:h-[40px]  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-white placeholder-white bg-mutedPink placeholder:font-bold font-lora text-center focus:bg-opacity-80 focus:outline-none'
+                    className='w-[80%] h-[30px] xl:h-[40px]  p-2 rounded-3xl bg-opacity-60 text-md tracking-wide text-gray-500 placeholder-gray-500 bg-mutedPink placeholder:font-normal font-lato text-center focus:bg-opacity-80 focus:outline-none'
                     onChange={(e) => {
                       setDeleteConfirmSentence(e.target.value);
                     }}
@@ -302,7 +302,7 @@ const Account = () => {
                   <button
                     type='button'
                     disabled={deleteAccountButtonStatus}
-                    className='w-[80%] inline-flex justify-center rounded-3xl border border-transparent bg-red-500 px-4 py-2 text-md font-lora text-white enabled:hover:bg-gradient-to-r from-orange to-pink focus:outline-none disabled:bg-blueGray disabled:bg-opacity-50'
+                    className='w-[80%] inline-flex justify-center rounded-3xl border border-transparent bg-red-500 px-4 py-2 text-md font-lato text-gray-500 enabled:hover:bg-gradient-to-r from-orange to-pink focus:outline-none disabled:bg-blueGray disabled:bg-opacity-50'
                     onClick={handleDeleteAccount}
                   >
                     Delete Account
