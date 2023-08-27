@@ -9,7 +9,7 @@ export const Landing = () => {
   return (
     <div className='w-full h-[100vh] snap-y snap-mandatory overflow-auto'>
       <NavBar />
-      <div className='sticky w-full top-10 z-10 hidden lg:block'>
+      <div className='sticky w-full top-5 z-10 hidden lg:block'>
         <img
           src={daddy}
           // src='../assets/img/landing-page/daddy.svg'

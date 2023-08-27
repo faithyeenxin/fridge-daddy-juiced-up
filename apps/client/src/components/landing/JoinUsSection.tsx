@@ -4,11 +4,10 @@ const JoinUsSection = () => {
     <div
       id='hero'
       data-testid='join-us-section-container'
-      className='w-full h-[100vh] flex flex-col lg:flex-row justify-evenly items-center'
+      className='w-full h-[100vh] flex flex-col lg:flex-row justify-evenly items-center py-40 lg:py-0'
     >
       {/* left item */}
-
-      <div className='flex mb-10 md:mt-16 md:mb-32 h-auto lg:h-full w-full lg:w-full justify-center lg:justify-start items-center'>
+      <div className='flex md:mt-16 md:mb-32 h-auto lg:h-full w-full lg:w-full justify-center lg:justify-start items-center'>
         <div
           className='w-[100%] lg:w-[60%] xl:w-[50%] lg:pl-[10%] flex flex-col gap-5 justify-center items-center'
           data-testid='content-container'
@@ -18,7 +17,7 @@ const JoinUsSection = () => {
           // data-aos-once='false'
         >
           <h1
-            className='w-lg font-bold text-center text-orange text-4xl md:text-4xl lg:text-4xl xl:text-5xl w-fit font-lato'
+            className='font-bold text-center text-orange text-4xl md:text-4xl lg:text-4xl xl:text-5xl w-fit font-lato '
             data-testid='content-container-items'
           >
             Make a difference today.

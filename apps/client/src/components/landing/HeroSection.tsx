@@ -31,7 +31,7 @@ const HeroSection = () => {
               data-testid='hero-left-container-item'
               className='w-lg text-gray-500 text-center text-lg md:text-xl font-lato'
             >
-              Join FridgeDaddy - your ultimate food inventory solution.
+              Join FridgeDaddy - Your Ultimate Food Inventory Solution.
             </p>
           </div>
           <div
