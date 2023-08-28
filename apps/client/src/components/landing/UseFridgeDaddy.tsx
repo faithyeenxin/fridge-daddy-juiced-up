@@ -41,7 +41,7 @@ const UseFridgeDaddy = () => {
           </h1>
           <h1
             data-testid='wasted-left-container-item'
-            className='text-md md:text-xl text-center md:text-left text-gray-500 md:w-5/6 font-lato '
+            className='text-md md:text-xl text-center md:text-left text-gray-500 md:w-5/6 font-lato'
           >
             FridgeDaddy helps you take proactive steps towards reducing food
             wastage. Tracking your food inventory gives you a better overview of

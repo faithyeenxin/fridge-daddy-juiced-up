@@ -23,13 +23,13 @@ const WastedSection = () => {
         className='flex flex-col h-full w-full lg:w-1/2 justify-center mt-2/3'
       >
         <div
-          className='flex flex-col justify-center md:justify-start items-center md:items-start gap-10 px-5 md:px-10 '
+          className='flex flex-col justify-center md:justify-start items-center md:items-start gap-10 px-5 md:px-5'
           // data-aos='fade-up'
           // data-aos-duration='1500'
           // data-aos-easing='ease-in-out'
           // data-aos-once='false'
         >
-          <div>
+          <div className='flex flex-col gap-3'>
             <h1
               data-testid='wasted-left-container-item'
               className='w-lg font-bold text-center md:text-left text-orange text-3xl md:text-4xl xl:text-5xl font-lato'

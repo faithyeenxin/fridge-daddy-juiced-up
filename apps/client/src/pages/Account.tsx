@@ -134,13 +134,13 @@ const Account = () => {
 
         <div className='flex gap-5'>
           <div
-            className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gradient-to-r from-orange to-pink focus:outline-none'
+            className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none'
             onClick={() => setChangePassword(true)}
           >
             Change Password
           </div>
           <div
-            className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gradient-to-r from-orange to-pink focus:outline-none'
+            className='mr-2 inline-flex justify-center rounded-2xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none'
             onClick={() => setDeleteAccount(true)}
           >
             Delete Account
@@ -228,7 +228,7 @@ const Account = () => {
                   <button
                     type='button'
                     disabled={changePasswordButtonStatus}
-                    className='w-[80%] inline-flex justify-center rounded-3xl border border-transparent bg-orange px-4 py-2 text-md font-lato text-gray-500 enabled:hover:bg-gradient-to-r from-orange to-pink focus:outline-none disabled:bg-blueGray disabled:bg-opacity-50'
+                    className='w-[80%] inline-flex justify-center rounded-3xl border border-transparent bg-orange px-4 py-2 text-md font-lato text-white enabled:hover:bg-gradient-to-r from-orange to-pink focus:outline-none disabled:bg-blueGray disabled:bg-opacity-50'
                     onClick={handlePasswordChange}
                   >
                     Change Password
@@ -302,7 +302,7 @@ const Account = () => {
                   <button
                     type='button'
                     disabled={deleteAccountButtonStatus}
-                    className='w-[80%] inline-flex justify-center rounded-3xl border border-transparent bg-red-500 px-4 py-2 text-md font-lato text-gray-500 enabled:hover:bg-gradient-to-r from-orange to-pink focus:outline-none disabled:bg-blueGray disabled:bg-opacity-50'
+                    className='w-[80%] inline-flex justify-center rounded-3xl border border-transparent bg-red-500 px-4 py-2 text-md font-lato text-white enabled:hover:bg-gradient-to-r from-orange to-pink focus:outline-none disabled:bg-blueGray disabled:bg-opacity-50'
                     onClick={handleDeleteAccount}
                   >
                     Delete Account

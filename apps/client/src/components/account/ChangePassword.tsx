@@ -49,7 +49,7 @@ const ChangePassword = () => {
               ></input>
             </div>
             <div className='flex md:w-3/4'>
-              <button className='w-full disabled:opacity-40 text-gray-500 bg-gradient-to-br from-red-500 disabled:cursor-not-allowed to-pink-400  hover:bg-gradient-to-bl font-medium rounded-lg text-xs px-3 py-2 md:py-3 text-center'>
+              <button className='w-full disabled:opacity-40 text-white bg-gradient-to-br from-red-500 disabled:cursor-not-allowed to-pink-400  hover:bg-gradient-to-bl font-medium rounded-lg text-xs px-3 py-2 md:py-3 text-center'>
                 Change Password
               </button>
             </div>
