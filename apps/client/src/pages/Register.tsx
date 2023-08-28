@@ -11,7 +11,7 @@ const Register = () => {
           <RegisterCard />
         </div>
         {/* Right Item */}
-        <div className='md:w-1/2 items-center hidden md:gflex justify-center'>
+        <div className='md:w-1/2 items-center hidden md:flex justify-center'>
           <img src={signup} />
         </div>
       </div>
