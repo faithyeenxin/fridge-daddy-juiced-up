@@ -93,7 +93,7 @@ const HomeHero = () => {
   return (
     <div
       ref={welcomeRef}
-      className='w-full h-[350px] bg-bgColorPeachBeige rounded-2xl flex-col flex md:flex-row justify-left items-center px-[10%] gap-2 md:gap-10'
+      className='w-full h-[350px] bg-tablePink rounded-2xl flex-col flex md:flex-row justify-left items-center px-[10%] gap-2 md:gap-10'
     >
       <div
         className={`w-full lg:w-1/3 justify-center items-center ${

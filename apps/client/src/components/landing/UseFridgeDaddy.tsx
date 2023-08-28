@@ -51,7 +51,7 @@ const UseFridgeDaddy = () => {
             data-testid='wasted-left-container-item'
             className='text-md md:text-xl text-center md:text-left text-gray-500 md:w-5/6 font-lato '
           >
-            Learn more by clicking the{' '}
+            Find out more by clicking the{' '}
             <strong className='text-orange'>Learn More</strong> button our
             navigation bar above!
           </h1>

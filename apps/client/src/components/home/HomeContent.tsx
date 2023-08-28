@@ -58,7 +58,7 @@ const HomeContent = () => {
         className='w-3/12 h-full hidden lg:flex lg:flex-col justify-between gap-2'
       >
         <div className='w-full h-full bg-tablePink rounded-lg flex flex-col gap-1 justify-center items-center px-10'>
-          <p className='text-md font-lato text-orange tracking-widest'>
+          <p className='text-lg font-bold font-lato text-orange tracking-widest'>
             Food for Thought
           </p>
           <div className='text-md font-lato text-gray-500 tracking-normal flex justify-between'>

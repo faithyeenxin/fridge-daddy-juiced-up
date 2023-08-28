@@ -7,9 +7,7 @@ const LoggedOutLayout = () => {
   return (
     <div>
       <NavBar />
-      <div className='my-3 mx-7'>
-        <Outlet />
-      </div>
+      <Outlet />
       <Footer />
     </div>
   );

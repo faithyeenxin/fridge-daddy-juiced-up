@@ -81,7 +81,7 @@ const LoggedInNavBar = () => {
         {/* Logo*/}
         <div className='flex'>
           <div
-            className='text-3xl font-normal tracking-wider text-orange hover:cursor-pointer'
+            className='text-3xl font-bold tracking-wider text-orange hover:cursor-pointer'
             onClick={() => {
               navigate('/home');
               setNavStatus('');
@@ -159,7 +159,7 @@ const LoggedInNavBar = () => {
                 Account
               </div>
               <div
-                className='md:block p-2 px-6 pt-2 text-gray-500 bg-orange rounded-full baseline hover:bg-gradient-to-r from-orange to-pink md:text-2xl hover:cursor-pointer'
+                className='md:block p-2 px-6 pt-2 text-white bg-orange rounded-full baseline hover:bg-gradient-to-r from-orange to-pink md:text-2xl hover:cursor-pointer'
                 onClick={() => {
                   sessionStorage.removeItem('fridgeDaddyToken');
                   navigate(`/`);

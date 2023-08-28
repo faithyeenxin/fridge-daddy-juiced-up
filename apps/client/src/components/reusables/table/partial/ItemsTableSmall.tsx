@@ -42,7 +42,7 @@ const ItemsTableSmall = () => {
       <div className='relative flex flex-col justify-between'>
         <div
           id='table-head'
-          className='flex sticky top-0 rounded-t-lg bg-orange rounded-top-lg font-lato text-gray-500 text-bold xl:text-lg lg:text-md md:text-sm sm:text-xs text-xs text-center items-center h-[45px] shadow-xl'
+          className='flex sticky top-0 rounded-t-lg bg-orange rounded-top-lg font-lato text-white text-bold xl:text-lg lg:text-md md:text-sm sm:text-xs text-xs text-center items-center h-[45px] shadow-xl'
         >
           <div className='w-2/5 tracking-wide'>Days Left</div>
           <div className='w-2/5 tracking-wide'>Name</div>

@@ -1,98 +1,150 @@
 import React from 'react';
-import addItemAndCategory from '../../public/images/gif/add-item-and-add-category.gif';
-import searchFridge from '../../public/images/gif/filtering.gif';
-import searchRecipe from '../../public/images/gif/search-recipes.gif';
+
+import sparkles from '../assets/img/learn-more/sparkles.svg';
+import clock from '../assets/img/learn-more/clock.png';
+import idea from '../assets/img/learn-more/idea.png';
+import addItem from '../assets/img/learn-more/add-item.png';
+import filter from '../assets/img/learn-more/filter.png';
+import recipe from '../assets/img/learn-more/recipe.png';
+
 const LearnMore = () => {
   return (
-    <>
-      <div className='w-full h-full'>
-        <div className='w-full h-[80vh] lg:h-[90vh] flex flex-col xl:flex-row justify-evenly items-center'>
+    <div>
+      {/* ADD ITEMS */}
+      <div className='w-full h-full relative mt-[5%] mb-[5%] bg-tablePink py-20 px-10 z-[-10]'>
+        <img
+          src={sparkles}
+          className='absolute z-[-1] right-[50%] bottom-[20%] hidden md:block'
+        />
+        <div className='w-full flex flex-col xl:flex-row justify-evenly items-start gap-10 md:gap-0'>
           {/* left item */}
-          <div className='flex flex-col mb-10 md:mt-16 md:mb-32 h-auto w-full xl:w-3/6 justify-center items-center'>
+          <div className='flex h-auto w-full xl:w-1/2 justify-center items-start'>
+            <div className='relative w-[30px] h-[30px]'>
+              <div className='absolute w-[100%] h-[100%] bg-mutedPink z-[-1] rounded-full left-[-40%] bottom-[-30%]' />
+              <p className='font-medium text-center text-gray-700 text-2xl md:text-3xl xl:text-left bg-opacity-0'>
+                1.
+              </p>
+            </div>
             <div
-              className='flex flex-col gap-2 w-[100%] lg:w-[90%] xl:w-[80%]'
-              data-aos='fade-in'
-              data-aos-duration='1000'
-              data-aos-easing='ease-in-out'
-              data-aos-once='false'
+              className='flex flex-col w-[100%] lg:w-[90%] xl:w-[80%] gap-2 md:gap-5'
+              // data-aos='fade-in'
+              // data-aos-duration='1000'
+              // data-aos-easing='ease-in-out'
+              // data-aos-once='false'
             >
-              <h1 className='w-lg font-normal text-center text-orange xs:text-lg sm:text-2xl md:text-4xl lg:text-4xl xl:text-5xl xl:text-left'>
-                Manage items in your fridge
+              <h1 className='font-medium text-center text-gray-700 text-2xl md:text-3xl xl:text-left'>
+                Add items into your inventory.
+              </h1>
+              <h1 className='font-normal text-center text-gray-700 text-md md:text-xl xl:text-left'>
+                Add items that you have stocked up in your pantry, fridge or
+                freezer. Categorize these items by type or compartment so you
+                can easily track and locate items.
               </h1>
             </div>
           </div>
           {/* right item */}
-          <div className='h-auto lg:h-full w-full xl:w-3/6 flex justify-evenly items-center lg:relative'>
+          <div className='h-full w-full xl:w-1/2'>
             <img
-              src={addItemAndCategory}
-              className='w-[850px] md:w-[900px] md:h-[500px] border-2 border-orange rounded-2xl'
-              data-aos='fade-in'
-              data-aos-duration='1000'
-              data-aos-easing='ease-in-out'
-              data-aos-once='false'
+              src={addItem}
+              className='w-[850px]rounded-2xl'
+              // data-aos='fade-in'
+              // data-aos-duration='1000'
+              // data-aos-easing='ease-in-out'
+              // data-aos-once='false'
             />
           </div>
         </div>
       </div>
-      <div className='w-full h-full'>
-        <div className='w-full h-[80vh] lg:h-[90vh] flex flex-col xl:flex-row justify-evenly items-center'>
+      {/* TRACK ITEMS */}
+      <div className='w-full h-full relative mt-[5%] mb-[5%] bg-tablePink py-20 px-10 z-[-10]'>
+        <img
+          src={clock}
+          className='absolute z-[-1] right-[50%] bottom-[20%] hidden md:block'
+        />
+        <div className='w-full flex flex-col xl:flex-row justify-evenly items-start gap-10 md:gap-0 '>
           {/* left item */}
-          <div className='flex flex-col mb-10 md:mt-16 md:mb-32 h-auto w-full xl:w-3/6 justify-center items-center'>
+          <div className='flex h-auto w-full xl:w-1/2 justify-center items-start'>
+            <div className='relative w-[30px] h-[30px]'>
+              <div className='absolute w-[100%] h-[100%] bg-mutedPink z-[-1] rounded-full left-[-40%] bottom-[-30%]' />
+              <p className='font-medium text-center text-gray-700 text-2xl md:text-3xl xl:text-left bg-opacity-0'>
+                2.
+              </p>
+            </div>
             <div
-              className='flex flex-col gap-2 w-[100%] lg:w-[90%] xl:w-[80%]'
-              data-aos='fade-in'
-              data-aos-duration='1000'
-              data-aos-easing='ease-in-out'
-              data-aos-once='false'
+              className='flex flex-col w-[100%] lg:w-[90%] xl:w-[80%] gap-2 md:gap-5'
+              // data-aos='fade-in'
+              // data-aos-duration='1000'
+              // data-aos-easing='ease-in-out'
+              // data-aos-once='false'
             >
-              <h1 className='w-lg font-normal text-center text-orange xs:text-lg sm:text-2xl md:text-4xl lg:text-4xl xl:text-5xl xl:text-left'>
-                Keep track of what's in your inventory
+              <h1 className='font-medium text-center text-gray-700 text-2xl md:text-3xl xl:text-left'>
+                Monitor food item expiration status.
+              </h1>
+              <h1 className='font-normal text-center text-gray-700 text-md md:text-xl xl:text-left'>
+                Effortlessly sort items based on their condition and expiry
+                dates, helping you identify what to consume before they expire.
               </h1>
             </div>
           </div>
           {/* right item */}
-          <div className='h-auto lg:h-full w-full xl:w-3/6 flex justify-evenly items-center lg:relative'>
+          <div className='h-full w-full xl:w-1/2'>
             <img
-              src={searchFridge}
-              className='w-[850px] md:w-[900px] md:h-[500px] border-2 border-orange rounded-2xl'
-              data-aos='fade-in'
-              data-aos-duration='1000'
-              data-aos-easing='ease-in-out'
-              data-aos-once='false'
+              src={filter}
+              className='w-[850px]rounded-2xl'
+              // data-aos='fade-in'
+              // data-aos-duration='1000'
+              // data-aos-easing='ease-in-out'
+              // data-aos-once='false'
             />
           </div>
         </div>
       </div>
-      <div className='w-full h-full'>
-        <div className='w-full h-[80vh] lg:h-[90vh] flex flex-col xl:flex-row justify-evenly items-center'>
+
+      {/* RECIPE */}
+      <div className='w-full h-full relative mt-[5%] mb-[5%] bg-tablePink py-20 px-10 z-[-10]'>
+        <img
+          src={idea}
+          className='absolute z-[-1] right-[48%] bottom-[10%] rotate-[-20deg] hidden md:block'
+        />
+        <div className='w-full flex flex-col xl:flex-row justify-evenly items-start gap-10 md:gap-0 '>
           {/* left item */}
-          <div className='flex flex-col mb-10 md:mt-16 md:mb-32 h-auto lg:h-full w-full xl:w-3/6 justify-center items-center'>
+          <div className='flex h-auto w-full xl:w-1/2 justify-center items-start'>
+            <div className='relative w-[30px] h-[30px]'>
+              <div className='absolute w-[100%] h-[100%] bg-mutedPink z-[-1] rounded-full left-[-40%] bottom-[-30%]' />
+              <p className='font-medium text-center text-gray-700 text-2xl md:text-3xl xl:text-left bg-opacity-0'>
+                3.
+              </p>
+            </div>
             <div
-              className='flex flex-col gap-2 w-[100%] lg:w-[90%] xl:w-[80%]'
-              data-aos='fade-in'
-              data-aos-duration='1000'
-              data-aos-easing='ease-in-out'
-              data-aos-once='false'
+              className='flex flex-col w-[100%] lg:w-[90%] xl:w-[80%] gap-2 md:gap-5'
+              // data-aos='fade-in'
+              // data-aos-duration='1000'
+              // data-aos-easing='ease-in-out'
+              // data-aos-once='false'
             >
-              <h1 className='w-lg font-normal text-center text-orange xs:text-lg sm:text-2xl md:text-4xl lg:text-4xl xl:text-5xl xl:text-left'>
-                Get curated recipes based on your fridge's items
+              <h1 className='font-medium text-center text-gray-700 text-2xl md:text-3xl xl:text-left'>
+                Discover curated recipes based on items in your fridge.
+              </h1>
+              <h1 className='font-normal text-center text-gray-700 text-md md:text-xl xl:text-left'>
+                Stuck with leftovers and unsure what to cook? Don't worry, we've
+                got you covered with recipe suggestions based on your inventory.
               </h1>
             </div>
           </div>
           {/* right item */}
-          <div className='h-auto lg:h-full w-full xl:w-3/6 flex justify-evenly items-center lg:relative'>
+          <div className='h-full w-full xl:w-1/2'>
             <img
-              src={searchRecipe}
-              className='w-[850px] md:w-[900px] md:h-[500px] border-2 border-orange rounded-2xl'
-              data-aos='fade-in'
-              data-aos-duration='1000'
-              data-aos-easing='ease-in-out'
-              data-aos-once='false'
+              src={recipe}
+              className='w-[850px]rounded-2xl'
+              // data-aos='fade-in'
+              // data-aos-duration='1000'
+              // data-aos-easing='ease-in-out'
+              // data-aos-once='false'
             />
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

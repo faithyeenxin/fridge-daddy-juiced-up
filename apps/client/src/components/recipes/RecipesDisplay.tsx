@@ -41,7 +41,7 @@ const RecipesDisplay = () => {
     <div className='w-full h-full bg-bgColorPeachBeige rounded-lg flex justify-center p-5 flex-col'>
       {/* Recipes Title */}
       <div className='py-5'>
-        <div className='text-2xl xl:text-3xl font-lato font-normal text-orange tracking-wider text-center'>
+        <div className='text-2xl xl:text-3xl font-lato font-bold text-orange tracking-wider text-center'>
           Recipes You'll Love
         </div>
         <div className='text-md xl:text-md tracking-wider italic text-orange text-center'>

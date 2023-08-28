@@ -350,7 +350,7 @@ const FilterCard = () => {
       </div>
       <div className='flex justify-center'>
         <div
-          className='flex w-2/3 bg-orange font-lato font-normaler text-gray-500 justify-center rounded-3xl p-1 hover:bg-gradient-to-r from-orange to-pink cursor-pointer'
+          className='flex w-2/3 bg-orange font-lato font-normaler text-white justify-center rounded-3xl p-1 hover:bg-gradient-to-r from-orange to-pink cursor-pointer'
           onClick={() => {
             dispatch(updateFilteredItems(allUserItems));
             setCheckboxStatus({

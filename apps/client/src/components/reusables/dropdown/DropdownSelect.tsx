@@ -168,7 +168,7 @@ const DropdownSelect = ({
         <div className='flex w-full items-center justify-center'>
           {selectedValue ? capitalizeWords(selectedValue?.name) : name}
         </div>
-        <img src='/images/cards/dropdown.svg' />
+        <img src='/images/cards/dropdown.svg' className='filter' />
       </button>
       {/* <!-- Dropdown menu --> */}
       <div className='relative w-full'>

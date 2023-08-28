@@ -5,7 +5,6 @@ import daddy from '../../src/assets/img/landing-page/daddy.svg';
 import { ToastContainer } from 'react-toastify';
 import NavBar from '../components/layout/NavBar';
 import UseFridgeDaddy from '../components/landing/UseFridgeDaddy';
-import InfoAdd from '../components/landing/InfoAdd';
 export const Landing = () => {
   return (
     <div className='w-full h-[100vh] snap-y snap-mandatory overflow-y-auto overflow-x-hidden'>
