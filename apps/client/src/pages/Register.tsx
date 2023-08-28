@@ -1,6 +1,7 @@
 import React from 'react';
 import { RegisterCard } from '../components/reusables/cards/RegisterCard';
 import register2 from '../assets/img/register2.png';
+import signup from '../assets/img/verification/sign-up.png';
 const Register = () => {
   return (
     <div className=' h-screen'>
@@ -10,8 +11,8 @@ const Register = () => {
           <RegisterCard />
         </div>
         {/* Right Item */}
-        <div className='md:w-1/2 items-center hidden md:block'>
-          <img src={register2} />
+        <div className='md:w-1/2 items-center hidden md:gflex justify-center'>
+          <img src={signup} />
         </div>
       </div>
     </div>

@@ -1,6 +1,8 @@
 import React from 'react';
 import LoginCard from '../components/reusables/cards/LoginCard';
-import signin from '../assets/img/sign-in2.png';
+// import signin from '../assets/img/sign-in2.png';
+import signin from '../assets/img/verification/sign-in.png';
+
 const Login = () => {
   return (
     <div id='login' className='h-screen'>
@@ -11,7 +13,7 @@ const Login = () => {
             Welcome Back!
           </h1> */}
           <div className='hidden md:block'>
-            <img src={signin} />
+            <img src={signin} className='rotate-[360deg]' />
           </div>
         </div>
         {/* Right Item */}
