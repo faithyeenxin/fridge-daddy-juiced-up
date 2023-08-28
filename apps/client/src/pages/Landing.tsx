@@ -25,7 +25,7 @@ export const Landing = () => {
         <UseFridgeDaddy />
       </div>
 
-      <div className='w-full h-[100vh] snap-center md:px-10'>
+      <div className='w-full h-[100vh] snap-center px-10'>
         <JoinUsSection />
       </div>
       <ToastContainer

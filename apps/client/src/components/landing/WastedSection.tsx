@@ -88,7 +88,7 @@ const WastedSection = () => {
       >
         <img
           src={rottenShelf}
-          className='w-[250px] md:w-[300px] lg:w-[400px] xl:w-[500px] lg:absolute lg:top-[8%] lg:left-0 xl:top-20 xl:left-0'
+          className='w-[200px] md:w-[300px] lg:w-[400px] xl:w-[500px] lg:absolute lg:top-[8%] lg:left-0 xl:top-20 xl:left-0'
           // data-aos='fade-in'
           // data-aos-duration='1000'
           // data-aos-easing='ease-in-out'

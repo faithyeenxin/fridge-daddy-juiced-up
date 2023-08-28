@@ -6,10 +6,27 @@ import idea from '../assets/img/learn-more/idea.png';
 import addItem from '../assets/img/learn-more/add-item.png';
 import filter from '../assets/img/learn-more/filter.png';
 import recipe from '../assets/img/learn-more/recipe.png';
-
+import waves from '../assets/img/landing-page/waves.svg';
+import circle from '../assets/img/landing-page/circle.svg';
+import square from '../assets/img/landing-page/square.svg';
+import waves2 from '../assets/img/landing-page/waves-2.svg';
+import sparkle from '../assets/img/learn-more/sparkles.svg';
 const LearnMore = () => {
   return (
-    <div>
+    <div className='relative overflow-y-auto overflow-x-hidden'>
+      <img
+        src={waves}
+        className='absolute w-[800px] z-[-20] rotate-[-25deg] left-[-10%] top-[-20%]'
+      />
+      <img
+        src={circle}
+        className='absolute w-[400px] z-[-20] right-[-10%] top-[25%]'
+      />
+      <img src={square} className='absolute w-[300px] z-[-20] top-[60%]' />
+      <img
+        src={waves2}
+        className='absolute w-[800px] z-[-20] bottom-0 rotate-[25deg] right-[-10%]'
+      />
       {/* ADD ITEMS */}
       <div className='w-full h-full relative mt-[5%] mb-[5%] bg-tablePink py-20 px-10 z-[-10]'>
         <img

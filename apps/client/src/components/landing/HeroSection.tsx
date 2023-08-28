@@ -9,34 +9,34 @@ const HeroSection = () => {
   return (
     <div
       id='hero'
-      className='w-full  h-full flex flex-col-reverse lg:flex-row justify-evenly items-center pt-20 relative'
+      className='w-full pt-[20%] gap-10 md:gap-0 md:h-full flex flex-col-reverse lg:flex-row justify-evenly items-center md:pt-20 relative'
     >
       <img
         src={circle}
-        className='absolute right-[-10%] md:right-[-5%] top-[10%] md:top-[20%] sm:w-[300px] md:w-fit z-[-1]'
+        className='absolute right-[-10%] md:right-[-5%] top-[10%] md:top-[20%] w-[150px] md:w-fit z-[-1]'
       />
       <img
         src={square}
-        className='absolute left-[-5%] md:left-0 sm:bottom-10 md:bottom-20 sm:w-[300px] md:w-fit z-[-1]'
+        className='absolute left-[-5%] md:left-0 bottom-10 md:bottom-20 w-[250px] md:w-fit z-[-1]'
       />
       <img
         src={arrows}
-        className='absolute z-[-1] bottom-10 blinking-element'
+        className='absolute z-[-1] bottom-5 md:bottom-10 blinking-element'
       />
 
       {/* left item */}
       <div
         data-testid='hero-left-container'
-        className='flex flex-col mb-10 md:mt-16 md:mb-32 h-auto lg:h-full w-full lg:w-3/6 justify-center items-center'
+        className='flex flex-col mb-20 md:mt-16 md:mb-32 h-auto lg:h-full w-full lg:w-3/6 justify-center items-center'
       >
         <div
-          className='flex flex-col gap-10'
+          className='flex flex-col gap-5 md:gap-10'
           data-aos='fade-in'
           data-aos-duration='1000'
           data-aos-easing='ease-in-out'
           data-aos-once='false'
         >
-          <div className='flex flex-col gap-3'>
+          <div className='flex flex-col gap-5 md:gap-0'>
             <h1
               data-testid='hero-left-container-item'
               className='w-lg font-bold text-orange text-4xl md:text-5xl xl:text-6xl text-center md:text-left font-lato'
@@ -57,7 +57,7 @@ const HeroSection = () => {
           >
             <a
               href='/register'
-              className=' p-2 px-6 pt-2 text-white bg-orange rounded-full baseline hover:bg-gradient-to-r from-orange to-pink text-md font-lato font-normal'
+              className='p-2 px-6 text-white bg-orange rounded-full baseline hover:bg-gradient-to-r from-orange to-pink text-md font-lato font-normal'
             >
               Get Started
             </a>
@@ -71,7 +71,7 @@ const HeroSection = () => {
       >
         <img
           src={freshShelf}
-          className='w-[250px] md:w-[300px] lg:w-[400px] xl:w-[500px] lg:absolute lg:top-[5%] lg:left-0 xl:top-0 xl:left-0'
+          className='w-[200px] lg:w-[400px] xl:w-[500px] lg:absolute lg:top-[5%] lg:left-0 xl:top-0 xl:left-0'
           data-aos='fade-in'
           data-aos-duration='1000'
           data-aos-easing='ease-in-out'
