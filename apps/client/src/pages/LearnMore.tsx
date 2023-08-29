@@ -15,7 +15,7 @@ import waves2 from "../assets/img/landing-page/waves-2.svg";
 import sparkle from "../assets/img/learn-more/sparkles.svg";
 const LearnMore = () => {
   return (
-    <div className="relative h-full">
+    <div className="relative w-full h-full">
       <img
         src={waves}
         className="absolute w-[800px] z-[-20] rotate-[-25deg] left-[-10%] top-[-20%]"
