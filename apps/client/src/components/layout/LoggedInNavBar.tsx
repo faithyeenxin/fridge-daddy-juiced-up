@@ -75,7 +75,7 @@ const LoggedInNavBar = () => {
 
   return (
     // <nav className="bg-bgColor py-2.5 pr-5 md:pr-10 sticky w-full z-20 top-0 left-0 p-7">
-    <nav className='bg-bgColor py-2.5 md:py-4 sticky w-full z-20 top-0 left-0 p-7'>
+    <nav className='bg-bgColor py-2.5 md:py-4 sticky w-full z-10 top-0 left-0 p-7'>
       {/*Flex container */}
       <div className='flex items-center justify-between sm:mx-5 md:mx-0'>
         {/* Logo*/}
