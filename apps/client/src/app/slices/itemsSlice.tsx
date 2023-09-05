@@ -219,7 +219,7 @@ export const itemsSlice = createSlice({
         };
         return newItem;
       });
-      console.log(updatedItems);
+
       state.userItems = updatedItems;
       state.filteredUserItems = updatedItems;
     },
@@ -247,7 +247,6 @@ export const itemsSlice = createSlice({
       .addCase(getItemsByUserId.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.userItemsLoading = false;
-        console.log(action.payload);
         state.userItems = action.payload.map((item) => {
           let newItem = {
             userId: item.userId,

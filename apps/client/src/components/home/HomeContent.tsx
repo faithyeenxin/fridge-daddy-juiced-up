@@ -48,7 +48,6 @@ const HomeContent = () => {
     'Food waste in landfills produces methane, a potent greenhouse gas.',
     'Reducing food waste helps conserve resources for future generations.',
   ];
-  console.log(Math.floor(Math.random() * foodWasteFacts.length));
 
   return (
     <div className='w-full h-[700px] flex gap-2'>

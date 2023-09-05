@@ -21,7 +21,6 @@ const RecipesDisplay = () => {
   //////////////////////////////////////////////////////
   const numberOfRecipes = 20;
   const randomRecipeUrl = `https://api.spoonacular.com/recipes/random?number=${numberOfRecipes}&apiKey=${spoonacularApiKeys[0]}`;
-  console.log(randomRecipeUrl);
   useEffect(() => {
     dispatch(setRecipesLoading(true));
     fetch(randomRecipeUrl)

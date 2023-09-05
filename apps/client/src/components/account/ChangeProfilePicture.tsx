@@ -10,7 +10,6 @@ const ChangeProfilePicture = () => {
     event.stopPropagation();
     //let's grab the image file
     console.log('item dropped');
-    // let imageFile = event.dataTransfer.files[0];
   };
   return (
     <div className='flex flex-wrap-reverse bg-bgColor w-4/5 md:w-2/3 m-auto justify-center md:justify-between rounded-2xl p-8 md:p-10 mb-5'>

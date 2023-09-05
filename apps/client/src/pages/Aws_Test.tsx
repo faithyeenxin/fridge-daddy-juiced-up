@@ -1,20 +1,19 @@
-import axios from "axios";
-import React, { useState } from "react";
+import axios from 'axios';
+import React, { useState } from 'react';
 const Aws_Test = () => {
-  const [multipleFiles, setMultipleFiles] = useState("");
-  const awsUrl = "/api/aws/uploadMultipleFiles";
+  const [multipleFiles, setMultipleFiles] = useState('');
+  const awsUrl = '/api/aws/uploadMultipleFiles';
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(multipleFiles);
     const uploadedFiles = new FormData();
     for (let i = 0; i < multipleFiles.length; i++) {
-      uploadedFiles.append("uploadedFiles", multipleFiles[i]);
+      uploadedFiles.append('uploadedFiles', multipleFiles[i]);
     }
     const config = {
       headers: {
         // Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data",
+        'Content-Type': 'multipart/form-data',
       },
     };
     axios
@@ -27,8 +26,8 @@ const Aws_Test = () => {
       <div>AWS TEST PAGE</div>
       <form onSubmit={handleSubmit}>
         <input
-          name="multipleFiles"
-          type="file"
+          name='multipleFiles'
+          type='file'
           multiple={true}
           onChange={(e: any) => {
             setMultipleFiles(e.currentTarget.files);
@@ -36,15 +35,15 @@ const Aws_Test = () => {
         />
         <button
           style={{
-            backgroundColor: "#4CAF50",
-            borderRadius: "20px",
-            border: "none",
-            color: "white",
-            padding: "15px 32px",
-            textAlign: "center",
-            textDecoration: "none",
-            display: "inline-block",
-            fontSize: "16px",
+            backgroundColor: '#4CAF50',
+            borderRadius: '20px',
+            border: 'none',
+            color: 'white',
+            padding: '15px 32px',
+            textAlign: 'center',
+            textDecoration: 'none',
+            display: 'inline-block',
+            fontSize: '16px',
           }}
         >
           Add Files

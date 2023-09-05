@@ -25,7 +25,6 @@ const ItemsTableSmall = () => {
   let colorState = true;
 
   const handleUnselectAll = () => {
-    console.log('unselect all');
     dispatch(unselectAllItem());
     closeModal();
   };

@@ -98,7 +98,6 @@ const Account = () => {
   };
 
   const handleDeleteAccount = () => {
-    console.log(user);
     if (user.email !== 'testUser@hotmail.com') {
       dispatch(deleteUser(user.id))
         .unwrap()

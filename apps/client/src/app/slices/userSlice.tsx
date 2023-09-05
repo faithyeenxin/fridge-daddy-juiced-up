@@ -81,7 +81,6 @@ export const createUser = createAsyncThunk<IUser, Object>(
 export const authenticateUser = createAsyncThunk<Object, Object>(
   '/users/authenticateUser',
   async (data, thunkAPI) => {
-    console.log('');
     try {
       const response = await axios.post(`${USERS_URL}/login`, data);
       return response.data;

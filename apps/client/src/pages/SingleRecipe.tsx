@@ -27,13 +27,11 @@ const SingleRecipe = () => {
     fetch(recipeUrl)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         dispatch(setSingleRecipeData(data));
       });
     fetch(nutritionUrl)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         dispatch(setSingleRecipeNutrition(data));
         setLoading(false);
       });

@@ -103,7 +103,6 @@ const DropdownSelect = ({
     setOpenDropdown(!openDropdown);
     setSelectedValue(item);
     if (dropdownName === 'Category') {
-      console.log(`categoryId is ${item.id}`);
       setNewItem({ ...newItem, categoryId: item.id });
       if (item.name !== '-') {
         dispatch(setShelfLife(item));

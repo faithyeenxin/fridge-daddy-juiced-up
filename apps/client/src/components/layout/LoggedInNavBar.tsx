@@ -30,7 +30,6 @@ import {
 
 const LoggedInNavBar = () => {
   const { id } = useParams();
-  console.log(`id: ${id}`);
   const location = useLocation();
   const dispatch = useAppDispatch();
   const [navStatus, setNavStatus] = useState('');
