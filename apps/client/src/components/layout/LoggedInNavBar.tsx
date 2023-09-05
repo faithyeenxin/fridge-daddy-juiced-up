@@ -51,6 +51,7 @@ const LoggedInNavBar = () => {
       if (divRef.current && !divRef.current.contains(event.target)) {
         setNavStatus('');
         setHamburgMenuStatus('hidden');
+        closeAllModals();
       }
     };
     document.addEventListener('mousedown', handler);
@@ -241,7 +242,6 @@ const LoggedInNavBar = () => {
           as='div'
           className='relative z-10'
           onClose={() => {
-            // dispatch(setAddModalOpen(false));
             dispatch(setAddItemModalOpen(false));
           }}
         >
@@ -290,7 +290,6 @@ const LoggedInNavBar = () => {
           as='div'
           className='relative z-10'
           onClose={() => {
-            // dispatch(setAddModalOpen(false));
             dispatch(setAddCategoryModalOpen(false));
           }}
         >
