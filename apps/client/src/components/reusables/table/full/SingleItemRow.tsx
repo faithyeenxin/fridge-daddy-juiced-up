@@ -323,7 +323,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                   <div className='mt-4 flex justify-center'>
                     <button
                       type='button'
-                      className='mr-2 w-[200px] inline-flex justify-center rounded-3xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gradient-to-r from-orange to-pink focus:outline-none '
+                      className='mr-2 w-[200px] inline-flex justify-center rounded-3xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none '
                       onClick={() => {
                         setEdit(!edit);
                         setNewItem({
@@ -344,7 +344,7 @@ const SingleItemRow = ({ item, colorState }: ISingleItemProps) => {
                     {edit && (
                       <button
                         type='button'
-                        className='mr-2 w-[200px] inline-flex justify-center rounded-3xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gradient-to-r from-orange to-pink focus:outline-none focus-visible:ring-2'
+                        className='mr-2 w-[200px] inline-flex justify-center rounded-3xl border border-transparent bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-gradient-to-r from-orange to-pink focus:outline-none focus-visible:ring-2'
                         onClick={() => {
                           if (
                             !isAfter(
