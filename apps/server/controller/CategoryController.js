@@ -1,65 +1,58 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
-const { PrismaClient } = require("@prisma/client");
+const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 //* Seed Route
-router.get("/seed", async (req, res) => {
+router.get('/seed', async (req, res) => {
   // await prisma.category.deleteMany({});
   const seedItems = await prisma.category.createMany({
     data: [
       {
-        // userId: "e4fca1e7-deb9-41c4-b8c7-b0fe9aebadea",
-        name: "beef steak",
+        name: 'beef steak',
         dateCreated: new Date(2022, 12, 19),
         pantryDays: 0,
         fridgeDays: 3,
         freezerDays: 121,
       },
       {
-        // userId: "e4fca1e7-deb9-41c4-b8c7-b0fe9aebadea",
-        name: "fresh juice",
+        name: 'fresh juice',
         dateCreated: new Date(2022, 12, 19),
         pantryDays: 0,
         fridgeDays: 3,
         freezerDays: 365,
       },
       {
-        // userId: "e4fca1e7-deb9-41c4-b8c7-b0fe9aebadea",
-        name: "fruit pie",
+        name: 'fruit pie',
         dateCreated: new Date(2022, 12, 19),
         pantryDays: 0,
         fridgeDays: 4,
         freezerDays: 182,
       },
       {
-        // userId: "e4fca1e7-deb9-41c4-b8c7-b0fe9aebadea",
-        name: "uncooked fresh sausages",
+        name: 'uncooked fresh sausages',
         dateCreated: new Date(2022, 12, 19),
         pantryDays: 0,
         fridgeDays: 2,
         freezerDays: 62,
       },
       {
-        // userId: "e4fca1e7-deb9-41c4-b8c7-b0fe9aebadea",
-        name: "cooked sausages",
+        name: 'cooked sausages',
         dateCreated: new Date(2022, 12, 19),
         pantryDays: 0,
         fridgeDays: 4,
         freezerDays: 62,
       },
       {
-        // userId: "e4fca1e7-deb9-41c4-b8c7-b0fe9aebadea",
-        name: "hard/dry sausages",
+        name: 'hard/dry sausages',
         dateCreated: new Date(2022, 12, 19),
         pantryDays: 0,
         fridgeDays: 21,
         freezerDays: 62,
       },
       {
-        // userId: "e4fca1e7-deb9-41c4-b8c7-b0fe9aebadea",
-        name: "cooked noodles",
+        name: 'cooked noodles',
         dateCreated: new Date(2022, 12, 19),
         pantryDays: 0,
         fridgeDays: 5,
@@ -72,13 +65,13 @@ router.get("/seed", async (req, res) => {
 });
 
 //* Show All Category
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   const allCategories = await prisma.category.findMany();
   res.status(200).send(allCategories);
 });
 
 //* Show By Category ID
-router.get("/:id", async (req, res) => {
+router.get('/:id', async (req, res) => {
   const { id } = req.params;
   const category = await prisma.category.findUnique({
     where: {
@@ -100,7 +93,7 @@ router.get("/:id", async (req, res) => {
 // });
 
 //* Find by Category Name
-router.get("/findByCategoryName/:categoryName", async (req, res) => {
+router.get('/findByCategoryName/:categoryName', async (req, res) => {
   try {
     const { categoryName } = req.params;
     const category = await prisma.category.findMany({
@@ -108,12 +101,12 @@ router.get("/findByCategoryName/:categoryName", async (req, res) => {
     });
     res.status(200).send(category);
   } catch {
-    res.status(400).send({ error: "category does not exist" });
+    res.status(400).send({ error: 'category does not exist' });
   }
 });
 
 //* Create Category
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const newCategory = req.body;
     const category = await prisma.category.create({
@@ -121,12 +114,12 @@ router.post("/", async (req, res) => {
     });
     res.status(200).send(category);
   } catch {
-    res.status(400).send({ error: "could not create category" });
+    res.status(400).send({ error: 'could not create category' });
   }
 });
 
 //* Update Category
-router.put("/:id", async (req, res) => {
+router.put('/:id', async (req, res) => {
   const { id } = req.params;
   const updatedData = req.body;
   const category = await prisma.category.update({
@@ -139,7 +132,7 @@ router.put("/:id", async (req, res) => {
 });
 
 //* Delete Category based on ID
-router.delete("/:id", async (req, res) => {
+router.delete('/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const deletedCategory = await prisma.category.delete({
@@ -149,7 +142,7 @@ router.delete("/:id", async (req, res) => {
     });
     res.status(200).send(deletedCategory);
   } catch {
-    res.status(400).send({ error: "category does not exist" });
+    res.status(400).send({ error: 'category does not exist' });
   }
 });
 
