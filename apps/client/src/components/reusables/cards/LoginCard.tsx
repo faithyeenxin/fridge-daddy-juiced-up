@@ -66,6 +66,7 @@ const LoginCard = () => {
         })
         .catch((rejectedValueOrSerializedError) => {
           // handle error here
+          toast.error('Login failed, please try again.');
           openModal();
         });
     },
