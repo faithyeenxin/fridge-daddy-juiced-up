@@ -180,7 +180,7 @@ const LoggedInNavBar = () => {
           className='relative z-10'
           onClose={() => dispatch(setAddModalOpen(false))}
         >
-          <Transition.Child
+          {/* <Transition.Child
             as={Fragment}
             enter='ease-out duration-300'
             enterFrom='opacity-0'
@@ -190,7 +190,7 @@ const LoggedInNavBar = () => {
             leaveTo='opacity-0'
           >
             <div className='fixed inset-0 bg-black bg-opacity-25' />
-          </Transition.Child>
+          </Transition.Child> */}
 
           <div className='fixed inset-0 overflow-y-auto'>
             <div className='flex min-h-full items-center justify-center p-4 text-center'>
@@ -245,7 +245,7 @@ const LoggedInNavBar = () => {
             dispatch(setAddItemModalOpen(false));
           }}
         >
-          <Transition.Child
+          {/* <Transition.Child
             as={Fragment}
             enter='ease-out duration-300'
             enterFrom='opacity-0'
@@ -255,7 +255,7 @@ const LoggedInNavBar = () => {
             leaveTo='opacity-0'
           >
             <div className='fixed inset-0 bg-black bg-opacity-25' />
-          </Transition.Child>
+          </Transition.Child> */}
 
           <div className='fixed inset-0 overflow-y-auto'>
             <div className='flex min-h-full items-center justify-center p-4 text-center'>
@@ -293,7 +293,7 @@ const LoggedInNavBar = () => {
             dispatch(setAddCategoryModalOpen(false));
           }}
         >
-          <Transition.Child
+          {/* <Transition.Child
             as={Fragment}
             enter='ease-out duration-300'
             enterFrom='opacity-0'
@@ -303,7 +303,7 @@ const LoggedInNavBar = () => {
             leaveTo='opacity-0'
           >
             <div className='fixed inset-0 bg-black bg-opacity-25' />
-          </Transition.Child>
+          </Transition.Child> */}
 
           <div className='fixed inset-0 overflow-y-auto'>
             <div className='flex min-h-full items-center justify-center p-4 text-center'>
@@ -333,7 +333,7 @@ const LoggedInNavBar = () => {
           className='relative z-10'
           onClose={() => dispatch(setFilterModalOpen(false))}
         >
-          <Transition.Child
+          {/* <Transition.Child
             as={Fragment}
             enter='ease-out duration-300'
             enterFrom='opacity-0'
@@ -343,7 +343,7 @@ const LoggedInNavBar = () => {
             leaveTo='opacity-0'
           >
             <div className='fixed inset-0 bg-black bg-opacity-25' />
-          </Transition.Child>
+          </Transition.Child> */}
 
           <div className='fixed inset-0 overflow-y-auto'>
             <div className='flex min-h-full items-center justify-center p-4 text-center'>
@@ -371,7 +371,7 @@ const LoggedInNavBar = () => {
           className='relative z-10'
           onClose={() => dispatch(setIngredientModalOpen(false))}
         >
-          <Transition.Child
+          {/* <Transition.Child
             as={Fragment}
             enter='ease-out duration-300'
             enterFrom='opacity-0'
@@ -381,7 +381,7 @@ const LoggedInNavBar = () => {
             leaveTo='opacity-0'
           >
             <div className='fixed inset-0 bg-black bg-opacity-25' />
-          </Transition.Child>
+          </Transition.Child> */}
 
           <div className='fixed inset-0 overflow-y-auto'>
             <div className='flex min-h-full items-center justify-center p-4 text-center'>
@@ -409,7 +409,7 @@ const LoggedInNavBar = () => {
           className='relative z-10'
           onClose={() => dispatch(setNutritionModalOpen(false))}
         >
-          <Transition.Child
+          {/* <Transition.Child
             as={Fragment}
             enter='ease-out duration-300'
             enterFrom='opacity-0'
@@ -419,7 +419,7 @@ const LoggedInNavBar = () => {
             leaveTo='opacity-0'
           >
             <div className='fixed inset-0 bg-black bg-opacity-25' />
-          </Transition.Child>
+          </Transition.Child> */}
 
           <div className='fixed inset-0 overflow-y-auto'>
             <div className='flex min-h-full items-center justify-center p-4 text-center'>
